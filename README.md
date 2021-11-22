@@ -9,7 +9,7 @@
 - **Language:** English
 - **Class name style:** CamelCase
 - **Variables and methods name style:** camelCase
-- **IDE:** Apache NetBeans 12.4
+- **IDE:** Apache NetBeans 12.5
 ## Definition of Done
 https://docs.google.com/document/d/1lHZpMsNSy-l6VG_AqhNU84g0M24vIGxBMOmijMGUGtQ/edit?usp=sharing
 ## System Architecture
