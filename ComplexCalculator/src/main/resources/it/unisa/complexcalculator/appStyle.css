@@ -1,0 +1,28 @@
+@fontface {
+    src: url("fonts/Fleftex_M.ttf");
+}
+
+#text {
+   -fx-font-family: 'Fleftex';
+   -fx-background-color: rgb(142,137,42);
+   -fx-border-width:  1px;
+   -fx-border-color: black;
+   -fx-border-radius: 6px;
+   -fx-background-clip: padding-box;
+   -fx-background-radius: 6px;
+   -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 13, 0.5, 0.0, 0.0); 
+}
+
+#list {
+    -fx-font-family: 'Fleftex';
+    -fx-background-color: rgb(142,137,42);
+    -fx-border-color: black;
+    -fx-background-radius: 10px;
+    -fx-border-width: 1px;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 25, 0.5, 0.0, 0.0);
+    -fx-border-radius: 10px;
+}
+
+#anchor {
+    -fx-background-color: #F5F5F5;
+}

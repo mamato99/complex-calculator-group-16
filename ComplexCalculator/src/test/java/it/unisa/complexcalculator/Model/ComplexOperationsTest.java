@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package it.unisa.complexcalculator.Model;
 
 import org.junit.After;
@@ -68,7 +64,6 @@ public class ComplexOperationsTest {
         assertEquals(expResult2, result2);
         assertEquals(expResult3, result3);
         assertEquals(expResult4, result4);
-        // TODO review the generated test code and remove the default call to fail.
 
     }
 
@@ -111,7 +106,7 @@ public class ComplexOperationsTest {
         assertEquals(expResult2, result2);
         assertEquals(expResult3, result3);
         assertEquals(expResult4, result4);
-        // TODO review the generated test code and remove the default call to fail.
+        
     }
 
     @Test
@@ -126,6 +121,5 @@ public class ComplexOperationsTest {
             assertEquals(expResult1, result1);
         }
 
-        // TODO review the generated test code and remove the default call to fail.
     }
 
