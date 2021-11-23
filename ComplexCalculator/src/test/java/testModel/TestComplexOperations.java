@@ -3,11 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package testModel;
-
+import org.junit.*;
+import static org.junit.Assert.*;
 /**
  *
  * @author mdr
  */
 public class TestComplexOperations {
+    
+    
     
 }
