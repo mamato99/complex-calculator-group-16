@@ -17,8 +17,9 @@ public class CalculatorApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("FXMLDocument"), 640, 480);
+        scene = new Scene(loadFXML("FXMLDocument"));
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
