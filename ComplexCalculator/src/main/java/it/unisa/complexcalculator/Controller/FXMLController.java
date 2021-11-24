@@ -1,13 +1,19 @@
 package it.unisa.complexcalculator.Controller;
 
 import it.unisa.complexcalculator.Model.ComplexNumber;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 
-public class FXMLController {
+public class FXMLController implements Initializable{
 
     @FXML
     private Button twoButton;
@@ -32,11 +38,7 @@ public class FXMLController {
     @FXML
     private Button zeroButton;
     @FXML
-    private Button imButton;
-    @FXML
     private Button insButton;
-    @FXML
-    private Button acButton;
     @FXML
     private Button plusButton;
     @FXML
@@ -50,11 +52,31 @@ public class FXMLController {
     @FXML
     private Button invButton;
     @FXML
-    private ListView<ComplexNumber> storedElements;
+    private ListView<String> storedElements;
     @FXML
-    private Label userLabel;
+    private Label realLabel;
+    @FXML
+    private Label imgLabel;
+    @FXML
+    private Button delButton;
+    @FXML
+    private Button acButton1;
+    @FXML
+    private Button realButton;
+    @FXML
+    private Button imgButton;
+    @FXML
+    private ToggleButton signReal;
+    @FXML
+    private ToggleButton signImg;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        storedElements.setItems(FXCollections.observableArrayList("3+2i"));
+    }
+    
     private void updateLabel(String to_add) {
+        /*
         if ("del".equals(to_add) && userLabel.getText().length() > 0) {
             if ("Welcome".equals(userLabel.getText())) {
                 userLabel.setText("");
@@ -66,6 +88,7 @@ public class FXMLController {
         } else if (!"del".equals(to_add)) {
             userLabel.setText(userLabel.getText() + to_add);
         }
+        */
     }
 
     @FXML
@@ -124,7 +147,6 @@ public class FXMLController {
         updateLabel("0");
     }
 
-    @FXML
     private void imClicked(MouseEvent event) {
         updateLabel("i");
     }
@@ -163,4 +185,33 @@ public class FXMLController {
     @FXML
     private void invClicked(MouseEvent event) {
     }
+
+    @FXML
+    private void changeRealSign(ActionEvent event) {
+        if (signReal.isSelected()) {
+            signReal.setText("+");
+        }else
+            signReal.setText("-");
+    }
+
+    @FXML
+    private void changeImgSign(ActionEvent event) {
+        if (signImg.isSelected()) {
+            signImg.setText("+");
+        }else
+            signImg.setText("-");
+    }
+
+    @FXML
+    private void acClicked(MouseEvent event) {
+    }
+
+    @FXML
+    private void realClicked(MouseEvent event) {
+    }
+
+    @FXML
+    private void imgClicked(MouseEvent event) {
+    }
+
 }
