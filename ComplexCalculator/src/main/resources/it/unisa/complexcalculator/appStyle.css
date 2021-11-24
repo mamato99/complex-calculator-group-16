@@ -19,6 +19,9 @@
     -fx-border-color: black;
     -fx-border-width: 1px;
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 30, 0.7, 0.0, 0.0);
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 4px;
 }
 
 #anchor {
@@ -51,8 +54,13 @@
 
 .list-view .list-cell {
     -fx-background-color: rgb(142,137,42);
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
     -fx-alignment: center;
     -fx-text-fill: #60199e;
+    -fx-border-color: #60199e;
+    -fx-border-width: 1px;
+}
+
+.list-view .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-padding:-8;
 }

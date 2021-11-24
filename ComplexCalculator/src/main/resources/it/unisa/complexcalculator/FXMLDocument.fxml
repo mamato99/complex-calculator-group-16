@@ -17,9 +17,9 @@
    <children>
       <VBox alignment="BOTTOM_CENTER" prefHeight="525.0" prefWidth="430.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox prefHeight="179.0" prefWidth="390.0">
+            <HBox prefHeight="175.0" prefWidth="395.0">
                <children>
-                  <ListView id="list" fx:id="storedElements" focusTraversable="false" prefHeight="157.0" prefWidth="254.0" snapToPixel="false">
+                  <ListView id="list" fx:id="storedElements" focusTraversable="false" prefHeight="157.0" prefWidth="254.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -61,6 +61,9 @@
                                  </bumpInput>
                               </Lighting>
                            </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ToggleButton>
                         <ToggleButton fx:id="signImg" mnemonicParsing="false" onAction="#changeImgSign" styleClass="signButtons" text="-" textFill="WHITE" GridPane.rowIndex="1">
                            <effect>
@@ -73,6 +76,9 @@
                            <font>
                               <Font name="Monaco" size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ToggleButton>
                      </children>
                      <HBox.margin>

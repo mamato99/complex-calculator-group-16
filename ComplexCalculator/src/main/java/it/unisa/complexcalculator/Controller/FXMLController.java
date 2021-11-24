@@ -72,7 +72,7 @@ public class FXMLController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        storedElements.setItems(FXCollections.observableArrayList("3+2i"));
+        storedElements.setItems(FXCollections.observableArrayList("3+2i", "6+6i", "5", "6+6i","6+6i","6+6i"));
     }
     
     private void updateLabel(String to_add) {
