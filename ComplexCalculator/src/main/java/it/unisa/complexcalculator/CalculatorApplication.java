@@ -21,6 +21,7 @@ public class CalculatorApplication extends Application {
         scene.getStylesheets().add(getClass().getResource("appStyle.css").toExternalForm()); // Add the stylesheet to the scene
         stage.setScene(scene);
         stage.setResizable(false);
+        stage.setTitle("GROUP 16");
         stage.show();
     }
 
