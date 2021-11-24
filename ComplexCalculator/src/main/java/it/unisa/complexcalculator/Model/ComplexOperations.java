@@ -44,7 +44,6 @@ public final class ComplexOperations {
         return new ComplexNumber(-c.getReal(), -c.getImaginary());
     }
 
-    //Mario
     public static ComplexNumber multiply(ComplexNumber c1, ComplexNumber c2) {
         double real = 0;
         double imaginary = 0;

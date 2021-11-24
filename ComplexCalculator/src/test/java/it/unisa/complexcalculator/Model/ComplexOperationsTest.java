@@ -33,7 +33,7 @@ public class ComplexOperationsTest {
     public void tearDown() {
     }
 
-        /**
+    /**
      * Test of add method, of class ComplexOperations.
      */
     /*@Test
@@ -62,11 +62,11 @@ public class ComplexOperationsTest {
     }
 
     /**
-     * Test of modulo method, of class ComplexOperations.
+     * Test of abs method, of class ComplexOperations.
      */
     @Test
-    public void testModulo() {
-        System.out.println("modulo");
+    public void testAbs() {
+        System.out.println("abs");
         ComplexNumber c = new ComplexNumber(5,4);
         double expResult = sqrt(41);
         double result = ComplexOperations.abs(c);
@@ -190,34 +190,6 @@ public class ComplexOperationsTest {
         
             assertEquals(expResult1, result1);
         }
-
-    /**
-     * Test of abs method, of class ComplexOperations.
-     */
-    @Test
-    public void testAbs() {
-        System.out.println("abs");
-        ComplexNumber c = null;
-        double expResult = 0.0;
-        double result = ComplexOperations.abs(c);
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of sqrtComplex method, of class ComplexOperations.
-     */
-    @Test
-    public void testSqrtComplex() {
-        System.out.println("sqrtComplex");
-        ComplexNumber c = null;
-        ComplexNumber expResult = null;
-        ComplexNumber result = ComplexOperations.sqrtComplex(c);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     }
 
