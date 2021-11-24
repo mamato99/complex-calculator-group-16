@@ -12,6 +12,10 @@ import static java.lang.Math.sqrt;
  */
 public final class ComplexOperations {
     
+    public static ComplexNumber add(ComplexNumber c1, ComplexNumber c2) {
+        return new ComplexNumber(c1.getReal() + c2.getReal(), c1.getImaginary() + c2.getImaginary());
+    }
+    
     public static ComplexNumber difference(ComplexNumber c1, ComplexNumber c2) {
         return new ComplexNumber(c1.getReal() - c2.getReal(), c1.getImaginary() - c2.getImaginary());
     }
@@ -33,10 +37,6 @@ public final class ComplexOperations {
             a1 = - sqrt( (abs(c) + c.getReal()) /2);
             b1 = sqrt( (abs(c) - c.getReal()) /2);
         }
-        /* per la seconda soluzione
-        double a2 = - a1;
-        double b2 = - b1;
-        */
         return new ComplexNumber(a1, b1);
     }
         
