@@ -10,7 +10,7 @@
    -fx-border-radius: 6px;
    -fx-background-clip: padding-box;
    -fx-background-radius: 6px;
-   -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 13, 0.5, 0.0, 0.0); 
+   -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 16, 0.7, 0.0, 0.0); 
 }
 
 #list {
@@ -19,10 +19,26 @@
     -fx-border-color: black;
     -fx-background-radius: 10px;
     -fx-border-width: 1px;
-    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 25, 0.5, 0.0, 0.0);
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 30, 0.7, 0.0, 0.0);
     -fx-border-radius: 10px;
 }
 
 #anchor {
-    -fx-background-color: #F5F5F5;
+    -fx-background-color: rgb(26,26,26);
+}
+
+.operationButtons {
+    -fx-background-color: rgb(36,62,62);
+}
+
+#delButton {
+    -fx-background-color: rgb(200,0,7);
+}
+
+#insButton {
+    -fx-background-color: rgb(252,44,7);
+}
+
+.numberButtons {
+    -fx-background-color: rgb(86,86,86);
 }
