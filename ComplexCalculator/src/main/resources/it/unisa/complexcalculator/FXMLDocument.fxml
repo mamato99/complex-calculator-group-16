@@ -148,6 +148,9 @@
                      <font>
                         <Font name="Andale Mono" size="18.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </Button>
                   <Button fx:id="imgButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#imgClicked" prefHeight="50.0" prefWidth="70.0" styleClass="compButtons" text="Im" textFill="WHITE">
                      <cursor>
