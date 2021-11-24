@@ -175,6 +175,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void delClicked(MouseEvent event) {
         updateLabel("del");
+        
     }
 
     @FXML
