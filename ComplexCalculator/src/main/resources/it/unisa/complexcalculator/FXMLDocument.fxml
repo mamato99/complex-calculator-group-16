@@ -17,7 +17,7 @@
    <children>
       <VBox alignment="BOTTOM_CENTER" prefHeight="525.0" prefWidth="430.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ListView id="list" focusTraversable="false" prefHeight="158.0" prefWidth="386.0">
+            <ListView id="list" fx:id="storedElements" focusTraversable="false" prefHeight="158.0" prefWidth="386.0">
                <VBox.margin>
                   <Insets bottom="20.0" left="22.0" right="22.0" top="20.0" />
                </VBox.margin>
@@ -25,7 +25,7 @@
                   <Insets />
                </opaqueInsets>
             </ListView>
-            <Label id="text" alignment="CENTER" prefHeight="34.0" prefWidth="387.0" text="Welcome" textFill="#60199e">
+            <Label id="text" fx:id="userLabel" alignment="CENTER" prefHeight="34.0" prefWidth="387.0" text="Welcome" textFill="#60199e">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
@@ -50,7 +50,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="twoButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#twoClicked" prefHeight="45.0" prefWidth="45.0" styleClass="numberButtons" text="2" textFill="WHITE" GridPane.columnIndex="1">
+                        <Button fx:id="twoButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#twoClicked" prefHeight="50.0" prefWidth="50.0" styleClass="numberButtons" text="2" textFill="WHITE" GridPane.columnIndex="1">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -65,7 +65,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="oneButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#oneClicked" prefHeight="45.0" prefWidth="45.0" styleClass="numberButtons" text="1" textFill="WHITE">
+                        <Button fx:id="oneButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#oneClicked" prefHeight="50.0" prefWidth="50.0" styleClass="numberButtons" text="1" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -80,7 +80,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="threeButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#threeClicked" prefHeight="45.0" prefWidth="45.0" styleClass="numberButtons" text="3" textFill="WHITE" GridPane.columnIndex="2">
+                        <Button fx:id="threeButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#threeClicked" prefHeight="50.0" prefWidth="50.0" styleClass="numberButtons" text="3" textFill="WHITE" GridPane.columnIndex="2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -95,7 +95,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="fourButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#fourClicked" prefHeight="45.0" prefWidth="45.0" styleClass="numberButtons" text="4" textFill="WHITE" GridPane.rowIndex="1">
+                        <Button fx:id="fourButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#fourClicked" prefHeight="50.0" prefWidth="50.0" styleClass="numberButtons" text="4" textFill="WHITE" GridPane.rowIndex="1">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -110,7 +110,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="fiveButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#fiveClicked" prefHeight="45.0" prefWidth="45.0" styleClass="numberButtons" text="5" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button fx:id="fiveButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#fiveClicked" prefHeight="50.0" prefWidth="50.0" styleClass="numberButtons" text="5" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -125,7 +125,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="sixButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#sixClicked" prefHeight="45.0" prefWidth="45.0" styleClass="numberButtons" text="6" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Button fx:id="sixButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#sixClicked" prefHeight="50.0" prefWidth="50.0" styleClass="numberButtons" text="6" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -140,7 +140,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="sevenButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#sevenClicked" prefHeight="45.0" prefWidth="45.0" styleClass="numberButtons" text="7" textFill="WHITE" GridPane.rowIndex="2">
+                        <Button fx:id="sevenButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#sevenClicked" prefHeight="50.0" prefWidth="50.0" styleClass="numberButtons" text="7" textFill="WHITE" GridPane.rowIndex="2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -155,7 +155,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="eightButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#eightClicked" prefHeight="45.0" prefWidth="45.0" styleClass="numberButtons" text="8" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Button fx:id="eightButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#eightClicked" prefHeight="50.0" prefWidth="50.0" styleClass="numberButtons" text="8" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -170,7 +170,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="nineButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#nineClicked" prefHeight="45.0" prefWidth="45.0" styleClass="numberButtons" text="9" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <Button fx:id="nineButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#nineClicked" prefHeight="50.0" prefWidth="50.0" styleClass="numberButtons" text="9" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -185,7 +185,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="dotButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#dotClicked" prefHeight="45.0" prefWidth="45.0" styleClass="numberButtons" text="." textFill="WHITE" GridPane.rowIndex="3">
+                        <Button fx:id="dotButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#dotClicked" prefHeight="50.0" prefWidth="50.0" styleClass="numberButtons" text="." textFill="WHITE" GridPane.rowIndex="3">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -200,7 +200,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="zeroButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#zeroClicked" prefHeight="45.0" prefWidth="45.0" styleClass="numberButtons" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Button fx:id="zeroButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#zeroClicked" prefHeight="50.0" prefWidth="50.0" styleClass="numberButtons" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -215,7 +215,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button id="imButton" fx:id="imButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#imClicked" prefHeight="45.0" prefWidth="45.0" styleClass="numberButtons" text="i" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <Button id="imButton" fx:id="imButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#imClicked" prefHeight="50.0" prefWidth="50.0" styleClass="numberButtons" text="i" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -230,7 +230,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button id="insButton" fx:id="insButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#insClicked" prefHeight="45.0" prefWidth="45.0" styleClass="serviceButtons" text="INS" textFill="WHITE" GridPane.columnIndex="3">
+                        <Button id="insButton" fx:id="insButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#insClicked" prefHeight="50.0" prefWidth="55.0" styleClass="serviceButtons" text="INS" textFill="WHITE" GridPane.columnIndex="3">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -245,7 +245,7 @@
                               <Font name="Andale Mono" size="18.0" />
                            </font>
                         </Button>
-                        <Button id="delButton" fx:id="acButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#delClicked" prefHeight="45.0" prefWidth="45.0" text="DEL" textFill="WHITE" GridPane.columnIndex="4">
+                        <Button id="delButton" fx:id="acButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#delClicked" prefHeight="50.0" prefWidth="55.0" text="DEL" textFill="WHITE" GridPane.columnIndex="4">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -260,7 +260,7 @@
                               <Font name="Andale Mono" size="17.0" />
                            </font>
                         </Button>
-                        <Button fx:id="plusButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#plusClicked" prefHeight="45.0" prefWidth="45.0" styleClass="operationButtons" text="+" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <Button fx:id="plusButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#plusClicked" prefHeight="50.0" prefWidth="50.0" styleClass="operationButtons" text="+" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -275,7 +275,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="minusButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#minusClicked" prefHeight="45.0" prefWidth="45.0" styleClass="operationButtons" text="−" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                        <Button fx:id="minusButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#minusClicked" prefHeight="50.0" prefWidth="50.0" styleClass="operationButtons" text="−" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -290,7 +290,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="prodButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#prodClicked" prefHeight="45.0" prefWidth="45.0" styleClass="operationButtons" text="×" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                        <Button fx:id="prodButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#prodClicked" prefHeight="50.0" prefWidth="50.0" styleClass="operationButtons" text="×" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -305,7 +305,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="divButton" focusTraversable="false" mnemonicParsing="false" onMouseDragged="#divClicked" prefHeight="45.0" prefWidth="45.0" styleClass="operationButtons" text="÷" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                        <Button fx:id="divButton" focusTraversable="false" mnemonicParsing="false" onMouseDragged="#divClicked" prefHeight="50.0" prefWidth="50.0" styleClass="operationButtons" text="÷" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -320,7 +320,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="sqrtButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#sqrtClicked" prefHeight="45.0" prefWidth="45.0" styleClass="operationButtons" text="√" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                        <Button fx:id="sqrtButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#sqrtClicked" prefHeight="50.0" prefWidth="50.0" styleClass="operationButtons" text="√" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="3">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -335,7 +335,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="invButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#invClicked" prefHeight="45.0" prefWidth="45.0" styleClass="operationButtons" text="+−" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                        <Button fx:id="invButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#invClicked" prefHeight="50.0" prefWidth="50.0" styleClass="operationButtons" text="+−" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="3">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -352,10 +352,13 @@
                         </Button>
                      </children>
                      <HBox.margin>
-                        <Insets left="3.0" right="3.0" top="3.0" />
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                      </HBox.margin>
                   </GridPane>
                </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>
