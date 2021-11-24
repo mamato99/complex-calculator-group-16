@@ -1,5 +1,6 @@
 package it.unisa.complexcalculator.Model;
 
+import static java.lang.Math.sqrt;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -32,6 +33,60 @@ public class ComplexOperationsTest {
     public void tearDown() {
     }
 
+    /**
+     * Test of difference method, of class ComplexOperations.
+     */
+    @Test
+    public void testDifference() {
+        System.out.println("difference");
+        ComplexNumber c1 = new ComplexNumber(5,0);
+        ComplexNumber c2 = new ComplexNumber(9,0);
+        ComplexNumber expResult = new ComplexNumber(-4,0);
+        ComplexNumber result = ComplexOperations.difference(c1, c2);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of modulo method, of class ComplexOperations.
+     */
+    @Test
+    public void testModulo() {
+        System.out.println("modulo");
+        ComplexNumber c = new ComplexNumber(5,4);
+        double expResult = sqrt(41);
+        double result = ComplexOperations.abs(c);
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Test of sqrtComplex method, of class ComplexOperations.
+     */
+   /* @Test
+    public void testSqrtComplex() {
+        System.out.println("sqrtComplex");
+        ComplexNumber c = new ComplexNumber(-4,0);
+        ComplexNumber expResult = new ComplexNumber(0,2);
+        ComplexNumber result = ComplexOperations.sqrtComplex(c);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }*/
+
+    /**
+     * Test of invertSign method, of class ComplexOperations.
+     */
+    @Test
+    public void testInvertSign() {
+        System.out.println("invertSign");
+        ComplexNumber c = new ComplexNumber(-1,2);
+        ComplexNumber expResult = new ComplexNumber(1,-2);
+        ComplexNumber result = ComplexOperations.invertSign(c);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+    
+    
     /**
      * Test of multiply method, of class ComplexOperations.
      */
