@@ -63,7 +63,7 @@ public class FXMLController {
             }
         } else if ("Welcome".equals(userLabel.getText())) {
             userLabel.setText(to_add);
-        } else if ("del".equals(to_add)) {
+        } else if (!"del".equals(to_add)) {
             userLabel.setText(userLabel.getText() + to_add);
         }
     }
