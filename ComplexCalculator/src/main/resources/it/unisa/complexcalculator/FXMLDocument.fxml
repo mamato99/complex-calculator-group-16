@@ -50,158 +50,14 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="1">
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="2" GridPane.columnIndex="1">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <effect>
                               <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
                                  <bumpInput>
-                                    <Shadow blurType="ONE_PASS_BOX" />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                        </Button>
-                        <Button defaultButton="true" focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="DEL" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                           <font>
-                              <Font name="Andale Mono" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button contentDisplay="CENTER" defaultButton="true" focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="AC" GridPane.columnIndex="4">
-                           <font>
-                              <Font name="Andale Mono" size="17.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button defaultButton="true" focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="INS" GridPane.columnIndex="3">
-                           <font>
-                              <Font name="Andale Mono" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="4" GridPane.rowIndex="1">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="7" GridPane.rowIndex="2">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="." GridPane.rowIndex="3">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
+                                    <Shadow blurType="TWO_PASS_BOX" />
                                  </bumpInput>
                               </Lighting>
                            </effect>
@@ -209,97 +65,7 @@
                               <Font name="Andale Mono" size="20.0" />
                            </font>
                         </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="+" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="-" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="x" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="\%" GridPane.columnIndex="4" GridPane.rowIndex="2">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="1" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="+-" GridPane.columnIndex="4" GridPane.rowIndex="3">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <effect>
-                              <Lighting diffuseConstant="2.0" light="$null" specularConstant="1.64" specularExponent="40.0" surfaceScale="2.81">
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                              </Lighting>
-                           </effect>
-                           <font>
-                              <Font name="Andale Mono" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="2" GridPane.columnIndex="1">
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="1">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -321,7 +87,262 @@
                            <effect>
                               <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
                                  <bumpInput>
-                                    <Shadow blurType="GAUSSIAN" />
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="4" GridPane.rowIndex="1">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="7" GridPane.rowIndex="2">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="." GridPane.rowIndex="3">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button defaultButton="true" focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="DEL" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button defaultButton="true" focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="INS" GridPane.columnIndex="3">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button defaultButton="true" focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="AC" GridPane.columnIndex="4">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="+" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="−" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="×" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="÷" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="√" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
+                                 </bumpInput>
+                              </Lighting>
+                           </effect>
+                           <font>
+                              <Font name="Andale Mono" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button focusTraversable="false" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" text="+−" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                                 <bumpInput>
+                                    <Shadow blurType="TWO_PASS_BOX" />
                                  </bumpInput>
                               </Lighting>
                            </effect>
