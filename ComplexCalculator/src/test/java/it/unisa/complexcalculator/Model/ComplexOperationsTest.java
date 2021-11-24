@@ -1,5 +1,7 @@
 package it.unisa.complexcalculator.Model;
 
+import it.unisa.complexcalculator.Exception.MinimumBoundException;
+import it.unisa.complexcalculator.Exception.UpperBoundException;
 import static java.lang.Math.sqrt;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,16 +49,15 @@ public class ComplexOperationsTest {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }*/
-    
     /**
      * Test of difference method, of class ComplexOperations.
      */
     @Test
     public void testDifference() {
         System.out.println("difference");
-        ComplexNumber c1 = new ComplexNumber(5,0);
-        ComplexNumber c2 = new ComplexNumber(9,0);
-        ComplexNumber expResult = new ComplexNumber(-4,0);
+        ComplexNumber c1 = new ComplexNumber(5, 0);
+        ComplexNumber c2 = new ComplexNumber(9, 0);
+        ComplexNumber expResult = new ComplexNumber(-4, 0);
         ComplexNumber result = ComplexOperations.difference(c1, c2);
         assertEquals(expResult, result);
     }
@@ -67,7 +68,7 @@ public class ComplexOperationsTest {
     @Test
     public void testAbs() {
         System.out.println("abs");
-        ComplexNumber c = new ComplexNumber(5,4);
+        ComplexNumber c = new ComplexNumber(5, 4);
         double expResult = sqrt(41);
         double result = ComplexOperations.abs(c);
         assertEquals(expResult, result, 0.0);
@@ -76,7 +77,7 @@ public class ComplexOperationsTest {
     /**
      * Test of sqrtComplex method, of class ComplexOperations.
      */
-   /* @Test
+    /* @Test
     public void testSqrtComplex() {
         System.out.println("sqrtComplex");
         ComplexNumber c = new ComplexNumber(-4,0);
@@ -86,22 +87,20 @@ public class ComplexOperationsTest {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }*/
-
     /**
      * Test of invertSign method, of class ComplexOperations.
      */
     @Test
     public void testInvertSign() {
         System.out.println("invertSign");
-        ComplexNumber c = new ComplexNumber(-1,2);
-        ComplexNumber expResult = new ComplexNumber(1,-2);
+        ComplexNumber c = new ComplexNumber(-1, 2);
+        ComplexNumber expResult = new ComplexNumber(1, -2);
         ComplexNumber result = ComplexOperations.invertSign(c);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-    
-    
+
     /**
      * Test of multiply method, of class ComplexOperations.
      */
@@ -135,6 +134,24 @@ public class ComplexOperationsTest {
         assertEquals(expResult3, result3);
         assertEquals(expResult4, result4);
 
+    }
+
+    @Test(expected = UpperBoundException.class)
+    public void testUpperBoundMultiply() {
+        ComplexNumber c1 = new ComplexNumber(Double.MAX_VALUE-1, Double.MAX_VALUE-1);
+        ComplexNumber c2 = new ComplexNumber(2, 2);
+        ComplexNumber result = ComplexOperations.multiply(c1, c2);
+        System.out.println("");
+        
+        
+    }
+
+    @Test(expected = MinimumBoundException.class)
+    public void testMinimumBoundMultiply() {
+        ComplexNumber c1 = new ComplexNumber(Double.MIN_VALUE, Double.MIN_VALUE);
+        ComplexNumber c2 = new ComplexNumber(2,  2);
+        ComplexNumber result = ComplexOperations.multiply(c1, c2);
+    
     }
 
     /**
@@ -176,20 +193,26 @@ public class ComplexOperationsTest {
         assertEquals(expResult2, result2);
         assertEquals(expResult3, result3);
         assertEquals(expResult4, result4);
-        
+
     }
 
     @Test
+    public void testMinimumBuondDivide() {
+        ComplexNumber c1 = new ComplexNumber(Double.MAX_VALUE, Double.MAX_VALUE);
+        ComplexNumber c2 = new ComplexNumber(Double.MIN_VALUE, Double.MIN_VALUE);
+
+        ComplexNumber expResult = new ComplexNumber(0, 0);
+        ComplexNumber result = ComplexOperations.divide(c2, c1);
+        assertEquals(expResult, result);
+
+    }
+
+    @Test(expected = ArithmeticException.class)
     public void testDivideForZero() {
         System.out.println("divide for zero");
         ComplexNumber c1 = new ComplexNumber(1, 2);
         ComplexNumber c2 = new ComplexNumber(0, 0);
-        ComplexNumber expResult1 = new ComplexNumber(0, 0);
-
         ComplexNumber result1 = ComplexOperations.divide(c1, c2);
-        
-            assertEquals(expResult1, result1);
-        }
-
     }
 
+}
