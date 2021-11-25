@@ -178,17 +178,27 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void insClicked(MouseEvent event) {
-        double real, img;
+        double real = 0;
+        double img = 0;
+        
         if ("+".equals(signReal.getText()))
             real = Double.parseDouble(realLabel.getText());
         else
             real = -Double.parseDouble(realLabel.getText());
         
+        if (imgLabel.getText().isEmpty()){
+            values.add(new ComplexNumber(real, img));
+            return;
+        }
+        
         if ("+".equals(signImg.getText()))
             img = Double.parseDouble(imgLabel.getText());
-        else
-            img = -Double.parseDouble(imgLabel.getText());
-            
+        else{
+            img = Double.parseDouble(imgLabel.getText());
+            if (img != 0)
+                img = -img;
+        }
+        
         values.add(new ComplexNumber(real, img));
     }
 

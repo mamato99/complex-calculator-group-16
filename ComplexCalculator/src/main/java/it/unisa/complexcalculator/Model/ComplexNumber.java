@@ -41,8 +41,7 @@ public class ComplexNumber {
 
     @Override
     public String toString() {
-        String ret;
-        if (this.imaginary > 0)
+        if (this.imaginary >= new Double(0))
             return real + " + " + imaginary + "i";
         else
             return real + " - " + -imaginary + "i";
