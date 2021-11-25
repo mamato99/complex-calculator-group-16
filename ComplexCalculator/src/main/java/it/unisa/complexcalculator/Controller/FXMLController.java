@@ -1,6 +1,7 @@
 package it.unisa.complexcalculator.Controller;
 
 import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.NumberMemory;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
@@ -73,14 +74,14 @@ public class FXMLController implements Initializable {
     @FXML
     private ToggleButton signImg;
     
-    
-    ObservableList<ComplexNumber> values;
+    NumberMemory mem;
+    //ObservableList<ComplexNumber> values;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        values= FXCollections.observableArrayList();
-        //storedElements.setItems(FXCollections.observableArrayList(new ComplexNumber(Double.parseDouble("3"), Double.parseDouble("2"))));
-        storedElements.setItems(values);
+    public void initialize(URL location, ResourceBundle resources) {    
+        mem = new NumberMemory();
+        //values= FXCollections.observableArrayList();
+        storedElements.setItems(mem.getStack());
         
         realButton.setDisable(true);
         
@@ -187,7 +188,7 @@ public class FXMLController implements Initializable {
             real = -Double.parseDouble(realLabel.getText());
         
         if (imgLabel.getText().isEmpty()){
-            values.add(new ComplexNumber(real, img));
+            mem.push(new ComplexNumber(real, img));
             return;
         }
         
@@ -199,7 +200,7 @@ public class FXMLController implements Initializable {
                 img = -img;
         }
         
-        values.add(new ComplexNumber(real, img));
+        mem.push(new ComplexNumber(real, img));
     }
 
     @FXML
