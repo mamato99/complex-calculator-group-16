@@ -1,7 +1,6 @@
 package it.unisa.complexcalculator.Model;
 
-import it.unisa.complexcalculator.Exception.MinimumBoundException;
-import it.unisa.complexcalculator.Exception.UpperBoundException;
+import it.unisa.complexcalculator.Exception.OutOfBoundException;
 import static java.lang.Math.sqrt;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -136,22 +135,22 @@ public class ComplexOperationsTest {
 
     }
 
-    @Test(expected = UpperBoundException.class)
-    public void testUpperBoundMultiply() {
-        ComplexNumber c1 = new ComplexNumber(Double.MAX_VALUE-1, Double.MAX_VALUE-1);
+    @Test(expected = OutOfBoundException.class)
+    public void testMaximumBoundMultiply() {
+        ComplexNumber c1 = new ComplexNumber(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
         ComplexNumber c2 = new ComplexNumber(2, 2);
         ComplexNumber result = ComplexOperations.multiply(c1, c2);
         System.out.println("");
-        
-        
+
     }
 
-    @Test(expected = MinimumBoundException.class)
+    @Test(expected = OutOfBoundException.class)
     public void testMinimumBoundMultiply() {
-        ComplexNumber c1 = new ComplexNumber(Double.MIN_VALUE, Double.MIN_VALUE);
-        ComplexNumber c2 = new ComplexNumber(2,  2);
+        ComplexNumber c1 = new ComplexNumber(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+        ComplexNumber c2 = new ComplexNumber(2, 2);
         ComplexNumber result = ComplexOperations.multiply(c1, c2);
-    
+        ComplexNumber expResult1 = new ComplexNumber(-5, 10);
+        assertEquals(expResult1, result);
     }
 
     /**
@@ -196,13 +195,21 @@ public class ComplexOperationsTest {
 
     }
 
-    @Test
+    @Test(expected = OutOfBoundException.class)
     public void testMinimumBuondDivide() {
-        ComplexNumber c1 = new ComplexNumber(Double.MAX_VALUE, Double.MAX_VALUE);
-        ComplexNumber c2 = new ComplexNumber(Double.MIN_VALUE, Double.MIN_VALUE);
+        ComplexNumber c1 = new ComplexNumber(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+        ComplexNumber c2 = new ComplexNumber(0.5, 0.5);
+        ComplexNumber result = ComplexOperations.divide(c1, c2);
+
+    }
+
+    @Test(expected = OutOfBoundException.class)
+    public void testMaximumBuondDivide() {
+        ComplexNumber c1 = new ComplexNumber(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+        ComplexNumber c2 = new ComplexNumber(0.5, 0.5);
 
         ComplexNumber expResult = new ComplexNumber(0, 0);
-        ComplexNumber result = ComplexOperations.divide(c2, c1);
+        ComplexNumber result = ComplexOperations.divide(c1, c2);
         assertEquals(expResult, result);
 
     }

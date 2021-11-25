@@ -8,13 +8,13 @@ package it.unisa.complexcalculator.Exception;
  *
  * @author super
  */
-public class UpperBoundException extends RuntimeException{
+public class OutOfBoundException extends RuntimeException{
 
     /**
      * Creates a new instance of <code>UpperBoundException</code> without detail
      * message.
      */
-    public UpperBoundException() {
+    public OutOfBoundException() {
     }
 
     /**
@@ -23,7 +23,7 @@ public class UpperBoundException extends RuntimeException{
      *
      * @param msg the detail message.
      */
-    public UpperBoundException(String msg) {
+    public OutOfBoundException(String msg) {
         super(msg);
     }
 }
