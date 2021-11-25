@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -71,11 +72,18 @@ public class FXMLController implements Initializable {
     private ToggleButton signReal;
     @FXML
     private ToggleButton signImg;
+    
+    
+    ObservableList<ComplexNumber> values;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        values= FXCollections.observableArrayList();
         //storedElements.setItems(FXCollections.observableArrayList(new ComplexNumber(Double.parseDouble("3"), Double.parseDouble("2"))));
+        storedElements.setItems(values);
+        
         realButton.setDisable(true);
+        
 
     }
 
@@ -170,6 +178,18 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void insClicked(MouseEvent event) {
+        double real, img;
+        if ("+".equals(signReal.getText()))
+            real = Double.parseDouble(realLabel.getText());
+        else
+            real = -Double.parseDouble(realLabel.getText());
+        
+        if ("+".equals(signImg.getText()))
+            img = Double.parseDouble(imgLabel.getText());
+        else
+            img = -Double.parseDouble(imgLabel.getText());
+            
+        values.add(new ComplexNumber(real, img));
     }
 
     @FXML

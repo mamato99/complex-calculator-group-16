@@ -45,7 +45,7 @@ public class ComplexNumber {
         if (this.imaginary > 0)
             return real + " + " + imaginary + "i";
         else
-            return real + " - " + imaginary + "i";
+            return real + " - " + -imaginary + "i";
     }
 
     @Override
