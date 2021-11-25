@@ -42,6 +42,7 @@
 
 .numberButtons {
     -fx-background-color: rgb(86,86,86);
+    -fx-background-radius: 15px;
 }
 
 .compButtons {
@@ -50,6 +51,7 @@
 
 .signButtons {
     -fx-background-color: #000033;
+
 }
 
 .list-view .list-cell {
