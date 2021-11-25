@@ -1,7 +1,7 @@
 package it.unisa.complexcalculator.Model;
 
-import it.unisa.complexcalculator.Exception.MinimumBoundException;
-import it.unisa.complexcalculator.Exception.UpperBoundException;
+
+import it.unisa.complexcalculator.Exception.OutOfBoundException;
 import static java.lang.Math.sqrt;
 
 /**
@@ -41,40 +41,27 @@ public final class ComplexOperations {
         return new ComplexNumber(-c.getReal(), -c.getImaginary());
     }
 
-    public static ComplexNumber multiplication(ComplexNumber c1, ComplexNumber c2) throws UpperBoundException,MinimumBoundException {
-        if ((c1.getReal() == Double.MAX_VALUE || c1.getImaginary() == Double.MAX_VALUE || c2.getReal() == Double.MAX_VALUE || c2.getImaginary() == Double.MAX_VALUE && c1.getReal() > 1) && c1.getReal()!= Double.MAX_VALUE)  {
-            throw new UpperBoundException();
-        }
-        if ((c1.getReal() == Double.MAX_VALUE || c1.getImaginary() == Double.MAX_VALUE || c2.getReal() == Double.MAX_VALUE || c2.getImaginary() == Double.MAX_VALUE) && c1.getImaginary() > 1 && c1.getImaginary()!= Double.MAX_VALUE)  {
-            throw new UpperBoundException();
-        }
-        if ((c1.getReal() == Double.MAX_VALUE || c1.getImaginary() == Double.MAX_VALUE || c2.getReal() == Double.MAX_VALUE || c2.getImaginary() == Double.MAX_VALUE) && c2.getReal() > 1 && c2.getReal() != Double.MAX_VALUE)  {
-            throw new UpperBoundException();
-        }
-        if ((c1.getReal() == Double.MAX_VALUE || c1.getImaginary() == Double.MAX_VALUE || c2.getReal() == Double.MAX_VALUE || c2.getImaginary() == Double.MAX_VALUE) && c2.getImaginary() > 1 && c2.getImaginary() != Double.MAX_VALUE)  {
-            throw new UpperBoundException();
-        }
-         if (c1.getReal() == Double.MIN_VALUE || c1.getImaginary() == Double.MIN_VALUE || c2.getReal() == Double.MIN_VALUE || c2.getImaginary() == Double.MIN_VALUE) {
-            throw new MinimumBoundException();
-        }
-        double real = c1.getReal() * c2.getReal() - (c1.getImaginary() * c2.getImaginary());
-        double imaginary = c1.getImaginary() * c2.getReal() + (c1.getReal() * c2.getImaginary());
+    public static ComplexNumber multiply(ComplexNumber c1, ComplexNumber c2) throws OutOfBoundException {
+        Double real = c1.getReal() * c2.getReal() - (c1.getImaginary() * c2.getImaginary());
+        Double imaginary = c1.getImaginary() * c2.getReal() + (c1.getReal() * c2.getImaginary());
+        if(real.isNaN() || imaginary.isNaN())
+            throw new OutOfBoundException();
         return new ComplexNumber(real, imaginary);
     }
 
-    public static ComplexNumber division(ComplexNumber c1, ComplexNumber c2) throws ArithmeticException {
+    public static ComplexNumber divide(ComplexNumber c1, ComplexNumber c2) throws ArithmeticException,OutOfBoundException {
         if (c2.getReal() == 0 && c2.getImaginary() == 0) {
             throw new ArithmeticException();
         }
-        double numeratorReal;
-        double denominatorReal;
-        double numeratorImaginary;
-        double denominatorImaginary;
         
-        numeratorReal = c1.getReal() * c2.getReal() + c1.getImaginary() * c2.getImaginary();
-        denominatorReal = c2.getReal() * c2.getReal() + c2.getImaginary() * c2.getImaginary();
-        numeratorImaginary = c1.getImaginary() * c2.getReal() - (c1.getReal() * c2.getImaginary());
-        denominatorImaginary = c2.getReal() * c2.getReal() + c2.getImaginary() * c2.getImaginary();
+        Double numeratorReal = c1.getReal() * c2.getReal() + c1.getImaginary() * c2.getImaginary();
+        Double denominatorReal = c2.getReal() * c2.getReal() + c2.getImaginary() * c2.getImaginary();
+        Double numeratorImaginary = c1.getImaginary() * c2.getReal() - (c1.getReal() * c2.getImaginary());
+        Double denominatorImaginary = c2.getReal() * c2.getReal() + c2.getImaginary() * c2.getImaginary();
+        
+        if (numeratorReal.isNaN() || denominatorReal.isNaN() || numeratorImaginary.isNaN() || denominatorImaginary.isNaN()) 
+            throw new OutOfBoundException();
+       
         return new ComplexNumber(numeratorReal / denominatorReal, numeratorImaginary / denominatorImaginary);
     }
 
