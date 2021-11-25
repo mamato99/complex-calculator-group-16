@@ -1,5 +1,6 @@
 package it.unisa.complexcalculator.Controller;
 
+import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import it.unisa.complexcalculator.Model.NumberMemory;
 import java.net.URL;
@@ -74,21 +75,48 @@ public class FXMLController implements Initializable {
     @FXML
     private ToggleButton signImg;
     
-    NumberMemory mem;
-    //ObservableList<ComplexNumber> values;
+    Calculator c = new Calculator();
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {    
-        mem = new NumberMemory();
-        //values= FXCollections.observableArrayList();
-        storedElements.setItems(mem.getStack());
-        
+    public void initialize(URL location, ResourceBundle resources) {                 
+        storedElements.setItems(c.getStoredNumbers().getStack());       
         realButton.setDisable(true);
-        
+        refreshButtonState();
+    }
+    
+    private void refreshButtonState(){
+        int size = c.getStoredNumbers().len();
+        if(size>=2){
+            plusButton.setDisable(false);
+            minusButton.setDisable(false);
+            prodButton.setDisable(false);
+            divButton.setDisable(false);
+            sqrtButton.setDisable(false);
+            invButton.setDisable(false);
+        }else if (size == 1){
+            plusButton.setDisable(true);
+            minusButton.setDisable(true);
+            prodButton.setDisable(true);
+            divButton.setDisable(true);
+            sqrtButton.setDisable(false);
+            invButton.setDisable(false);
+        }else{
+            plusButton.setDisable(true);
+            minusButton.setDisable(true);
+            prodButton.setDisable(true);
+            divButton.setDisable(true);
+            sqrtButton.setDisable(true);
+            invButton.setDisable(true);
+        }
 
     }
-
+    
+    
     private void updateLabel(String to_add) {
+        if (realLabel.getText().equalsIgnoreCase("err") && imgLabel.getText().equalsIgnoreCase("err")){
+            realLabel.setText("");
+            imgLabel.setText("");
+        }
         if (realButton.isDisable()) {
             if ("del".equals(to_add) && realLabel.getText().length() > 0) {
                 if ("Re".equals(realLabel.getText())) {
@@ -113,7 +141,6 @@ public class FXMLController implements Initializable {
             } else if (!"del".equals(to_add)) {
                 imgLabel.setText(imgLabel.getText() + to_add);
             }
-
         }
     }
 
@@ -179,28 +206,27 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void insClicked(MouseEvent event) {
-        double real = 0;
-        double img = 0;
+        String real;
+        String img;
+        
+        if (realLabel.getText().isEmpty() && imgLabel.getText().isEmpty())
+            return;
+        if (realLabel.getText().equalsIgnoreCase("err") && imgLabel.getText().equalsIgnoreCase("err"))
+            return;
         
         if ("+".equals(signReal.getText()))
-            real = Double.parseDouble(realLabel.getText());
+            real = "+" + realLabel.getText();
         else
-            real = -Double.parseDouble(realLabel.getText());
-        
-        if (imgLabel.getText().isEmpty()){
-            mem.push(new ComplexNumber(real, img));
-            return;
-        }
+            real = "-" + realLabel.getText();
         
         if ("+".equals(signImg.getText()))
-            img = Double.parseDouble(imgLabel.getText());
-        else{
-            img = Double.parseDouble(imgLabel.getText());
-            if (img != 0)
-                img = -img;
-        }
+            img = "+" + imgLabel.getText();
+        else
+            img = "-" + imgLabel.getText();
         
-        mem.push(new ComplexNumber(real, img));
+        
+        c.pushNumber(real, img);
+        refreshButtonState();
     }
 
     @FXML
@@ -211,28 +237,43 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void plusClicked(MouseEvent event) {
-        
+        c.add();
+        refreshButtonState();
     }
 
     @FXML
     private void minusClicked(MouseEvent event) {
-        
+        c.subtract();
+        refreshButtonState();
     }
 
     @FXML
     private void prodClicked(MouseEvent event) {
+        c.multiply();
+        refreshButtonState();
     }
 
     @FXML
     private void divClicked(MouseEvent event) {
+        try{
+            c.devide();
+        } catch(RuntimeException ex){
+            imgLabel.setText("Err");
+            realLabel.setText("Err");
+        }
+        refreshButtonState();
     }
 
     @FXML
     private void sqrtClicked(MouseEvent event) {
+        c.squareRoot();
+        refreshButtonState();
     }
 
     @FXML
     private void invClicked(MouseEvent event) {
+        c.invertSign();
+        refreshButtonState();
     }
 
     @FXML

@@ -1,18 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package it.unisa.complexcalculator.Model;
 
+import java.util.EmptyStackException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
  *
  * @author Amministratore
- * @param <ComplexNumber>
  */
-public class NumberMemory<ComplexNumber>{
+public class NumberMemory{
     
     private final ObservableList<ComplexNumber> stack;
     private int len;
@@ -28,15 +24,18 @@ public class NumberMemory<ComplexNumber>{
     }
     
     public ComplexNumber pop(){
-        if (len > 0)
+        if (len > 0){
+            len--;
             return stack.remove(0);
-        return null;
+        }
+        throw new EmptyStackException();
+        
     }
     
     public ComplexNumber top(){
         if (len > 0)
             return stack.get(0);
-        return null;
+        throw new EmptyStackException();
     }
     
     public int len(){

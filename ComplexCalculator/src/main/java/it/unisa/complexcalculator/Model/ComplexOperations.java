@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package it.unisa.complexcalculator.Model;
 
 import it.unisa.complexcalculator.Exception.MinimumBoundException;
@@ -28,7 +24,7 @@ public final class ComplexOperations {
         return modulo;
     }
 
-    public static ComplexNumber sqrtComplex(ComplexNumber c) {
+    public static ComplexNumber squareRoot(ComplexNumber c) {
         double a1;
         double b1;
         if (c.getImaginary() > 0) {
@@ -41,11 +37,11 @@ public final class ComplexOperations {
         return new ComplexNumber(a1, b1);
     }
 
-    public static ComplexNumber invertSign(ComplexNumber c) {
+    public static ComplexNumber signInversion(ComplexNumber c) {
         return new ComplexNumber(-c.getReal(), -c.getImaginary());
     }
 
-    public static ComplexNumber multiply(ComplexNumber c1, ComplexNumber c2) throws UpperBoundException,MinimumBoundException {
+    public static ComplexNumber multiplication(ComplexNumber c1, ComplexNumber c2) throws UpperBoundException,MinimumBoundException {
         if ((c1.getReal() == Double.MAX_VALUE || c1.getImaginary() == Double.MAX_VALUE || c2.getReal() == Double.MAX_VALUE || c2.getImaginary() == Double.MAX_VALUE && c1.getReal() > 1) && c1.getReal()!= Double.MAX_VALUE)  {
             throw new UpperBoundException();
         }
@@ -66,14 +62,15 @@ public final class ComplexOperations {
         return new ComplexNumber(real, imaginary);
     }
 
-    public static ComplexNumber divide(ComplexNumber c1, ComplexNumber c2) throws ArithmeticException {
+    public static ComplexNumber division(ComplexNumber c1, ComplexNumber c2) throws ArithmeticException {
         if (c2.getReal() == 0 && c2.getImaginary() == 0) {
             throw new ArithmeticException();
         }
-        double numeratorReal = 0;
-        double denominatorReal = 0;
-        double numeratorImaginary = 0;
-        double denominatorImaginary = 0;
+        double numeratorReal;
+        double denominatorReal;
+        double numeratorImaginary;
+        double denominatorImaginary;
+        
         numeratorReal = c1.getReal() * c2.getReal() + c1.getImaginary() * c2.getImaginary();
         denominatorReal = c2.getReal() * c2.getReal() + c2.getImaginary() * c2.getImaginary();
         numeratorImaginary = c1.getImaginary() * c2.getReal() - (c1.getReal() * c2.getImaginary());

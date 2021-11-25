@@ -95,7 +95,7 @@ public class ComplexOperationsTest {
         System.out.println("invertSign");
         ComplexNumber c = new ComplexNumber(-1, 2);
         ComplexNumber expResult = new ComplexNumber(1, -2);
-        ComplexNumber result = ComplexOperations.invertSign(c);
+        ComplexNumber result = ComplexOperations.signInversion(c);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -124,10 +124,10 @@ public class ComplexOperationsTest {
         ComplexNumber c8 = new ComplexNumber(-3, -4);
         ComplexNumber expResult4 = new ComplexNumber(-5, 10);
 
-        ComplexNumber result1 = ComplexOperations.multiply(c1, c2);
-        ComplexNumber result2 = ComplexOperations.multiply(c3, c4);
-        ComplexNumber result3 = ComplexOperations.multiply(c5, c6);
-        ComplexNumber result4 = ComplexOperations.multiply(c7, c8);
+        ComplexNumber result1 = ComplexOperations.multiplication(c1, c2);
+        ComplexNumber result2 = ComplexOperations.multiplication(c3, c4);
+        ComplexNumber result3 = ComplexOperations.multiplication(c5, c6);
+        ComplexNumber result4 = ComplexOperations.multiplication(c7, c8);
 
         assertEquals(expResult1, result1);
         assertEquals(expResult2, result2);
@@ -140,7 +140,7 @@ public class ComplexOperationsTest {
     public void testUpperBoundMultiply() {
         ComplexNumber c1 = new ComplexNumber(Double.MAX_VALUE-1, Double.MAX_VALUE-1);
         ComplexNumber c2 = new ComplexNumber(2, 2);
-        ComplexNumber result = ComplexOperations.multiply(c1, c2);
+        ComplexNumber result = ComplexOperations.multiplication(c1, c2);
         System.out.println("");
         
         
@@ -150,7 +150,7 @@ public class ComplexOperationsTest {
     public void testMinimumBoundMultiply() {
         ComplexNumber c1 = new ComplexNumber(Double.MIN_VALUE, Double.MIN_VALUE);
         ComplexNumber c2 = new ComplexNumber(2,  2);
-        ComplexNumber result = ComplexOperations.multiply(c1, c2);
+        ComplexNumber result = ComplexOperations.multiplication(c1, c2);
     
     }
 
@@ -184,10 +184,10 @@ public class ComplexOperationsTest {
         double res8 = (double) 2 / 25;
         ComplexNumber expResult4 = new ComplexNumber(res7, res8);
 
-        ComplexNumber result1 = ComplexOperations.divide(c1, c2);
-        ComplexNumber result2 = ComplexOperations.divide(c3, c4);
-        ComplexNumber result3 = ComplexOperations.divide(c5, c6);
-        ComplexNumber result4 = ComplexOperations.divide(c7, c8);
+        ComplexNumber result1 = ComplexOperations.division(c1, c2);
+        ComplexNumber result2 = ComplexOperations.division(c3, c4);
+        ComplexNumber result3 = ComplexOperations.division(c5, c6);
+        ComplexNumber result4 = ComplexOperations.division(c7, c8);
 
         assertEquals(expResult1, result1);
         assertEquals(expResult2, result2);
@@ -202,7 +202,7 @@ public class ComplexOperationsTest {
         ComplexNumber c2 = new ComplexNumber(Double.MIN_VALUE, Double.MIN_VALUE);
 
         ComplexNumber expResult = new ComplexNumber(0, 0);
-        ComplexNumber result = ComplexOperations.divide(c2, c1);
+        ComplexNumber result = ComplexOperations.division(c2, c1);
         assertEquals(expResult, result);
 
     }
@@ -212,7 +212,7 @@ public class ComplexOperationsTest {
         System.out.println("divide for zero");
         ComplexNumber c1 = new ComplexNumber(1, 2);
         ComplexNumber c2 = new ComplexNumber(0, 0);
-        ComplexNumber result1 = ComplexOperations.divide(c1, c2);
+        ComplexNumber result1 = ComplexOperations.division(c1, c2);
     }
 
 }
