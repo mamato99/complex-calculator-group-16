@@ -41,7 +41,7 @@ public final class ComplexOperations {
         return new ComplexNumber(-c.getReal(), -c.getImaginary());
     }
 
-    public static ComplexNumber multiply(ComplexNumber c1, ComplexNumber c2) throws OutOfBoundException {
+    public static ComplexNumber multiplication(ComplexNumber c1, ComplexNumber c2) throws OutOfBoundException {
         Double real = c1.getReal() * c2.getReal() - (c1.getImaginary() * c2.getImaginary());
         Double imaginary = c1.getImaginary() * c2.getReal() + (c1.getReal() * c2.getImaginary());
         if(real.isNaN() || imaginary.isNaN())
@@ -49,7 +49,7 @@ public final class ComplexOperations {
         return new ComplexNumber(real, imaginary);
     }
 
-    public static ComplexNumber divide(ComplexNumber c1, ComplexNumber c2) throws ArithmeticException,OutOfBoundException {
+    public static ComplexNumber division(ComplexNumber c1, ComplexNumber c2) throws ArithmeticException,OutOfBoundException {
         if (c2.getReal() == 0 && c2.getImaginary() == 0) {
             throw new ArithmeticException();
         }

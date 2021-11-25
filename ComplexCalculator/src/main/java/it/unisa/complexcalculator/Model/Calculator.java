@@ -64,7 +64,7 @@ public class Calculator {
         try{
             ComplexNumber c1 = storedNumbers.pop();
             ComplexNumber c2 = storedNumbers.pop();   
-            ComplexNumber result = ComplexOperations.divide(c1, c2);
+            ComplexNumber result = ComplexOperations.division(c1, c2);
             storedNumbers.push(result);
         } catch (EmptyStackException ex){
             System.err.println("Empty stack.");
@@ -75,7 +75,7 @@ public class Calculator {
         try{
             ComplexNumber c1 = storedNumbers.pop();
             ComplexNumber c2 = storedNumbers.pop();   
-            ComplexNumber result = ComplexOperations.multiply(c1, c2);
+            ComplexNumber result = ComplexOperations.multiplication(c1, c2);
             storedNumbers.push(result);
         } catch (EmptyStackException ex){
             System.err.println("Empty stack.");
