@@ -3,6 +3,8 @@ package it.unisa.complexcalculator.Controller;
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 
-public class FXMLController implements Initializable{
+public class FXMLController implements Initializable {
 
     @FXML
     private Button twoButton;
@@ -52,7 +54,7 @@ public class FXMLController implements Initializable{
     @FXML
     private Button invButton;
     @FXML
-    private ListView<String> storedElements;
+    private ListView<ComplexNumber> storedElements;
     @FXML
     private Label realLabel;
     @FXML
@@ -72,23 +74,38 @@ public class FXMLController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        storedElements.setItems(FXCollections.observableArrayList("3+2i", "6+6i", "5", "6+6i","6+6i","6+6i"));
+        //storedElements.setItems(FXCollections.observableArrayList(new ComplexNumber(Double.parseDouble("3"), Double.parseDouble("2"))));
+        realButton.setDisable(true);
+
     }
-    
+
     private void updateLabel(String to_add) {
-        /*
-        if ("del".equals(to_add) && userLabel.getText().length() > 0) {
-            if ("Welcome".equals(userLabel.getText())) {
-                userLabel.setText("");
-            } else {
-                userLabel.setText(userLabel.getText().substring(0, userLabel.getText().length() - 1));
+        if (realButton.isDisable()) {
+            if ("del".equals(to_add) && realLabel.getText().length() > 0) {
+                if ("Re".equals(realLabel.getText())) {
+                    realLabel.setText("");
+                } else {
+                    realLabel.setText(realLabel.getText().substring(0, realLabel.getText().length() - 1));
+                }
+            } else if ("Re".equals(realLabel.getText())) {
+                realLabel.setText(to_add);
+            } else if (!"del".equals(to_add)) {
+                realLabel.setText(realLabel.getText() + to_add);
             }
-        } else if ("Welcome".equals(userLabel.getText())) {
-            userLabel.setText(to_add);
-        } else if (!"del".equals(to_add)) {
-            userLabel.setText(userLabel.getText() + to_add);
+        } else {
+            if ("del".equals(to_add) && imgLabel.getText().length() > 0) {
+                if ("Im".equals(imgLabel.getText())) {
+                    imgLabel.setText("");
+                } else {
+                    imgLabel.setText(imgLabel.getText().substring(0, imgLabel.getText().length() - 1));
+                }
+            } else if ("Im".equals(imgLabel.getText())) {
+                imgLabel.setText(to_add);
+            } else if (!"del".equals(to_add)) {
+                imgLabel.setText(imgLabel.getText() + to_add);
+            }
+
         }
-        */
     }
 
     @FXML
@@ -158,16 +175,17 @@ public class FXMLController implements Initializable{
     @FXML
     private void delClicked(MouseEvent event) {
         updateLabel("del");
+        
     }
 
     @FXML
     private void plusClicked(MouseEvent event) {
-        updateLabel("+");
+        
     }
 
     @FXML
     private void minusClicked(MouseEvent event) {
-        updateLabel("-");
+        
     }
 
     @FXML
@@ -190,28 +208,36 @@ public class FXMLController implements Initializable{
     private void changeRealSign(ActionEvent event) {
         if (signReal.isSelected()) {
             signReal.setText("+");
-        }else
+        } else {
             signReal.setText("-");
+        }
     }
 
     @FXML
     private void changeImgSign(ActionEvent event) {
         if (signImg.isSelected()) {
             signImg.setText("+");
-        }else
+        } else {
             signImg.setText("-");
+        }
     }
 
     @FXML
     private void acClicked(MouseEvent event) {
+        realLabel.setText("");
+        imgLabel.setText("");
     }
 
     @FXML
     private void realClicked(MouseEvent event) {
+        realButton.setDisable(true);
+        imgButton.setDisable(false);
     }
 
     @FXML
     private void imgClicked(MouseEvent event) {
+        imgButton.setDisable(true);
+        realButton.setDisable(false);
     }
 
 }
