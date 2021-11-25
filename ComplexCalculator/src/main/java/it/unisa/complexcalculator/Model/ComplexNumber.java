@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package it.unisa.complexcalculator.Model;
 
 /**
@@ -41,7 +37,10 @@ public class ComplexNumber {
 
     @Override
     public String toString() {
-        return real + " " + imaginary + "j";
+        if (this.imaginary >= new Double(0))
+            return String.format("%.2f", real) + " + " + String.format("%.2f", imaginary) + "i";
+        else
+            return String.format("%.2f", real) + " - " + String.format("%.2f", -imaginary) + "i";
     }
 
     @Override

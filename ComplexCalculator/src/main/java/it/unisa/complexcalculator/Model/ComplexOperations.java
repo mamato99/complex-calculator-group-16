@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package it.unisa.complexcalculator.Model;
 
 
@@ -28,7 +24,7 @@ public final class ComplexOperations {
         return modulo;
     }
 
-    public static ComplexNumber sqrtComplex(ComplexNumber c) {
+    public static ComplexNumber squareRoot(ComplexNumber c) {
         double a1;
         double b1;
         if (c.getImaginary() > 0) {
@@ -41,14 +37,14 @@ public final class ComplexOperations {
         return new ComplexNumber(a1, b1);
     }
 
-    public static ComplexNumber invertSign(ComplexNumber c) {
+    public static ComplexNumber signInversion(ComplexNumber c) {
         return new ComplexNumber(-c.getReal(), -c.getImaginary());
     }
 
     public static ComplexNumber multiply(ComplexNumber c1, ComplexNumber c2) throws OutOfBoundException {
         Double real = c1.getReal() * c2.getReal() - (c1.getImaginary() * c2.getImaginary());
         Double imaginary = c1.getImaginary() * c2.getReal() + (c1.getReal() * c2.getImaginary());
-        if(real.isNaN() || imaginary.isNaN() || real.equals(Double.MAX_EXPONENT))
+        if(real.isNaN() || imaginary.isNaN())
             throw new OutOfBoundException();
         return new ComplexNumber(real, imaginary);
     }

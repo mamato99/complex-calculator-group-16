@@ -94,7 +94,7 @@ public class ComplexOperationsTest {
         System.out.println("invertSign");
         ComplexNumber c = new ComplexNumber(-1, 2);
         ComplexNumber expResult = new ComplexNumber(1, -2);
-        ComplexNumber result = ComplexOperations.invertSign(c);
+        ComplexNumber result = ComplexOperations.signInversion(c);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -140,17 +140,16 @@ public class ComplexOperationsTest {
         ComplexNumber c1 = new ComplexNumber(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
         ComplexNumber c2 = new ComplexNumber(2, 2);
         ComplexNumber result = ComplexOperations.multiply(c1, c2);
-        System.out.println("");
+       
 
     }
 
     @Test(expected = OutOfBoundException.class)
     public void testMinimumBoundMultiply() {
         ComplexNumber c1 = new ComplexNumber(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
-        ComplexNumber c2 = new ComplexNumber(2, 2);
+        ComplexNumber c2 = new ComplexNumber(2,  2);
         ComplexNumber result = ComplexOperations.multiply(c1, c2);
-        ComplexNumber expResult1 = new ComplexNumber(-5, 10);
-        assertEquals(expResult1, result);
+    
     }
 
     /**

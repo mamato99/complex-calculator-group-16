@@ -17,10 +17,11 @@
     -fx-font-family: 'Fleftex';
     -fx-background-color: rgb(142,137,42);
     -fx-border-color: black;
-    -fx-background-radius: 10px;
     -fx-border-width: 1px;
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 30, 0.7, 0.0, 0.0);
     -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 4px;
 }
 
 #anchor {
@@ -41,4 +42,25 @@
 
 .numberButtons {
     -fx-background-color: rgb(86,86,86);
+}
+
+.compButtons {
+    -fx-background-color: #60199e;
+}
+
+.signButtons {
+    -fx-background-color: #000033;
+}
+
+.list-view .list-cell {
+    -fx-background-color: rgb(142,137,42);
+    -fx-alignment: center;
+    -fx-text-fill: #60199e;
+    -fx-border-color: #60199e;
+    -fx-border-width: 1px;
+}
+
+.list-view .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-padding:-8;
 }
