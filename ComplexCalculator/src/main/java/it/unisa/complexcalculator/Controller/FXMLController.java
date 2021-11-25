@@ -85,6 +85,19 @@ public class FXMLController implements Initializable {
     }
     
     private void refreshButtonState(){
+        
+        if (realButton.isDisable()){
+            if (realLabel.getText().contains("."))
+                dotButton.setDisable(true);
+            else
+                dotButton.setDisable(false);
+        }else{
+            if (imgLabel.getText().contains("."))
+                dotButton.setDisable(true);
+            else
+                dotButton.setDisable(false);
+        }
+        
         int size = c.getStoredNumbers().len();
         if(size>=2){
             plusButton.setDisable(false);
@@ -142,6 +155,7 @@ public class FXMLController implements Initializable {
                 imgLabel.setText(imgLabel.getText() + to_add);
             }
         }
+        refreshButtonState();
     }
 
     @FXML
@@ -298,18 +312,21 @@ public class FXMLController implements Initializable {
     private void acClicked(MouseEvent event) {
         realLabel.setText("");
         imgLabel.setText("");
+        refreshButtonState();
     }
 
     @FXML
     private void realClicked(MouseEvent event) {
         realButton.setDisable(true);
         imgButton.setDisable(false);
+        refreshButtonState();
     }
 
     @FXML
     private void imgClicked(MouseEvent event) {
         imgButton.setDisable(true);
         realButton.setDisable(false);
+        refreshButtonState();
     }
 
 }
