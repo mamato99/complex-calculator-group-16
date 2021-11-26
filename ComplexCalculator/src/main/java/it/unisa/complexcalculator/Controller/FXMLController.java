@@ -247,7 +247,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void divClicked(MouseEvent event) {
         try{
-            c.devide();
+            c.divide();
         } catch(RuntimeException ex){
             imgLabel.setText("Err");
             realLabel.setText("Err");
