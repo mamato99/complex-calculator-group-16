@@ -13,10 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 
-/**
- *
- * @author Amministratore
- */
+
 public class FXMLController implements Initializable {
 
     @FXML
@@ -51,7 +48,7 @@ public class FXMLController implements Initializable {
     Calculator c = new Calculator();
 
     /**
-     *
+     * Initializes all elements according to user preferences by default
      * @param location
      * @param resources
      */
@@ -62,6 +59,9 @@ public class FXMLController implements Initializable {
         refreshButtonState();
     }
     
+    /*
+     * Method to handle changing button properties after specific operations
+     */
     private void refreshButtonState(){
         
         if (realButton.isDisable()){
@@ -102,7 +102,9 @@ public class FXMLController implements Initializable {
 
     }
     
-    
+    /*
+     * Method to manage the modification of the labels according to the pressed button 
+     */
     private void updateLabel(String to_add) {
         if (realLabel.getText().equalsIgnoreCase("err") && imgLabel.getText().equalsIgnoreCase("err")){
             realLabel.setText("");
@@ -135,67 +137,98 @@ public class FXMLController implements Initializable {
         }
         refreshButtonState();
     }
-
+    
+    /*
+     * Method to manage the modification of the labels when button with "1" as label is clicked
+     */
     @FXML
     private void oneClicked(MouseEvent event) {
         updateLabel("1");
     }
-
+    
+    /*
+     * Method to manage the modification of the labels when button with "2" as label is clicked
+     */
     @FXML
     private void twoClicked(MouseEvent event) {
         updateLabel("2");
     }
 
+    /*
+     * Method to manage the modification of the labels when button with "3" as label is clicked
+     */
     @FXML
     private void threeClicked(MouseEvent event) {
         updateLabel("3");
     }
-
+    
+    /*
+     * Method to manage the modification of the labels when button with "4" as label is clicked
+     */
     @FXML
     private void fourClicked(MouseEvent event) {
         updateLabel("4");
-
     }
 
+    /*
+     * Method to manage the modification of the labels when button with "5" as label is clicked
+     */
     @FXML
     private void fiveClicked(MouseEvent event) {
         updateLabel("5");
     }
 
+    /*
+     * Method to manage the modification of the labels when button with "6" as label is clicked
+     */
     @FXML
     private void sixClicked(MouseEvent event) {
         updateLabel("6");
     }
 
+    /*
+     * Method to manage the modification of the labels when button with "7" as label is clicked
+     */
     @FXML
     private void sevenClicked(MouseEvent event) {
         updateLabel("7");
     }
 
+    /*
+     * Method to manage the modification of the labels when button with "8" as label is clicked
+     */
     @FXML
     private void eightClicked(MouseEvent event) {
         updateLabel("8");
     }
 
+    /*
+     * Method to manage the modification of the labels when button with "9" as label is clicked
+     */
     @FXML
     private void nineClicked(MouseEvent event) {
         updateLabel("9");
     }
 
+    /*
+     * Method to manage the modification of the labels when button with "." as label is clicked
+     */
     @FXML
     private void dotClicked(MouseEvent event) {
         updateLabel(".");
     }
 
+    /*
+     * Method to manage the modification of the labels when button with "0" as label is clicked
+     */
     @FXML
     private void zeroClicked(MouseEvent event) {
         updateLabel("0");
     }
 
-    private void imClicked(MouseEvent event) {
-        updateLabel("i");
-    }
-
+    /*
+     * Method to manage the storing of a new complex number when button with "INS" as label is clicked
+     */
     @FXML
     private void insClicked(MouseEvent event) {
         String real;
@@ -220,34 +253,49 @@ public class FXMLController implements Initializable {
         c.pushNumber(real, img);
         refreshButtonState();
     }
-
+    
+    /*
+     * Method to manage the modification of the labels when button with "del" as label is clicked
+     */
     @FXML
     private void delClicked(MouseEvent event) {
         updateLabel("del");        
     }
-
+    
+    /*
+     * Method to manage the associated operation when button with "+" as label is clicked
+     */
     @FXML
     private void plusClicked(MouseEvent event) {
         c.add();
         refreshButtonState();
     }
 
+    /*
+     * Method to manage the associated operation when button with "-" as label is clicked
+     */
     @FXML
     private void minusClicked(MouseEvent event) {
         c.subtract();
         refreshButtonState();
     }
 
+    /*
+     * Method to manage the associated operation when button with "x" as label is clicked
+     */
     @FXML
     private void prodClicked(MouseEvent event) {
         c.multiply();
         refreshButtonState();
     }
 
+    /*
+     * Method to manage the associated operation when button with "%" as label is clicked
+     */
     @FXML
     private void divClicked(MouseEvent event) {
         try{
-            c.devide();
+            c.divide();
         } catch(RuntimeException ex){
             imgLabel.setText("Err");
             realLabel.setText("Err");
@@ -255,18 +303,27 @@ public class FXMLController implements Initializable {
         refreshButtonState();
     }
 
+    /*
+     * Method to manage the associated operation when button with "√" as label is clicked
+     */
     @FXML
     private void sqrtClicked(MouseEvent event) {
         c.squareRoot();
         refreshButtonState();
     }
 
+    /*
+     * Method to manage the associated operation when button with "+-" as label is clicked
+     */
     @FXML
     private void invClicked(MouseEvent event) {
         c.invertSign();
         refreshButtonState();
     }
 
+    /*
+     * Method to manage the action of signReal toggleButton clicked
+     */
     @FXML
     private void changeRealSign(ActionEvent event) {
         if (signReal.isSelected()) {
@@ -276,6 +333,9 @@ public class FXMLController implements Initializable {
         }
     }
 
+    /*
+     * Method to manage the action of signImg toggleButton clicked
+     */
     @FXML
     private void changeImgSign(ActionEvent event) {
         if (signImg.isSelected()) {
@@ -285,6 +345,9 @@ public class FXMLController implements Initializable {
         }
     }
 
+    /*
+     * Method to manage the modification of the labels when button with "AC" as label is clicked
+     */
     @FXML
     private void acClicked(MouseEvent event) {
         realLabel.setText("");
@@ -292,6 +355,9 @@ public class FXMLController implements Initializable {
         refreshButtonState();
     }
 
+    /*
+     * Method to manage the selected label to use when button with "Re" as label is clicked
+     */
     @FXML
     private void realClicked(MouseEvent event) {
         realButton.setDisable(true);
@@ -299,6 +365,9 @@ public class FXMLController implements Initializable {
         refreshButtonState();
     }
 
+    /*
+     * Method to manage the selected label to use when button with "Im" as label is clicked
+     */
     @FXML
     private void imgClicked(MouseEvent event) {
         imgButton.setDisable(true);

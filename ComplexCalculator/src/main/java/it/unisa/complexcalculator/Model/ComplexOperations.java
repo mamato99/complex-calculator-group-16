@@ -11,11 +11,11 @@ import static java.lang.Math.sqrt;
 public final class ComplexOperations {
 
     /**
-     *
-     * @param c1
-     * @param c2
-     * @return
-     * @throws OutOfBoundException
+     * <p>Add the two specified complex numbers values</p>
+     * @param c1 is the first complex number that is taken as input by the add function
+     * @param c2 is the second complex number that is taken as input by the add function
+     * @return returns the result complex number of the add function
+     * @throws OutOfBoundException if the complex number returned goes boyond the double threshold
      */
     public static ComplexNumber add(ComplexNumber c1, ComplexNumber c2) throws OutOfBoundException{
         Double real = c1.getReal() + c2.getReal();
@@ -26,11 +26,11 @@ public final class ComplexOperations {
     }
     
     /**
-     *
-     * @param c1
-     * @param c2
-     * @return
-     * @throws OutOfBoundException
+     * <p>Subtracts the two specified complex numbers values</p>
+     * @param c1 is the first complex number that is taken as input by the difference function
+     * @param c2 is the second complex number that is taken as input by the difference function
+     * @return returns the result complex number of the difference function
+     * @throws OutOfBoundException if the complex number returned goes boyond the double threshold
      */
     public static ComplexNumber difference(ComplexNumber c1, ComplexNumber c2) throws OutOfBoundException{
         Double real = c1.getReal() - c2.getReal();
@@ -41,10 +41,10 @@ public final class ComplexOperations {
     }
 
     /**
-     *
-     * @param c
-     * @return
-     * @throws OutOfBoundException
+     * <p>Calculates the module of the specified complex number</p>
+     * @param c is the complex number that is taken as input by the abs function
+     * @return returns the module of the complex number 
+     * @throws OutOfBoundException if the complex number returned goes boyond the double threshold
      */
     public static double abs(ComplexNumber c) throws OutOfBoundException{
         Double var = c.getReal() * c.getReal() + c.getImaginary() * c.getImaginary();
@@ -54,10 +54,10 @@ public final class ComplexOperations {
     }
 
     /**
-     *
-     * @param c
-     * @return
-     * @throws OutOfBoundException
+     * <p>This function calculates the square root number</p>
+     * @param c is the complex number that is taken as input by the squareRoot function
+     * @return returns the square root of the complex number 
+     * @throws OutOfBoundException if the complex number returned goes boyond the double threshold
      */
     public static ComplexNumber squareRoot(ComplexNumber c) throws OutOfBoundException{
         Double real;
@@ -74,9 +74,7 @@ public final class ComplexOperations {
             throw new OutOfBoundException();
         return new ComplexNumber(real, imaginary);
     }
-     
-    //quali sono i casi limite?
-
+   
     /**
      * <p> Invert the sign of the specified Complex Numbers values </p>
      * @param c the complex number to which the sign will be changed

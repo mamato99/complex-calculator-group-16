@@ -10,33 +10,33 @@ public class Calculator {
     private final NumberMemory storedNumbers;
     
     /**
-     *
+     * <p>Constructor of the Calculator class</p> 
      */
     public Calculator(){
         storedNumbers = new NumberMemory();
     }
 
     /**
-     *
-     * @return
+     * <p>This function returns the numbers saved.</p>
+     * @return <p>This function returns the numbers saved.</p>
      */
     public NumberMemory getStoredNumbers() {
         return storedNumbers;
     }
     
     /**
-     *
-     * @param real
-     * @param img
+     * <p>This function saves the number (that has been passed) into the list</p>
+     * @param real represents the real number to be entered
+     * @param img represents the imaginary number to be entered
      */
     public void pushNumber(double real, double img){
         storedNumbers.push(new ComplexNumber(real,img));
     }
     
     /**
-     *
-     * @param re
-     * @param im
+     * <p>This function converts the input strings into double numbers and passes them to another function</p>
+     * @param re represents the real number to be entered
+     * @param im represents the imaginary number to be entered
      */
     public void pushNumber(String re, String im){
         double real;
@@ -56,7 +56,7 @@ public class Calculator {
     }
     
     /**
-     *
+     * <p>This function takes the last two numbers saved on the stack and adds them together </p>
      */
     public void add(){
         try{
@@ -70,7 +70,7 @@ public class Calculator {
     }
     
     /**
-     *
+     * <p>This function takes the last two numbers saved on the stack and subtracts them together </p>
      */
     public void subtract(){
         try{
@@ -84,9 +84,9 @@ public class Calculator {
     }
     
     /**
-     *
+     * <p>This function takes the last two numbers saved on the stack and divides them together </p>
      */
-    public void devide(){
+    public void divide(){
         try{
             ComplexNumber c1 = storedNumbers.pop();
             ComplexNumber c2 = storedNumbers.pop();   
@@ -98,7 +98,7 @@ public class Calculator {
     }
     
     /**
-     *
+     * <p>This function takes the last two numbers saved on the stack and multiplies them together </p>
      */
     public void multiply(){
         try{
@@ -112,7 +112,7 @@ public class Calculator {
     }
     
     /**
-     *
+     * <p>This function takes the last number saved on the stack and reverses its sign </p>
      */
     public void invertSign(){
         try{
@@ -125,7 +125,7 @@ public class Calculator {
     }
     
     /**
-     *
+     * <p>This function takes the last number saved on the stack and calculates the square root</p>
      */
     public void squareRoot(){
         try{
