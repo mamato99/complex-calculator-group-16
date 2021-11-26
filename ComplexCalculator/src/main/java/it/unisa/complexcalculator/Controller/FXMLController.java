@@ -2,13 +2,8 @@ package it.unisa.complexcalculator.Controller;
 
 import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
-import it.unisa.complexcalculator.Model.NumberMemory;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,29 +16,7 @@ import javafx.scene.input.MouseEvent;
 public class FXMLController implements Initializable {
 
     @FXML
-    private Button twoButton;
-    @FXML
-    private Button oneButton;
-    @FXML
-    private Button threeButton;
-    @FXML
-    private Button fourButton;
-    @FXML
-    private Button fiveButton;
-    @FXML
-    private Button sixButton;
-    @FXML
-    private Button sevenButton;
-    @FXML
-    private Button eightButton;
-    @FXML
-    private Button nineButton;
-    @FXML
     private Button dotButton;
-    @FXML
-    private Button zeroButton;
-    @FXML
-    private Button insButton;
     @FXML
     private Button plusButton;
     @FXML
@@ -62,10 +35,6 @@ public class FXMLController implements Initializable {
     private Label realLabel;
     @FXML
     private Label imgLabel;
-    @FXML
-    private Button delButton;
-    @FXML
-    private Button acButton1;
     @FXML
     private Button realButton;
     @FXML
@@ -245,8 +214,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void delClicked(MouseEvent event) {
-        updateLabel("del");
-        
+        updateLabel("del");        
     }
 
     @FXML
