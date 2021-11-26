@@ -103,13 +103,13 @@ public class CalculatorTest {
     }
 
     /**
-     * Test of devide method, of class Calculator.
+     * Test of divide method, of class Calculator.
      */
     @Test
-    public void testDevide() {
-        System.out.println("devide");
+    public void testDivide() {
+        System.out.println("divide");
         Calculator instance = new Calculator();
-        instance.devide();
+        instance.divide();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
