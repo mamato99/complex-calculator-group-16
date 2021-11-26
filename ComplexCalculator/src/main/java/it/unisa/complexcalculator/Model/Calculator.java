@@ -9,18 +9,35 @@ import java.util.EmptyStackException;
 public class Calculator {
     private final NumberMemory storedNumbers;
     
+    /**
+     *
+     */
     public Calculator(){
         storedNumbers = new NumberMemory();
     }
 
+    /**
+     *
+     * @return
+     */
     public NumberMemory getStoredNumbers() {
         return storedNumbers;
     }
     
+    /**
+     *
+     * @param real
+     * @param img
+     */
     public void pushNumber(double real, double img){
         storedNumbers.push(new ComplexNumber(real,img));
     }
     
+    /**
+     *
+     * @param re
+     * @param im
+     */
     public void pushNumber(String re, String im){
         double real;
         double img;
@@ -38,6 +55,9 @@ public class Calculator {
         pushNumber(real,img);
     }
     
+    /**
+     *
+     */
     public void add(){
         try{
             ComplexNumber c1 = storedNumbers.pop();
@@ -49,6 +69,9 @@ public class Calculator {
         }
     }
     
+    /**
+     *
+     */
     public void subtract(){
         try{
             ComplexNumber c1 = storedNumbers.pop();
@@ -60,6 +83,9 @@ public class Calculator {
         }
     }
     
+    /**
+     *
+     */
     public void devide(){
         try{
             ComplexNumber c1 = storedNumbers.pop();
@@ -71,6 +97,9 @@ public class Calculator {
         }
     }
     
+    /**
+     *
+     */
     public void multiply(){
         try{
             ComplexNumber c1 = storedNumbers.pop();
@@ -82,6 +111,9 @@ public class Calculator {
         }
     }
     
+    /**
+     *
+     */
     public void invertSign(){
         try{
             ComplexNumber c1 = storedNumbers.pop(); 
@@ -92,6 +124,9 @@ public class Calculator {
         }
     }
     
+    /**
+     *
+     */
     public void squareRoot(){
         try{
             ComplexNumber c1 = storedNumbers.pop();
