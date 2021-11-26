@@ -13,6 +13,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 
+/**
+ *
+ * @author Amministratore
+ */
 public class FXMLController implements Initializable {
 
     @FXML
@@ -46,6 +50,11 @@ public class FXMLController implements Initializable {
     
     Calculator c = new Calculator();
 
+    /**
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {                 
         storedElements.setItems(c.getStoredNumbers().getStack());       

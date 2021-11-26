@@ -15,6 +15,11 @@ public class CalculatorApplication extends Application {
 
     private static Scene scene;
 
+    /**
+     *
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("FXMLDocument"));
@@ -34,6 +39,10 @@ public class CalculatorApplication extends Application {
         return fxmlLoader.load();
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }

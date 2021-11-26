@@ -9,32 +9,61 @@ public class ComplexNumber {
     private double real;
     private double imaginary;
 
+    /**
+     *
+     * @param real
+     * @param imaginary
+     */
     public ComplexNumber(double real, double imaginary) {
         this.real = real;
         this.imaginary = imaginary;
     }
 
+    /**
+     *
+     * @param real
+     */
     public ComplexNumber(double real) {
         this.real = real;
         this.imaginary = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getReal() {
         return real;
     }
 
+    /**
+     *
+     * @param real
+     */
     public void setReal(double real) {
         this.real = real;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getImaginary() {
         return imaginary;
     }
 
+    /**
+     *
+     * @param imaginary
+     */
     public void setImaginary(double imaginary) {
         this.imaginary = imaginary;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         if (this.imaginary >= new Double(0))
@@ -43,6 +72,10 @@ public class ComplexNumber {
             return String.format("%.2f", real) + " - " + String.format("%.2f", -imaginary) + "i";
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -51,6 +84,11 @@ public class ComplexNumber {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
