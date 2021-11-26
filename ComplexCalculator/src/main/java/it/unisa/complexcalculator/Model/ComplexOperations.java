@@ -10,34 +10,49 @@ import static java.lang.Math.sqrt;
  */
 public final class ComplexOperations {
 
-    public static ComplexNumber add(ComplexNumber c1, ComplexNumber c2) {
-        return new ComplexNumber(c1.getReal() + c2.getReal(), c1.getImaginary() + c2.getImaginary());
+    public static ComplexNumber add(ComplexNumber c1, ComplexNumber c2) throws OutOfBoundException{
+        Double real = c1.getReal() + c2.getReal();
+        Double imaginary = c1.getImaginary() + c2.getImaginary();
+        if(real.isInfinite() || imaginary.isInfinite())
+            throw new OutOfBoundException();
+        return new ComplexNumber(real, imaginary);
+    }
+    
+    public static ComplexNumber difference(ComplexNumber c1, ComplexNumber c2) throws OutOfBoundException{
+        Double real = c1.getReal() - c2.getReal();
+        Double imaginary = c1.getImaginary() - c2.getImaginary();
+        if(real.isInfinite() || imaginary.isInfinite())
+            throw new OutOfBoundException();
+        return new ComplexNumber(real, imaginary);    
     }
 
-    public static ComplexNumber difference(ComplexNumber c1, ComplexNumber c2) {
-        return new ComplexNumber(c1.getReal() - c2.getReal(), c1.getImaginary() - c2.getImaginary());
+    public static double abs(ComplexNumber c) throws OutOfBoundException{
+        Double var = c.getReal() * c.getReal() + c.getImaginary() * c.getImaginary();
+        if (var.isNaN() || var.isInfinite())
+            throw new OutOfBoundException();
+        return sqrt(var);
     }
 
-    public static double abs(ComplexNumber c) {
-        double var = c.getReal() * c.getReal() + c.getImaginary() * c.getImaginary();
-        double modulo = sqrt(var);
-        return modulo;
-    }
-
-    public static ComplexNumber squareRoot(ComplexNumber c) {
-        double a1;
-        double b1;
-        if (c.getImaginary() > 0) {
-            a1 = sqrt((abs(c) + c.getReal()) / 2);
-            b1 = sqrt((abs(c) - c.getReal()) / 2);
-        } else {
-            a1 = -sqrt((abs(c) + c.getReal()) / 2);
-            b1 = sqrt((abs(c) - c.getReal()) / 2);
+    public static ComplexNumber squareRoot(ComplexNumber c) throws OutOfBoundException{
+        Double real;
+        Double imaginary;
+        if (c.getImaginary() >= 0){
+            real = sqrt( (abs(c) + c.getReal()) /2);
+            imaginary = sqrt( (abs(c) - c.getReal()) /2);
         }
-        return new ComplexNumber(a1, b1);
+        else{
+            real = - sqrt( (abs(c) + c.getReal()) /2);
+            imaginary = sqrt( (abs(c) - c.getReal()) /2);
+        }
+        if(real.isInfinite() || imaginary.isInfinite())
+            throw new OutOfBoundException();
+        return new ComplexNumber(real, imaginary);
     }
-
+     
+    //quali sono i casi limite?
     public static ComplexNumber signInversion(ComplexNumber c) {
+        //Double real = c.getReal();
+        //Double imaginary = c.getImaginary();
         return new ComplexNumber(-c.getReal(), -c.getImaginary());
     }
 
