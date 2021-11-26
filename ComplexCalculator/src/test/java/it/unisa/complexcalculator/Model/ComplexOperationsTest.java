@@ -329,6 +329,8 @@ public class ComplexOperationsTest {
         assertEquals(expResult4, result4);
     }
 
+    //-----------------------MULTIPLICATION-----------------------------------------
+
     /**
      * Test of multiply method, of class ComplexOperations.
      */
@@ -379,6 +381,8 @@ public class ComplexOperationsTest {
         ComplexNumber result = ComplexOperations.multiplication(c1, c2);
 
     }
+
+    //-----------------------DIVISION-----------------------------------------
 
     /**
      * Test of divide method, of class ComplexOperations.
@@ -442,7 +446,7 @@ public class ComplexOperationsTest {
     }
 
     @Test(expected = ArithmeticException.class)
-    public void testDivideForZero() {
+    public void testDivisionForZero() {
         System.out.println("divide for zero");
         ComplexNumber c1 = new ComplexNumber(1, 2);
         ComplexNumber c2 = new ComplexNumber(0, 0);
