@@ -2,10 +2,6 @@ package it.unisa.complexcalculator.Model;
 
 import java.util.EmptyStackException;
 
-/**
- *
- * @author Amministratore
- */
 public class Calculator {
     private final NumberMemory storedNumbers;
     

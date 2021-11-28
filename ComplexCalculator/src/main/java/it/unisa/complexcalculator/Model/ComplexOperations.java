@@ -4,10 +4,6 @@ package it.unisa.complexcalculator.Model;
 import it.unisa.complexcalculator.Exception.OutOfBoundException;
 import static java.lang.Math.sqrt;
 
-/**
- *
- * @author mdr
- */
 public final class ComplexOperations {
 
     /**

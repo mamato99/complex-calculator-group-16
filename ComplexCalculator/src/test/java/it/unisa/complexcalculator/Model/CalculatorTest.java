@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package it.unisa.complexcalculator.Model;
 
 import it.unisa.complexcalculator.Exception.OutOfBoundException;
@@ -9,10 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author mdr
- */
 public class CalculatorTest {
     private Calculator calc;
     private ComplexNumber c1,c2;

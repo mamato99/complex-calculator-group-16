@@ -1,9 +1,5 @@
 package it.unisa.complexcalculator.Model;
 
-/**
- *
- * @author mdr
- */
 public class ComplexNumber {
     
     private double real;

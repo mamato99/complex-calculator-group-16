@@ -6,10 +6,6 @@ import javafx.collections.ObservableList;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author mdr
- */
 public class NumberMemoryTest {
     NumberMemory stack;
     
