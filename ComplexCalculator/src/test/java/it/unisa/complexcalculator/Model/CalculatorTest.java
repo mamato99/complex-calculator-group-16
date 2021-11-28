@@ -16,6 +16,8 @@ import static org.junit.Assert.*;
  * @author Amministratore
  */
 public class CalculatorTest {
+        
+    private Calculator c;
     
     public CalculatorTest() {
     }
@@ -30,6 +32,10 @@ public class CalculatorTest {
     
     @Before
     public void setUp() {
+        c = new Calculator();
+        c.pushNumber(20, 10);
+        c.pushNumber(-10, 8);
+        
     }
     
     @After
@@ -84,10 +90,9 @@ public class CalculatorTest {
     @Test
     public void testAdd() {
         System.out.println("add");
-        Calculator instance = new Calculator();
-        instance.add();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ComplexNumber expected = ComplexOperations.add(new ComplexNumber(20,10), new ComplexNumber(-10,8));
+        c.add();
+        assertEquals(expected, c.getStoredNumbers().top());
     }
 
     /**

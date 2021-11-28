@@ -48,7 +48,7 @@ public final class ComplexOperations {
      */
     public static double abs(ComplexNumber c) throws OutOfBoundException{
         Double var = c.getReal() * c.getReal() + c.getImaginary() * c.getImaginary();
-        if (var.isNaN() || var.isInfinite())
+        if (var.isInfinite())
             throw new OutOfBoundException();
         return sqrt(var);
     }
@@ -96,7 +96,7 @@ public final class ComplexOperations {
     public static ComplexNumber multiplication(ComplexNumber c1, ComplexNumber c2) throws OutOfBoundException {
         Double real = c1.getReal() * c2.getReal() - (c1.getImaginary() * c2.getImaginary());
         Double imaginary = c1.getImaginary() * c2.getReal() + (c1.getReal() * c2.getImaginary());
-        if(real.isNaN() || imaginary.isNaN())
+        if(real.isInfinite() || imaginary.isInfinite())
             throw new OutOfBoundException();
         return new ComplexNumber(real, imaginary);
     }
@@ -119,7 +119,7 @@ public final class ComplexOperations {
         Double numeratorImaginary = c1.getImaginary() * c2.getReal() - (c1.getReal() * c2.getImaginary());
         Double denominatorImaginary = c2.getReal() * c2.getReal() + c2.getImaginary() * c2.getImaginary();
         
-        if (numeratorReal.isNaN() || denominatorReal.isNaN() || numeratorImaginary.isNaN() || denominatorImaginary.isNaN()) 
+        if (numeratorReal.isInfinite() || denominatorReal.isInfinite() || numeratorImaginary.isInfinite() || denominatorImaginary.isInfinite()) 
             throw new OutOfBoundException();
        
         return new ComplexNumber(numeratorReal / denominatorReal, numeratorImaginary / denominatorImaginary);
