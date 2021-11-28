@@ -22,7 +22,7 @@ public class NumberMemoryTest {
     }
     
     
-    //-----------------------PUSH-----------------------------------------
+    //-----------------------push-----------------------------------------
     
     /**
      * Test of push method, of class NumberMemory. This method pushes a non-null item in the stack.
@@ -61,7 +61,7 @@ public class NumberMemoryTest {
     }
     
     
-    //-----------------------POP-----------------------------------------
+    //-----------------------pop-----------------------------------------
     
     /**
      * Test of exception in pop method, of class NumberMemory.
@@ -108,7 +108,7 @@ public class NumberMemoryTest {
     }
     
     
-    //-----------------------TOP-----------------------------------------
+    //-----------------------top-----------------------------------------
     
     /**
      * Test of top method, of class NumberMemory.
@@ -150,7 +150,7 @@ public class NumberMemoryTest {
                 
     }
     
-    //-----------------------LEN-----------------------------------------
+    //-----------------------len-----------------------------------------
     
     /**
      * Test of len method, of class NumberMemory.
@@ -167,7 +167,7 @@ public class NumberMemoryTest {
     }
     
     
-    //-----------------------GET STACK-----------------------------------------
+    //-----------------------getStack-----------------------------------------
     
     /**
      * Test of getStack method, of class NumberMemory. Test if the method returns a non-empty stack.

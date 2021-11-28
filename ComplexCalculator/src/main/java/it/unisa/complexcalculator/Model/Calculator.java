@@ -18,14 +18,15 @@ public class Calculator {
 
     /**
      * <p>This function returns the numbers saved.</p>
-     * @return <p>This function returns the numbers saved.</p>
+     * @return <p>the complex numbers in cartesian notation saved.</p>
      */
     public NumberMemory getStoredNumbers() {
         return storedNumbers;
     }
     
     /**
-     * <p>This function saves the number (that has been passed) into the list</p>
+     * <p>This function saves the number <code>real</code> and <code>img</code> into the data structure 
+     * containing the stored complex numbers.</p>
      * @param real represents the real number to be entered
      * @param img represents the imaginary number to be entered
      */
