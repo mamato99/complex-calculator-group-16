@@ -509,5 +509,5 @@ public class CalculatorTest {
         calc.squareRoot();
         assertEquals(expResult, calc.getStoredNumbers().pop());
     }
-
 }
+
