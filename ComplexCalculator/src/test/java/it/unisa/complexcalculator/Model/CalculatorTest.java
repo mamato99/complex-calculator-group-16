@@ -1,5 +1,6 @@
 package it.unisa.complexcalculator.Model;
 
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Exception.OutOfBoundException;
 import org.junit.Before;
 import org.junit.Test;
@@ -81,76 +82,6 @@ public class CalculatorTest {
     }
 
    
-    //-----------------------pushNumber_String_String - Whitebox testing (path coverage)-----------------------------------------
-    
-    /**
-     * Test of pushNumber method, of class Calculator.
-     */
-    @Test
-    public void testPushNumberStringStringZeroZero() {
-        System.out.println("pushNumber");
-        String re = "+";
-        String im = "+";
-        
-        calc.pushNumber(re, im);
-        ComplexNumber expResult = new ComplexNumber(0, 0);
-        
-        ComplexNumber result = calc.getStoredNumbers().pop();
-        
-        assertEquals(expResult, result);
-    }
-    
-    /**
-     * Test of pushNumber method, of class Calculator.
-     */
-    @Test
-    public void testPushNumberStringStringNonZeroNonZero() {
-        System.out.println("pushNumber");
-        String re = "+1.0";
-        String im = "+1.0";
-        
-        calc.pushNumber(re, im);
-        ComplexNumber expResult = new ComplexNumber(1, 1);
-        
-        ComplexNumber result = calc.getStoredNumbers().pop();
-        
-        assertEquals(expResult, result);
-    }
-    
-    /**
-     * Test of pushNumber method, of class Calculator.
-     */
-    @Test
-    public void testPushNumberStringStringZeroNonZero() {
-        System.out.println("pushNumber");
-        String re = "+0.0";
-        String im = "+1.0";
-        
-        calc.pushNumber(re, im);
-        ComplexNumber expResult = new ComplexNumber(0, 1);
-        
-        ComplexNumber result = calc.getStoredNumbers().pop();
-        
-        assertEquals(expResult, result);
-    }
-    
-    /**
-     * Test of pushNumber method, of class Calculator.
-     */
-    @Test
-    public void testPushNumberStringStringNonZeroZero() {
-        System.out.println("pushNumber");
-        String re = "+1.0";
-        String im = "+0.0";
-        
-        calc.pushNumber(re, im);
-        ComplexNumber expResult = new ComplexNumber(1, 0);
-        
-        ComplexNumber result = calc.getStoredNumbers().pop();
-        
-        assertEquals(expResult, result);
-    }
-
     //-----------------------add-----------------------------------------
     /**
      * Test of add method, of class Calculator.
@@ -222,7 +153,19 @@ public class CalculatorTest {
         calc.getStoredNumbers().push(c2);
         calc.add();
     }
-
+    
+    /**
+     * Test of add method, of class Calculator.
+     */
+    @Test(expected = NotEnoughOperandsException.class)
+    public void testAddNotEnoughOperandsException() {
+        System.out.println("add");
+        c1 = new ComplexNumber(1, 1);
+        calc.getStoredNumbers().push(c1);
+        calc.add();
+    }
+    
+    
     //-----------------------subtract-----------------------------------------
     /**
      * Test of subtract method, of class Calculator.
@@ -294,7 +237,19 @@ public class CalculatorTest {
         calc.getStoredNumbers().push(c2);
         calc.subtract();
     }
-
+    
+    /**
+     * Test of subtract method, of class Calculator.
+     */
+    @Test(expected = NotEnoughOperandsException.class)
+    public void testSubtractNotEnoughOperandsException() {
+        System.out.println("subtract");
+        c1 = new ComplexNumber(1, 1);
+        calc.getStoredNumbers().push(c1);
+        calc.subtract();
+    }
+    
+    
     //-----------------------divide-----------------------------------------
     /**
      * Test of divide method, of class Calculator.
@@ -381,6 +336,18 @@ public class CalculatorTest {
         calc.getStoredNumbers().push(c2);
         calc.divide();
     }
+    
+    /**
+     * Test of divide method, of class Calculator.
+     */
+    @Test(expected = NotEnoughOperandsException.class)
+    public void testDivideNotEnoughOperandsException() {
+        System.out.println("divide");
+        c1 = new ComplexNumber(1, 1);
+        calc.getStoredNumbers().push(c1);
+        calc.divide();
+    }
+    
 
     //-----------------------multiply-----------------------------------------
     /**
@@ -453,6 +420,18 @@ public class CalculatorTest {
         calc.getStoredNumbers().push(c2);
         calc.multiply();
     }
+    
+    /**
+     * Test of multiply method, of class Calculator.
+     */
+    @Test(expected = NotEnoughOperandsException.class)
+    public void testMultiplyNotEnoughOperandsException() {
+        System.out.println("multiply");
+        c1 = new ComplexNumber(1, 1);
+        calc.getStoredNumbers().push(c1);
+        calc.multiply();
+    }
+    
 
     //-----------------------invertSign-----------------------------------------
     
@@ -494,8 +473,19 @@ public class CalculatorTest {
         calc.invertSign();
         assertEquals(expResult, calc.getStoredNumbers().pop());
     }
+    
+    /**
+     * Test of invertSign method, of class Calculator.
+     */
+    @Test(expected = NotEnoughOperandsException.class)
+    public void testInvertSignNotEnoughOperandsException() {
+        System.out.println("invertSign");
+        calc.invertSign();
+    }
+    
 
     //-----------------------squareRoot-----------------------------------------
+    
     /**
      * Test of squareRoot method, of class Calculator.
      */
@@ -559,6 +549,67 @@ public class CalculatorTest {
         calc.getStoredNumbers().push(c1);
         calc.squareRoot();
         assertEquals(expResult, calc.getStoredNumbers().pop());
+    }
+    
+    /**
+     * Test of squareRoot method, of class Calculator.
+     */
+    @Test(expected = NotEnoughOperandsException.class)
+    public void testSquareRootNotEnoughOperandsException() {
+        System.out.println("squareRoot");
+        calc.squareRoot();
+    }
+    
+    
+    //-----------------------swap-----------------------------------------
+    
+    /**
+     * Test of swap method, of class Calculator.
+     */
+    @Test
+    public void testSwap() {
+        System.out.println("swap");
+        c1 = new ComplexNumber(1, 1);
+        c2 = new ComplexNumber(-1, -1);
+        
+        ComplexNumber[] expResult = {c1,c2};
+        ComplexNumber[] result;
+        result = new ComplexNumber[2];
+        
+        calc.getStoredNumbers().push(c1);
+        calc.getStoredNumbers().push(c2);
+        
+        calc.swap();
+        
+        result[0] = calc.getStoredNumbers().pop();
+        result[1] = calc.getStoredNumbers().pop();
+        
+        assertEquals(expResult[0], result[0]);
+        assertEquals(expResult[1], result[1]);
+    }
+    
+     /**
+     * Test of swap method, of class Calculator.
+     */
+    @Test(expected = Exception.class)
+    public void testSwapException() {
+        System.out.println("swap");
+        c1 = new ComplexNumber(1, 1);
+        
+        calc.getStoredNumbers().push(c1);
+        
+        calc.swap();
+    }
+    
+    /**
+     * Test of swap method, of class Calculator.
+     */
+    @Test(expected = NotEnoughOperandsException.class)
+    public void testSwapNotEnoughOperandsException() {
+        System.out.println("swap");
+        c1 = new ComplexNumber(1, 1);
+        calc.getStoredNumbers().push(c1);
+        calc.swap();
     }
 }
 

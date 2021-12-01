@@ -1,5 +1,6 @@
 package it.unisa.complexcalculator.Controller;
 
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import java.net.URL;
@@ -16,48 +17,47 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-
 public class FXMLController implements Initializable {
 
     @FXML
     private ListView<ComplexNumber> storedElements;
-    
+
     private KeyCombination sum;
     private KeyCombination difference;
-    
+
     Calculator c = new Calculator();
     @FXML
     private TextField inputBox;
- 
-    
+
     /**
      * Initializes all elements according to user preferences by default
+     *
      * @param location
      * @param resources
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {                 
+    public void initialize(URL location, ResourceBundle resources) {
         storedElements.setItems(c.getStoredNumbers().getStack());
-        
+
         sum = new KeyCodeCombination(KeyCode.S, KeyCodeCombination.SHIFT_DOWN);
         difference = new KeyCodeCombination(KeyCode.D, KeyCodeCombination.SHIFT_DOWN);
-        
-        
+
     }
-    
+
     /*
      * Method to manage the modification of the labels according to the pressed button 
      */
     private void updateInputBox(String upd) {
-       
-        if ("del".equals(upd) && inputBox.getText().length() > 0)
+
+        if ("del".equals(upd) && inputBox.getText().length() > 0) {
             inputBox.deletePreviousChar();
-        else if ("ac".equals(upd) && inputBox.getText().length() > 0)
+        } else if ("ac".equals(upd) && inputBox.getText().length() > 0) {
             inputBox.setText("");
-        else
+        } else {
             inputBox.appendText(upd);
+        }
     }
-    
+
     /*
      * Method to manage the modification of the labels when button with "1" as label is clicked
      */
@@ -65,7 +65,7 @@ public class FXMLController implements Initializable {
     private void oneClicked() {
         updateInputBox("1");
     }
-    
+
     /*
      * Method to manage the modification of the labels when button with "2" as label is clicked
      */
@@ -81,7 +81,7 @@ public class FXMLController implements Initializable {
     private void threeClicked() {
         updateInputBox("3");
     }
-    
+
     /*
      * Method to manage the modification of the labels when button with "4" as label is clicked
      */
@@ -153,69 +153,76 @@ public class FXMLController implements Initializable {
     private void insClicked() {
         double real = 0;
         double img = 0;
-        
+
         String input = inputBox.getText();
-        
+
         String toAnalyze = "";
-        
-        for (int i=0; i<input.length();i++){
-            if(input.charAt(i) == '+' || input.charAt(i) == '-'){
-                if(i != 0) toAnalyze+=",";
-                toAnalyze+=input.charAt(i);
+
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '+' || input.charAt(i) == '-') {
+                if (i != 0) {
+                    toAnalyze += ",";
+                }
+                toAnalyze += input.charAt(i);
+            } else {
+                toAnalyze += input.charAt(i);
             }
-            else
-                toAnalyze+=input.charAt(i);
         }
-        
+
         String[] splitted = toAnalyze.split(",");
-        
-        for(String s : splitted){
-            try{
-                if(s.contains("i"))
-                    img += Double.parseDouble(s.substring(0, s.length()-1));
-                else
+
+        for (String s : splitted) {
+            try {
+                if (s.contains("i")) {
+                    img += Double.parseDouble(s.substring(0, s.length() - 1));
+                } else {
                     real += Double.parseDouble(s.substring(0, s.length()));
-            } catch(NumberFormatException ex){
+                }
+            } catch (NumberFormatException ex) {
                 generateAlert("Invalid number format.");
                 return;
             }
         }
-        
+
         c.pushNumber(real, img);
-        
+
     }
-    
-    
+
     /*
      * Method to manage the modification of the labels when button with "del" as label is clicked
      */
     @FXML
     private void delClicked() {
-        updateInputBox("del");        
+        updateInputBox("del");
     }
-    
+
     /*
      * Method to manage the associated operation when button with "+" as label is clicked
      */
     @FXML
     private void plusClicked() {
-        if (c.getStoredNumbers().len() >= 2)
+        try{
             c.add();
-        else{
-            generateAlert("Not enough numbers");
+        }catch(NotEnoughOperandsException ex){
+            generateAlert("Not enough operands.");
         }
     }
-    
-    private void generateAlert(String s){
-            Alert alert = new Alert(Alert.AlertType.ERROR, s, ButtonType.OK);
-            alert.showAndWait();
+
+    private void generateAlert(String s) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, s, ButtonType.OK);
+        alert.showAndWait();
     }
+
     /*
      * Method to manage the associated operation when button with "-" as label is clicked
      */
     @FXML
     private void minusClicked() {
-        c.subtract();
+        try{
+            c.subtract();
+        }catch(NotEnoughOperandsException ex){
+            generateAlert("Not enough operands.");
+        }
     }
 
     /*
@@ -223,7 +230,11 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void prodClicked() {
-        c.multiply();
+        try{
+            c.multiply();
+        }catch(NotEnoughOperandsException ex){
+            generateAlert("Not enough operands.");
+        }
     }
 
     /*
@@ -231,10 +242,10 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void divClicked() {
-        try{
+         try{
             c.divide();
-        } catch(RuntimeException ex){
-            generateAlert("");
+        }catch(NotEnoughOperandsException ex){
+            generateAlert("Not enough operands.");
         }
     }
 
@@ -243,7 +254,11 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void sqrtClicked() {
-        c.squareRoot();
+         try{
+            c.squareRoot();
+        }catch(NotEnoughOperandsException ex){
+            generateAlert("Not enough operands.");
+        }
     }
 
     /*
@@ -251,7 +266,11 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void invClicked() {
-        c.invertSign();
+         try{
+            c.invertSign();
+        }catch(NotEnoughOperandsException ex){
+            generateAlert("Not enough operands.");
+        }
     }
 
     /*
@@ -264,10 +283,12 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void handleKey(KeyEvent event) {
-        if(sum.match(event))
+        if (sum.match(event)) {
             plusClicked();
-        if(difference.match(event))
+        }
+        if (difference.match(event)) {
             minusClicked();
+        }
     }
 
     @FXML
@@ -294,6 +315,11 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void swapClicked() {
+         try{
+            c.swap();
+        }catch(NotEnoughOperandsException ex){
+            generateAlert("Not enough operands.");
+        }
     }
 
     @FXML
@@ -307,14 +333,13 @@ public class FXMLController implements Initializable {
     @FXML
     private void clearClicked() {
     }
-    
+
     private void getNumbers() {
-        
-        
+
     }
 
     @FXML
     private void imgClicked(MouseEvent event) {
     }
-    
+
 }
