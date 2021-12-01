@@ -125,8 +125,7 @@ public class Calculator {
     }
 
     /**
-     * <p>
-     * This method takes the last two numbers saved in the stack and swaps them.</p>
+     * <p>This method takes the last two numbers saved in the stack and swaps them.</p>
      */
     public void swap() {
         if (storedNumbers.len() < 2) {
@@ -139,4 +138,41 @@ public class Calculator {
         storedNumbers.push(c2);
 
     }
+    
+    /**
+     * <p>This function store a new number on the stack that is a copy of the last</p>
+     */
+    public void dup(){
+        if(storedNumbers.len() < 1)
+            throw new NotEnoughOperandsException();
+        ComplexNumber dup = storedNumbers.top();
+        storedNumbers.push(dup);
+    }
+    
+    /**
+     * <p>This function takes the list of saved numbers and empties it</p>
+     */
+    public void clear(){
+        while(storedNumbers.len()>0){
+            storedNumbers.pop();
+        }
+    }
+    
+    /**
+     * <p>This function takes the last stored element and deletes it</p>
+     */
+    public void drop() {
+        storedNumbers.pop();
+    }
+
+    public void over() {
+        if(storedNumbers.len() < 2)
+            throw new NotEnoughOperandsException();
+        ComplexNumber c1 = storedNumbers.pop();
+        ComplexNumber over = storedNumbers.top();
+        
+        storedNumbers.push(c1);
+        storedNumbers.push(over);
+    }
+    
 }

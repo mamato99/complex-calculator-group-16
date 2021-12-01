@@ -4,6 +4,7 @@ import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import java.net.URL;
+import java.util.EmptyStackException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +16,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
 public class FXMLController implements Initializable {
 
@@ -24,6 +24,7 @@ public class FXMLController implements Initializable {
 
     private KeyCombination sum;
     private KeyCombination difference;
+    private KeyCombination multiplication;
 
     Calculator c = new Calculator();
     @FXML
@@ -38,10 +39,12 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         storedElements.setItems(c.getStoredNumbers().getStack());
-
-        sum = new KeyCodeCombination(KeyCode.S, KeyCodeCombination.SHIFT_DOWN);
-        difference = new KeyCodeCombination(KeyCode.D, KeyCodeCombination.SHIFT_DOWN);
-
+        
+        //DA RIVEDERE
+        sum = new KeyCodeCombination(KeyCode.PLUS, KeyCodeCombination.SHORTCUT_ANY);
+        difference = new KeyCodeCombination(KeyCode.MINUS, KeyCodeCombination.SHORTCUT_DOWN);
+        multiplication = new KeyCodeCombination(KeyCode.ASTERISK, KeyCodeCombination.SHORTCUT_DOWN);
+        
     }
 
     /*
@@ -151,11 +154,43 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void insClicked() {
-        double real = 0;
-        double img = 0;
 
         String input = inputBox.getText();
+        
+        if(checkStackOperation(input))
+            return;
+        
+        if(checkVariableOperation(input))
+            return;
+        
+        checkNumberInsertion(input);
+        
+        inputBox.setText("");
+    }
 
+    private boolean checkStackOperation(String in){
+        switch(in){
+            case "dup": dupClicked(); return true;
+            case "clear": dupClicked(); return true;
+            case "swap": dupClicked(); return true;
+            case "drop": dupClicked(); return true;
+            case "over": dupClicked(); return true;
+            default: return false;
+        }
+    }
+    
+    private boolean checkVariableOperation(String in){
+        if(in.length() != 2)
+            return false;
+        if(!in.startsWith(">") || !in.startsWith("<") || !in.startsWith("+") || !in.startsWith("-"))
+            return false;
+        return in.substring(1, 1).matches("[a-zA-Z]");
+    }
+    
+    private void checkNumberInsertion(String input){
+        double real = 0;
+        double img = 0;
+        
         String toAnalyze = "";
 
         for (int i = 0; i < input.length(); i++) {
@@ -174,7 +209,12 @@ public class FXMLController implements Initializable {
         for (String s : splitted) {
             try {
                 if (s.contains("i")) {
-                    img += Double.parseDouble(s.substring(0, s.length() - 1));
+                    if (!s.matches(".*\\d.*")) {
+                        if (s.contains("-")) img -= 1;
+                        else img += 1;
+                    } else {
+                        img += Double.parseDouble(s.substring(0, s.length() - 1));
+                    }
                 } else {
                     real += Double.parseDouble(s.substring(0, s.length()));
                 }
@@ -183,11 +223,9 @@ public class FXMLController implements Initializable {
                 return;
             }
         }
-
         c.pushNumber(real, img);
-
     }
-
+    
     /*
      * Method to manage the modification of the labels when button with "del" as label is clicked
      */
@@ -201,9 +239,9 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void plusClicked() {
-        try{
+        try {
             c.add();
-        }catch(NotEnoughOperandsException ex){
+        } catch (NotEnoughOperandsException ex) {
             generateAlert("Not enough operands.");
         }
     }
@@ -218,9 +256,9 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void minusClicked() {
-        try{
+        try {
             c.subtract();
-        }catch(NotEnoughOperandsException ex){
+        } catch (NotEnoughOperandsException ex) {
             generateAlert("Not enough operands.");
         }
     }
@@ -230,9 +268,9 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void prodClicked() {
-        try{
+        try {
             c.multiply();
-        }catch(NotEnoughOperandsException ex){
+        } catch (NotEnoughOperandsException ex) {
             generateAlert("Not enough operands.");
         }
     }
@@ -242,9 +280,9 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void divClicked() {
-         try{
+        try {
             c.divide();
-        }catch(NotEnoughOperandsException ex){
+        } catch (NotEnoughOperandsException ex) {
             generateAlert("Not enough operands.");
         }
     }
@@ -254,9 +292,9 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void sqrtClicked() {
-         try{
+        try {
             c.squareRoot();
-        }catch(NotEnoughOperandsException ex){
+        } catch (NotEnoughOperandsException ex) {
             generateAlert("Not enough operands.");
         }
     }
@@ -266,9 +304,9 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void invClicked() {
-         try{
+        try {
             c.invertSign();
-        }catch(NotEnoughOperandsException ex){
+        } catch (NotEnoughOperandsException ex) {
             generateAlert("Not enough operands.");
         }
     }
@@ -289,6 +327,13 @@ public class FXMLController implements Initializable {
         if (difference.match(event)) {
             minusClicked();
         }
+        if (multiplication.match(event)) {
+            prodClicked();
+        }
+        if (event.getCode().equals(KeyCode.ENTER))
+            insClicked();
+        if (event.getCode().equals(KeyCode.ESCAPE))
+            acClicked();
     }
 
     @FXML
@@ -303,43 +348,58 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void gtClicked() {
+        updateInputBox(">");
     }
 
     @FXML
     private void ltClicked() {
+        updateInputBox("<");
     }
 
     @FXML
     private void dupClicked() {
+        try {
+            c.dup();
+        } catch (NotEnoughOperandsException ex) {
+            generateAlert("Not Enough Operands.");
+        }
     }
 
     @FXML
     private void swapClicked() {
-         try{
+        try {
             c.swap();
-        }catch(NotEnoughOperandsException ex){
+        } catch (NotEnoughOperandsException ex) {
             generateAlert("Not enough operands.");
         }
     }
 
     @FXML
     private void dropClicked() {
+        try {
+            c.drop();
+        } catch (EmptyStackException ex) {
+            generateAlert("Stack empty, no elements to drop.");
+        }
     }
 
     @FXML
     private void overClicked() {
+        try {
+            c.over();
+        } catch (NotEnoughOperandsException ex) {
+            generateAlert("Not enough operands.");
+        }
     }
 
     @FXML
     private void clearClicked() {
-    }
-
-    private void getNumbers() {
-
+        c.clear();
     }
 
     @FXML
-    private void imgClicked(MouseEvent event) {
+    private void imgClicked() {
+        updateInputBox("i");
     }
 
 }

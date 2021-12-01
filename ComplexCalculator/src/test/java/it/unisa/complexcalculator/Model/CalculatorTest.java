@@ -2,6 +2,7 @@ package it.unisa.complexcalculator.Model;
 
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Exception.OutOfBoundException;
+import java.util.EmptyStackException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -610,6 +611,101 @@ public class CalculatorTest {
         c1 = new ComplexNumber(1, 1);
         calc.getStoredNumbers().push(c1);
         calc.swap();
+    }
+    
+    
+    //-----------------------dup-----------------------------------------
+    
+    /*
+     * Test of dup method, of class Calculator.
+     */
+    @Test
+    public void testDup(){
+        System.out.println("dup");
+        c1 = new ComplexNumber(123,456);
+        calc.getStoredNumbers().getStack().clear();
+        calc.pushNumber(123,456);
+
+        calc.dup();
+
+        assertEquals(c1, calc.getStoredNumbers().top());
+    }
+
+    /*
+     * Test of dup method, of class Calculator.
+     */
+    @Test(expected = NotEnoughOperandsException.class)
+    public void testDupNotEnoughOperandsException(){
+        System.out.println("dup exception");
+        calc.dup();
+    }
+    
+    
+    //-----------------------clear-----------------------------------------
+    
+    /**
+     * Test of clear method, of class Calculator.
+     */
+    @Test
+    public void testClear(){
+        System.out.println("clear");
+        c1 = new ComplexNumber(1,1);
+        calc.getStoredNumbers().push(c1);
+        calc.clear();
+        assert(calc.getStoredNumbers().len() == 0);
+    }
+    
+    
+    //-----------------------drop-----------------------------------------
+    
+    /**
+     * Test of drop method, of class Calculator.
+     */
+    @Test(expected = EmptyStackException.class)
+    public void testDropEmptyStackException() {
+        System.out.println("drop");
+        calc.drop();
+    }
+
+     /**
+     * Test of drop method, of class Calculator.
+     */
+    @Test
+    public void testDrop() {
+        System.out.println("drop");
+        c1 = new ComplexNumber(1,1);
+        calc.getStoredNumbers().push(c1);
+        calc.drop();
+        assert(calc.getStoredNumbers().len() == 0);
+    }
+    
+    
+    //-----------------------over-----------------------------------------
+    
+    /**
+     * Test of over method, of class Calculator.
+     */
+    @Test(expected = NotEnoughOperandsException.class)
+    public void testOverNotEnoughOperandsException() {
+        System.out.println("over");
+        c1 = new ComplexNumber(1,1);
+        calc.over();
+    }
+    
+    /**
+     * Test of over method, of class Calculator.
+     */
+    @Test
+    public void testOver() {
+        System.out.println("over");
+        c1 = new ComplexNumber(1,1);
+        c2 = new ComplexNumber(-1,-1);
+        
+        calc.getStoredNumbers().push(c1);
+        calc.getStoredNumbers().push(c2);
+        calc.over();
+        
+        assertEquals(calc.getStoredNumbers().top(), c1);
     }
 }
 
