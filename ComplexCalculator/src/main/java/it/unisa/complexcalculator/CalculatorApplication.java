@@ -23,7 +23,7 @@ public class CalculatorApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("FXMLDocument"));
-        scene.getStylesheets().add(getClass().getResource("appStyle.css").toExternalForm()); // Add the stylesheet to the scene
+        scene.getStylesheets().add(getClass().getResource("appStyle.css").toExternalForm()); // Add the css stylesheet to the scene
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Complex Calculator");

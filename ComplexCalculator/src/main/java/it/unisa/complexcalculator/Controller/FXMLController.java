@@ -9,22 +9,18 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 public class FXMLController implements Initializable {
 
     @FXML
     private ListView<ComplexNumber> storedElements;
-
-    private KeyCombination sum;
-    private KeyCombination difference;
-    private KeyCombination multiplication;
 
     Calculator c = new Calculator();
     @FXML
@@ -39,11 +35,6 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         storedElements.setItems(c.getStoredNumbers().getStack());
-        
-        //DA RIVEDERE
-        sum = new KeyCodeCombination(KeyCode.PLUS, KeyCodeCombination.SHORTCUT_ANY);
-        difference = new KeyCodeCombination(KeyCode.MINUS, KeyCodeCombination.SHORTCUT_DOWN);
-        multiplication = new KeyCodeCombination(KeyCode.ASTERISK, KeyCodeCombination.SHORTCUT_DOWN);
         
     }
 
@@ -62,94 +53,6 @@ public class FXMLController implements Initializable {
     }
 
     /*
-     * Method to manage the modification of the labels when button with "1" as label is clicked
-     */
-    @FXML
-    private void oneClicked() {
-        updateInputBox("1");
-    }
-
-    /*
-     * Method to manage the modification of the labels when button with "2" as label is clicked
-     */
-    @FXML
-    private void twoClicked() {
-        updateInputBox("2");
-    }
-
-    /*
-     * Method to manage the modification of the labels when button with "3" as label is clicked
-     */
-    @FXML
-    private void threeClicked() {
-        updateInputBox("3");
-    }
-
-    /*
-     * Method to manage the modification of the labels when button with "4" as label is clicked
-     */
-    @FXML
-    private void fourClicked() {
-        updateInputBox("4");
-    }
-
-    /*
-     * Method to manage the modification of the labels when button with "5" as label is clicked
-     */
-    @FXML
-    private void fiveClicked() {
-        updateInputBox("5");
-    }
-
-    /*
-     * Method to manage the modification of the labels when button with "6" as label is clicked
-     */
-    @FXML
-    private void sixClicked() {
-        updateInputBox("6");
-    }
-
-    /*
-     * Method to manage the modification of the labels when button with "7" as label is clicked
-     */
-    @FXML
-    private void sevenClicked() {
-        updateInputBox("7");
-    }
-
-    /*
-     * Method to manage the modification of the labels when button with "8" as label is clicked
-     */
-    @FXML
-    private void eightClicked() {
-        updateInputBox("8");
-    }
-
-    /*
-     * Method to manage the modification of the labels when button with "9" as label is clicked
-     */
-    @FXML
-    private void nineClicked() {
-        updateInputBox("9");
-    }
-
-    /*
-     * Method to manage the modification of the labels when button with "." as label is clicked
-     */
-    @FXML
-    private void dotClicked() {
-        updateInputBox(".");
-    }
-
-    /*
-     * Method to manage the modification of the labels when button with "0" as label is clicked
-     */
-    @FXML
-    private void zeroClicked() {
-        updateInputBox("0");
-    }
-
-    /*
      * Method to manage the storing of a new complex number when button with "INS" as label is clicked
      */
     @FXML
@@ -157,24 +60,33 @@ public class FXMLController implements Initializable {
 
         String input = inputBox.getText();
         
-        if(checkStackOperation(input))
+        if(checkStackOperation(input)){
+            inputBox.setText("");
             return;
-        
-        if(checkVariableOperation(input))
+        }
+            
+        if(checkVariableOperation(input)){
+            inputBox.setText("");
             return;
-        
+        }
+            
         checkNumberInsertion(input);
-        
         inputBox.setText("");
     }
 
     private boolean checkStackOperation(String in){
         switch(in){
             case "dup": dupClicked(); return true;
-            case "clear": dupClicked(); return true;
-            case "swap": dupClicked(); return true;
-            case "drop": dupClicked(); return true;
-            case "over": dupClicked(); return true;
+            case "clear": clearClicked(); return true;
+            case "swap": swapClicked(); return true;
+            case "drop": dropClicked(); return true;
+            case "over": overClicked(); return true;
+            case "+": plusClicked(); return true;
+            case "-": minusClicked(); return true;
+            case "*": prodClicked(); return true;
+            case "/": divClicked(); return true;
+            case "sqrt": sqrtClicked(); return true;
+            case "+-": invClicked(); return true;
             default: return false;
         }
     }
@@ -182,9 +94,9 @@ public class FXMLController implements Initializable {
     private boolean checkVariableOperation(String in){
         if(in.length() != 2)
             return false;
-        if(!in.startsWith(">") || !in.startsWith("<") || !in.startsWith("+") || !in.startsWith("-"))
+        if(!(in.startsWith(">") || in.startsWith("<") || in.startsWith("+") || in.startsWith("-")))
             return false;
-        return in.substring(1, 1).matches("[a-zA-Z]");
+        return in.substring(1).matches("[a-z]");
     }
     
     private void checkNumberInsertion(String input){
@@ -320,42 +232,13 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
-    private void handleKey(KeyEvent event) {
-        if (sum.match(event)) {
-            plusClicked();
-        }
-        if (difference.match(event)) {
-            minusClicked();
-        }
-        if (multiplication.match(event)) {
-            prodClicked();
-        }
+    private void handleSpecialKeys(KeyEvent event) {
         if (event.getCode().equals(KeyCode.ENTER))
             insClicked();
         if (event.getCode().equals(KeyCode.ESCAPE))
             acClicked();
     }
-
-    @FXML
-    private void posClicked() {
-        updateInputBox("+");
-    }
-
-    @FXML
-    private void negClicked() {
-        updateInputBox("-");
-    }
-
-    @FXML
-    private void gtClicked() {
-        updateInputBox(">");
-    }
-
-    @FXML
-    private void ltClicked() {
-        updateInputBox("<");
-    }
-
+    
     @FXML
     private void dupClicked() {
         try {
@@ -397,9 +280,13 @@ public class FXMLController implements Initializable {
         c.clear();
     }
 
+    /*
+     * Method that shows on the input box the label of the button clicked.
+     */
     @FXML
-    private void imgClicked() {
-        updateInputBox("i");
+    private void digitClicked(MouseEvent event) {
+        Button b = (Button)event.getSource();
+        updateInputBox(b.getText().replaceAll("\\(", "").replaceAll("\\)", ""));
     }
 
 }
