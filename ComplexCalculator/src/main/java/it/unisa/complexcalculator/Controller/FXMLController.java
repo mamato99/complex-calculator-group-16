@@ -4,49 +4,32 @@ import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 
 public class FXMLController implements Initializable {
 
     @FXML
-    private Button dotButton;
-    @FXML
-    private Button plusButton;
-    @FXML
-    private Button minusButton;
-    @FXML
-    private Button prodButton;
-    @FXML
-    private Button divButton;
-    @FXML
-    private Button sqrtButton;
-    @FXML
-    private Button invButton;
-    @FXML
     private ListView<ComplexNumber> storedElements;
-    @FXML
-    private Label realLabel;
-    @FXML
-    private Label imgLabel;
-    @FXML
-    private Button realButton;
-    @FXML
-    private Button imgButton;
-    @FXML
-    private ToggleButton signReal;
-    @FXML
-    private ToggleButton signImg;
+    
+    private KeyCombination sum;
+    private KeyCombination difference;
     
     Calculator c = new Calculator();
-
+    @FXML
+    private TextField inputBox;
+ 
+    
     /**
      * Initializes all elements according to user preferences by default
      * @param location
@@ -54,325 +37,284 @@ public class FXMLController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {                 
-        storedElements.setItems(c.getStoredNumbers().getStack());       
-        realButton.setDisable(true);
-        refreshButtonState();
-    }
-    
-    /*
-     * Method to handle changing button properties after specific operations
-     */
-    private void refreshButtonState(){
+        storedElements.setItems(c.getStoredNumbers().getStack());
         
-        if (realButton.isDisable()){
-            if (realLabel.getText().contains("."))
-                dotButton.setDisable(true);
-            else
-                dotButton.setDisable(false);
-        }else{
-            if (imgLabel.getText().contains("."))
-                dotButton.setDisable(true);
-            else
-                dotButton.setDisable(false);
-        }
+        sum = new KeyCodeCombination(KeyCode.S, KeyCodeCombination.SHIFT_DOWN);
+        difference = new KeyCodeCombination(KeyCode.D, KeyCodeCombination.SHIFT_DOWN);
         
-        int size = c.getStoredNumbers().len();
-        if(size>=2){
-            plusButton.setDisable(false);
-            minusButton.setDisable(false);
-            prodButton.setDisable(false);
-            divButton.setDisable(false);
-            sqrtButton.setDisable(false);
-            invButton.setDisable(false);
-        }else if (size == 1){
-            plusButton.setDisable(true);
-            minusButton.setDisable(true);
-            prodButton.setDisable(true);
-            divButton.setDisable(true);
-            sqrtButton.setDisable(false);
-            invButton.setDisable(false);
-        }else{
-            plusButton.setDisable(true);
-            minusButton.setDisable(true);
-            prodButton.setDisable(true);
-            divButton.setDisable(true);
-            sqrtButton.setDisable(true);
-            invButton.setDisable(true);
-        }
-
+        
     }
     
     /*
      * Method to manage the modification of the labels according to the pressed button 
      */
-    private void updateLabel(String to_add) {
-        if (realLabel.getText().equalsIgnoreCase("err") && imgLabel.getText().equalsIgnoreCase("err")){
-            realLabel.setText("");
-            imgLabel.setText("");
-        }
-        if (realButton.isDisable()) {
-            if ("del".equals(to_add) && realLabel.getText().length() > 0) {
-                if ("Re".equals(realLabel.getText())) {
-                    realLabel.setText("");
-                } else {
-                    realLabel.setText(realLabel.getText().substring(0, realLabel.getText().length() - 1));
-                }
-            } else if ("Re".equals(realLabel.getText())) {
-                realLabel.setText(to_add);
-            } else if (!"del".equals(to_add)) {
-                realLabel.setText(realLabel.getText() + to_add);
-            }
-        } else {
-            if ("del".equals(to_add) && imgLabel.getText().length() > 0) {
-                if ("Im".equals(imgLabel.getText())) {
-                    imgLabel.setText("");
-                } else {
-                    imgLabel.setText(imgLabel.getText().substring(0, imgLabel.getText().length() - 1));
-                }
-            } else if ("Im".equals(imgLabel.getText())) {
-                imgLabel.setText(to_add);
-            } else if (!"del".equals(to_add)) {
-                imgLabel.setText(imgLabel.getText() + to_add);
-            }
-        }
-        refreshButtonState();
+    private void updateInputBox(String upd) {
+       
+        if ("del".equals(upd) && inputBox.getText().length() > 0)
+            inputBox.deletePreviousChar();
+        else if ("ac".equals(upd) && inputBox.getText().length() > 0)
+            inputBox.setText("");
+        else
+            inputBox.appendText(upd);
     }
     
     /*
      * Method to manage the modification of the labels when button with "1" as label is clicked
      */
     @FXML
-    private void oneClicked(MouseEvent event) {
-        updateLabel("1");
+    private void oneClicked() {
+        updateInputBox("1");
     }
     
     /*
      * Method to manage the modification of the labels when button with "2" as label is clicked
      */
     @FXML
-    private void twoClicked(MouseEvent event) {
-        updateLabel("2");
+    private void twoClicked() {
+        updateInputBox("2");
     }
 
     /*
      * Method to manage the modification of the labels when button with "3" as label is clicked
      */
     @FXML
-    private void threeClicked(MouseEvent event) {
-        updateLabel("3");
+    private void threeClicked() {
+        updateInputBox("3");
     }
     
     /*
      * Method to manage the modification of the labels when button with "4" as label is clicked
      */
     @FXML
-    private void fourClicked(MouseEvent event) {
-        updateLabel("4");
+    private void fourClicked() {
+        updateInputBox("4");
     }
 
     /*
      * Method to manage the modification of the labels when button with "5" as label is clicked
      */
     @FXML
-    private void fiveClicked(MouseEvent event) {
-        updateLabel("5");
+    private void fiveClicked() {
+        updateInputBox("5");
     }
 
     /*
      * Method to manage the modification of the labels when button with "6" as label is clicked
      */
     @FXML
-    private void sixClicked(MouseEvent event) {
-        updateLabel("6");
+    private void sixClicked() {
+        updateInputBox("6");
     }
 
     /*
      * Method to manage the modification of the labels when button with "7" as label is clicked
      */
     @FXML
-    private void sevenClicked(MouseEvent event) {
-        updateLabel("7");
+    private void sevenClicked() {
+        updateInputBox("7");
     }
 
     /*
      * Method to manage the modification of the labels when button with "8" as label is clicked
      */
     @FXML
-    private void eightClicked(MouseEvent event) {
-        updateLabel("8");
+    private void eightClicked() {
+        updateInputBox("8");
     }
 
     /*
      * Method to manage the modification of the labels when button with "9" as label is clicked
      */
     @FXML
-    private void nineClicked(MouseEvent event) {
-        updateLabel("9");
+    private void nineClicked() {
+        updateInputBox("9");
     }
 
     /*
      * Method to manage the modification of the labels when button with "." as label is clicked
      */
     @FXML
-    private void dotClicked(MouseEvent event) {
-        updateLabel(".");
+    private void dotClicked() {
+        updateInputBox(".");
     }
 
     /*
      * Method to manage the modification of the labels when button with "0" as label is clicked
      */
     @FXML
-    private void zeroClicked(MouseEvent event) {
-        updateLabel("0");
+    private void zeroClicked() {
+        updateInputBox("0");
     }
 
     /*
      * Method to manage the storing of a new complex number when button with "INS" as label is clicked
      */
     @FXML
-    private void insClicked(MouseEvent event) {
-        String real;
-        String img;
+    private void insClicked() {
+        double real = 0;
+        double img = 0;
         
-        if (realLabel.getText().isEmpty() && imgLabel.getText().isEmpty())
-            return;
-        if (realLabel.getText().equalsIgnoreCase("err") && imgLabel.getText().equalsIgnoreCase("err"))
-            return;
+        String input = inputBox.getText();
         
-        if ("+".equals(signReal.getText()))
-            real = "+" + realLabel.getText();
-        else
-            real = "-" + realLabel.getText();
+        String toAnalyze = "";
         
-        if ("+".equals(signImg.getText()))
-            img = "+" + imgLabel.getText();
-        else
-            img = "-" + imgLabel.getText();
+        for (int i=0; i<input.length();i++){
+            if(input.charAt(i) == '+' || input.charAt(i) == '-'){
+                if(i != 0) toAnalyze+=",";
+                toAnalyze+=input.charAt(i);
+            }
+            else
+                toAnalyze+=input.charAt(i);
+        }
         
+        String[] splitted = toAnalyze.split(",");
+        
+        for(String s : splitted){
+            try{
+                if(s.contains("i"))
+                    img += Double.parseDouble(s.substring(0, s.length()-1));
+                else
+                    real += Double.parseDouble(s.substring(0, s.length()));
+            } catch(NumberFormatException ex){
+                generateAlert("Invalid number format.");
+                return;
+            }
+        }
         
         c.pushNumber(real, img);
-        refreshButtonState();
+        
     }
+    
     
     /*
      * Method to manage the modification of the labels when button with "del" as label is clicked
      */
     @FXML
-    private void delClicked(MouseEvent event) {
-        updateLabel("del");        
+    private void delClicked() {
+        updateInputBox("del");        
     }
     
     /*
      * Method to manage the associated operation when button with "+" as label is clicked
      */
     @FXML
-    private void plusClicked(MouseEvent event) {
-        c.add();
-        refreshButtonState();
+    private void plusClicked() {
+        if (c.getStoredNumbers().len() >= 2)
+            c.add();
+        else{
+            generateAlert("Not enough numbers");
+        }
     }
-
+    
+    private void generateAlert(String s){
+            Alert alert = new Alert(Alert.AlertType.ERROR, s, ButtonType.OK);
+            alert.showAndWait();
+    }
     /*
      * Method to manage the associated operation when button with "-" as label is clicked
      */
     @FXML
-    private void minusClicked(MouseEvent event) {
+    private void minusClicked() {
         c.subtract();
-        refreshButtonState();
     }
 
     /*
      * Method to manage the associated operation when button with "x" as label is clicked
      */
     @FXML
-    private void prodClicked(MouseEvent event) {
+    private void prodClicked() {
         c.multiply();
-        refreshButtonState();
     }
 
     /*
      * Method to manage the associated operation when button with "%" as label is clicked
      */
     @FXML
-    private void divClicked(MouseEvent event) {
+    private void divClicked() {
         try{
             c.divide();
         } catch(RuntimeException ex){
-            imgLabel.setText("Err");
-            realLabel.setText("Err");
+            generateAlert("");
         }
-        refreshButtonState();
     }
 
     /*
      * Method to manage the associated operation when button with "√" as label is clicked
      */
     @FXML
-    private void sqrtClicked(MouseEvent event) {
+    private void sqrtClicked() {
         c.squareRoot();
-        refreshButtonState();
     }
 
     /*
      * Method to manage the associated operation when button with "+-" as label is clicked
      */
     @FXML
-    private void invClicked(MouseEvent event) {
+    private void invClicked() {
         c.invertSign();
-        refreshButtonState();
-    }
-
-    /*
-     * Method to manage the action of signReal toggleButton clicked
-     */
-    @FXML
-    private void changeRealSign(ActionEvent event) {
-        if (signReal.isSelected()) {
-            signReal.setText("+");
-        } else {
-            signReal.setText("-");
-        }
-    }
-
-    /*
-     * Method to manage the action of signImg toggleButton clicked
-     */
-    @FXML
-    private void changeImgSign(ActionEvent event) {
-        if (signImg.isSelected()) {
-            signImg.setText("+");
-        } else {
-            signImg.setText("-");
-        }
     }
 
     /*
      * Method to manage the modification of the labels when button with "AC" as label is clicked
      */
     @FXML
-    private void acClicked(MouseEvent event) {
-        realLabel.setText("");
-        imgLabel.setText("");
-        refreshButtonState();
+    private void acClicked() {
+        updateInputBox("ac");
     }
 
-    /*
-     * Method to manage the selected label to use when button with "Re" as label is clicked
-     */
     @FXML
-    private void realClicked(MouseEvent event) {
-        realButton.setDisable(true);
-        imgButton.setDisable(false);
-        refreshButtonState();
+    private void handleKey(KeyEvent event) {
+        if(sum.match(event))
+            plusClicked();
+        if(difference.match(event))
+            minusClicked();
     }
 
-    /*
-     * Method to manage the selected label to use when button with "Im" as label is clicked
-     */
+    @FXML
+    private void posClicked() {
+        updateInputBox("+");
+    }
+
+    @FXML
+    private void negClicked() {
+        updateInputBox("-");
+    }
+
+    @FXML
+    private void gtClicked() {
+    }
+
+    @FXML
+    private void ltClicked() {
+    }
+
+    @FXML
+    private void dupClicked() {
+    }
+
+    @FXML
+    private void swapClicked() {
+    }
+
+    @FXML
+    private void dropClicked() {
+    }
+
+    @FXML
+    private void overClicked() {
+    }
+
+    @FXML
+    private void clearClicked() {
+    }
+    
+    private void getNumbers() {
+        
+        
+    }
+
     @FXML
     private void imgClicked(MouseEvent event) {
-        imgButton.setDisable(true);
-        realButton.setDisable(false);
-        refreshButtonState();
     }
-
+    
 }

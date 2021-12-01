@@ -4,6 +4,7 @@
 
 #text {
    -fx-font-family: 'Fleftex';
+   -fx-font-size: 1.5em;
    -fx-background-color: rgb(142,137,42);
    -fx-border-width:  1px;
    -fx-border-color: black;
@@ -45,13 +46,9 @@
     -fx-background-radius: 15px;
 }
 
-.compButtons {
-    -fx-background-color: #60199e;
-}
-
 .signButtons {
-    -fx-background-color: #000033;
-
+    -fx-background-color: rgb(86,86,86);
+    -fx-background-radius: 15px;
 }
 
 .list-view .list-cell {
@@ -65,4 +62,8 @@
 .list-view .scroll-bar:vertical {
     -fx-opacity: 0;
     -fx-padding:-8;
+}
+
+.stackButtons {
+    -fx-background-color: #336600;
 }
