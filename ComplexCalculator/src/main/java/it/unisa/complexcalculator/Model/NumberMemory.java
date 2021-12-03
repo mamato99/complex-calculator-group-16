@@ -15,10 +15,9 @@ import javafx.collections.ObservableList;
  * </ul>
  * </p>
  */
-public class NumberMemory{
+public class NumberMemory implements Stack<ComplexNumber>{
     
     private final ObservableList<ComplexNumber> stack;
-    private int len;
 
     /**
      * <p>Constructor of the NumberMemory class.</p>
@@ -27,7 +26,6 @@ public class NumberMemory{
      */
     public NumberMemory() {
         stack = FXCollections.observableArrayList();
-        len = 0;
     }
     
     /**
@@ -35,9 +33,9 @@ public class NumberMemory{
      * stored numbers by one.</p>
      * @param n The <code>ComplexNumber</code> in cartesian notation.
      */
+    @Override
     public void push(ComplexNumber n){
         stack.add(0, n);
-        len++;
     }
     
     /**
@@ -45,21 +43,21 @@ public class NumberMemory{
      * and decreases the size of the stored numbers by one.</p>
      * @return the <code>ComplexNumber</code> at the top of the stack.
      */
+    @Override
     public ComplexNumber pop(){
-        if (len > 0){
-            len--;
+        if (stack.size() > 0){
             return stack.remove(0);
         }
-        throw new EmptyStackException();
-        
+        throw new EmptyStackException();      
     }
     
     /**
      * <p>Returns the complex numebr in cartesian notation at the top of the stack if the stack is not empty.</p>
      * @return the <code>ComplexNumber</code> at the top of the stack in cartesia notation.
      */
+    @Override
     public ComplexNumber top(){
-        if (len > 0)
+        if (stack.size() > 0)
             return stack.get(0);
         throw new EmptyStackException();
     }
@@ -69,7 +67,7 @@ public class NumberMemory{
      * @return the number of complex numbers (as an <code>int</code>) in cartesian notation contained in the stack.
      */
     public int len(){
-        return len;
+        return stack.size();
     }
     
     /**
@@ -79,5 +77,5 @@ public class NumberMemory{
     public ObservableList<ComplexNumber> getStack() {
         return stack;
     }
-    
+
 }
