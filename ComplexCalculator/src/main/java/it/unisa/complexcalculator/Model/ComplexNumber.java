@@ -64,10 +64,10 @@ public class ComplexNumber {
      */
     @Override
     public String toString() {
-        if (this.imaginary >= new Double(0))
-            return String.format("%.2f", real) + " + " + String.format("%.2f", imaginary) + "i";
+        if (imaginary >= 0.0)
+            return String.format("%.6f", real) + " + " + String.format("%.6f", imaginary) + "i";
         else
-            return String.format("%.2f", real) + " - " + String.format("%.2f", -imaginary) + "i";
+            return String.format("%.6f", real) + " - " +String.format("%.6f", -imaginary) + "i";
     }
 
     /**

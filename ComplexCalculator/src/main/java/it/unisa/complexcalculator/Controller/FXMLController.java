@@ -14,7 +14,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class FXMLController implements Initializable {
@@ -36,27 +35,20 @@ public class FXMLController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         storedElements.setItems(c.getStoredNumbers().getStack());
         
-    }
-
-    /*
-     * Method to manage the modification of the labels according to the pressed button 
-     */
-    private void updateInputBox(String upd) {
-
-        if ("del".equals(upd) && inputBox.getText().length() > 0) {
-            inputBox.deletePreviousChar();
-        } else if ("ac".equals(upd) && inputBox.getText().length() > 0) {
-            inputBox.setText("");
-        } else {
-            inputBox.appendText(upd);
-        }
+        // Enter key to submit and Escape key to clear
+        inputBox.setOnKeyPressed(value -> {
+            if (value.getCode().equals(KeyCode.ENTER))
+                ins();
+            else if (value.getCode().equals(KeyCode.ESCAPE))
+                ac();
+        });
     }
 
     /*
      * Method to manage the storing of a new complex number when button with "INS" as label is clicked
      */
     @FXML
-    private void insClicked() {
+    private void ins() {
 
         String input = inputBox.getText();
         
@@ -76,17 +68,17 @@ public class FXMLController implements Initializable {
 
     private boolean checkStackOperation(String in){
         switch(in){
-            case "dup": dupClicked(); return true;
-            case "clear": clearClicked(); return true;
-            case "swap": swapClicked(); return true;
-            case "drop": dropClicked(); return true;
-            case "over": overClicked(); return true;
-            case "+": plusClicked(); return true;
-            case "-": minusClicked(); return true;
-            case "*": prodClicked(); return true;
-            case "/": divClicked(); return true;
-            case "sqrt": sqrtClicked(); return true;
-            case "+-": invClicked(); return true;
+            case "dup": dup(); return true;
+            case "clear": clear(); return true;
+            case "swap": swap(); return true;
+            case "drop": drop(); return true;
+            case "over": over(); return true;
+            case "+": plus(); return true;
+            case "-": minus(); return true;
+            case "*": prod(); return true;
+            case "/": div(); return true;
+            case "sqrt": sqrt(); return true;
+            case "+-": inv(); return true;
             default: return false;
         }
     }
@@ -96,7 +88,7 @@ public class FXMLController implements Initializable {
             return false;
         if(!(in.startsWith(">") || in.startsWith("<") || in.startsWith("+") || in.startsWith("-")))
             return false;
-        return in.substring(1).matches("[a-z]");
+        return in.substring(1).matches("[A-Z]"); //UPPERCASE TO AVOID "i" as imaginary part
     }
     
     private void checkNumberInsertion(String input){
@@ -121,10 +113,13 @@ public class FXMLController implements Initializable {
         for (String s : splitted) {
             try {
                 if (s.contains("i")) {
-                    if (!s.matches(".*\\d.*")) {
-                        if (s.contains("-")) img -= 1;
-                        else img += 1;
-                    } else {
+                    if (s.equals("+i") || s.equals("i")) {
+                        img += 1;
+                    }
+                    else if (s.equals("-i")) {
+                        img -= 1;
+                    }
+                    else {
                         img += Double.parseDouble(s.substring(0, s.length() - 1));
                     }
                 } else {
@@ -142,15 +137,15 @@ public class FXMLController implements Initializable {
      * Method to manage the modification of the labels when button with "del" as label is clicked
      */
     @FXML
-    private void delClicked() {
-        updateInputBox("del");
+    private void del() {
+        inputBox.deletePreviousChar();
     }
 
     /*
      * Method to manage the associated operation when button with "+" as label is clicked
      */
     @FXML
-    private void plusClicked() {
+    private void plus() {
         try {
             c.add();
         } catch (NotEnoughOperandsException ex) {
@@ -167,7 +162,7 @@ public class FXMLController implements Initializable {
      * Method to manage the associated operation when button with "-" as label is clicked
      */
     @FXML
-    private void minusClicked() {
+    private void minus() {
         try {
             c.subtract();
         } catch (NotEnoughOperandsException ex) {
@@ -179,7 +174,7 @@ public class FXMLController implements Initializable {
      * Method to manage the associated operation when button with "x" as label is clicked
      */
     @FXML
-    private void prodClicked() {
+    private void prod() {
         try {
             c.multiply();
         } catch (NotEnoughOperandsException ex) {
@@ -191,7 +186,7 @@ public class FXMLController implements Initializable {
      * Method to manage the associated operation when button with "%" as label is clicked
      */
     @FXML
-    private void divClicked() {
+    private void div() {
         try {
             c.divide();
         } catch (NotEnoughOperandsException ex) {
@@ -203,7 +198,7 @@ public class FXMLController implements Initializable {
      * Method to manage the associated operation when button with "√" as label is clicked
      */
     @FXML
-    private void sqrtClicked() {
+    private void sqrt() {
         try {
             c.squareRoot();
         } catch (NotEnoughOperandsException ex) {
@@ -215,7 +210,7 @@ public class FXMLController implements Initializable {
      * Method to manage the associated operation when button with "+-" as label is clicked
      */
     @FXML
-    private void invClicked() {
+    private void inv() {
         try {
             c.invertSign();
         } catch (NotEnoughOperandsException ex) {
@@ -227,20 +222,12 @@ public class FXMLController implements Initializable {
      * Method to manage the modification of the labels when button with "AC" as label is clicked
      */
     @FXML
-    private void acClicked() {
-        updateInputBox("ac");
-    }
-
-    @FXML
-    private void handleSpecialKeys(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.ENTER))
-            insClicked();
-        if (event.getCode().equals(KeyCode.ESCAPE))
-            acClicked();
+    private void ac() {
+        inputBox.clear();
     }
     
     @FXML
-    private void dupClicked() {
+    private void dup() {
         try {
             c.dup();
         } catch (NotEnoughOperandsException ex) {
@@ -249,7 +236,7 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
-    private void swapClicked() {
+    private void swap() {
         try {
             c.swap();
         } catch (NotEnoughOperandsException ex) {
@@ -258,7 +245,7 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
-    private void dropClicked() {
+    private void drop() {
         try {
             c.drop();
         } catch (EmptyStackException ex) {
@@ -267,7 +254,7 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
-    private void overClicked() {
+    private void over() {
         try {
             c.over();
         } catch (NotEnoughOperandsException ex) {
@@ -276,7 +263,7 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
-    private void clearClicked() {
+    private void clear() {
         c.clear();
     }
 
@@ -284,9 +271,8 @@ public class FXMLController implements Initializable {
      * Method that shows on the input box the label of the button clicked.
      */
     @FXML
-    private void digitClicked(MouseEvent event) {
+    private void digit(MouseEvent event) {
         Button b = (Button)event.getSource();
-        updateInputBox(b.getText().replaceAll("\\(", "").replaceAll("\\)", ""));
+        inputBox.appendText(b.getText().replaceAll("\\(", "").replaceAll("\\)", ""));
     }
-
 }

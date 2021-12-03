@@ -79,6 +79,12 @@ public final class ComplexOperations {
     public static ComplexNumber signInversion(ComplexNumber c) {
         //Double real = c.getReal();
         //Double imaginary = c.getImaginary();
+        if (c.getImaginary() == 0 && c.getReal() == 0)
+            return new ComplexNumber(c.getReal(), c.getImaginary());
+        else if (c.getImaginary() == 0)
+            return new ComplexNumber(-c.getReal(), c.getImaginary());
+        else if (c.getReal() == 0)
+            return new ComplexNumber(c.getReal(), -c.getImaginary());
         return new ComplexNumber(-c.getReal(), -c.getImaginary());
     }
 
