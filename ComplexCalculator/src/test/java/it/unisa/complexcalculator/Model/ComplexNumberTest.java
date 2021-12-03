@@ -224,7 +224,7 @@ public class ComplexNumberTest {
     public void testParseAlphanumericOneDot() {
         System.out.println("parse");
         
-        assertEquals(ComplexNumber.parse("1.0 + 2.0i"),new ComplexNumber(1, 0));
+        assertEquals(ComplexNumber.parse("1.0+2.0i"),new ComplexNumber(1, 2));
     }
     
     /**
@@ -232,6 +232,16 @@ public class ComplexNumberTest {
      */
     @Test(expected= NumberFormatException.class)
     public void testParseAlphanumericTwoDots() {
+        System.out.println("parse");
+        
+        assertEquals(ComplexNumber.parse("1..0+2.0i"),new ComplexNumber(1, 0));
+    }
+    
+    /**
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test(expected= NumberFormatException.class)
+    public void testParseAlphanumericWithSpaces() {
         System.out.println("parse");
         
         assertEquals(ComplexNumber.parse("1..0 + 2.0i"),new ComplexNumber(1, 0));
