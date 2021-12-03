@@ -4,7 +4,10 @@
  */
 package it.unisa.complexcalculator.Model.Operation;
 
-import org.junit.After;
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.ComplexOperations;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -14,28 +17,46 @@ import static org.junit.Assert.*;
  * @author mdr
  */
 public class DivideOperationTest {
+    private Calculator c;
     
     public DivideOperationTest() {
     }
     
     @Before
     public void setUp() {
+        c = new Calculator();
     }
     
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of execute method, of class DivideOperation.
      */
     @Test
     public void testExecute() {
-        System.out.println("execute");
-        DivideOperation instance = null;
+        System.out.println("divide execute");
+        DivideOperation instance = new DivideOperation(c);
+        
+        ComplexNumber c1 = new ComplexNumber(1,1);
+        ComplexNumber c2 = new ComplexNumber(1,1);
+        
+        c.getStoredNumbers().push(c1);
+        c.getStoredNumbers().push(c2);
+        
         instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        assertEquals(c.getStoredNumbers().pop(), ComplexOperations.division(c1, c2));
+        
+    }
+    
+    /**
+     * Test of execute method, of class DivideOperation.
+     */
+    @Test(expected = NotEnoughOperandsException.class)
+    public void testExecuteNotEnoughOperandsExeption() {
+        System.out.println("divide execute");
+        DivideOperation instance = new DivideOperation(c);
+        
+        instance.execute();
+        
     }
     
 }

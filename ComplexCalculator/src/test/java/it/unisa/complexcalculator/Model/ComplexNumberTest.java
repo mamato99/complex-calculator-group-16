@@ -1,43 +1,38 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package it.unisa.complexcalculator.Model;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author mdr
- */
+
 public class ComplexNumberTest {
+    ComplexNumber c;
     
     public ComplexNumberTest() {
     }
     
     @Before
-    public void setUp() {
+    public void setUp(){
+        c = new ComplexNumber(0,0);
     }
     
-    @After
-    public void tearDown() {
-    }
-
+    
+    //--------------------------getter and setter----------------------------
+    
     /**
      * Test of getReal method, of class ComplexNumber.
      */
     @Test
     public void testGetReal() {
         System.out.println("getReal");
-        ComplexNumber instance = null;
-        double expResult = 0.0;
-        double result = instance.getReal();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        double expResult = 1.0;
+        
+        c.setReal(expResult);
+        
+        double result = c.getReal();
+        
+        assertEquals(expResult, result, 0.001);
     }
 
     /**
@@ -46,11 +41,14 @@ public class ComplexNumberTest {
     @Test
     public void testSetReal() {
         System.out.println("setReal");
-        double real = 0.0;
-        ComplexNumber instance = null;
-        instance.setReal(real);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        double expResult = 1.0;
+        
+        c.setReal(expResult);
+        
+        double result = c.getReal();
+        
+        assertEquals(expResult, result, 0.001);
     }
 
     /**
@@ -59,12 +57,14 @@ public class ComplexNumberTest {
     @Test
     public void testGetImaginary() {
         System.out.println("getImaginary");
-        ComplexNumber instance = null;
-        double expResult = 0.0;
-        double result = instance.getImaginary();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        double expResult = 1.0;
+        
+        c.setImaginary(expResult);
+        
+        double result = c.getImaginary();
+        
+        assertEquals(expResult, result, 0.001);
     }
 
     /**
@@ -73,68 +73,188 @@ public class ComplexNumberTest {
     @Test
     public void testSetImaginary() {
         System.out.println("setImaginary");
-        double imaginary = 0.0;
-        ComplexNumber instance = null;
-        instance.setImaginary(imaginary);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        double expResult = 1.0;
+        
+        c.setImaginary(expResult);
+        
+        double result = c.getImaginary();
+        
+        assertEquals(expResult, result, 0.001);
     }
 
+    
+    //--------------------------parse----------------------------
+    
     /**
-     * Test of toString method, of class ComplexNumber.
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test(expected= NumberFormatException.class)
+    public void testParseEmptyString() {
+        System.out.println("parse");
+        
+        ComplexNumber.parse("");
+    }
+    
+     /**
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test(expected= NumberFormatException.class)
+    public void testParseOnlyLetters() {
+        System.out.println("parse");
+        
+        ComplexNumber.parse("abc");
+    }
+    
+     /**
+     * Test of parse method, of class ComplexNumber.
      */
     @Test
-    public void testToString() {
-        System.out.println("toString");
-        ComplexNumber instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testParseOnlyNumbersOneDot() {
+        System.out.println("parse");
+ 
+        assertEquals(ComplexNumber.parse("123.456"),new ComplexNumber(123.456, 0));
+        
     }
-
-    /**
-     * Test of hashCode method, of class ComplexNumber.
+    
+     /**
+     * Test of parse method, of class ComplexNumber.
      */
     @Test
-    public void testHashCode() {
-        System.out.println("hashCode");
-        ComplexNumber instance = null;
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testParseOnlyNumbersZeroDots() {
+        System.out.println("parse");
+        
+        assertEquals(ComplexNumber.parse("123456"),new ComplexNumber(123456, 0));
     }
-
+    
+     /**
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test(expected= NumberFormatException.class)
+    public void testParseOnlyNumbersTwoDots() {
+        System.out.println("parse");
+        
+        ComplexNumber.parse("12.34.56");
+    }
+    
+     /**
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test(expected= NumberFormatException.class)
+    public void testParseAlphanumericNoImg() {
+        System.out.println("parse");
+        
+        ComplexNumber.parse("123abc");
+    }
+    
+     /**
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test(expected= NumberFormatException.class)
+    public void testParseAlphanumericWithImg() {
+        System.out.println("parse");
+        
+        ComplexNumber.parse("123abci");
+    }
+    
+     /**
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test
+    public void testParseAlphanumericOnlyImg() {
+        System.out.println("parse");
+        
+        assertEquals(ComplexNumber.parse("123i"),new ComplexNumber(0, 123));
+    }
+    
+    /**
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test(expected= NumberFormatException.class)
+    public void testParseAlphanumericOnlyImgException() {
+        System.out.println("parse");
+        
+        assertEquals(ComplexNumber.parse("i123"),new ComplexNumber(0, 123));
+    }
+    
+     /**
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test
+    public void testParsePlusSign() {
+        System.out.println("parse");
+        
+        assertEquals(ComplexNumber.parse("+1+i"),new ComplexNumber(1, 1));
+    }
+    
     /**
      * Test of parse method, of class ComplexNumber.
      */
     @Test
-    public void testParse() {
+    public void testParseMinusSign() {
         System.out.println("parse");
-        String input = "";
-        ComplexNumber expResult = null;
-        ComplexNumber result = ComplexNumber.parse(input);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        assertEquals(ComplexNumber.parse("-1-i"),new ComplexNumber(-1, -1));
     }
-
+    
     /**
-     * Test of equals method, of class ComplexNumber.
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test(expected= NumberFormatException.class)
+    public void testParseDoubleMinusSignExeption() {
+        System.out.println("parse");
+        
+        ComplexNumber.parse("--1");
+    }
+    
+     /**
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test(expected= NumberFormatException.class)
+    public void testParseDoublePlusSignExeption() {
+        System.out.println("parse");
+        
+        ComplexNumber.parse("+-i");
+    }
+    
+    /**
+     * Test of parse method, of class ComplexNumber.
      */
     @Test
-    public void testEquals() {
-        System.out.println("equals");
-        Object obj = null;
-        ComplexNumber instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals(obj);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testParseAlphanumericOneDot() {
+        System.out.println("parse");
+        
+        assertEquals(ComplexNumber.parse("1.0+2.0i"),new ComplexNumber(1, 2));
+    }
+    
+    /**
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test(expected= NumberFormatException.class)
+    public void testParseAlphanumericTwoDots() {
+        System.out.println("parse");
+        
+        assertEquals(ComplexNumber.parse("1..0+2.0i"),new ComplexNumber(1, 0));
+    }
+    
+    /**
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test(expected= NumberFormatException.class)
+    public void testParseAlphanumericWithSpaces() {
+        System.out.println("parse");
+        
+        assertEquals(ComplexNumber.parse("1..0 + 2.0i"),new ComplexNumber(1, 0));
+    }
+    
+    /**
+     * Test of parse method, of class ComplexNumber.
+     */
+    @Test(expected= NullPointerException.class)
+    public void testParseNullString() {
+        System.out.println("parse");
+        
+        ComplexNumber.parse(null);
     }
     
 }
