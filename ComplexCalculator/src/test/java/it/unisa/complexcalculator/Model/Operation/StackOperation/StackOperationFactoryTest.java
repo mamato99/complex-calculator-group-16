@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package it.unisa.complexcalculator.Model.Operation;
+package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
 import it.unisa.complexcalculator.Model.Operation.StackOperation.StackOperationFactory;
 import it.unisa.complexcalculator.Model.Operation.StackOperation.SqrtOperation;
@@ -17,6 +17,8 @@ import it.unisa.complexcalculator.Model.Operation.StackOperation.ClearOperation;
 import it.unisa.complexcalculator.Model.Operation.StackOperation.DivideOperation;
 import it.unisa.complexcalculator.Model.Operation.StackOperation.AddOperation;
 import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Model.Operation.Operation;
+import it.unisa.complexcalculator.Model.Operation.OperationFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

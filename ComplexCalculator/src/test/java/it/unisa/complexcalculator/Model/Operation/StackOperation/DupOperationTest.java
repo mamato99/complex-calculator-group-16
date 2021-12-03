@@ -2,13 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package it.unisa.complexcalculator.Model.Operation;
+package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
-import it.unisa.complexcalculator.Model.Operation.StackOperation.AddOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.DupOperation;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
-import it.unisa.complexcalculator.Model.ComplexOperations;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -17,10 +16,10 @@ import static org.junit.Assert.*;
  *
  * @author mdr
  */
-public class AddOperationTest {
+public class DupOperationTest {
     private Calculator c;
     
-    public AddOperationTest() {
+    public DupOperationTest() {
     }
     
     @Before
@@ -33,18 +32,17 @@ public class AddOperationTest {
      */
     @Test
     public void testExecute() {
-        System.out.println("add execute");
-        AddOperation instance = new AddOperation(c);
+        System.out.println("dup execute");
+        DupOperation instance = new DupOperation(c);
         
-        ComplexNumber c1 = new ComplexNumber(1,1);
-        ComplexNumber c2 = new ComplexNumber(1,1);
+        ComplexNumber c1 = new ComplexNumber(2,2);
         
-        c.getStoredNumbers().push(c1);
-        c.getStoredNumbers().push(c2);
+        c.pushNumber(c1);
         
         instance.execute();
         
-        assertEquals(c.getStoredNumbers().pop(), ComplexOperations.add(c1, c2));
+        assertEquals(c.getStoredNumbers().top(), c1);
+        assertEquals(c.getStoredNumbers().len(), 2);
         
     }
     
@@ -53,8 +51,8 @@ public class AddOperationTest {
      */
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteNotEnoughOperandsExeption() {
-        System.out.println("add execute");
-        AddOperation instance = new AddOperation(c);
+        System.out.println("dup execute");
+        DupOperation instance = new DupOperation(c);
         
         instance.execute();
         

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package it.unisa.complexcalculator.Model.Operation;
+package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
 import it.unisa.complexcalculator.Model.Operation.StackOperation.SubtractOperation;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;

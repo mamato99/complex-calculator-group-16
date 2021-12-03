@@ -2,14 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package it.unisa.complexcalculator.Model.Operation;
+package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
-import it.unisa.complexcalculator.Model.Operation.StackOperation.InvertSignOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.DivideOperation;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import it.unisa.complexcalculator.Model.ComplexOperations;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -18,10 +17,10 @@ import static org.junit.Assert.*;
  *
  * @author mdr
  */
-public class InvertSignOperationTest {
+public class DivideOperationTest {
     private Calculator c;
     
-    public InvertSignOperationTest() {
+    public DivideOperationTest() {
     }
     
     @Before
@@ -30,33 +29,35 @@ public class InvertSignOperationTest {
     }
     
     /**
-     * Test of execute method, of class AddOperation.
+     * Test of execute method, of class DivideOperation.
      */
     @Test
     public void testExecute() {
-        System.out.println("invert sign execute");
-        InvertSignOperation instance = new InvertSignOperation(c);
+        System.out.println("divide execute");
+        DivideOperation instance = new DivideOperation(c);
         
-        ComplexNumber c1 = new ComplexNumber(2,2);
+        ComplexNumber c1 = new ComplexNumber(1,1);
+        ComplexNumber c2 = new ComplexNumber(1,1);
         
-        c.pushNumber(c1);
+        c.getStoredNumbers().push(c1);
+        c.getStoredNumbers().push(c2);
         
         instance.execute();
         
-        assertEquals(c.getStoredNumbers().top(), ComplexOperations.signInversion(c1));
-        assertEquals(c.getStoredNumbers().len(), 1);
+        assertEquals(c.getStoredNumbers().pop(), ComplexOperations.division(c1, c2));
         
     }
     
     /**
-     * Test of execute method, of class AddOperation.
+     * Test of execute method, of class DivideOperation.
      */
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteNotEnoughOperandsExeption() {
-        System.out.println("invert sign execute");
-        InvertSignOperation instance = new InvertSignOperation(c);
+        System.out.println("divide execute");
+        DivideOperation instance = new DivideOperation(c);
         
         instance.execute();
         
     }
+    
 }

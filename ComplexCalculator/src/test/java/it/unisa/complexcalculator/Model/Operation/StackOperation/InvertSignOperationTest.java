@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
-package it.unisa.complexcalculator.Model.Operation;
+package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
-import it.unisa.complexcalculator.Model.Operation.StackOperation.MultiplyOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.InvertSignOperation;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
@@ -16,11 +16,12 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author
+ * @author mdr
  */
-public class MultiplyOperationTest {
+public class InvertSignOperationTest {
     private Calculator c;
-    public MultiplyOperationTest() {
+    
+    public InvertSignOperationTest() {
     }
     
     @Before
@@ -28,40 +29,34 @@ public class MultiplyOperationTest {
         c = new Calculator();
     }
     
-    @After
-    public void tearDown() {
-    }
-
     /**
-     * Test of execute method, of class MultiplyOperation.
+     * Test of execute method, of class AddOperation.
      */
     @Test
     public void testExecute() {
-        System.out.println("execute");
-        MultiplyOperation instance = new MultiplyOperation(c);
+        System.out.println("invert sign execute");
+        InvertSignOperation instance = new InvertSignOperation(c);
         
-        ComplexNumber c1 = new ComplexNumber(1,1);
-        ComplexNumber c2 = new ComplexNumber(1,1);
+        ComplexNumber c1 = new ComplexNumber(2,2);
         
-        c.getStoredNumbers().push(c1);
-        c.getStoredNumbers().push(c2);
+        c.pushNumber(c1);
         
         instance.execute();
         
-        assertEquals(c.getStoredNumbers().pop(), ComplexOperations.multiplication(c1, c2));
+        assertEquals(c.getStoredNumbers().top(), ComplexOperations.signInversion(c1));
+        assertEquals(c.getStoredNumbers().len(), 1);
         
     }
     
     /**
-     * Test of execute method, of class MultiplyOperation.
+     * Test of execute method, of class AddOperation.
      */
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteNotEnoughOperandsExeption() {
-        System.out.println("execute");
-        MultiplyOperation instance = new MultiplyOperation(c);
+        System.out.println("invert sign execute");
+        InvertSignOperation instance = new InvertSignOperation(c);
         
         instance.execute();
         
     }
-    
 }
