@@ -4,11 +4,10 @@
  */
 package it.unisa.complexcalculator.Model.Operation;
 
+import it.unisa.complexcalculator.Model.Operation.StackOperation.DupOperation;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
-import java.util.EmptyStackException;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

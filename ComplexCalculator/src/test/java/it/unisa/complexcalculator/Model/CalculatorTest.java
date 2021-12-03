@@ -2,8 +2,10 @@ package it.unisa.complexcalculator.Model;
 
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Exception.NotExistentVariableException;
 import it.unisa.complexcalculator.Exception.OutOfBoundException;
 import java.util.EmptyStackException;
+import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -36,7 +38,7 @@ public class CalculatorTest {
     }
     
     
-    //-----------------------pushNumber_double_double - Boundary analysis-----------------------------------------
+    //-----------------------pushNumber - Boundary analysis-----------------------------------------
     
     /**
      * Test of pushNumber method, of class Calculator.
@@ -82,9 +84,133 @@ public class CalculatorTest {
         assertEquals(new ComplexNumber(real,img), calc.getStoredNumbers().pop());
         
     }
-
+    
+    
+    //-----------------------pushVariable-----------------------------------------
+    
+    /**
+     * Test of pushVariable method, of class Calculator. Must throw an exception.
+     */
+    @Test(expected=NotExistentVariableException.class)
+    public void testPushVariableWrongChar() {
+        System.out.println("pushVariable");
+        
+        char v = 'a';
+        
+        calc.variableToStack(v);
+    }
+    
+    /**
+     * Test of pushVariable method, of class Calculator.
+     */
+    @Test
+    public void testPushVariable() {
+        System.out.println("pushVariable");
+        char v = 'A';
+        c1 = new ComplexNumber(1,1);
+        
+        calc.getVariables().put(v, c1);
+        calc.variableToStack(v);
+        assertEquals(calc.getStoredNumbers().pop(), c1);
+    }
    
+    
+    //-----------------------addToVariable-----------------------------------------
+    
+    /**
+     * Test of addToVariable method, of class Calculator.
+     */
+    @Test
+    public void testAddToVariable() {
+        System.out.println("add to variable");
+        Character v = 'C'; 
+        c1 = new ComplexNumber(1,1);
+        c2 = new ComplexNumber(-1,-1);
+
+
+        calc.getStoredNumbers().push(c1);
+        calc.getStoredNumbers().push(c2);
+
+        calc.addToVariable(v);
+
+        assertEquals(calc.getVariables().get(v), c2);
+
+        calc.addToVariable(v);
+
+        c2 = new ComplexNumber(0,0);
+        assertEquals(calc.getVariables().get(v), c2);
+
+    }
+    
+    /**
+     * Test of addToVariable method, of class Calculator.
+     */
+    @Test(expected=EmptyStackException.class)
+    public void testAddToVariableEmptyStackException() {
+        System.out.println("add to variable");
+        Character v = 'C'; 
+        calc.addToVariable(v);
+
+    }
+
+    /**
+     * Test of addToVariable method, of class Calculator.
+     */
+    @Test(expected=NotExistentVariableException.class)
+    public void testAddToVariableNotExistentVariableException() {
+        System.out.println("add to variable");
+        Character v = '5'; 
+        c1 = new ComplexNumber(1,1);
+        calc.getStoredNumbers().push(c1);
+        calc.addToVariable(v);
+
+    }
+    
+    
+    //-----------------------addToVariable-----------------------------------------
+    
+     /**
+     * Test of subtractToVariable method, of class Calculator.
+     */
+    @Test
+    public void testSubtractToVariable() {
+        System.out.println("SubtractToVariable");
+        c1 = new ComplexNumber(1, 1);
+        c2 = new ComplexNumber(1, 1);
+
+        HashMap<Character, ComplexNumber> m = calc.getVariables();
+        m.put('a', c1);
+        calc.getStoredNumbers().push(c2);
+        calc.subtractToVariable('a');
+        assertEquals(m.get('a'), ComplexOperations.difference(c1, c2));
+    }
+
+    /**
+     * Test of subtractToVariable method, of class Calculator.
+     */
+    @Test(expected = EmptyStackException.class)
+    public void testSubtractToVariableNotEnoughOperandsException() {
+        System.out.println("SubtractToVariableNotEnoughOperandsException");
+        HashMap<Character, ComplexNumber> m = calc.getVariables();
+        m.put('a', c1);
+        calc.subtractToVariable('a');
+    }
+
+    /**
+     * Test of subtractToVariable method, of class Calculator.
+     */
+    @Test(expected = NotExistentVariableException.class)
+    public void testSubtractToVariableNotExsistentVariableException() {
+        System.out.println("SubtractToVariableNotExsistentVariableException");
+        c1 = new ComplexNumber(1, 1);
+        calc.getStoredNumbers().push(c1);
+        HashMap<Character, ComplexNumber> m = calc.getVariables();
+        calc.subtractToVariable('a');
+    }
+    
+    
     //-----------------------add-----------------------------------------
+    
     /**
      * Test of add method, of class Calculator.
      */

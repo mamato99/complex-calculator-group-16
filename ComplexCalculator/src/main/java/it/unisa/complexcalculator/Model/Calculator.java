@@ -1,7 +1,7 @@
 package it.unisa.complexcalculator.Model;
 
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
-import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Exception.*;
 import java.util.*;
 
 public class Calculator {
@@ -16,8 +16,8 @@ public class Calculator {
     public Calculator() {
         storedNumbers = new NumberMemory();
         variables = new HashMap<>();
-        for (char c='A'; c<='Z'; c++){
-            variables.put(c, new ComplexNumber(0,0));
+        for (char c = 'A'; c <= 'Z'; c++) {
+            variables.put(c, new ComplexNumber(0, 0));
         }
     }
 
@@ -32,16 +32,75 @@ public class Calculator {
     public NumberMemory getStoredNumbers() {
         return storedNumbers;
     }
-
+    
+    public HashMap<Character, ComplexNumber> getVariables(){
+        return variables;
+    }
+    
     /**
      * <p>
      * This method saves the number <code>real</code> and <code>img</code> into the data structure containing the stored complex numbers.</p>
+     *
      * @param c The complex number being inserted.
      */
     public void pushNumber(ComplexNumber c) {
         storedNumbers.push(c);
     }
+    
+    /**
+     * <p>This function stores the value of the variable identified by the key <code>v</code> in the stack of complex numbers.</p>
+     * @param v the key of the variables Map
+     */
+    public void variableToStack(Character v) {
+        ComplexNumber c = variables.get(v);
+        if(c == null)
+            throw new NotExistentVariableException();
+        storedNumbers.push(c);
+    }
+    
+    /**
+     * <p>This function takes the complex number identified by the key 'v' and push it to the top of the stack</p>
+     * @param v  the character representing the key of the variable
+     */
+    public void stackToVariable(Character v) throws EmptyStackException{
+        if (storedNumbers.len() < 1)
+            throw new EmptyStackException();
 
+        ComplexNumber c1 = storedNumbers.pop();
+        if(variables.get(v) == null)
+            throw new NotExistentVariableException();
+        variables.put(v, c1);
+    }
+    
+    /**
+     * <p>This function takes the complex number at the toip of the stack and subtract to the variable identified by the key 'v'</p>
+     * @param v  the character representing the key of a variable
+     */
+    public void subtractToVariable(Character v){
+        if(storedNumbers.len()<1)
+            throw new EmptyStackException();
+        ComplexNumber c1 = storedNumbers.pop();
+        ComplexNumber old = variables.get(v);
+        if(old == null)
+            throw new NotExistentVariableException();
+        variables.put(v, ComplexOperations.difference(old, c1));
+    } 
+
+    /**
+     * <p>This function takes the last stored complex number and add it to the variable named as the Character v passed
+     * as argument</p>
+     * @param v the key of the variables Map
+     */
+    public void addToVariable(Character v){
+        if(storedNumbers.len() < 1)
+            throw new EmptyStackException();
+        ComplexNumber c1 = storedNumbers.pop();
+        ComplexNumber old = variables.get(v); 
+        if (old == null)
+            throw new NotExistentVariableException();
+        variables.put(v, ComplexOperations.add(c1,old));
+    }
+    
     /**
      * <p>
      * This method takes the last two numbers saved on the stack and adds them together </p>
@@ -130,7 +189,8 @@ public class Calculator {
     }
 
     /**
-     * <p>This method takes the last two numbers saved in the stack and swaps them.</p>
+     * <p>
+     * This method takes the last two numbers saved in the stack and swaps them.</p>
      */
     public void swap() {
         if (storedNumbers.len() < 2) {
@@ -143,45 +203,50 @@ public class Calculator {
         storedNumbers.push(c2);
 
     }
-    
+
     /**
-     * <p>This function store a new number on the stack that is a copy of the last</p>
+     * <p>
+     * This function store a new number on the stack that is a copy of the last</p>
      */
-    public void dup(){
-        if(storedNumbers.len() < 1)
+    public void dup() {
+        if (storedNumbers.len() < 1) {
             throw new NotEnoughOperandsException();
+        }
         ComplexNumber dup = storedNumbers.top();
         storedNumbers.push(dup);
     }
-    
+
     /**
-     * <p>This function takes the list of saved numbers and empties it</p>
+     * <p>
+     * This function takes the list of saved numbers and empties it</p>
      */
-    public void clear(){
-        while(storedNumbers.len()>0){
+    public void clear() {
+        while (storedNumbers.len() > 0) {
             storedNumbers.pop();
         }
     }
-    
+
     /**
-     * <p>This function takes the last stored element and deletes it</p>
+     * <p>
+     * This function takes the last stored element and deletes it</p>
      */
     public void drop() {
         storedNumbers.pop();
     }
 
     /**
-     * <p>This function takes the second last stored element and push it to the top of the stack</p>
+     * <p>
+     * This function takes the second last stored element and push it to the top of the stack</p>
      */
     public void over() {
-        if(storedNumbers.len() < 2)
+        if (storedNumbers.len() < 2) {
             throw new NotEnoughOperandsException();
+        }
         ComplexNumber c1 = storedNumbers.pop();
         ComplexNumber over = storedNumbers.top();
-        
+
         storedNumbers.push(c1);
         storedNumbers.push(over);
     }
-    
-   
+
 }

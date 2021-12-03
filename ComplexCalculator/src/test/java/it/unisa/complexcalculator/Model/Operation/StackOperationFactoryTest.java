@@ -4,6 +4,18 @@
  */
 package it.unisa.complexcalculator.Model.Operation;
 
+import it.unisa.complexcalculator.Model.Operation.StackOperation.StackOperationFactory;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.SqrtOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.SubtractOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.OverOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.SwapOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.InvertSignOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.MultiplyOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.DupOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.DropOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.ClearOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.DivideOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.AddOperation;
 import it.unisa.complexcalculator.Model.Calculator;
 import org.junit.After;
 import org.junit.Before;
@@ -14,9 +26,9 @@ import static org.junit.Assert.*;
  *
  * @author mdr
  */
-public class OperationFactoryTest {
+public class StackOperationFactoryTest {
        private  Calculator c;
-    public OperationFactoryTest() {
+    public StackOperationFactoryTest() {
     }
     
     @Before
@@ -35,7 +47,8 @@ public class OperationFactoryTest {
     public void testParseDupOperation() {
         System.out.println("parseDupOperation");
         String s = "dup"; 
-        Operation result = OperationFactory.parseOperation(s, c); 
+        OperationFactory opFac = new StackOperationFactory();
+        Operation result = opFac.parseOperation(s, c);
         assert(result instanceof DupOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -47,7 +60,8 @@ public class OperationFactoryTest {
     public void testParseClearOperation() {
         System.out.println("parseClearOperation");
         String s = "clear"; 
-        Operation result = OperationFactory.parseOperation(s, c); 
+        OperationFactory opFac = new StackOperationFactory();
+        Operation result = opFac.parseOperation(s, c);
         assert(result instanceof ClearOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -59,7 +73,8 @@ public class OperationFactoryTest {
     public void testParseSwapOperation() {
         System.out.println("parseSwapOperation");
         String s = "swap"; 
-        Operation result = OperationFactory.parseOperation(s, c); 
+        OperationFactory opFac = new StackOperationFactory();
+        Operation result = opFac.parseOperation(s, c);
         assert(result instanceof SwapOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -71,7 +86,8 @@ public class OperationFactoryTest {
     public void testParseDropOperation() {
         System.out.println("parseSwapOperation");
         String s = "drop"; 
-        Operation result = OperationFactory.parseOperation(s, c); 
+        OperationFactory opFac = new StackOperationFactory();
+        Operation result = opFac.parseOperation(s, c);
         assert(result instanceof DropOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -83,7 +99,8 @@ public class OperationFactoryTest {
     public void testParseOverOperation() {
         System.out.println("parseOverOperation");
         String s = "over"; 
-        Operation result = OperationFactory.parseOperation(s, c); 
+        OperationFactory opFac = new StackOperationFactory();
+        Operation result = opFac.parseOperation(s, c);
         assert(result instanceof OverOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -95,7 +112,8 @@ public class OperationFactoryTest {
     public void testParseAddOperation() {
         System.out.println("parseAddOperation");
         String s = "+"; 
-        Operation result = OperationFactory.parseOperation(s, c); 
+        OperationFactory opFac = new StackOperationFactory();
+        Operation result = opFac.parseOperation(s, c);
         assert(result instanceof AddOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -107,7 +125,8 @@ public class OperationFactoryTest {
     public void testParseSubtractOperation() {
         System.out.println("parseSubtractOperation");
         String s = "-"; 
-        Operation result = OperationFactory.parseOperation(s, c); 
+        OperationFactory opFac = new StackOperationFactory();
+        Operation result = opFac.parseOperation(s, c);
         assert(result instanceof SubtractOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -119,7 +138,8 @@ public class OperationFactoryTest {
     public void testParseMultiplyOperation() {
         System.out.println("parseMultiplyOperation");
         String s = "*"; 
-        Operation result = OperationFactory.parseOperation(s, c); 
+        OperationFactory opFac = new StackOperationFactory();
+        Operation result = opFac.parseOperation(s, c);
         assert(result instanceof MultiplyOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -131,7 +151,8 @@ public class OperationFactoryTest {
     public void testParseDivideOperation() {
         System.out.println("parseDivideOperation");
         String s = "/"; 
-        Operation result = OperationFactory.parseOperation(s, c); 
+        OperationFactory opFac = new StackOperationFactory();
+        Operation result = opFac.parseOperation(s, c);
         assert(result instanceof DivideOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -144,7 +165,8 @@ public class OperationFactoryTest {
     public void testParseSqrtOperation() {
         System.out.println("parseSqrtOperation");
         String s = "sqrt"; 
-        Operation result = OperationFactory.parseOperation(s, c); 
+        OperationFactory opFac = new StackOperationFactory();
+        Operation result = opFac.parseOperation(s, c);
         assert(result instanceof SqrtOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -157,7 +179,8 @@ public class OperationFactoryTest {
     public void testParseInvertSignOperation() {
         System.out.println("parseInvertSignOperation");
         String s = "+-"; 
-        Operation result = OperationFactory.parseOperation(s, c); 
+        OperationFactory opFac = new StackOperationFactory();
+        Operation result = opFac.parseOperation(s, c);
         assert(result instanceof InvertSignOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -169,7 +192,8 @@ public class OperationFactoryTest {
     public void testParseNullOperation() {
         System.out.println("parseNullOperation");
         String s = "any"; 
-        Operation result = OperationFactory.parseOperation(s, c); 
+        OperationFactory opFac = new StackOperationFactory();
+        Operation result = opFac.parseOperation(s, c);
         assertNull(result);
         // TODO review the generated test code and remove the default call to fail.
     }  

@@ -4,6 +4,8 @@ import it.unisa.complexcalculator.Model.Operation.OperationInvoker;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.*;
 import it.unisa.complexcalculator.Model.Operation.OperationFactory;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.StackOperationFactory;
+import it.unisa.complexcalculator.Model.Operation.VariableOperation.VariableOperationFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -52,8 +54,17 @@ public class FXMLController implements Initializable {
     private void ins() {
 
         String input = inputBox.getText();
+        OperationFactory opFac = new StackOperationFactory();
+        Operation op = opFac.parseOperation(input, c);
         
-        Operation op = OperationFactory.parseOperation(input, c);
+        if (op != null){
+            opInvoker.execute(op);
+            inputBox.setText("");
+            return;
+        }
+        
+        opFac = new VariableOperationFactory();
+        op = opFac.parseOperation(input, c);
         if (op != null){
             opInvoker.execute(op);
             inputBox.setText("");
@@ -65,6 +76,7 @@ public class FXMLController implements Initializable {
             inputBox.setText("");
             c.pushNumber(num);
         } catch (NumberFormatException ex){
+            inputBox.setText("");
             generateAlert("Invalid number format.");
         }
     }
@@ -110,19 +122,13 @@ public class FXMLController implements Initializable {
         Button b = (Button)event.getSource();
         String s = b.getText().toLowerCase();
         
-        Operation op = OperationFactory.parseOperation(s, c);
+        OperationFactory opFac = new StackOperationFactory();
+        Operation op = opFac.parseOperation(s, c);
+        
         if (op != null){
             opInvoker.execute(op);
             inputBox.setText("");
         }
-    }
-    
-    private boolean checkVariableOperation(String in){
-        if(in.length() != 2)
-            return false;
-        if(!(in.startsWith(">") || in.startsWith("<") || in.startsWith("+") || in.startsWith("-")))
-            return false;
-        return in.substring(1).matches("[A-Z]"); //UPPERCASE TO AVOID "i" as imaginary part
     }
   
 }
