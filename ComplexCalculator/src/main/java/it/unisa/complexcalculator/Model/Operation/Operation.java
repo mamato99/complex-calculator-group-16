@@ -6,7 +6,7 @@ package it.unisa.complexcalculator.Model.Operation;
 
 /**
  *
- * @author mdr
+ * @author 
  */
 public interface Operation { 
     

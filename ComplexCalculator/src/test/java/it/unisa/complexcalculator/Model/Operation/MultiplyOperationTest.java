@@ -4,6 +4,10 @@
  */
 package it.unisa.complexcalculator.Model.Operation;
 
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.ComplexOperations;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,15 +15,16 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author mdr
+ * @author
  */
 public class MultiplyOperationTest {
-    
+    private Calculator c;
     public MultiplyOperationTest() {
     }
     
     @Before
     public void setUp() {
+        c = new Calculator();
     }
     
     @After
@@ -32,10 +37,30 @@ public class MultiplyOperationTest {
     @Test
     public void testExecute() {
         System.out.println("execute");
-        MultiplyOperation instance = null;
+        MultiplyOperation instance = new MultiplyOperation(c);
+        
+        ComplexNumber c1 = new ComplexNumber(1,1);
+        ComplexNumber c2 = new ComplexNumber(1,1);
+        
+        c.getStoredNumbers().push(c1);
+        c.getStoredNumbers().push(c2);
+        
         instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        assertEquals(c.getStoredNumbers().pop(), ComplexOperations.multiplication(c1, c2));
+        
+    }
+    
+    /**
+     * Test of execute method, of class MultiplyOperation.
+     */
+    @Test(expected = NotEnoughOperandsException.class)
+    public void testExecuteNotEnoughOperandsExeption() {
+        System.out.println("execute");
+        MultiplyOperation instance = new MultiplyOperation(c);
+        
+        instance.execute();
+        
     }
     
 }
