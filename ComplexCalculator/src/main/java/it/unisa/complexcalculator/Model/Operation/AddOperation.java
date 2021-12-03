@@ -5,12 +5,7 @@
 package it.unisa.complexcalculator.Model.Operation;
 
 import it.unisa.complexcalculator.Model.Calculator;
-import it.unisa.complexcalculator.Model.Operation.Operation;
 
-/**
- *
- * @author mdr
- */
 public class AddOperation implements Operation{
     private final Calculator c;
 

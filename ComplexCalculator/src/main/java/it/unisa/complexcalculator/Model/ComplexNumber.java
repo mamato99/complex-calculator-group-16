@@ -159,10 +159,7 @@ public class ComplexNumber {
         if (Double.doubleToLongBits(this.real) != Double.doubleToLongBits(other.real)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.imaginary) != Double.doubleToLongBits(other.imaginary)) {
-            return false;
-        }
-        return true;
+        return Double.doubleToLongBits(this.imaginary) == Double.doubleToLongBits(other.imaginary);
 
     }
 
