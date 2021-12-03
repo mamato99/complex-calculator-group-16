@@ -1,5 +1,6 @@
-package it.unisa.complexcalculator.Model;
+package it.unisa.complexcalculator.Model.Memory;
 
+import it.unisa.complexcalculator.Model.ComplexNumber;
 import java.util.EmptyStackException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +16,7 @@ import javafx.collections.ObservableList;
  * </ul>
  * </p>
  */
-public class NumberMemory implements Stack<ComplexNumber>{
+public class NumberMemory{
     
     private final ObservableList<ComplexNumber> stack;
 
@@ -33,7 +34,6 @@ public class NumberMemory implements Stack<ComplexNumber>{
      * stored numbers by one.</p>
      * @param n The <code>ComplexNumber</code> in cartesian notation.
      */
-    @Override
     public void push(ComplexNumber n){
         stack.add(0, n);
     }
@@ -43,7 +43,6 @@ public class NumberMemory implements Stack<ComplexNumber>{
      * and decreases the size of the stored numbers by one.</p>
      * @return the <code>ComplexNumber</code> at the top of the stack.
      */
-    @Override
     public ComplexNumber pop(){
         if (stack.size() > 0){
             return stack.remove(0);
@@ -55,7 +54,6 @@ public class NumberMemory implements Stack<ComplexNumber>{
      * <p>Returns the complex numebr in cartesian notation at the top of the stack if the stack is not empty.</p>
      * @return the <code>ComplexNumber</code> at the top of the stack in cartesia notation.
      */
-    @Override
     public ComplexNumber top(){
         if (stack.size() > 0)
             return stack.get(0);

@@ -1,5 +1,6 @@
 package it.unisa.complexcalculator.Model;
 
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Exception.OutOfBoundException;
 import java.util.EmptyStackException;
@@ -41,13 +42,13 @@ public class CalculatorTest {
      * Test of pushNumber method, of class Calculator.
      */
     @Test
-    public void testPushNumberDoubleDoubleMinValues() {
+    public void testPushNumberMinValues() {
         System.out.println("pushNumber - Min values");
         
         // Test 1 - Min Values for real and img part
         double real = -Double.MAX_VALUE;
         double img = -Double.MAX_VALUE;
-        calc.pushNumber(real, img);
+        calc.pushNumber(new ComplexNumber(real, img));
         assertEquals(new ComplexNumber(real,img), calc.getStoredNumbers().pop());
         
     }
@@ -56,13 +57,13 @@ public class CalculatorTest {
      * Test of pushNumber method, of class Calculator.
      */
     @Test
-    public void testPushNumberDoubleDoubleMaxValues() {
+    public void testPushNumberMaxValues() {
         System.out.println("pushNumber - Max values");
         
         // Test 2 - Max Values for real and img part
         double real = Double.MAX_VALUE;
         double img = Double.MAX_VALUE;
-        calc.pushNumber(real, img);
+        calc.pushNumber(new ComplexNumber(real, img));
         assertEquals(new ComplexNumber(real,img), calc.getStoredNumbers().pop());
         
     }
@@ -71,13 +72,13 @@ public class CalculatorTest {
      * Test of pushNumber method, of class Calculator.
      */
     @Test
-    public void testPushNumberDoubleDoubleZeroValues() {
+    public void testPushNumberZeroValues() {
         System.out.println("pushNumber - Zero values");
         
         // Test 3 - Zero values for real and img part
         double real = 0.0;
         double img = 0.0;
-        calc.pushNumber(real, img);
+        calc.pushNumber(new ComplexNumber(real, img));
         assertEquals(new ComplexNumber(real,img), calc.getStoredNumbers().pop());
         
     }
@@ -624,7 +625,7 @@ public class CalculatorTest {
         System.out.println("dup");
         c1 = new ComplexNumber(123,456);
         calc.getStoredNumbers().getStack().clear();
-        calc.pushNumber(123,456);
+        calc.pushNumber(c1);
 
         calc.dup();
 

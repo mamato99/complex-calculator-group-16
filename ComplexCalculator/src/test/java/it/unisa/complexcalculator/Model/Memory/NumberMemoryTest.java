@@ -1,5 +1,7 @@
-package it.unisa.complexcalculator.Model;
+package it.unisa.complexcalculator.Model.Memory;
 
+import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import java.util.EmptyStackException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

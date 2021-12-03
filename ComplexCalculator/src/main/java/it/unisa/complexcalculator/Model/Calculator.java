@@ -1,5 +1,6 @@
 package it.unisa.complexcalculator.Model;
 
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 
 public class Calculator {
@@ -29,12 +30,10 @@ public class Calculator {
     /**
      * <p>
      * This method saves the number <code>real</code> and <code>img</code> into the data structure containing the stored complex numbers.</p>
-     *
-     * @param real represents the real number to be entered
-     * @param img represents the imaginary number to be entered
+     * @param c The complex number being inserted.
      */
-    public void pushNumber(double real, double img) {
-        storedNumbers.push(new ComplexNumber(real, img));
+    public void pushNumber(ComplexNumber c) {
+        storedNumbers.push(c);
     }
 
     /**

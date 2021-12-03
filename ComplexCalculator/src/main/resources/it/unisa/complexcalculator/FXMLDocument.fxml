@@ -398,7 +398,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button focusTraversable="false" onMouseClicked="#plus" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="operationButtons" text="_+" textFill="WHITE">
+                  <Button focusTraversable="false" onMouseClicked="#operation" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="operationButtons" text="+" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -413,7 +413,22 @@
                         <Font name="Andale Mono" size="20.0" />
                      </font>
                   </Button>
-                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#minus" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="operationButtons" text="−" textFill="WHITE" GridPane.columnIndex="1">
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#operation" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="operationButtons" text="-" textFill="WHITE" GridPane.columnIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <effect>
+                        <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
+                           <bumpInput>
+                              <Shadow blurType="TWO_PASS_BOX" />
+                           </bumpInput>
+                        </Lighting>
+                     </effect>
+                     <font>
+                        <Font name="Andale Mono" size="29.0" />
+                     </font>
+                  </Button>
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#operation" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="operationButtons" text="/" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -428,7 +443,7 @@
                         <Font name="Andale Mono" size="20.0" />
                      </font>
                   </Button>
-                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#div" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="operationButtons" text="÷" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#operation" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="operationButtons" text="*" textFill="WHITE" GridPane.rowIndex="1">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -443,7 +458,7 @@
                         <Font name="Andale Mono" size="20.0" />
                      </font>
                   </Button>
-                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#prod" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="operationButtons" text="×" textFill="WHITE" GridPane.rowIndex="1">
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#operation" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="operationButtons" text="+-" textFill="WHITE" GridPane.rowIndex="2">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -455,10 +470,10 @@
                         </Lighting>
                      </effect>
                      <font>
-                        <Font name="Andale Mono" size="20.0" />
+                        <Font name="Andale Mono" size="23.0" />
                      </font>
                   </Button>
-                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#inv" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="operationButtons" text="+−" textFill="WHITE" GridPane.rowIndex="2">
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#operation" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="operationButtons" text="sqrt" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -470,25 +485,10 @@
                         </Lighting>
                      </effect>
                      <font>
-                        <Font name="Andale Mono" size="17.0" />
+                        <Font name="Andale Mono" size="15.0" />
                      </font>
                   </Button>
-                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#sqrt" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="operationButtons" text="√" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <Lighting diffuseConstant="1.26" light="$null" specularConstant="0.8" specularExponent="22.85" surfaceScale="2.21">
-                           <bumpInput>
-                              <Shadow blurType="TWO_PASS_BOX" />
-                           </bumpInput>
-                        </Lighting>
-                     </effect>
-                     <font>
-                        <Font name="Andale Mono" size="20.0" />
-                     </font>
-                  </Button>
-                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#dup" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="stackButtons" text="DUP" textFill="WHITE" GridPane.rowIndex="3">
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#operation" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="stackButtons" text="DUP" textFill="WHITE" GridPane.rowIndex="3">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -503,7 +503,7 @@
                         <Font name="Andale Mono" size="14.0" />
                      </font>
                   </Button>
-                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#swap" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="stackButtons" text="SWAP" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#operation" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="stackButtons" text="SWAP" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -518,7 +518,7 @@
                         <Font name="Andale Mono" size="14.0" />
                      </font>
                   </Button>
-                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#drop" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="stackButtons" text="DROP" textFill="WHITE" GridPane.rowIndex="4">
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#operation" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="stackButtons" text="DROP" textFill="WHITE" GridPane.rowIndex="4">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -533,7 +533,7 @@
                         <Font name="Andale Mono" size="14.0" />
                      </font>
                   </Button>
-                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#over" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="stackButtons" text="OVER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#operation" prefHeight="60.0" prefWidth="60.0" style="-fx-border-radius: 10px;" styleClass="stackButtons" text="OVER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -548,7 +548,7 @@
                         <Font name="Andale Mono" size="14.0" />
                      </font>
                   </Button>
-                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#clear" prefHeight="60.0" prefWidth="133.0" style="-fx-border-radius: 10px;" styleClass="stackButtons" text="CLEAR" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#operation" prefHeight="60.0" prefWidth="133.0" style="-fx-border-radius: 10px;" styleClass="stackButtons" text="CLEAR" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="5">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

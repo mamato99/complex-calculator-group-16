@@ -1,10 +1,10 @@
 package it.unisa.complexcalculator.Controller;
 
-import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
-import it.unisa.complexcalculator.Model.Calculator;
-import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.Operation.OperationInvoker;
+import it.unisa.complexcalculator.Model.Operation.Operation;
+import it.unisa.complexcalculator.Model.*;
+import it.unisa.complexcalculator.Model.Operation.OperationFactory;
 import java.net.URL;
-import java.util.EmptyStackException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,7 +20,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     private ListView<ComplexNumber> storedElements;
-
+    private OperationInvoker opInvoker;
     Calculator c = new Calculator();
     @FXML
     private TextField inputBox;
@@ -34,6 +34,7 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         storedElements.setItems(c.getStoredNumbers().getStack());
+        opInvoker = new OperationInvoker();
         
         // Enter key to submit and Escape key to clear
         inputBox.setOnKeyPressed(value -> {
@@ -52,87 +53,22 @@ public class FXMLController implements Initializable {
 
         String input = inputBox.getText();
         
-        if(checkStackOperation(input)){
+        Operation op = OperationFactory.parseOperation(input, c);
+        if (op != null){
+            opInvoker.execute(op);
             inputBox.setText("");
             return;
         }
-            
-        if(checkVariableOperation(input)){
-            inputBox.setText("");
-            return;
-        }
-            
-        checkNumberInsertion(input);
-        inputBox.setText("");
-    }
-
-    private boolean checkStackOperation(String in){
-        switch(in){
-            case "dup": dup(); return true;
-            case "clear": clear(); return true;
-            case "swap": swap(); return true;
-            case "drop": drop(); return true;
-            case "over": over(); return true;
-            case "+": plus(); return true;
-            case "-": minus(); return true;
-            case "*": prod(); return true;
-            case "/": div(); return true;
-            case "sqrt": sqrt(); return true;
-            case "+-": inv(); return true;
-            default: return false;
-        }
-    }
-    
-    private boolean checkVariableOperation(String in){
-        if(in.length() != 2)
-            return false;
-        if(!(in.startsWith(">") || in.startsWith("<") || in.startsWith("+") || in.startsWith("-")))
-            return false;
-        return in.substring(1).matches("[A-Z]"); //UPPERCASE TO AVOID "i" as imaginary part
-    }
-    
-    private void checkNumberInsertion(String input){
-        double real = 0;
-        double img = 0;
         
-        String toAnalyze = "";
-
-        for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) == '+' || input.charAt(i) == '-') {
-                if (i != 0) {
-                    toAnalyze += ",";
-                }
-                toAnalyze += input.charAt(i);
-            } else {
-                toAnalyze += input.charAt(i);
-            }
+        try{
+            ComplexNumber num = ComplexNumber.parse(input);
+            inputBox.setText("");
+            c.pushNumber(num);
+        } catch (NumberFormatException ex){
+            generateAlert("Invalid number format.");
         }
-
-        String[] splitted = toAnalyze.split(",");
-
-        for (String s : splitted) {
-            try {
-                if (s.contains("i")) {
-                    if (s.equals("+i") || s.equals("i")) {
-                        img += 1;
-                    }
-                    else if (s.equals("-i")) {
-                        img -= 1;
-                    }
-                    else {
-                        img += Double.parseDouble(s.substring(0, s.length() - 1));
-                    }
-                } else {
-                    real += Double.parseDouble(s.substring(0, s.length()));
-                }
-            } catch (NumberFormatException ex) {
-                generateAlert("Invalid number format.");
-                return;
-            }
-        }
-        c.pushNumber(real, img);
     }
-    
+
     /*
      * Method to manage the modification of the labels when button with "del" as label is clicked
      */
@@ -142,80 +78,11 @@ public class FXMLController implements Initializable {
     }
 
     /*
-     * Method to manage the associated operation when button with "+" as label is clicked
+     * Method that generates an alert.
      */
-    @FXML
-    private void plus() {
-        try {
-            c.add();
-        } catch (NotEnoughOperandsException ex) {
-            generateAlert("Not enough operands.");
-        }
-    }
-
     private void generateAlert(String s) {
         Alert alert = new Alert(Alert.AlertType.ERROR, s, ButtonType.OK);
         alert.showAndWait();
-    }
-
-    /*
-     * Method to manage the associated operation when button with "-" as label is clicked
-     */
-    @FXML
-    private void minus() {
-        try {
-            c.subtract();
-        } catch (NotEnoughOperandsException ex) {
-            generateAlert("Not enough operands.");
-        }
-    }
-
-    /*
-     * Method to manage the associated operation when button with "x" as label is clicked
-     */
-    @FXML
-    private void prod() {
-        try {
-            c.multiply();
-        } catch (NotEnoughOperandsException ex) {
-            generateAlert("Not enough operands.");
-        }
-    }
-
-    /*
-     * Method to manage the associated operation when button with "%" as label is clicked
-     */
-    @FXML
-    private void div() {
-        try {
-            c.divide();
-        } catch (NotEnoughOperandsException ex) {
-            generateAlert("Not enough operands.");
-        }
-    }
-
-    /*
-     * Method to manage the associated operation when button with "√" as label is clicked
-     */
-    @FXML
-    private void sqrt() {
-        try {
-            c.squareRoot();
-        } catch (NotEnoughOperandsException ex) {
-            generateAlert("Not enough operands.");
-        }
-    }
-
-    /*
-     * Method to manage the associated operation when button with "+-" as label is clicked
-     */
-    @FXML
-    private void inv() {
-        try {
-            c.invertSign();
-        } catch (NotEnoughOperandsException ex) {
-            generateAlert("Not enough operands.");
-        }
     }
 
     /*
@@ -224,47 +91,6 @@ public class FXMLController implements Initializable {
     @FXML
     private void ac() {
         inputBox.clear();
-    }
-    
-    @FXML
-    private void dup() {
-        try {
-            c.dup();
-        } catch (NotEnoughOperandsException ex) {
-            generateAlert("Not Enough Operands.");
-        }
-    }
-
-    @FXML
-    private void swap() {
-        try {
-            c.swap();
-        } catch (NotEnoughOperandsException ex) {
-            generateAlert("Not enough operands.");
-        }
-    }
-
-    @FXML
-    private void drop() {
-        try {
-            c.drop();
-        } catch (EmptyStackException ex) {
-            generateAlert("Stack empty, no elements to drop.");
-        }
-    }
-
-    @FXML
-    private void over() {
-        try {
-            c.over();
-        } catch (NotEnoughOperandsException ex) {
-            generateAlert("Not enough operands.");
-        }
-    }
-
-    @FXML
-    private void clear() {
-        c.clear();
     }
 
     /*
@@ -275,4 +101,28 @@ public class FXMLController implements Initializable {
         Button b = (Button)event.getSource();
         inputBox.appendText(b.getText().replaceAll("\\(", "").replaceAll("\\)", ""));
     }
+
+    /*
+     * Method that handle the button operation clicked.
+     */
+    @FXML
+    private void operation(MouseEvent event) {
+        Button b = (Button)event.getSource();
+        String s = b.getText().toLowerCase();
+        
+        Operation op = OperationFactory.parseOperation(s, c);
+        if (op != null){
+            opInvoker.execute(op);
+            inputBox.setText("");
+        }
+    }
+    
+    private boolean checkVariableOperation(String in){
+        if(in.length() != 2)
+            return false;
+        if(!(in.startsWith(">") || in.startsWith("<") || in.startsWith("+") || in.startsWith("-")))
+            return false;
+        return in.substring(1).matches("[A-Z]"); //UPPERCASE TO AVOID "i" as imaginary part
+    }
+  
 }
