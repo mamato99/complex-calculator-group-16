@@ -2,10 +2,12 @@ package it.unisa.complexcalculator.Model;
 
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import java.util.*;
 
 public class Calculator {
 
     private final NumberMemory storedNumbers;
+    private final HashMap<Character, ComplexNumber> variables;
 
     /**
      * <p>
@@ -13,6 +15,10 @@ public class Calculator {
      */
     public Calculator() {
         storedNumbers = new NumberMemory();
+        variables = new HashMap<>();
+        for (char c='A'; c<='Z'; c++){
+            variables.put(c, new ComplexNumber(0,0));
+        }
     }
 
     /**
@@ -164,6 +170,9 @@ public class Calculator {
         storedNumbers.pop();
     }
 
+    /**
+     * <p>This function takes the second last stored element and push it to the top of the stack</p>
+     */
     public void over() {
         if(storedNumbers.len() < 2)
             throw new NotEnoughOperandsException();
@@ -174,4 +183,5 @@ public class Calculator {
         storedNumbers.push(over);
     }
     
+   
 }

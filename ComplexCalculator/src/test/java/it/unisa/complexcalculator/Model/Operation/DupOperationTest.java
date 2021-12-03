@@ -4,6 +4,10 @@
  */
 package it.unisa.complexcalculator.Model.Operation;
 
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Model.ComplexNumber;
+import java.util.EmptyStackException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,28 +18,45 @@ import static org.junit.Assert.*;
  * @author mdr
  */
 public class DupOperationTest {
+    private Calculator c;
     
     public DupOperationTest() {
     }
     
     @Before
     public void setUp() {
+        c = new Calculator();
     }
     
-    @After
-    public void tearDown() {
-    }
-
     /**
-     * Test of execute method, of class DupOperation.
+     * Test of execute method, of class AddOperation.
      */
     @Test
     public void testExecute() {
-        System.out.println("execute");
-        DupOperation instance = null;
+        System.out.println("dup execute");
+        DupOperation instance = new DupOperation(c);
+        
+        ComplexNumber c1 = new ComplexNumber(2,2);
+        
+        c.pushNumber(c1);
+        
         instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        assertEquals(c.getStoredNumbers().top(), c1);
+        assertEquals(c.getStoredNumbers().len(), 2);
+        
+    }
+    
+    /**
+     * Test of execute method, of class AddOperation.
+     */
+    @Test(expected = NotEnoughOperandsException.class)
+    public void testExecuteNotEnoughOperandsExeption() {
+        System.out.println("dup execute");
+        DupOperation instance = new DupOperation(c);
+        
+        instance.execute();
+        
     }
     
 }

@@ -4,6 +4,11 @@
  */
 package it.unisa.complexcalculator.Model.Operation;
 
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.ComplexOperations;
+import java.util.EmptyStackException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,28 +19,47 @@ import static org.junit.Assert.*;
  * @author mdr
  */
 public class DropOperationTest {
+    private Calculator c;
     
     public DropOperationTest() {
     }
     
     @Before
     public void setUp() {
+        c = new Calculator();
     }
     
-    @After
-    public void tearDown() {
-    }
-
     /**
-     * Test of execute method, of class DropOperation.
+     * Test of execute method, of class AddOperation.
      */
     @Test
     public void testExecute() {
-        System.out.println("execute");
-        DropOperation instance = null;
+        System.out.println("drop execute");
+        DropOperation instance = new DropOperation(c);
+        
+        ComplexNumber c1 = new ComplexNumber(2,2);
+        ComplexNumber c2 = new ComplexNumber(1,1);
+        
+        c.pushNumber(c1);
+        c.pushNumber(c2);
+        
         instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        assertEquals(c.getStoredNumbers().top(), c1);
+        assertEquals(c.getStoredNumbers().len(), 1);
+        
+    }
+    
+    /**
+     * Test of execute method, of class AddOperation.
+     */
+    @Test(expected = EmptyStackException.class)
+    public void testExecuteNotEnoughOperandsExeption() {
+        System.out.println("drop execute");
+        DropOperation instance = new DropOperation(c);
+        
+        instance.execute();
+        
     }
     
 }

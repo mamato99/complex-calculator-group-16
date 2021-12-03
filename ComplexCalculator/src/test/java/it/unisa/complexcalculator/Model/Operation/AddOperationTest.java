@@ -57,7 +57,7 @@ public class AddOperationTest {
      */
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteNotEnoughOperandsExeption() {
-        System.out.println("execute");
+        System.out.println("add execute");
         AddOperation instance = new AddOperation(c);
         
         instance.execute();
