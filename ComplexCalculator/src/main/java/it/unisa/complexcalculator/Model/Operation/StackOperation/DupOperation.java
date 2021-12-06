@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
 import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-/**
- *
- * @author mdr
- */
+
 public class DupOperation implements Operation{
     private Calculator c;
 
@@ -18,7 +12,9 @@ public class DupOperation implements Operation{
         this.c = c;
     }
     
-    
+    /*
+     * Method for the execution of the Dup Operation 
+     */
     @Override
     public void execute() {
         c.dup();

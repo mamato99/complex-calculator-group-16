@@ -3,10 +3,6 @@ package it.unisa.complexcalculator.Model.Operation.VariableOperation;
 import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-/**
- *
- * @author mdr
- */
 public class VariableToStackOperation implements Operation {
     private final Calculator c;
     private final Character var;
@@ -16,6 +12,9 @@ public class VariableToStackOperation implements Operation {
         this.var = var;
     }
     
+    /*
+     * Method for the execution of the stackToVariable Operation 
+     */
     @Override
     public void execute() {
         c.variableToStack(var);

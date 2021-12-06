@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
+
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
 import it.unisa.complexcalculator.Model.Operation.StackOperation.SqrtOperation;
@@ -14,20 +11,16 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-
 public class SqrtOperationTest {
+
     private Calculator c;
-    
+
     public SqrtOperationTest() {
     }
-    
+
     @Before
     public void setUp() {
         c = new Calculator();
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     /**
@@ -37,17 +30,17 @@ public class SqrtOperationTest {
     public void testExecute() {
         System.out.println("execute");
         SqrtOperation instance = new SqrtOperation(c);
-        
-        ComplexNumber c1 = new ComplexNumber(1,1);
-        
+
+        ComplexNumber c1 = new ComplexNumber(1, 1);
+
         c.getStoredNumbers().push(c1);
-        
+
         instance.execute();
-        
+
         assertEquals(c.getStoredNumbers().pop(), ComplexOperations.squareRoot(c1));
-        
+
     }
-    
+
     /**
      * Test of execute method, of class SqrtOperation.
      */
@@ -55,8 +48,8 @@ public class SqrtOperationTest {
     public void testExecuteNotEnoughOperandsExeption() {
         System.out.println("execute");
         SqrtOperation instance = new SqrtOperation(c);
-        
+
         instance.execute();
-        
+
     }
 }

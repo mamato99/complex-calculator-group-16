@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
+
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
-import it.unisa.complexcalculator.Model.Operation.StackOperation.SwapOperation;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
@@ -12,10 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author mdr
- */
+
 public class SwapOperationTest {
     private Calculator c;
     

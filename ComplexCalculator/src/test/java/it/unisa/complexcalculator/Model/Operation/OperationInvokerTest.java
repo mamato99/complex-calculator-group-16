@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
+
 package it.unisa.complexcalculator.Model.Operation;
 
 import it.unisa.complexcalculator.Model.Operation.StackOperation.SqrtOperation;
@@ -190,6 +187,9 @@ public class OperationInvokerTest {
         assertEquals(c.getStoredNumbers().top(), ComplexOperations.squareRoot(c1));
     }
 
+    /**
+     * Test of execute method, of class OperationInvoker.
+     */
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteSqrtOperationNotEnoughOperandsException() {
         System.out.println("executeSqrtOperation");

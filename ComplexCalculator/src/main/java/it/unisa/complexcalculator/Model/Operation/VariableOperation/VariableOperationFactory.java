@@ -1,19 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package it.unisa.complexcalculator.Model.Operation.VariableOperation;
 
 import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.Operation.OperationFactory;
 
-/**
- *
- * @author mdr
- */
+
 public class VariableOperationFactory implements OperationFactory{
     
+    /*
+     * Method for the parsing of a variable operation
+     */
     @Override
     public Operation parseOperation(String s, Calculator c) {
         
