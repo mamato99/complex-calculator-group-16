@@ -1,31 +1,15 @@
 
 package it.unisa.complexcalculator.Model.Operation;
 
-import it.unisa.complexcalculator.Model.Operation.StackOperation.SqrtOperation;
-import it.unisa.complexcalculator.Model.Operation.StackOperation.SubtractOperation;
-import it.unisa.complexcalculator.Model.Operation.StackOperation.OverOperation;
-import it.unisa.complexcalculator.Model.Operation.StackOperation.SwapOperation;
-import it.unisa.complexcalculator.Model.Operation.StackOperation.InvertSignOperation;
-import it.unisa.complexcalculator.Model.Operation.StackOperation.MultiplyOperation;
-import it.unisa.complexcalculator.Model.Operation.StackOperation.DupOperation;
-import it.unisa.complexcalculator.Model.Operation.StackOperation.DropOperation;
-import it.unisa.complexcalculator.Model.Operation.StackOperation.ClearOperation;
-import it.unisa.complexcalculator.Model.Operation.StackOperation.DivideOperation;
-import it.unisa.complexcalculator.Model.Operation.StackOperation.AddOperation;
-import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
-import it.unisa.complexcalculator.Model.Calculator;
-import it.unisa.complexcalculator.Model.ComplexNumber;
-import it.unisa.complexcalculator.Model.ComplexOperations;
+import it.unisa.complexcalculator.Model.Operation.StackOperation.*;
+import it.unisa.complexcalculator.Exception.*;
+import it.unisa.complexcalculator.Model.*;
 import java.util.EmptyStackException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author mdr
- */
 public class OperationInvokerTest {
 
     private Calculator c;
@@ -48,14 +32,14 @@ public class OperationInvokerTest {
     @Test
     public void testExecuteAddOperation() {
         System.out.println("executeAddOperation");
-        AddOperation op = new AddOperation(c);
+        AddOperation op = new AddOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         ComplexNumber c2 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
-        c.getStoredNumbers().push(c2);
+        c.getNumbers().push(c1);
+        c.getNumbers().push(c2);
         instance.execute(op);
-        assertEquals(c.getStoredNumbers().top(), ComplexOperations.add(c1, c2));
+        assertEquals(c.getNumbers().top(), ComplexOperations.add(c1, c2));
     }
 
     /**
@@ -64,10 +48,10 @@ public class OperationInvokerTest {
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteAddOperationNotEnoughOperandsException() {
         System.out.println("executeAddOperation");
-        AddOperation op = new AddOperation(c);
+        AddOperation op = new AddOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
+        c.getNumbers().push(c1);
         instance.execute(op);
     }
 
@@ -77,14 +61,14 @@ public class OperationInvokerTest {
     @Test
     public void testExecuteSubtractOperation() {
         System.out.println("executeSubtractOperation");
-        SubtractOperation op = new SubtractOperation(c);
+        SubtractOperation op = new SubtractOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         ComplexNumber c2 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
-        c.getStoredNumbers().push(c2);
+        c.getNumbers().push(c1);
+        c.getNumbers().push(c2);
         instance.execute(op);
-        assertEquals(c.getStoredNumbers().top(), ComplexOperations.difference(c1, c2));
+        assertEquals(c.getNumbers().top(), ComplexOperations.difference(c1, c2));
     }
 
     /**
@@ -93,10 +77,10 @@ public class OperationInvokerTest {
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteSubtractOperationNotEnoughOperandsException() {
         System.out.println("executeSubtractOperation");
-        SubtractOperation op = new SubtractOperation(c);
+        SubtractOperation op = new SubtractOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
+        c.getNumbers().push(c1);
         instance.execute(op);
     }
 
@@ -106,14 +90,14 @@ public class OperationInvokerTest {
     @Test
     public void testExecuteMultiplyOperation() {
         System.out.println("executeMultiplicationOperation");
-        MultiplyOperation op = new MultiplyOperation(c);
+        MultiplyOperation op = new MultiplyOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         ComplexNumber c2 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
-        c.getStoredNumbers().push(c2);
+        c.getNumbers().push(c1);
+        c.getNumbers().push(c2);
         instance.execute(op);
-        assertEquals(c.getStoredNumbers().top(), ComplexOperations.multiplication(c1, c2));
+        assertEquals(c.getNumbers().top(), ComplexOperations.multiplication(c1, c2));
     }
 
     /**
@@ -122,10 +106,10 @@ public class OperationInvokerTest {
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteMultiplyOperationNotEnoughOperandsException() {
         System.out.println("executeSubtractOperation");
-        MultiplyOperation op = new MultiplyOperation(c);
+        MultiplyOperation op = new MultiplyOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
+        c.getNumbers().push(c1);
         instance.execute(op);
     }
 
@@ -135,14 +119,14 @@ public class OperationInvokerTest {
     @Test
     public void testExecuteDivideOperation() {
         System.out.println("executeDivideOperation");
-        DivideOperation op = new DivideOperation(c);
+        DivideOperation op = new DivideOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         ComplexNumber c2 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
-        c.getStoredNumbers().push(c2);
+        c.getNumbers().push(c1);
+        c.getNumbers().push(c2);
         instance.execute(op);
-        assertEquals(c.getStoredNumbers().top(), ComplexOperations.division(c1, c2));
+        assertEquals(c.getNumbers().top(), ComplexOperations.division(c1, c2));
     }
 
     /**
@@ -151,10 +135,10 @@ public class OperationInvokerTest {
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteDivideOperationNotEnoughOperandsException() {
         System.out.println("executeSubtractOperation");
-        DivideOperation op = new DivideOperation(c);
+        DivideOperation op = new DivideOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
+        c.getNumbers().push(c1);
         instance.execute(op);
     }
 
@@ -164,12 +148,12 @@ public class OperationInvokerTest {
     @Test(expected = ArithmeticException.class)
     public void testExecuteDivideOperationArithmeticException() {
         System.out.println("executeSubtractOperation");
-        DivideOperation op = new DivideOperation(c);
+        DivideOperation op = new DivideOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         ComplexNumber c2 = new ComplexNumber(0, 0);
-        c.getStoredNumbers().push(c2);
-        c.getStoredNumbers().push(c1);
+        c.getNumbers().push(c2);
+        c.getNumbers().push(c1);
         instance.execute(op);
     }
 
@@ -179,12 +163,12 @@ public class OperationInvokerTest {
     @Test
     public void testExecuteSqrtOperation() {
         System.out.println("executeSqrtOperation");
-        SqrtOperation op = new SqrtOperation(c);
+        SqrtOperation op = new SqrtOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
+        c.getNumbers().push(c1);
         instance.execute(op);
-        assertEquals(c.getStoredNumbers().top(), ComplexOperations.squareRoot(c1));
+        assertEquals(c.getNumbers().top(), ComplexOperations.squareRoot(c1));
     }
 
     /**
@@ -193,7 +177,7 @@ public class OperationInvokerTest {
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteSqrtOperationNotEnoughOperandsException() {
         System.out.println("executeSqrtOperation");
-        SqrtOperation op = new SqrtOperation(c);
+        SqrtOperation op = new SqrtOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         instance.execute(op);
     }
@@ -204,12 +188,12 @@ public class OperationInvokerTest {
     @Test
     public void testExecuteInvertSignOperation() {
         System.out.println("executeInvertSignOperation");
-        InvertSignOperation op = new InvertSignOperation(c);
+        InvertSignOperation op = new InvertSignOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
+        c.getNumbers().push(c1);
         instance.execute(op);
-        assertEquals(c.getStoredNumbers().top(), ComplexOperations.signInversion(c1));
+        assertEquals(c.getNumbers().top(), ComplexOperations.signInversion(c1));
     }
 
     /**
@@ -218,7 +202,7 @@ public class OperationInvokerTest {
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteInvertSignOperationNotEnoughOperandsException() {
         System.out.println("executeSqrtOperation");
-        SqrtOperation op = new SqrtOperation(c);
+        SqrtOperation op = new SqrtOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         instance.execute(op);
     }
@@ -229,12 +213,12 @@ public class OperationInvokerTest {
     @Test
     public void testExecuteDupOperation() {
         System.out.println("executeDupOperation");
-        DupOperation op = new DupOperation(c);
+        DupOperation op = new DupOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
+        c.getNumbers().push(c1);
         instance.execute(op);
-        assertEquals(c.getStoredNumbers().len(), 2);
+        assertEquals(c.getNumbers().len(), 2);
     }
 
     /**
@@ -243,7 +227,7 @@ public class OperationInvokerTest {
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteDupOperationNotEnoughOperandsException() {
         System.out.println("executeDupOperation");
-        DupOperation op = new DupOperation(c);
+        DupOperation op = new DupOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         instance.execute(op);
     }
@@ -254,16 +238,16 @@ public class OperationInvokerTest {
     @Test
     public void testExecuteSwapOperation() {
         System.out.println("executeSwapOperation");
-        SwapOperation op = new SwapOperation(c);
+        SwapOperation op = new SwapOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         ComplexNumber c2 = new ComplexNumber(2, 1);
 
-        c.getStoredNumbers().push(c1);
-        c.getStoredNumbers().push(c2);
+        c.getNumbers().push(c1);
+        c.getNumbers().push(c2);
         instance.execute(op);
-        assertEquals(c.getStoredNumbers().pop(), c1);
-        assertEquals(c.getStoredNumbers().pop(), c2);
+        assertEquals(c.getNumbers().pop(), c1);
+        assertEquals(c.getNumbers().pop(), c2);
     }
 
     /**
@@ -272,10 +256,10 @@ public class OperationInvokerTest {
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteSwapOperationNotEnoughOperandsException() {
         System.out.println("executeSwapOperation");
-        SwapOperation op = new SwapOperation(c);
+        SwapOperation op = new SwapOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
+        c.getNumbers().push(c1);
         instance.execute(op);
     }
 
@@ -285,17 +269,17 @@ public class OperationInvokerTest {
     @Test
     public void testExecuteOverOperation() {
         System.out.println("executeOverOperation");
-        OverOperation op = new OverOperation(c);
+        OverOperation op = new OverOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         ComplexNumber c2 = new ComplexNumber(2, 1);
 
-        c.getStoredNumbers().push(c1);
-        c.getStoredNumbers().push(c2);
+        c.getNumbers().push(c1);
+        c.getNumbers().push(c2);
         instance.execute(op);
-        assertEquals(c.getStoredNumbers().pop(), c1);
-        assertEquals(c.getStoredNumbers().pop(), c2);
-        assertEquals(c.getStoredNumbers().pop(), c1);
+        assertEquals(c.getNumbers().pop(), c1);
+        assertEquals(c.getNumbers().pop(), c2);
+        assertEquals(c.getNumbers().pop(), c1);
     }
 
     /**
@@ -304,10 +288,10 @@ public class OperationInvokerTest {
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteOverOperationNotEnoughOperandsException() {
         System.out.println("executeOverOperation");
-        OverOperation op = new OverOperation(c);
+        OverOperation op = new OverOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
-        c.getStoredNumbers().push(c1);
+        c.getNumbers().push(c1);
         instance.execute(op);
     }
 
@@ -317,15 +301,15 @@ public class OperationInvokerTest {
     @Test
     public void testExecuteClearOperation() {
         System.out.println("executeClearOperation");
-        ClearOperation op = new ClearOperation(c);
+        ClearOperation op = new ClearOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         ComplexNumber c2 = new ComplexNumber(2, 1);
 
-        c.getStoredNumbers().push(c1);
-        c.getStoredNumbers().push(c2);
+        c.getNumbers().push(c1);
+        c.getNumbers().push(c2);
         instance.execute(op);
-        assertEquals(c.getStoredNumbers().len(), 0);
+        assertEquals(c.getNumbers().len(), 0);
     }
 
     /**
@@ -334,16 +318,16 @@ public class OperationInvokerTest {
     @Test
     public void testExecuteDropOperation() {
         System.out.println("executeDropOperation");
-        DropOperation op = new DropOperation(c);
+        DropOperation op = new DropOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         ComplexNumber c2 = new ComplexNumber(2, 1);
 
-        c.getStoredNumbers().push(c1);
-        c.getStoredNumbers().push(c2);
+        c.getNumbers().push(c1);
+        c.getNumbers().push(c2);
         instance.execute(op);
-        assertEquals(c.getStoredNumbers().top(), c1);
-        assertEquals(c.getStoredNumbers().len(), 1);
+        assertEquals(c.getNumbers().top(), c1);
+        assertEquals(c.getNumbers().len(), 1);
 
     }
 
@@ -353,7 +337,7 @@ public class OperationInvokerTest {
     @Test(expected = EmptyStackException.class)
     public void testExecuteDropOperationEmptyStackException() {
         System.out.println("executeDropOperation");
-        DropOperation op = new DropOperation(c);
+        DropOperation op = new DropOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
         instance.execute(op);
     }

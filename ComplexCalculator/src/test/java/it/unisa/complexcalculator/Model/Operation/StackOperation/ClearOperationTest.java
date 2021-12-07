@@ -1,40 +1,35 @@
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
-import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ClearOperationTest {
 
-    private Calculator c;
+    private NumberMemory storedNumbers;
+    private ComplexNumber c1;
+    private ClearOperation instance;
 
     public ClearOperationTest() {
     }
 
     @Before
     public void setUp() {
-        c = new Calculator();
+        storedNumbers = new NumberMemory();
+        instance = new ClearOperation(storedNumbers);
+        c1 = null;;
     }
 
     /**
      * Test of execute method, of class ClearOperation.
      */
     @Test
-    public void testExecute() {
-        System.out.println("clear execute");
-        ClearOperation instance = new ClearOperation(c);
-
-        ComplexNumber c1 = new ComplexNumber(1, 1);
-        ComplexNumber c2 = new ComplexNumber(1, 1);
-
-        c.getStoredNumbers().push(c1);
-        c.getStoredNumbers().push(c2);
-
+    public void testClearOperation() {
+        System.out.println("clear");
+        c1 = new ComplexNumber(1, 1);
+        storedNumbers.push(c1);
         instance.execute();
-
-        assert (c.getStoredNumbers().len() == 0);
-
+        assert (storedNumbers.len() == 0);
     }
-
 }

@@ -1,55 +1,46 @@
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
-import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import java.util.EmptyStackException;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class DropOperationTest {
 
-    private Calculator c;
+    private NumberMemory storedNumbers;
+    private ComplexNumber c1;
+    private DropOperation instance;
 
     public DropOperationTest() {
     }
 
     @Before
     public void setUp() {
-        c = new Calculator();
-    }
-
-    /**
-     * Test of execute method, of class DropOperation.
-     */
-    @Test
-    public void testExecute() {
-        System.out.println("drop execute");
-        DropOperation instance = new DropOperation(c);
-
-        ComplexNumber c1 = new ComplexNumber(2, 2);
-        ComplexNumber c2 = new ComplexNumber(1, 1);
-
-        c.pushNumber(c1);
-        c.pushNumber(c2);
-
-        instance.execute();
-
-        assertEquals(c.getStoredNumbers().top(), c1);
-        assertEquals(c.getStoredNumbers().len(), 1);
-
+        storedNumbers = new NumberMemory();
+        c1 = null;
+        instance = new DropOperation(storedNumbers);
     }
 
     /**
      * Test of execute method, of class DropOperation.
      */
     @Test(expected = EmptyStackException.class)
-    public void testExecuteNotEnoughOperandsExeption() {
-        System.out.println("drop execute");
-        DropOperation instance = new DropOperation(c);
-
+    public void testDropOperationEmptyStackException() {
+        System.out.println("drop");
         instance.execute();
+    }
 
+    /**
+     * Test of execute method, of class DropOperation.
+     */
+    @Test
+    public void testDropOperation() {
+        System.out.println("drop");
+        c1 = new ComplexNumber(1, 1);
+        storedNumbers.push(c1);
+        instance.execute();
+        assert (storedNumbers.len() == 0);
     }
 
 }

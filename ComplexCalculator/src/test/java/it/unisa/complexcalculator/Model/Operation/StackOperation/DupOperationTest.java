@@ -1,22 +1,23 @@
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
-import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class DupOperationTest {
-
-    private Calculator c;
-
-    public DupOperationTest() {
-    }
-
+    
+    private NumberMemory storedNumbers;
+    private ComplexNumber c;
+    private DupOperation instance;
+    
     @Before
     public void setUp() {
-        c = new Calculator();
+        storedNumbers = new NumberMemory();
+        c = null;
+        instance = new DupOperation(storedNumbers);
     }
 
     /**
@@ -24,17 +25,15 @@ public class DupOperationTest {
      */
     @Test
     public void testExecute() {
-        System.out.println("dup execute");
-        DupOperation instance = new DupOperation(c);
-
-        ComplexNumber c1 = new ComplexNumber(2, 2);
-
-        c.pushNumber(c1);
-
+        System.out.println("dup");
+        storedNumbers.getStack().clear();
+        c = new ComplexNumber(2, 2);
+        storedNumbers.push(c);
+        
         instance.execute();
-
-        assertEquals(c.getStoredNumbers().top(), c1);
-        assertEquals(c.getStoredNumbers().len(), 2);
+        
+        assertEquals(storedNumbers.top(), c);
+        assertEquals(storedNumbers.len(), 2);
 
     }
 
@@ -43,11 +42,7 @@ public class DupOperationTest {
      */
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteNotEnoughOperandsExeption() {
-        System.out.println("dup execute");
-        DupOperation instance = new DupOperation(c);
-
+        System.out.println("dup");
         instance.execute();
-
     }
-
 }
