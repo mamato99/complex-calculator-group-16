@@ -1,5 +1,6 @@
-package it.unisa.complexcalculator.Model.Operation;
+package it.unisa.complexcalculator.Model.Operation.CustomOperation;
 
+import it.unisa.complexcalculator.Model.Operation.Operation;
 import java.util.ArrayDeque;
 
 public class CustomOperation implements Operation{

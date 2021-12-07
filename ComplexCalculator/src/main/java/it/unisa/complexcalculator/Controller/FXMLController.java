@@ -2,9 +2,6 @@ package it.unisa.complexcalculator.Controller;
 
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.*;
-import it.unisa.complexcalculator.Model.Memory.NumberMemory;
-import it.unisa.complexcalculator.Model.Memory.VariableMemory;
-import it.unisa.complexcalculator.Model.Memory.OperationMemory;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -22,9 +19,7 @@ public class FXMLController implements Initializable {
     @FXML
     private ListView<ComplexNumber> storedElements;
     
-    private NumberMemory num;
-    private VariableMemory var;
-    private OperationMemory opFac;
+    private Calculator c;
     
     @FXML
     private TextField inputBox;
@@ -37,11 +32,9 @@ public class FXMLController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        num = new NumberMemory();
-        var = new VariableMemory();
+        c = new Calculator();
         
-        storedElements.setItems(num.getStack());
-        opFac = new OperationMemory(num, var);
+        storedElements.setItems(c.getNumbers().getStack());
         
         // Enter key to submit and Escape key to clear
         inputBox.setOnKeyPressed(value -> {
@@ -61,7 +54,7 @@ public class FXMLController implements Initializable {
         String input = inputBox.getText();
         
         try{
-            Operation op = opFac.createOperation(input);
+            Operation op = c.createOperation(input);
             op.execute();
         } catch (NumberFormatException ex){
             inputBox.setText("");
@@ -112,10 +105,8 @@ public class FXMLController implements Initializable {
         Button b = (Button)event.getSource();
         String s = b.getText().toLowerCase();
         
-        String input = inputBox.getText();
-        
         try{
-            Operation op = opFac.createOperation(input);
+            Operation op = c.createOperation(s);
             op.execute();
         } catch (NumberFormatException ex){
             inputBox.setText("");
