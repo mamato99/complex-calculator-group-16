@@ -1,22 +1,29 @@
-
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
-import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
+public class DupOperation implements Operation {
 
-public class DupOperation implements Operation{
-    private Calculator c;
+    private final NumberMemory storedNumbers;
 
-    public DupOperation(Calculator c) {
-        this.c = c;
+    public DupOperation(NumberMemory storedNumbers) {
+        this.storedNumbers = storedNumbers;
     }
-    
-    /*
-     * Method for the execution of the Dup Operation 
+
+    /**
+     * <p>
+     * This function store a new number on the stack that is a copy of the
+     * last</p>
      */
     @Override
     public void execute() {
-        c.dup();
+        if (storedNumbers.len() < 1) {
+            throw new NotEnoughOperandsException();
+        }
+        ComplexNumber dup = storedNumbers.top();
+        storedNumbers.push(dup);
     }
 }

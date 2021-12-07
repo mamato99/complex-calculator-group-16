@@ -1,22 +1,31 @@
-
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
-import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.ComplexOperations;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-
 public class SubtractOperation implements Operation{
-    private Calculator c;
+    
+    private final NumberMemory storedNumbers;
 
-    public SubtractOperation(Calculator c) {
-        this.c = c;
+    public SubtractOperation(NumberMemory storedNumbers) {
+        this.storedNumbers = storedNumbers;
     }
     
-    /*
-     * Method for the execution of the Subtract Operation 
-    */
+    /**
+     * <p>
+     * This method takes the last two numbers saved on the stack and subtracts them together </p>
+     */
     @Override
     public void execute() {
-        c.subtract();
+        if (storedNumbers.len() < 2) {
+            throw new NotEnoughOperandsException();
+        }
+        ComplexNumber c1 = storedNumbers.pop();
+        ComplexNumber c2 = storedNumbers.pop();
+        ComplexNumber result = ComplexOperations.difference(c1, c2);
+        storedNumbers.push(result);
     }
 }

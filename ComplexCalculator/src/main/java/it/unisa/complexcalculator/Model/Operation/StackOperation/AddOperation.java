@@ -1,20 +1,30 @@
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
-import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.ComplexOperations;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
 public class AddOperation implements Operation{
-    private final Calculator c;
+    private final NumberMemory storedNumbers;
 
-    public AddOperation(Calculator c) {
-        this.c = c;
+    public AddOperation(NumberMemory storedNumbers) {
+        this.storedNumbers = storedNumbers;
     }
-    /*
-     * Method for the execution of the Add Operation 
-    */
+    /**
+     * <p>
+     * This method takes the last two numbers saved on the stack and adds them together </p>
+     */
     @Override
     public void execute() {
-        c.add();
+        if (storedNumbers.len() < 2) {
+            throw new NotEnoughOperandsException();
+        }
+        ComplexNumber c1 = storedNumbers.pop();
+        ComplexNumber c2 = storedNumbers.pop();
+        ComplexNumber result = ComplexOperations.add(c1, c2);
+        storedNumbers.push(result);
     }
     
 }

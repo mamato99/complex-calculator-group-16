@@ -1,22 +1,29 @@
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
-import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.ComplexOperations;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
-import it.unisa.complexcalculator.Model.Operation.Operation;
 
-public class SqrtOperation implements Operation {
+public class SqrtOperation implements Operation{
+    private final NumberMemory storedNumbers;
 
-    private Calculator c;
-
-    public SqrtOperation(Calculator c) {
-        this.c = c;
+    public SqrtOperation(NumberMemory storedNumbers) {
+        this.storedNumbers = storedNumbers;
     }
-
-    /*
-     * Method for the execution of the Square Root Operation 
+    
+    /**
+     * <p>
+     * This method takes the last number saved on the stack and calculates the square root</p>
      */
     @Override
     public void execute() {
-        c.squareRoot();
+        if (storedNumbers.len() < 1) {
+            throw new NotEnoughOperandsException();
+        }
+        ComplexNumber c1 = storedNumbers.pop();
+        ComplexNumber result = ComplexOperations.squareRoot(c1);
+        storedNumbers.push(result);
     }
 }

@@ -1,24 +1,22 @@
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
+import it.unisa.complexcalculator.Model.ComplexNumber;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-public class ClearOperation implements Operation {
-
+public class PushOperation implements Operation{
+   
+    private final ComplexNumber c;
     private final NumberMemory storedNumbers;
 
-    public ClearOperation(NumberMemory storedNumbers) {
+    public PushOperation(NumberMemory storedNumbers, ComplexNumber c) {
+        this.c = c;
         this.storedNumbers = storedNumbers;
     }
-
-    /**
-     * <p>
-     * This function takes the list of saved numbers and empties it</p>
-     */
+    
     @Override
     public void execute() {
-        while (storedNumbers.len() > 0) {
-            storedNumbers.pop();
-        }
+        storedNumbers.push(c);
     }
+    
 }

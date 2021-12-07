@@ -1,22 +1,32 @@
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
-import it.unisa.complexcalculator.Model.Calculator;
-import it.unisa.complexcalculator.Model.Operation.Operation;
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
 public class OverOperation implements Operation {
 
-    private Calculator c;
+    private final NumberMemory storedNumbers;
 
-    public OverOperation(Calculator c) {
-        this.c = c;
+    public OverOperation(NumberMemory storedNumbers) {
+        this.storedNumbers = storedNumbers;
     }
 
-    /*
-     * Method for the execution of the Over Operation 
+    /**
+     * <p>
+     * This function takes the second last stored element and push it to the top
+     * of the stack</p>
      */
     @Override
     public void execute() {
-        c.over();
+        if (storedNumbers.len() < 2) {
+            throw new NotEnoughOperandsException();
+        }
+        ComplexNumber c1 = storedNumbers.pop();
+        ComplexNumber over = storedNumbers.top();
+
+        storedNumbers.push(c1);
+        storedNumbers.push(over);
     }
 }

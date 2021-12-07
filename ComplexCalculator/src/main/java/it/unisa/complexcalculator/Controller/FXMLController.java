@@ -1,11 +1,10 @@
 package it.unisa.complexcalculator.Controller;
 
-import it.unisa.complexcalculator.Model.Operation.OperationInvoker;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.*;
-import it.unisa.complexcalculator.Model.Operation.OperationFactory;
-import it.unisa.complexcalculator.Model.Operation.StackOperation.StackOperationFactory;
-import it.unisa.complexcalculator.Model.Operation.VariableOperation.VariableOperationFactory;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
+import it.unisa.complexcalculator.Model.Memory.VariableMemory;
+import it.unisa.complexcalculator.Model.Memory.OperationMemory;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -22,8 +21,11 @@ public class FXMLController implements Initializable {
 
     @FXML
     private ListView<ComplexNumber> storedElements;
-    private OperationInvoker opInvoker;
-    Calculator c = new Calculator();
+    
+    private NumberMemory num;
+    private VariableMemory var;
+    private OperationMemory opFac;
+    
     @FXML
     private TextField inputBox;
 
@@ -35,8 +37,11 @@ public class FXMLController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        storedElements.setItems(c.getStoredNumbers().getStack());
-        opInvoker = new OperationInvoker();
+        num = new NumberMemory();
+        var = new VariableMemory();
+        
+        storedElements.setItems(num.getStack());
+        opFac = new OperationMemory(num, var);
         
         // Enter key to submit and Escape key to clear
         inputBox.setOnKeyPressed(value -> {
@@ -54,31 +59,16 @@ public class FXMLController implements Initializable {
     private void ins() {
 
         String input = inputBox.getText();
-        OperationFactory opFac = new StackOperationFactory();
-        Operation op = opFac.parseOperation(input, c);
-        
-        if (op != null){
-            opInvoker.execute(op);
-            inputBox.setText("");
-            return;
-        }
-        
-        opFac = new VariableOperationFactory();
-        op = opFac.parseOperation(input, c);
-        if (op != null){
-            opInvoker.execute(op);
-            inputBox.setText("");
-            return;
-        }
         
         try{
-            ComplexNumber num = ComplexNumber.parse(input);
-            inputBox.setText("");
-            c.pushNumber(num);
+            Operation op = opFac.createOperation(input);
+            op.execute();
         } catch (NumberFormatException ex){
             inputBox.setText("");
             generateAlert("Invalid number format.");
         }
+        inputBox.setText("");
+        
     }
 
     /*
@@ -122,13 +112,16 @@ public class FXMLController implements Initializable {
         Button b = (Button)event.getSource();
         String s = b.getText().toLowerCase();
         
-        OperationFactory opFac = new StackOperationFactory();
-        Operation op = opFac.parseOperation(s, c);
+        String input = inputBox.getText();
         
-        if (op != null){
-            opInvoker.execute(op);
+        try{
+            Operation op = opFac.createOperation(input);
+            op.execute();
+        } catch (NumberFormatException ex){
             inputBox.setText("");
+            generateAlert("Invalid number format.");
         }
+        inputBox.setText("");
     }
   
 }

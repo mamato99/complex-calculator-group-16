@@ -1,23 +1,24 @@
 package it.unisa.complexcalculator.Model.Operation.VariableOperation;
 
-import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
+import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 
 public class VariableToStackOperation implements Operation {
-    private final Calculator c;
-    private final Character var;
+    
+    private final VariableMemory var;
+    private final NumberMemory num;
+    private final Character c;
 
-    public VariableToStackOperation(Character var, Calculator c) {
+    public VariableToStackOperation(NumberMemory num, VariableMemory var, Character c) {
+        this.var=var;
+        this.num=num;
         this.c = c;
-        this.var = var;
     }
     
-    /*
-     * Method for the execution of the stackToVariable Operation 
-     */
     @Override
-    public void execute() {
-        c.variableToStack(var);
+    public void execute() {        
+        num.push(var.getVariable(c));
     }
     
 }

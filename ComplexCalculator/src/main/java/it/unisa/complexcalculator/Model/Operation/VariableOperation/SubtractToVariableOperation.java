@@ -1,25 +1,25 @@
-
 package it.unisa.complexcalculator.Model.Operation.VariableOperation;
 
-import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Model.ComplexOperations;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
-
+import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 
 public class SubtractToVariableOperation implements Operation {
-    Calculator c;
-    Character var;
+    
+    private final VariableMemory var;
+    private final NumberMemory num;
+    private final Character c;
 
-    public SubtractToVariableOperation(Character var, Calculator c) {
+    public SubtractToVariableOperation(NumberMemory num, VariableMemory var, Character c) {
+        this.var=var;
+        this.num=num;
         this.c = c;
-        this.var = var;
     }
     
-    /*
-     * Method for the execution of the stackToVariable Operation 
-     */
     @Override
     public void execute() {
-        c.subtractToVariable(var);
+        var.addVariable(c, ComplexOperations.difference(var.getVariable(c), num.pop()));
     }
     
 }

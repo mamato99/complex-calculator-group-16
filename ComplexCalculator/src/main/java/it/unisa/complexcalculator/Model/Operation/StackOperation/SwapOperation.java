@@ -1,22 +1,33 @@
-
 package it.unisa.complexcalculator.Model.Operation.StackOperation;
 
-import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
+public class SwapOperation implements Operation {
 
-public class SwapOperation implements Operation{
-    private Calculator c;
+    private NumberMemory storedNumbers;
 
-    public SwapOperation(Calculator c) {
-        this.c = c;
+    public SwapOperation(NumberMemory storedNumbers) {
+        this.storedNumbers = storedNumbers;
     }
-    
-    /*
-     * Method for the execution of the Swap Operation 
+
+    /**
+     * <p>
+     * This method takes the last two numbers saved in the stack and swaps
+     * them.</p>
      */
     @Override
     public void execute() {
-        c.swap();
+        if (storedNumbers.len() < 2) {
+            throw new NotEnoughOperandsException();
+        }
+        ComplexNumber c1 = storedNumbers.pop();
+        ComplexNumber c2 = storedNumbers.pop();
+
+        storedNumbers.push(c1);
+        storedNumbers.push(c2);
+
     }
 }
