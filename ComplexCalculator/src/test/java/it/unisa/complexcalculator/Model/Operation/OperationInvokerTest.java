@@ -1,7 +1,17 @@
 
 package it.unisa.complexcalculator.Model.Operation;
 
-import it.unisa.complexcalculator.Model.Operation.StackOperation.*;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.SwapOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.SqrtOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.InvertSignOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.SubtractOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.OverOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.DropOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.MultiplyOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.AddOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.DupOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.DivideOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.ClearOperation;
 import it.unisa.complexcalculator.Exception.*;
 import it.unisa.complexcalculator.Model.*;
 import java.util.EmptyStackException;

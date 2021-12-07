@@ -1,10 +1,10 @@
 package it.unisa.complexcalculator.Model;
 
-import it.unisa.complexcalculator.Model.Operation.CustomOperation.CustomOperation;
+import it.unisa.complexcalculator.Model.Operation.VariableOperations.*;
+import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.*;
 import it.unisa.complexcalculator.Model.Memory.*;
 import it.unisa.complexcalculator.Model.Operation.*;
-import it.unisa.complexcalculator.Model.Operation.StackOperation.*;
-import it.unisa.complexcalculator.Model.Operation.VariableOperation.*;
 
 import java.util.ArrayDeque;
 

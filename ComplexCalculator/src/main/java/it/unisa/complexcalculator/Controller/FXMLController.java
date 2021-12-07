@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +24,8 @@ public class FXMLController implements Initializable {
     
     @FXML
     private TextField inputBox;
+    @FXML
+    private TableView<?> varTable;
 
     /**
      * Initializes all elements according to user preferences by default
@@ -86,15 +89,6 @@ public class FXMLController implements Initializable {
     @FXML
     private void ac() {
         inputBox.clear();
-    }
-
-    /*
-     * Method that shows on the input box the label of the button clicked.
-     */
-    @FXML
-    private void digit(MouseEvent event) {
-        Button b = (Button)event.getSource();
-        inputBox.appendText(b.getText().replaceAll("\\(", "").replaceAll("\\)", ""));
     }
 
     /*
