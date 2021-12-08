@@ -272,8 +272,8 @@
                            <children>
                               <TableView fx:id="varTable" prefHeight="305.0" prefWidth="466.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn prefWidth="113.0" resizable="false" text="Variable" />
-                                  <TableColumn prefWidth="343.0" resizable="false" text="Value" />
+                                  <TableColumn fx:id="varColumn" prefWidth="113.0" resizable="false" text="Variable" />
+                                  <TableColumn fx:id="valueColumn" prefWidth="343.0" resizable="false" text="Value" />
                                 </columns>
                                  <contextMenu>
                                     <ContextMenu>
@@ -322,10 +322,10 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="invisible">
                            <children>
-                              <TableView layoutX="26.0" layoutY="14.0" prefHeight="304.0" prefWidth="466.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="opsTable" layoutX="26.0" layoutY="14.0" prefHeight="304.0" prefWidth="466.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn prefWidth="122.69597053527832" resizable="false" text="Name" />
-                                  <TableColumn prefWidth="332.3040313720703" resizable="false" text="Sequence" />
+                                  <TableColumn fx:id="nameColumn" prefWidth="122.69597053527832" resizable="false" text="Name" />
+                                  <TableColumn fx:id="seqColumn" prefWidth="332.3040313720703" resizable="false" text="Sequence" />
                                 </columns>
                               </TableView>
                               <Button focusTraversable="false" layoutX="1.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#del" prefHeight="40.0" prefWidth="121.0" style="-fx-border-radius: 10px;" styleClass="optionButtons" text="INSERT" textFill="WHITE">

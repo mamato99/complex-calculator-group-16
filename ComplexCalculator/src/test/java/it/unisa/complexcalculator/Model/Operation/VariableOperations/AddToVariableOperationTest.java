@@ -36,11 +36,7 @@ public class AddToVariableOperationTest {
      */
     @Test
     public void testExecute() {
-        System.out.println("execute");
-        AddToVariableOperation instance = null;
-        instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }

@@ -10,6 +10,10 @@ public class CustomOperation implements Operation{
         this.ops = ops;
     }
     
+    public void update(ArrayDeque<Operation> ops){
+        this.ops = ops;
+    }
+    
     @Override
     public void execute() {
         ops.forEach(op -> {

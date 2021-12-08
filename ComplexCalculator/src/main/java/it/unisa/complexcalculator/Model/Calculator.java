@@ -44,7 +44,7 @@ public class Calculator {
         this.operations = operations;
     }
     
-    public Operation createOperation(String s) {
+    public Operation parseOperation(String s) {
         Operation op;
 
         op = parseStackOperation(s);
@@ -68,14 +68,14 @@ public class Calculator {
         ArrayDeque<Operation> custom = new ArrayDeque<>();
 
         for (String s : op) {
-            Operation o = createOperation(s);
+            Operation o = parseOperation(s);
             if (o == null) {
                 return;
             }
             custom.add(o);
         }
 
-        operations.addOperation(name, new CustomOperation(custom));
+        operations.addOperation(name, sequence, new CustomOperation(custom));
     }
     
     private Operation parseStackOperation(String s) {

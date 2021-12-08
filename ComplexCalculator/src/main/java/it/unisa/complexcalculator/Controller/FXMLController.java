@@ -2,7 +2,12 @@ package it.unisa.complexcalculator.Controller;
 
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.*;
+import it.unisa.complexcalculator.Model.Memory.Operations;
+import it.unisa.complexcalculator.Model.Memory.Variables;
+import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
+import it.unisa.complexcalculator.Model.Operation.StackOperations.AddOperation;
 import java.net.URL;
+import java.util.ArrayDeque;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,8 +15,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
@@ -25,7 +32,17 @@ public class FXMLController implements Initializable {
     @FXML
     private TextField inputBox;
     @FXML
-    private TableView<?> varTable;
+    private TableView<Variables> varTable;
+    @FXML
+    private TableColumn<Variables, Character> varColumn;
+    @FXML
+    private TableColumn<Variables, ComplexNumber> valueColumn;
+    @FXML
+    private TableView<Operations> opsTable;
+    @FXML
+    private TableColumn<Operations, String> nameColumn;
+    @FXML
+    private TableColumn<Operations, String> seqColumn;
 
     /**
      * Initializes all elements according to user preferences by default
@@ -39,6 +56,22 @@ public class FXMLController implements Initializable {
         
         storedElements.setItems(c.getNumbers().getStack());
         
+        varColumn.setCellValueFactory(new PropertyValueFactory<>("var")); //fai apparire nella tabella il valore della data
+        valueColumn.setCellValueFactory(new PropertyValueFactory<>("value")); //fai apparire il valore della descrizione
+        
+        varTable.setItems(c.getVariables().getVars());
+        
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name")); //fai apparire nella tabella il valore della data
+        seqColumn.setCellValueFactory(new PropertyValueFactory<>("sequence")); //fai apparire il valore della descrizione
+        
+        opsTable.setItems(c.getOperations().getOps());
+        
+        ArrayDeque<Operation> custom = new ArrayDeque<>();
+        custom.add(new AddOperation(c.getNumbers()));
+        custom.add(new AddOperation(c.getNumbers()));
+        custom.add(new AddOperation(c.getNumbers()));
+        Operation op = new CustomOperation(custom);
+        c.getOperations().addOperation("tris", "+ + +", op);
         // Enter key to submit and Escape key to clear
         inputBox.setOnKeyPressed(value -> {
             if (value.getCode().equals(KeyCode.ENTER))
@@ -57,13 +90,14 @@ public class FXMLController implements Initializable {
         String input = inputBox.getText();
         
         try{
-            Operation op = c.createOperation(input);
+            Operation op = c.parseOperation(input);
             op.execute();
         } catch (NumberFormatException ex){
             inputBox.setText("");
             generateAlert("Invalid number format.");
         }
         inputBox.setText("");
+        varTable.refresh();
         
     }
 
@@ -100,13 +134,14 @@ public class FXMLController implements Initializable {
         String s = b.getText().toLowerCase();
         
         try{
-            Operation op = c.createOperation(s);
+            Operation op = c.parseOperation(s);
             op.execute();
         } catch (NumberFormatException ex){
             inputBox.setText("");
             generateAlert("Invalid number format.");
         }
         inputBox.setText("");
+        varTable.refresh();
     }
   
 }

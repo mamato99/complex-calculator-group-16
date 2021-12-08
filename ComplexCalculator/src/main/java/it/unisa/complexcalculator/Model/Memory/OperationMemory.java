@@ -2,23 +2,37 @@ package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-import java.util.HashMap;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class OperationMemory {
 
-    private HashMap<String, Operation> operations;
+    private ObservableList<Operations> ops;
 
     public OperationMemory() {
-        operations = new HashMap<>();
+        ops = FXCollections.observableArrayList();
     }
     
-    public void addOperation(String name, Operation op){
-        operations.put(name, op);
+    public void addOperation(String name, String sequence, Operation op){
+        //controllo
+        ops.add(new Operations(name, sequence, op));
     }
     
     public Operation getOperation(String name){
-        return operations.get(name);
+        for (Operations c : ops){
+            if (c.getName().equals(name))
+                return c.getOp();
+            
+        }
+        return null;
     }
-    
+
+    public ObservableList<Operations> getOps() {
+        return ops;
+    }
+
+    public void setOps(ObservableList<Operations> ops) {
+        this.ops = ops;
+    }   
     
 }

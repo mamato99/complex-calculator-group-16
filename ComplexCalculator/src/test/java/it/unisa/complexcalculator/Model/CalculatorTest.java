@@ -40,7 +40,7 @@ public class CalculatorTest {
     public void testCreateDupOperation() {
         System.out.println("createDupOperation");
         String s = "dup"; 
-        Operation result = c.createOperation(s);
+        Operation result = c.parseOperation(s);
         assert(result instanceof DupOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -53,7 +53,7 @@ public class CalculatorTest {
         System.out.println("createClearOperation");
         String s = "clear"; 
         
-        Operation result = c.createOperation(s);
+        Operation result = c.parseOperation(s);
         assert(result instanceof ClearOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -66,7 +66,7 @@ public class CalculatorTest {
         System.out.println("createSwapOperation");
         String s = "swap"; 
         
-        Operation result = c.createOperation(s);
+        Operation result = c.parseOperation(s);
         assert(result instanceof SwapOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -79,7 +79,7 @@ public class CalculatorTest {
         System.out.println("createSwapOperation");
         String s = "drop"; 
         
-        Operation result = c.createOperation(s);
+        Operation result = c.parseOperation(s);
         assert(result instanceof DropOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -92,7 +92,7 @@ public class CalculatorTest {
         System.out.println("createOverOperation");
         String s = "over"; 
         
-        Operation result = c.createOperation(s);
+        Operation result = c.parseOperation(s);
         assert(result instanceof OverOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -105,7 +105,7 @@ public class CalculatorTest {
         System.out.println("createAddOperation");
         String s = "+"; 
         
-        Operation result = c.createOperation(s);
+        Operation result = c.parseOperation(s);
         assert(result instanceof AddOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -118,7 +118,7 @@ public class CalculatorTest {
         System.out.println("createSubtractOperation");
         String s = "-"; 
         
-        Operation result = c.createOperation(s);
+        Operation result = c.parseOperation(s);
         assert(result instanceof SubtractOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -131,7 +131,7 @@ public class CalculatorTest {
         System.out.println("createMultiplyOperation");
         String s = "*"; 
         
-        Operation result = c.createOperation(s);
+        Operation result = c.parseOperation(s);
         assert(result instanceof MultiplyOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -144,7 +144,7 @@ public class CalculatorTest {
         System.out.println("createDivideOperation");
         String s = "/"; 
         
-        Operation result = c.createOperation(s);
+        Operation result = c.parseOperation(s);
         assert(result instanceof DivideOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -158,7 +158,7 @@ public class CalculatorTest {
         System.out.println("createSqrtOperation");
         String s = "sqrt"; 
         
-        Operation result = c.createOperation(s);
+        Operation result = c.parseOperation(s);
         assert(result instanceof SqrtOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -172,7 +172,7 @@ public class CalculatorTest {
         System.out.println("createInvertSignOperation");
         String s = "+-"; 
         
-        Operation result = c.createOperation(s);
+        Operation result = c.parseOperation(s);
         assert(result instanceof InvertSignOperation);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -185,7 +185,7 @@ public class CalculatorTest {
         System.out.println("createNullOperation");
         String s = "any"; 
         
-        Operation result = c.createOperation(s);
+        Operation result = c.parseOperation(s);
         assertNull(result);
         // TODO review the generated test code and remove the default call to fail.
     }

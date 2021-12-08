@@ -1,23 +1,43 @@
 package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Model.ComplexNumber;
-import java.util.HashMap;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class VariableMemory {
-    private final HashMap<Character, ComplexNumber> var;
+    private ObservableList<Variables> vars;
 
     public VariableMemory() {
-        var = new HashMap<>();
+        vars = FXCollections.observableArrayList();
         for (char c = 'A'; c <= 'Z'; c++) {
-            var.put(c, new ComplexNumber(0, 0));
+            vars.add(new Variables(c, new ComplexNumber(0, 0)));
         }
     }
     
     public void addVariable(Character c, ComplexNumber n){
-        var.put(c, n);
+        for (Variables v : vars){
+            if (v.getVar().equals(c))
+                v.setValue(n);       
+        }
     }
     
     public ComplexNumber getVariable(Character c){
-        return var.get(c);
+        for (Variables v : vars){
+            if (v.getVar().equals(c))
+                return v.getValue();
+            
+        }
+        return null;
     }
+
+    public ObservableList<Variables> getVars() {
+        return vars;
+    }
+
+    public void setVars(ObservableList<Variables> vars) {
+        this.vars = vars;
+    }
+    
+    
+    
 }
