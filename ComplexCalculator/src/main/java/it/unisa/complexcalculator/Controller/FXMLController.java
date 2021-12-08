@@ -157,7 +157,12 @@ public class FXMLController implements Initializable {
     private void insertCustomOperation(MouseEvent event) {
         String name = nameField.getText();
         String seq = seqField.getText();
-
+        
+        if(!name.matches("^[a-zA-Z]+$")){
+            generateAlert("Operation name must contain only letters.");
+            return;
+        }
+        
         try {
             c.addCustomOperation(name, seq);
         } catch (AlreadyExistentOperationException ex) {
@@ -207,6 +212,11 @@ public class FXMLController implements Initializable {
     @FXML
     private void updateNameColumn(TableColumn.CellEditEvent<CustomOperation, String> event) {
         String old = opsTable.getSelectionModel().getSelectedItem().getName();
+        if(!event.getNewValue().matches("^[a-zA-Z]+$")){
+            generateAlert("Operation name must contain only letters.");
+            opsTable.refresh();
+            return;
+        }
         try {
             c.refreshSequences(old, event.getNewValue());
         } catch (AlreadyExistentOperationException ex) {

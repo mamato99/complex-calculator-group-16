@@ -95,7 +95,7 @@ public class Calculator {
     public void save(String file) throws FileNotFoundException, IOException {
         DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
         dout.writeInt(getOperations().getOps().size());
-                
+        
         for (CustomOperation op : getOperations().getOps()){
             String toWrite = op.getName() + ":" + op.getSequence();
             dout.writeUTF(toWrite);
