@@ -1,6 +1,8 @@
 package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Model.ComplexNumber;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -42,6 +44,19 @@ public class VariableMemory {
         this.vars = vars;
     }
     
+    public List<Variable> getVarsAsList(){
+        List<Variable> retVal = new ArrayList<>();
+        for (Variable var : vars){
+            retVal.add(0, var);
+        }
+        return retVal;
+    }
     
+    public void setVarsFromList(List<Variable> numbers){
+        vars.clear();
+        for (Variable var : numbers){
+            pushVariable(var);
+        }
+    }
     
 }

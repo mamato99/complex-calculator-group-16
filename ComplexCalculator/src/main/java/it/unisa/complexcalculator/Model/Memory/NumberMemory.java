@@ -1,7 +1,9 @@
 package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Model.ComplexNumber;
+import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -74,6 +76,21 @@ public class NumberMemory{
      */
     public ObservableList<ComplexNumber> getStack() {
         return stack;
+    }
+    
+    public List<ComplexNumber> getStackAsList(){
+        List<ComplexNumber> retVal = new ArrayList<>();
+        for (ComplexNumber num : stack){
+            retVal.add(0, num);
+        }
+        return retVal;
+    }
+    
+    public void setStackFromList(List<ComplexNumber> numbers){
+        stack.clear();
+        for (ComplexNumber num : numbers){
+            push(num);
+        }
     }
 
 }
