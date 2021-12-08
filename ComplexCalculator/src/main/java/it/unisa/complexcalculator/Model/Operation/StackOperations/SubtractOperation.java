@@ -6,7 +6,7 @@ import it.unisa.complexcalculator.Model.ComplexOperations;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-public class SubtractOperation implements Operation{
+public class SubtractOperation extends Operation{
     
     private final NumberMemory storedNumbers;
 

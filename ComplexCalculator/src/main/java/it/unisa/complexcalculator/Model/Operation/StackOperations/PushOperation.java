@@ -4,7 +4,7 @@ import it.unisa.complexcalculator.Model.ComplexNumber;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-public class PushOperation implements Operation{
+public class PushOperation extends Operation{
    
     private final ComplexNumber c;
     private final NumberMemory storedNumbers;

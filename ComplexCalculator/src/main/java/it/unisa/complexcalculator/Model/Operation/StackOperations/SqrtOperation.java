@@ -6,7 +6,7 @@ import it.unisa.complexcalculator.Model.ComplexOperations;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-public class SqrtOperation implements Operation{
+public class SqrtOperation extends Operation{
     private final NumberMemory storedNumbers;
 
     public SqrtOperation(NumberMemory storedNumbers) {

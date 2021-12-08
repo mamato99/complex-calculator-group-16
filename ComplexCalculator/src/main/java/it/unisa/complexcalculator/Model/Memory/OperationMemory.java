@@ -2,16 +2,21 @@ package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Exception.AlreadyExistentOperationException;
 import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
+import java.io.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class OperationMemory {
+public class OperationMemory implements Serializable{
 
     private ObservableList<CustomOperation> ops;
 
     public OperationMemory() {
         ops = FXCollections.observableArrayList();
+    }
+    
+    public void removeCustomOperationFromMemory(CustomOperation op){
+        ops.remove(op);
     }
     
     public void addCustomToOperationMemory(CustomOperation op){

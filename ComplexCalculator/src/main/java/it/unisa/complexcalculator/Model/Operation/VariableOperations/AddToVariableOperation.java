@@ -5,7 +5,7 @@ import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 
-public class AddToVariableOperation implements Operation {
+public class AddToVariableOperation extends Operation {
 
     private final VariableMemory var;
     private final NumberMemory num;

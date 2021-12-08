@@ -6,7 +6,7 @@ import it.unisa.complexcalculator.Model.ComplexOperations;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-public class InvertSignOperation implements Operation{
+public class InvertSignOperation extends Operation{
     private final NumberMemory storedNumbers;
 
     public InvertSignOperation(NumberMemory storedNumbers) {

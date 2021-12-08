@@ -3,7 +3,7 @@ package it.unisa.complexcalculator.Model.Operation.CustomOperations;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import java.util.ArrayDeque;
 
-public class CustomOperation implements Operation{
+public class CustomOperation extends Operation{
     private ArrayDeque<Operation> ops;
     private String name;
     private String sequence;

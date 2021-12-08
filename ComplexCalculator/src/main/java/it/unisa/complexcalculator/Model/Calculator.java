@@ -5,8 +5,21 @@ import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperati
 import it.unisa.complexcalculator.Model.Operation.StackOperations.*;
 import it.unisa.complexcalculator.Model.Memory.*;
 import it.unisa.complexcalculator.Model.Operation.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Calculator {
@@ -44,6 +57,10 @@ public class Calculator {
         this.operations = operations;
     }
     
+    public void removeCustomOperation(CustomOperation op){
+        operations.removeCustomOperationFromMemory(op);
+    }
+    
     public Operation parseOperation(String s) {
         Operation op;
 
@@ -78,6 +95,26 @@ public class Calculator {
     public void addCustomOperation(String name, String sequence){
         CustomOperation op = sequenceToOperation(name, sequence);
         operations.addCustomToOperationMemory(op);
+    }
+    
+    public void save(String file) throws FileNotFoundException, IOException {
+        DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+        
+        for (CustomOperation op : getOperations().getOps()){
+            dout.writeUTF(op.getName() + ":" + op.getSequence());
+        }
+        
+    }
+
+    public void load(String file) throws FileNotFoundException, IOException, ClassNotFoundException {
+        DataInputStream din = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
+        
+        getOperations().getOps().clear();
+        String token;
+        while((token = din.readUTF()) != null){
+            getOperations().getOps().add(new CustomOperation(token.split(":")[0], token.split(":")[1], null));
+        }
+        
     }
     
     public void refreshSequences(String oldName, String newName){

@@ -3,7 +3,7 @@ package it.unisa.complexcalculator.Model.Operation.StackOperations;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-public class DropOperation implements Operation {
+public class DropOperation extends Operation {
 
     private NumberMemory storedNumbers;
 
