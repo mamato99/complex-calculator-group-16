@@ -9,17 +9,12 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Calculator {
@@ -99,20 +94,26 @@ public class Calculator {
     
     public void save(String file) throws FileNotFoundException, IOException {
         DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
-        
+        dout.writeInt(getOperations().getOps().size());
+                
         for (CustomOperation op : getOperations().getOps()){
-            dout.writeUTF(op.getName() + ":" + op.getSequence());
+            String toWrite = op.getName() + ":" + op.getSequence();
+            dout.writeUTF(toWrite);
         }
-        
+        dout.flush();
+        dout.close();
     }
 
     public void load(String file) throws FileNotFoundException, IOException, ClassNotFoundException {
         DataInputStream din = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
-        
+        int n = din.readInt();
         getOperations().getOps().clear();
+       
         String token;
-        while((token = din.readUTF()) != null){
-            getOperations().getOps().add(new CustomOperation(token.split(":")[0], token.split(":")[1], null));
+        
+        for(int i = 0; i < n; i++){
+            token = din.readUTF();
+            getOperations().getOps().add(new CustomOperation(token.split(":")[0], token.split(":")[1], null)); // Null because before invoking it, the calculator populates the arraydeque of operations
         }
         
     }
