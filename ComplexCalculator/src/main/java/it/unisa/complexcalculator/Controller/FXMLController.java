@@ -106,7 +106,8 @@ public class FXMLController implements Initializable {
         String input = inputBox.getText();
 
         executeOperation(input);
-
+        varTable.refresh();
+        opsTable.refresh();
     }
 
     /*
@@ -145,24 +146,26 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void loadVariablesState(MouseEvent event) {
-        
+        executeOperation("restore");
+        varTable.refresh();
     }
 
     @FXML
     private void saveVariablesState(MouseEvent event) {
-        
+        executeOperation("save");
+        varTable.refresh();
     }
 
     @FXML
     private void insertCustomOperation(MouseEvent event) {
         String name = nameField.getText();
         String seq = seqField.getText();
-        
-        if(!name.matches("^[a-zA-Z]+$")){
+
+        if (!name.matches("^[a-zA-Z]+$")) {
             generateAlert("Operation name must contain only letters.");
             return;
         }
-        
+
         try {
             c.addCustomOperation(name, seq);
         } catch (AlreadyExistentOperationException ex) {
@@ -212,7 +215,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void updateNameColumn(TableColumn.CellEditEvent<CustomOperation, String> event) {
         String old = opsTable.getSelectionModel().getSelectedItem().getName();
-        if(!event.getNewValue().matches("^[a-zA-Z]+$")){
+        if (!event.getNewValue().matches("^[a-zA-Z]+$")) {
             generateAlert("Operation name must contain only letters.");
             opsTable.refresh();
             return;

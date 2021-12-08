@@ -16,16 +16,18 @@ import java.io.IOException;
 
 import java.util.ArrayDeque;
 
-
 public class Calculator {
+
     private NumberMemory numbers;
     private VariableMemory variables;
     private OperationMemory operations;
+    private VariableStack varStack;
 
     public Calculator() {
         numbers = new NumberMemory();
         variables = new VariableMemory();
         operations = new OperationMemory();
+        varStack = new VariableStack();
     }
 
     public NumberMemory getNumbers() {
@@ -51,30 +53,33 @@ public class Calculator {
     public void setOperations(OperationMemory operations) {
         this.operations = operations;
     }
-    
-    public void removeCustomOperation(CustomOperation op){
+
+    public void removeCustomOperation(CustomOperation op) {
         operations.removeCustomOperationFromMemory(op);
     }
-    
+
     public Operation parseOperation(String s) {
         Operation op;
 
         op = parseStackOperation(s);
-        if (op != null) 
+        if (op != null) {
             return op;
+        }
 
         op = parseVariableOperation(s);
-        if (op != null)
+        if (op != null) {
             return op;
-        
+        }
+
         op = parseCustomOperation(s);
-        if (op != null)
+        if (op != null) {
             return op;
-        
+        }
+
         return new PushOperation(numbers, ComplexNumber.parse(s));
     }
-    
-    public CustomOperation sequenceToOperation(String name, String sequence){
+
+    public CustomOperation sequenceToOperation(String name, String sequence) {
         String[] ops = sequence.split(" ");
 
         ArrayDeque<Operation> custom = new ArrayDeque<>();
@@ -83,20 +88,20 @@ public class Calculator {
             Operation o = parseOperation(s);
             custom.add(o);
         }
-        
-       return new CustomOperation(name, sequence, custom);   
+
+        return new CustomOperation(name, sequence, custom);
     }
-    
-    public void addCustomOperation(String name, String sequence){
+
+    public void addCustomOperation(String name, String sequence) {
         CustomOperation op = sequenceToOperation(name, sequence);
         operations.addCustomToOperationMemory(op);
     }
-    
+
     public void save(String file) throws FileNotFoundException, IOException {
         DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
         dout.writeInt(getOperations().getOps().size());
-        
-        for (CustomOperation op : getOperations().getOps()){
+
+        for (CustomOperation op : getOperations().getOps()) {
             String toWrite = op.getName() + ":" + op.getSequence();
             dout.writeUTF(toWrite);
         }
@@ -108,20 +113,20 @@ public class Calculator {
         DataInputStream din = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
         int n = din.readInt();
         getOperations().getOps().clear();
-       
+
         String token;
-        
-        for(int i = 0; i < n; i++){
+
+        for (int i = 0; i < n; i++) {
             token = din.readUTF();
             getOperations().getOps().add(new CustomOperation(token.split(":")[0], token.split(":")[1], null)); // Null because before invoking it, the calculator populates the arraydeque of operations
         }
-        
+
     }
-    
-    public void refreshSequences(String oldName, String newName){
+
+    public void refreshSequences(String oldName, String newName) {
         operations.refreshSequences(oldName, newName);
     }
-    
+
     private Operation parseStackOperation(String s) {
         switch (s) {
             case "dup":
@@ -150,10 +155,17 @@ public class Calculator {
                 return null;
         }
     }
-    
+
     private Operation parseVariableOperation(String s) {
-        if (s.length() != 2 || !((s.startsWith(">") || s.startsWith("<") || s.startsWith("+") || s.startsWith("-"))))
+        switch (s) {
+            case "save":
+                return new SaveOperation(variables, varStack);
+            case "restore":
+                return new RestoreOperation(variables, varStack);
+        }
+        if (s.length() != 2 || !((s.startsWith(">") || s.startsWith("<") || s.startsWith("+") || s.startsWith("-")))) {
             return null;
+        }
 
         //UPPERCASE TO AVOID "i" as imaginary part
         if (s.charAt(1) >= 'A' && s.charAt(1) <= 'Z') {
@@ -166,21 +178,21 @@ public class Calculator {
                     return new AddToVariableOperation(numbers, variables, s.charAt(1));
                 case '-':
                     return new SubtractToVariableOperation(numbers, variables, s.charAt(1));
-                default: 
+                default:
                     return null;
             }
         }
-        
+
         return null;
     }
-    
+
     private CustomOperation parseCustomOperation(String s) {
         CustomOperation op = operations.getCustomOperation(s);
-        if (op != null){
+        if (op != null) {
             op = sequenceToOperation(op.getName(), op.getSequence()); // UPDATE SEQUENCE OF OPERATIONS
             return op;
         }
         return null;
     }
-    
+
 }

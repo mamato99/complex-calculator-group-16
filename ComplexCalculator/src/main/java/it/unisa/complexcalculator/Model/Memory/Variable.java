@@ -27,6 +27,11 @@ public class Variable {
     public void setValue(ComplexNumber value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "Variable{" + "var=" + var + ", value=" + value + '}';
+    }
     
     
 }
