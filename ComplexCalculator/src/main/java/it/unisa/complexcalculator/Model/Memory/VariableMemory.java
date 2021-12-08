@@ -24,7 +24,7 @@ public class VariableMemory {
     }
     
     public void pushVariable(Variable var){
-        vars.add(0,var);
+        vars.add(var);
     }
     
     public ComplexNumber getVariable(Character c){
@@ -47,19 +47,17 @@ public class VariableMemory {
     public List<Variable> getVarsAsList(){
         List<Variable> retVal = new ArrayList<>();
         for (Variable var : vars){
-            retVal.add(0, var);
+            retVal.add(new Variable(var.getVar(), var.getValue()));
         }
-        System.out.println(retVal);
         return retVal;
     }
     
     public void setVarsFromList(List<Variable> numbers){
         vars.clear();
         for (Variable var : numbers){
-            pushVariable(var);
+            pushVariable(new Variable(var.getVar(), var.getValue()));
             
         }
-        System.out.println(vars);
     }
     
 }

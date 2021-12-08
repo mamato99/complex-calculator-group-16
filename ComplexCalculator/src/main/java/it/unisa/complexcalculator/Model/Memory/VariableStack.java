@@ -6,7 +6,4 @@ import java.util.List;
 
 public class VariableStack extends ArrayDeque<List<Variable>> {
 
- 
-    
-    
 }

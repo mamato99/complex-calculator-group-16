@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.EmptyStackException;
+import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -106,6 +107,7 @@ public class FXMLController implements Initializable {
         String input = inputBox.getText();
 
         executeOperation(input);
+        
         varTable.refresh();
         opsTable.refresh();
     }
@@ -147,6 +149,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void loadVariablesState(MouseEvent event) {
         executeOperation("restore");
+        
         varTable.refresh();
     }
 
@@ -259,6 +262,9 @@ public class FXMLController implements Initializable {
         } catch (EmptyStackException ex) {
             inputBox.setText("");
             generateAlert("Stack Empty.");
+        }catch (NoSuchElementException ex) {
+            inputBox.setText("");
+            generateAlert("No one state to restore.");
         } catch (Exception ex) {
             inputBox.setText("");
             generateAlert("Error: " + ex.getMessage());
