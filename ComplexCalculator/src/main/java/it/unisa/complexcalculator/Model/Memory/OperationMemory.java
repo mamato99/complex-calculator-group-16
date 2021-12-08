@@ -32,6 +32,8 @@ public class OperationMemory {
     }
     
     public void refreshSequences(String oldName, String newName){
+        if(contains(newName))
+            throw new AlreadyExistentOperationException();
         for(CustomOperation op: ops){
             op.setSequence(op.getSequence().replaceAll(oldName, newName));
         }

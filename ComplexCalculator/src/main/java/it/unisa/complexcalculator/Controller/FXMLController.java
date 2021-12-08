@@ -170,16 +170,31 @@ public class FXMLController implements Initializable {
     @FXML
     private void updateNameColumn(TableColumn.CellEditEvent<CustomOperation, String> event) {
         String old = opsTable.getSelectionModel().getSelectedItem().getName();
+        try{
+            c.refreshSequences(old, event.getNewValue());
+        } catch(AlreadyExistentOperationException ex){
+            generateAlert("Already existent operation.");
+            opsTable.refresh();
+            return;
+        } 
         opsTable.getSelectionModel().getSelectedItem().setName(event.getNewValue());
-        c.refreshSequences(old, event.getNewValue());
         opsTable.refresh();
     }
 
     
     @FXML
     private void updateSeqColumn(TableColumn.CellEditEvent<CustomOperation, String> event) {
-        opsTable.getSelectionModel().getSelectedItem().setSequence(event.getNewValue());
+        CustomOperation selected =  opsTable.getSelectionModel().getSelectedItem();
+        try{
+            String newSeq = c.sequenceToOperation(selected.getName(), event.getNewValue()).getSequence();
+            selected.setSequence(newSeq);
+        }catch(Exception ex){
+            generateAlert("Invalid sequence format.");
+            opsTable.refresh();
+            return;
+        }
         opsTable.refresh();
+     
     }
     
     private void executeOperation(String s){

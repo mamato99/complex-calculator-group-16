@@ -136,7 +136,7 @@ public class Calculator {
         return null;
     }
     
-    private Operation parseCustomOperation(String s) {
+    private CustomOperation parseCustomOperation(String s) {
         CustomOperation op = operations.getCustomOperation(s);
         if (op != null){
             op = sequenceToOperation(op.getName(), op.getSequence()); // UPDATE SEQUENCE OF OPERATIONS
