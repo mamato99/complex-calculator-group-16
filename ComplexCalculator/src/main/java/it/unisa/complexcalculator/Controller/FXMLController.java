@@ -19,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
@@ -66,12 +67,9 @@ public class FXMLController implements Initializable {
         
         opsTable.setItems(c.getOperations().getOps());
         
-        ArrayDeque<Operation> custom = new ArrayDeque<>();
-        custom.add(new AddOperation(c.getNumbers()));
-        custom.add(new AddOperation(c.getNumbers()));
-        custom.add(new AddOperation(c.getNumbers()));
-        Operation op = new CustomOperation(custom);
-        c.getOperations().addOperation("tris", "+ + +", op);
+        seqColumn.setCellFactory(TextFieldTableCell.forTableColumn()); // Become editable
+        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn()); // Become editable
+        
         // Enter key to submit and Escape key to clear
         inputBox.setOnKeyPressed(value -> {
             if (value.getCode().equals(KeyCode.ENTER))
@@ -143,5 +141,35 @@ public class FXMLController implements Initializable {
         inputBox.setText("");
         varTable.refresh();
     }
-  
+
+    @FXML
+    private void loadVariablesState(MouseEvent event) {
+    }
+
+    @FXML
+    private void saveVariablesState(MouseEvent event) {
+    }
+
+    @FXML
+    private void insertCustomOperation(MouseEvent event) {
+    }
+
+    @FXML
+    private void saveCustomOperation(MouseEvent event) {
+    }
+
+    @FXML
+    private void loadCustomOperation(MouseEvent event) {
+    }
+
+    @FXML
+    private void updateNameColumn(TableColumn.CellEditEvent<Operations, String> event) {
+        opsTable.getSelectionModel().getSelectedItem().setName(event.getNewValue());
+        opsTable.refresh();
+    }
+
+    @FXML
+    private void updateSeqColumn(TableColumn.CellEditEvent<Operations, String> event) {
+    }
+    
 }

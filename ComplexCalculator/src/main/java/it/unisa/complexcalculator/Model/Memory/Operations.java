@@ -37,7 +37,6 @@ public class Operations {
 
     public void setOp(Operation op) {
         this.op = op;
-    }
-    
+    } 
     
 }

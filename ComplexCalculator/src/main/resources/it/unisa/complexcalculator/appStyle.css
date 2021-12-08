@@ -139,6 +139,7 @@
     -fx-text-fill: #60199e;
     -fx-border-color: #60199e;
     -fx-border-width: 1px;
+    -fx-background-color: rgb(142,137,42);
 }
 
 .table-row-cell{
@@ -147,12 +148,13 @@
     -fx-text-fill: #60199e;
     -fx-border-color: #60199e;
     -fx-border-width: 1px;
+    -fx-background-color: rgb(112,107,12);
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #005797;
     -fx-background-insets: 0;
     -fx-background-radius: 1;
+    -fx-background-color: rgb(112,107,12);
 }
 
 .table-view > .virtual-flow > .scroll-bar:vertical,
@@ -170,3 +172,18 @@
 .table-view > .virtual-flow > .scroll-bar > .decrement-button {
     -fx-opacity: 0;
 }
+
+.opText{
+   -fx-font-family: 'Fleftex';
+   -fx-font-size: 1em;
+   -fx-background-color: rgb(142,137,42);
+   -fx-border-width:  1px;
+   -fx-border-color: black;
+   -fx-border-radius: 6px;
+   -fx-background-clip: padding-box;
+   -fx-background-radius: 6px;
+   -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 16, 0.7, 0.0, 0.0); 
+   -fx-text-fill: #60199e;
+}
+
+
