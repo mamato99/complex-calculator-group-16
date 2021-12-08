@@ -1,5 +1,6 @@
 package it.unisa.complexcalculator.Model.Memory;
 
+import it.unisa.complexcalculator.Exception.AlreadyExistentOperationException;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
 import javafx.collections.FXCollections;
@@ -15,6 +16,9 @@ public class OperationMemory {
     
     public void addOperation(String name, String sequence, Operation op){
         //controllo
+        if(contains(name)){
+            throw new AlreadyExistentOperationException();
+        }
         ops.add(new Operations(name, sequence, op));
     }
     
@@ -35,4 +39,11 @@ public class OperationMemory {
         this.ops = ops;
     }   
     
+    private boolean contains(String name){
+        for(Operations o : ops){
+            if(o.getName().equals(name))
+                return true;
+        }
+        return false;
+    }
 }

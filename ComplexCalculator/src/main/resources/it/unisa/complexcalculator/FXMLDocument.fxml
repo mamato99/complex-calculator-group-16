@@ -374,12 +374,12 @@
                                     <Font name="Andale Mono" size="17.0" />
                                  </font>
                               </Button>
-                              <TextField layoutX="177.0" layoutY="261.0" prefHeight="27.0" prefWidth="288.0" promptText="Sequence" styleClass="opText">
+                              <TextField fx:id="seqField" layoutX="177.0" layoutY="261.0" prefHeight="27.0" prefWidth="288.0" promptText="Sequence" styleClass="opText">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </TextField>
-                              <TextField layoutX="2.0" layoutY="261.0" prefHeight="20.0" prefWidth="119.0" promptText="Name" styleClass="opText">
+                              <TextField fx:id="nameField" layoutX="2.0" layoutY="261.0" prefHeight="20.0" prefWidth="119.0" promptText="Name" styleClass="opText">
                                  <font>
                                     <Font size="12.0" />
                                  </font>

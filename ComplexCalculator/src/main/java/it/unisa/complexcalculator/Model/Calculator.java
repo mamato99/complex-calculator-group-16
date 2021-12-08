@@ -69,12 +69,9 @@ public class Calculator {
 
         for (String s : op) {
             Operation o = parseOperation(s);
-            if (o == null) {
-                return;
-            }
             custom.add(o);
         }
-
+        
         operations.addOperation(name, sequence, new CustomOperation(custom));
     }
     

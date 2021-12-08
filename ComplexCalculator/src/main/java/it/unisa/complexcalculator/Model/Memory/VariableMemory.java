@@ -21,6 +21,10 @@ public class VariableMemory {
         }
     }
     
+    public void pushVariable(Variables var){
+        vars.add(var);
+    }
+    
     public ComplexNumber getVariable(Character c){
         for (Variables v : vars){
             if (v.getVar().equals(c))

@@ -1,10 +1,12 @@
 package it.unisa.complexcalculator.Controller;
 
+import it.unisa.complexcalculator.Exception.AlreadyExistentOperationException;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.*;
 import it.unisa.complexcalculator.Model.Memory.Operations;
 import it.unisa.complexcalculator.Model.Memory.Variables;
+import it.unisa.complexcalculator.Model.Operation.OperationInvoker;
 import java.net.URL;
 import java.util.EmptyStackException;
 import java.util.ResourceBundle;
@@ -29,8 +31,14 @@ public class FXMLController implements Initializable {
     
     private Calculator c;
     
+    private OperationInvoker invoker;
+    
     @FXML
     private TextField inputBox;
+    @FXML
+    private TextField nameField;
+    @FXML
+    private TextField seqField;
     @FXML
     private TableView<Variables> varTable;
     @FXML
@@ -53,7 +61,7 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         c = new Calculator();
-        
+        invoker = new OperationInvoker();
         storedElements.setItems(c.getNumbers().getStack());
         
         varColumn.setCellValueFactory(new PropertyValueFactory<>("var")); //fai apparire nella tabella il valore della data
@@ -131,9 +139,24 @@ public class FXMLController implements Initializable {
     @FXML
     private void saveVariablesState(MouseEvent event) {
     }
-
+    
     @FXML
     private void insertCustomOperation(MouseEvent event) {
+        String name = nameField.getText();
+        String seq = seqField.getText();
+        
+        try{
+            c.addOperation(name, seq);
+        } catch(AlreadyExistentOperationException ex){
+            generateAlert("Already existent operation.");
+            return;
+        } catch(Exception ex){
+            generateAlert("Invalid operation format.");
+            return;
+        }
+        
+        nameField.clear();
+        seqField.clear();
     }
 
     @FXML
@@ -143,21 +166,23 @@ public class FXMLController implements Initializable {
     @FXML
     private void loadCustomOperation(MouseEvent event) {
     }
-
+    
     @FXML
     private void updateNameColumn(TableColumn.CellEditEvent<Operations, String> event) {
         opsTable.getSelectionModel().getSelectedItem().setName(event.getNewValue());
         opsTable.refresh();
     }
 
+    
     @FXML
     private void updateSeqColumn(TableColumn.CellEditEvent<Operations, String> event) {
+        
     }
     
     private void executeOperation(String s){
         try{
             Operation op = c.parseOperation(s);
-            op.execute();
+            invoker.execute(op, c);            
         } catch (NumberFormatException ex){
             inputBox.setText("");
             generateAlert("Invalid number format.");
@@ -170,8 +195,12 @@ public class FXMLController implements Initializable {
         } catch (Exception ex){
             inputBox.setText("");
             generateAlert("Error: " + ex.getMessage());
-        }
+        }finally{
         inputBox.setText("");
         varTable.refresh();
+        opsTable.refresh();
+        storedElements.refresh();
+        }
     }
+
 }

@@ -48,7 +48,7 @@ public class OperationInvokerTest {
         ComplexNumber c2 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
         c.getNumbers().push(c2);
-        instance.execute(op);
+        instance.execute(op, c);
         assertEquals(c.getNumbers().top(), ComplexOperations.add(c1, c2));
     }
 
@@ -62,7 +62,7 @@ public class OperationInvokerTest {
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
-        instance.execute(op);
+        instance.execute(op, c);
     }
 
     /**
@@ -77,7 +77,7 @@ public class OperationInvokerTest {
         ComplexNumber c2 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
         c.getNumbers().push(c2);
-        instance.execute(op);
+        instance.execute(op, c);
         assertEquals(c.getNumbers().top(), ComplexOperations.difference(c1, c2));
     }
 
@@ -91,7 +91,7 @@ public class OperationInvokerTest {
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
-        instance.execute(op);
+        instance.execute(op, c);
     }
 
     /**
@@ -106,7 +106,7 @@ public class OperationInvokerTest {
         ComplexNumber c2 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
         c.getNumbers().push(c2);
-        instance.execute(op);
+        instance.execute(op, c);
         assertEquals(c.getNumbers().top(), ComplexOperations.multiplication(c1, c2));
     }
 
@@ -120,7 +120,7 @@ public class OperationInvokerTest {
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
-        instance.execute(op);
+        instance.execute(op, c);
     }
 
     /**
@@ -135,7 +135,7 @@ public class OperationInvokerTest {
         ComplexNumber c2 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
         c.getNumbers().push(c2);
-        instance.execute(op);
+        instance.execute(op, c);
         assertEquals(c.getNumbers().top(), ComplexOperations.division(c1, c2));
     }
 
@@ -149,7 +149,7 @@ public class OperationInvokerTest {
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
-        instance.execute(op);
+        instance.execute(op, c);
     }
 
     /**
@@ -164,7 +164,7 @@ public class OperationInvokerTest {
         ComplexNumber c2 = new ComplexNumber(0, 0);
         c.getNumbers().push(c2);
         c.getNumbers().push(c1);
-        instance.execute(op);
+        instance.execute(op, c);
     }
 
     /**
@@ -177,7 +177,7 @@ public class OperationInvokerTest {
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
-        instance.execute(op);
+        instance.execute(op, c);
         assertEquals(c.getNumbers().top(), ComplexOperations.squareRoot(c1));
     }
 
@@ -189,7 +189,7 @@ public class OperationInvokerTest {
         System.out.println("executeSqrtOperation");
         SqrtOperation op = new SqrtOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
-        instance.execute(op);
+        instance.execute(op, c);
     }
 
     /**
@@ -202,7 +202,7 @@ public class OperationInvokerTest {
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
-        instance.execute(op);
+        instance.execute(op, c);
         assertEquals(c.getNumbers().top(), ComplexOperations.signInversion(c1));
     }
 
@@ -214,7 +214,7 @@ public class OperationInvokerTest {
         System.out.println("executeSqrtOperation");
         SqrtOperation op = new SqrtOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
-        instance.execute(op);
+        instance.execute(op, c);
     }
 
     /**
@@ -227,7 +227,7 @@ public class OperationInvokerTest {
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
-        instance.execute(op);
+        instance.execute(op, c);
         assertEquals(c.getNumbers().len(), 2);
     }
 
@@ -239,7 +239,7 @@ public class OperationInvokerTest {
         System.out.println("executeDupOperation");
         DupOperation op = new DupOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
-        instance.execute(op);
+        instance.execute(op, c);
     }
 
     /**
@@ -255,7 +255,7 @@ public class OperationInvokerTest {
 
         c.getNumbers().push(c1);
         c.getNumbers().push(c2);
-        instance.execute(op);
+        instance.execute(op, c);
         assertEquals(c.getNumbers().pop(), c1);
         assertEquals(c.getNumbers().pop(), c2);
     }
@@ -270,7 +270,7 @@ public class OperationInvokerTest {
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
-        instance.execute(op);
+        instance.execute(op, c);
     }
 
     /**
@@ -286,7 +286,7 @@ public class OperationInvokerTest {
 
         c.getNumbers().push(c1);
         c.getNumbers().push(c2);
-        instance.execute(op);
+        instance.execute(op, c);
         assertEquals(c.getNumbers().pop(), c1);
         assertEquals(c.getNumbers().pop(), c2);
         assertEquals(c.getNumbers().pop(), c1);
@@ -302,7 +302,7 @@ public class OperationInvokerTest {
         OperationInvoker instance = new OperationInvoker();
         ComplexNumber c1 = new ComplexNumber(1, 1);
         c.getNumbers().push(c1);
-        instance.execute(op);
+        instance.execute(op, c);
     }
 
     /**
@@ -318,7 +318,7 @@ public class OperationInvokerTest {
 
         c.getNumbers().push(c1);
         c.getNumbers().push(c2);
-        instance.execute(op);
+        instance.execute(op, c);
         assertEquals(c.getNumbers().len(), 0);
     }
 
@@ -335,7 +335,7 @@ public class OperationInvokerTest {
 
         c.getNumbers().push(c1);
         c.getNumbers().push(c2);
-        instance.execute(op);
+        instance.execute(op, c);
         assertEquals(c.getNumbers().top(), c1);
         assertEquals(c.getNumbers().len(), 1);
 
@@ -349,6 +349,6 @@ public class OperationInvokerTest {
         System.out.println("executeDropOperation");
         DropOperation op = new DropOperation(c.getNumbers());
         OperationInvoker instance = new OperationInvoker();
-        instance.execute(op);
+        instance.execute(op, c);
     }
 }
