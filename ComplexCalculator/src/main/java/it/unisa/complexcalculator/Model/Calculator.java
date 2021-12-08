@@ -62,17 +62,26 @@ public class Calculator {
         return new PushOperation(numbers, ComplexNumber.parse(s));
     }
     
-    public void addOperation(String name, String sequence){
-        String[] op = sequence.split(" ");
+    public CustomOperation sequenceToOperation(String name, String sequence){
+        String[] ops = sequence.split(" ");
 
         ArrayDeque<Operation> custom = new ArrayDeque<>();
 
-        for (String s : op) {
+        for (String s : ops) {
             Operation o = parseOperation(s);
             custom.add(o);
         }
         
-        operations.addOperation(name, sequence, new CustomOperation(custom));
+       return new CustomOperation(name, sequence, custom);   
+    }
+    
+    public void addCustomOperation(String name, String sequence){
+        CustomOperation op = sequenceToOperation(name, sequence);
+        operations.addCustomToOperationMemory(op);
+    }
+    
+    public void refreshSequences(String oldName, String newName){
+        operations.refreshSequences(oldName, newName);
     }
     
     private Operation parseStackOperation(String s) {
@@ -103,7 +112,7 @@ public class Calculator {
                 return null;
         }
     }
-
+    
     private Operation parseVariableOperation(String s) {
         if (s.length() != 2 || !((s.startsWith(">") || s.startsWith("<") || s.startsWith("+") || s.startsWith("-"))))
             return null;
@@ -128,8 +137,11 @@ public class Calculator {
     }
     
     private Operation parseCustomOperation(String s) {
-        if (operations.getOperation(s) != null)
-            return operations.getOperation(s);
+        CustomOperation op = operations.getCustomOperation(s);
+        if (op != null){
+            op = sequenceToOperation(op.getName(), op.getSequence()); // UPDATE SEQUENCE OF OPERATIONS
+            return op;
+        }
         return null;
     }
     

@@ -2,12 +2,12 @@ package it.unisa.complexcalculator.Model.Operation;
 
 import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
-import it.unisa.complexcalculator.Model.Memory.Variables;
+import it.unisa.complexcalculator.Model.Memory.Variable;
 import java.util.*;
 
 public class OperationInvoker {
     private List<ComplexNumber> oldMem;
-    private List<Variables> oldVars;
+    private List<Variable> oldVars;
 
     public void execute(Operation op, Calculator c){
 
@@ -27,7 +27,7 @@ public class OperationInvoker {
         for (ComplexNumber num : c.getNumbers().getStack()){
             oldMem.add(0,num);
         }
-        for (Variables var : c.getVariables().getVars()){
+        for (Variable var : c.getVariables().getVars()){
             oldVars.add(var);
         }
 
@@ -39,7 +39,7 @@ public class OperationInvoker {
             c.getNumbers().push(num);
         }
         c.getVariables().getVars().clear();
-        for (Variables var : oldVars){
+        for (Variable var : oldVars){
             c.getVariables().pushVariable(var);
         }
 

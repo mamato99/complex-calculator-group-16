@@ -4,8 +4,8 @@ import it.unisa.complexcalculator.Exception.AlreadyExistentOperationException;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.*;
-import it.unisa.complexcalculator.Model.Memory.Operations;
-import it.unisa.complexcalculator.Model.Memory.Variables;
+import it.unisa.complexcalculator.Model.Memory.Variable;
+import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
 import it.unisa.complexcalculator.Model.Operation.OperationInvoker;
 import java.net.URL;
 import java.util.EmptyStackException;
@@ -40,17 +40,17 @@ public class FXMLController implements Initializable {
     @FXML
     private TextField seqField;
     @FXML
-    private TableView<Variables> varTable;
+    private TableView<Variable> varTable;
     @FXML
-    private TableColumn<Variables, Character> varColumn;
+    private TableColumn<Variable, Character> varColumn;
     @FXML
-    private TableColumn<Variables, ComplexNumber> valueColumn;
+    private TableColumn<Variable, ComplexNumber> valueColumn;
     @FXML
-    private TableView<Operations> opsTable;
+    private TableView<CustomOperation> opsTable;
     @FXML
-    private TableColumn<Operations, String> nameColumn;
+    private TableColumn<CustomOperation, String> nameColumn;
     @FXML
-    private TableColumn<Operations, String> seqColumn;
+    private TableColumn<CustomOperation, String> seqColumn;
 
     /**
      * Initializes all elements according to user preferences by default
@@ -146,7 +146,7 @@ public class FXMLController implements Initializable {
         String seq = seqField.getText();
         
         try{
-            c.addOperation(name, seq);
+            c.addCustomOperation(name, seq);
         } catch(AlreadyExistentOperationException ex){
             generateAlert("Already existent operation.");
             return;
@@ -168,20 +168,23 @@ public class FXMLController implements Initializable {
     }
     
     @FXML
-    private void updateNameColumn(TableColumn.CellEditEvent<Operations, String> event) {
+    private void updateNameColumn(TableColumn.CellEditEvent<CustomOperation, String> event) {
+        String old = opsTable.getSelectionModel().getSelectedItem().getName();
         opsTable.getSelectionModel().getSelectedItem().setName(event.getNewValue());
+        c.refreshSequences(old, event.getNewValue());
         opsTable.refresh();
     }
 
     
     @FXML
-    private void updateSeqColumn(TableColumn.CellEditEvent<Operations, String> event) {
-        
+    private void updateSeqColumn(TableColumn.CellEditEvent<CustomOperation, String> event) {
+        opsTable.getSelectionModel().getSelectedItem().setSequence(event.getNewValue());
+        opsTable.refresh();
     }
     
     private void executeOperation(String s){
         try{
-            Operation op = c.parseOperation(s);
+            Operation op = c.parseOperation(s); 
             invoker.execute(op, c);            
         } catch (NumberFormatException ex){
             inputBox.setText("");
@@ -196,10 +199,10 @@ public class FXMLController implements Initializable {
             inputBox.setText("");
             generateAlert("Error: " + ex.getMessage());
         }finally{
-        inputBox.setText("");
-        varTable.refresh();
-        opsTable.refresh();
-        storedElements.refresh();
+            inputBox.setText("");
+            varTable.refresh();
+            opsTable.refresh();
+            storedElements.refresh();
         }
     }
 

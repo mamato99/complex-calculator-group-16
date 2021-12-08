@@ -1,46 +1,52 @@
 package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Exception.AlreadyExistentOperationException;
-import it.unisa.complexcalculator.Model.Operation.Operation;
+import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class OperationMemory {
 
-    private ObservableList<Operations> ops;
+    private ObservableList<CustomOperation> ops;
 
     public OperationMemory() {
         ops = FXCollections.observableArrayList();
     }
     
-    public void addOperation(String name, String sequence, Operation op){
+    public void addCustomToOperationMemory(CustomOperation op){
         //controllo
-        if(contains(name)){
+        if(contains(op.getName())){
             throw new AlreadyExistentOperationException();
         }
-        ops.add(new Operations(name, sequence, op));
+        ops.add(op);
     }
     
-    public Operation getOperation(String name){
-        for (Operations c : ops){
-            if (c.getName().equals(name))
-                return c.getOp();
+    public CustomOperation getCustomOperation(String name){
+        for (CustomOperation op : ops){
+            if (op.getName().equals(name))
+                return op;
             
         }
         return null;
     }
-
-    public ObservableList<Operations> getOps() {
+    
+    public void refreshSequences(String oldName, String newName){
+        for(CustomOperation op: ops){
+            op.setSequence(op.getSequence().replaceAll(oldName, newName));
+        }
+    }
+    
+    public ObservableList<CustomOperation> getOps() {
         return ops;
     }
 
-    public void setOps(ObservableList<Operations> ops) {
+    public void setOps(ObservableList<CustomOperation> ops) {
         this.ops = ops;
     }   
     
     private boolean contains(String name){
-        for(Operations o : ops){
+        for(CustomOperation o : ops){
             if(o.getName().equals(name))
                 return true;
         }

@@ -3,11 +3,11 @@ package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Model.ComplexNumber;
 
-public class Variables {
+public class Variable {
     private Character var;
     private ComplexNumber value;
 
-    public Variables(Character var, ComplexNumber value) {
+    public Variable(Character var, ComplexNumber value) {
         this.var = var;
         this.value = value;
     }
