@@ -1,13 +1,12 @@
 package it.unisa.complexcalculator.Controller;
 
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.*;
 import it.unisa.complexcalculator.Model.Memory.Operations;
 import it.unisa.complexcalculator.Model.Memory.Variables;
-import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
-import it.unisa.complexcalculator.Model.Operation.StackOperations.AddOperation;
 import java.net.URL;
-import java.util.ArrayDeque;
+import java.util.EmptyStackException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -87,15 +86,7 @@ public class FXMLController implements Initializable {
 
         String input = inputBox.getText();
         
-        try{
-            Operation op = c.parseOperation(input);
-            op.execute();
-        } catch (NumberFormatException ex){
-            inputBox.setText("");
-            generateAlert("Invalid number format.");
-        }
-        inputBox.setText("");
-        varTable.refresh();
+        executeOperation(input);
         
     }
 
@@ -130,16 +121,7 @@ public class FXMLController implements Initializable {
     private void operation(MouseEvent event) {
         Button b = (Button)event.getSource();
         String s = b.getText().toLowerCase();
-        
-        try{
-            Operation op = c.parseOperation(s);
-            op.execute();
-        } catch (NumberFormatException ex){
-            inputBox.setText("");
-            generateAlert("Invalid number format.");
-        }
-        inputBox.setText("");
-        varTable.refresh();
+        executeOperation(s);
     }
 
     @FXML
@@ -172,4 +154,24 @@ public class FXMLController implements Initializable {
     private void updateSeqColumn(TableColumn.CellEditEvent<Operations, String> event) {
     }
     
+    private void executeOperation(String s){
+        try{
+            Operation op = c.parseOperation(s);
+            op.execute();
+        } catch (NumberFormatException ex){
+            inputBox.setText("");
+            generateAlert("Invalid number format.");
+        } catch (NotEnoughOperandsException ex){
+            inputBox.setText("");
+            generateAlert("Not Enough operands.");
+        } catch (EmptyStackException ex){
+            inputBox.setText("");
+            generateAlert("Stack Empty.");
+        } catch (Exception ex){
+            inputBox.setText("");
+            generateAlert("Error: " + ex.getMessage());
+        }
+        inputBox.setText("");
+        varTable.refresh();
+    }
 }
