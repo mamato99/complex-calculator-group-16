@@ -1,6 +1,7 @@
 
 package it.unisa.complexcalculator.Model.Operation.VariableOperations;
 
+import it.unisa.complexcalculator.Model.Memory.Variable;
 import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 import it.unisa.complexcalculator.Model.Memory.VariableStack;
 import it.unisa.complexcalculator.Model.Operation.Operation;
@@ -17,7 +18,10 @@ public class RestoreOperation extends Operation {
 
     @Override
     public void execute() {
-        var.setVars(varStack.pop());
+        var.getVars().clear();
+        for(Variable v : varStack.pop()){
+            var.getVars().add(v);
+        }
     }
 
 }

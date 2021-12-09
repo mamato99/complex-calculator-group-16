@@ -39,7 +39,7 @@ public class FXMLController implements Initializable {
 
     private OperationInvoker invoker;
     
-    private final String defaultPath = "backup.txt";
+    private final String defaultPath = "backup";
     
     @FXML
     private TextField inputBox;
@@ -205,7 +205,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void saveCustomOperation() {
         
-        File f = chooseFile(pathCheckbox.isSelected());
+        File f = chooseFile(pathCheckbox.isSelected(), true);
         if (f != null) {
             try {
                 c.save(f.getAbsolutePath());
@@ -221,7 +221,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void loadCustomOperation() {
         
-        File f = chooseFile(pathCheckbox.isSelected());
+        File f = chooseFile(pathCheckbox.isSelected(), false);
         if (f != null) {
             try {
                 c.load(f.getAbsolutePath());
@@ -324,11 +324,14 @@ public class FXMLController implements Initializable {
         c.removeCustomOperation(op);
     }
     
-    private File chooseFile(boolean checked){
+    private File chooseFile(boolean checked, boolean save){
         if(!checked){
             FileChooser fc = new FileChooser();
-            fc.setTitle("Save file...");
-            return fc.showOpenDialog(root.getScene().getWindow());
+            fc.setTitle("Choose file...");
+            if(save)
+                return fc.showSaveDialog(root.getScene().getWindow());
+            else
+                return fc.showOpenDialog(root.getScene().getWindow()); 
         }
         return new File(defaultPath);
     }

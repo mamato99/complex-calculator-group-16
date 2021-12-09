@@ -36,8 +36,8 @@ public class CustomOperation extends Operation{
     
     @Override
     public void execute() {
-        ops.forEach(op -> {
+        for(Operation op : ops){
             op.execute();
-        });
+        }
     }
 }

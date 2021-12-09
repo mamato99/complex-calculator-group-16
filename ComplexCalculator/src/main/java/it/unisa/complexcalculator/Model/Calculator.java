@@ -6,9 +6,12 @@ import it.unisa.complexcalculator.Model.Operation.StackOperations.*;
 import it.unisa.complexcalculator.Model.Memory.*;
 import it.unisa.complexcalculator.Model.Operation.*;
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import javafx.collections.ObservableList;
@@ -191,7 +194,15 @@ public class Calculator {
     }
 
     public void save(String file) throws FileNotFoundException, IOException {
-        
+        DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+        dout.writeInt(operations.getOps().size());
+
+        for (CustomOperation op : operations.getOps()) {
+            String toWrite = op.getName() + ":" + op.getSequence();
+            dout.writeUTF(toWrite);
+        }
+        dout.flush();
+        dout.close();
     }
 
     public void load(String file) throws FileNotFoundException, IOException, ClassNotFoundException {
