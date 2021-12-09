@@ -1,9 +1,7 @@
 package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Model.ComplexNumber;
-import java.util.ArrayList;
 import java.util.EmptyStackException;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -20,14 +18,21 @@ import javafx.collections.ObservableList;
  */
 public class NumberMemory{
     
+    private static NumberMemory instance = null;
     private ObservableList<ComplexNumber> stack;
 
+    public static NumberMemory getNumberMemory(){
+        if(instance == null)
+            instance = new NumberMemory();
+        return instance;
+    }
+    
     /**
      * <p>Constructor of the NumberMemory class.</p>
      * <p>It initializes the stored numbers stack assigning to it an instance of an empty 
      * <code>ObservableArrayList</code> class and sets the lenght of the stored numbers to zero.</p>
      */
-    public NumberMemory() {
+    private NumberMemory() {
         stack = FXCollections.observableArrayList();
     }
     
@@ -60,6 +65,10 @@ public class NumberMemory{
         if (stack.size() > 0)
             return stack.get(0);
         throw new EmptyStackException();
+    }
+    
+    public void clear(){
+        stack.clear();
     }
     
     /**

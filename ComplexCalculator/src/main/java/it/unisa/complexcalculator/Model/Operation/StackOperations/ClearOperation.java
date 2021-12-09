@@ -7,8 +7,8 @@ public class ClearOperation extends Operation {
 
     private final NumberMemory storedNumbers;
 
-    public ClearOperation(NumberMemory storedNumbers) {
-        this.storedNumbers = storedNumbers;
+    public ClearOperation() {
+        this.storedNumbers = NumberMemory.getNumberMemory();
     }
 
     /**

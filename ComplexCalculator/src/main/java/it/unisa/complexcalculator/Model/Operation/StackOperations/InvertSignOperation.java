@@ -9,8 +9,8 @@ import it.unisa.complexcalculator.Model.Operation.Operation;
 public class InvertSignOperation extends Operation{
     private final NumberMemory storedNumbers;
 
-    public InvertSignOperation(NumberMemory storedNumbers) {
-        this.storedNumbers = storedNumbers;
+    public InvertSignOperation() {
+        this.storedNumbers = NumberMemory.getNumberMemory();
     }
     
     /**

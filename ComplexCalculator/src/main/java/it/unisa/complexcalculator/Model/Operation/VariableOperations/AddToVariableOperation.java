@@ -11,15 +11,15 @@ public class AddToVariableOperation extends Operation {
     private final NumberMemory num;
     private final Character c;
 
-    public AddToVariableOperation(NumberMemory num, VariableMemory var, Character c) {
-        this.var = var;
-        this.num = num;
+    public AddToVariableOperation(Character c) {
+        this.var = VariableMemory.getVariableMemory();
+        this.num = NumberMemory.getNumberMemory();
         this.c = c;
     }
 
     @Override
     public void execute() {
-        var.addVariable(c, ComplexOperations.add(var.getVariable(c), num.pop()));
+        var.updateVariable(c, ComplexOperations.add(var.getVariable(c), num.pop()));
     }
 
 }

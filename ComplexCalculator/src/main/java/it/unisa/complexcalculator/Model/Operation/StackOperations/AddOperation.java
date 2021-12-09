@@ -9,8 +9,8 @@ import it.unisa.complexcalculator.Model.Operation.Operation;
 public class AddOperation extends Operation{
     private final NumberMemory storedNumbers;
 
-    public AddOperation(NumberMemory storedNumbers) {
-        this.storedNumbers = storedNumbers;
+    public AddOperation() {
+        this.storedNumbers = NumberMemory.getNumberMemory();
     }
     /**
      * <p>

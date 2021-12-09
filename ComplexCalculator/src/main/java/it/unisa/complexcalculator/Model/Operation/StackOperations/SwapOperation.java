@@ -7,10 +7,10 @@ import it.unisa.complexcalculator.Model.Operation.Operation;
 
 public class SwapOperation extends Operation {
 
-    private NumberMemory storedNumbers;
+    private final NumberMemory storedNumbers;
 
-    public SwapOperation(NumberMemory storedNumbers) {
-        this.storedNumbers = storedNumbers;
+    public SwapOperation() {
+        this.storedNumbers = NumberMemory.getNumberMemory();
     }
 
     /**

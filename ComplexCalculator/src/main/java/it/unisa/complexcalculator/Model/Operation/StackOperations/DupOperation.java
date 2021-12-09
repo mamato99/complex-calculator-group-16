@@ -9,8 +9,8 @@ public class DupOperation extends Operation {
 
     private final NumberMemory storedNumbers;
 
-    public DupOperation(NumberMemory storedNumbers) {
-        this.storedNumbers = storedNumbers;
+    public DupOperation() {
+        this.storedNumbers = NumberMemory.getNumberMemory();
     }
 
     /**

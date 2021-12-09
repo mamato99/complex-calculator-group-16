@@ -9,9 +9,9 @@ public class PushOperation extends Operation{
     private final ComplexNumber c;
     private final NumberMemory storedNumbers;
 
-    public PushOperation(NumberMemory storedNumbers, ComplexNumber c) {
+    public PushOperation(ComplexNumber c) {
         this.c = c;
-        this.storedNumbers = storedNumbers;
+        this.storedNumbers = NumberMemory.getNumberMemory();
     }
     
     @Override

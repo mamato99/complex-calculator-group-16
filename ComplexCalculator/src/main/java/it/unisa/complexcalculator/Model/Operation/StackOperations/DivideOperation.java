@@ -9,8 +9,8 @@ import it.unisa.complexcalculator.Model.Operation.Operation;
 public class DivideOperation extends Operation{
     private final NumberMemory storedNumbers;
 
-    public DivideOperation(NumberMemory storedNumbers) {
-        this.storedNumbers = storedNumbers;
+    public DivideOperation() {
+        this.storedNumbers = NumberMemory.getNumberMemory();
     }
     
     /**

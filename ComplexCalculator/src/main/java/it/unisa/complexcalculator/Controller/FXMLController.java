@@ -2,13 +2,18 @@ package it.unisa.complexcalculator.Controller;
 
 import it.unisa.complexcalculator.Exception.AlreadyExistentOperationException;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
+import it.unisa.complexcalculator.Exception.ReferencedOperationException;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.*;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
+import it.unisa.complexcalculator.Model.Memory.OperationMemory;
 import it.unisa.complexcalculator.Model.Memory.Variable;
+import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
 import it.unisa.complexcalculator.Model.Operation.OperationInvoker;
-import java.io.File;
-import java.io.IOException;
+import it.unisa.complexcalculator.Model.Stream.CustomStream;
+import it.unisa.complexcalculator.Model.Stream.DefaultStream;
+import it.unisa.complexcalculator.Model.Stream.Stream;
 import java.net.URL;
 import java.util.EmptyStackException;
 import java.util.NoSuchElementException;
@@ -28,13 +33,14 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
 
 public class FXMLController implements Initializable {
 
     @FXML
     private ListView<ComplexNumber> storedElements;
-
+    
+    private Stream stream;
+    
     private Calculator c;
 
     private OperationInvoker invoker;
@@ -72,17 +78,18 @@ public class FXMLController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setStream();
         c = new Calculator();
-        invoker = new OperationInvoker(c);
-        storedElements.setItems(c.getNumberList());
+        invoker = new OperationInvoker();
+        storedElements.setItems(NumberMemory.getNumberMemory().getStack());
 
         varColumn.setCellValueFactory(new PropertyValueFactory<>("var")); //fai apparire nella tabella il valore della data
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value")); //fai apparire il valore della descrizione
-        varTable.setItems(c.getVariableList());
+        varTable.setItems(VariableMemory.getVariableMemory().getVars());
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name")); //fai apparire nella tabella il valore della data
         seqColumn.setCellValueFactory(new PropertyValueFactory<>("sequence")); //fai apparire il valore della descrizione
-        opsTable.setItems(c.getCustomOperationList());
+        opsTable.setItems(OperationMemory.getOperationMemory().getOps());
 
         seqColumn.setCellFactory(TextFieldTableCell.forTableColumn()); // Become editable
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn()); // Become editable
@@ -188,7 +195,8 @@ public class FXMLController implements Initializable {
             return;
         }
         try {
-            c.addCustomOperation(name, seq);
+            CustomOperation op = c.createCustomOperation(name, seq);
+            OperationMemory.getOperationMemory().addCustomOperation(op);
         } catch (AlreadyExistentOperationException ex) {
             generateAlert("Already existent operation.");
             return;
@@ -203,38 +211,24 @@ public class FXMLController implements Initializable {
 
     
     @FXML
-    private void saveCustomOperation() {
-        
-        File f = chooseFile(pathCheckbox.isSelected(), true);
-        if (f != null) {
-            try {
-                c.save(f.getAbsolutePath());
-                generateConfirmation("Saved successfully.");
-                opsTable.refresh();
-            } catch (IOException ex) {
-                generateAlert("Error while saving file.");
-                return;
-            }
-        }
+    private void setStream(){
+        if(pathCheckbox.isSelected())
+            stream = new DefaultStream();
+        else
+            stream = new CustomStream();
+    }
+    
+    @FXML
+    private void saveCustomOperation() {        
+        stream.save(root.getScene());
+        opsTable.refresh();
+        //REFRESHARE
     }
 
     @FXML
     private void loadCustomOperation() {
-        
-        File f = chooseFile(pathCheckbox.isSelected(), false);
-        if (f != null) {
-            try {
-                c.load(f.getAbsolutePath());
-                generateConfirmation("Loaded successfully.");
-                opsTable.refresh();
-            } catch (IOException ex) {
-                generateAlert("Error while loading file.");
-                return;
-            } catch (ClassNotFoundException ex) {
-                generateAlert("Error: " + ex.getMessage());
-                return;
-            }
-        }
+        stream.load(root.getScene());
+        opsTable.refresh();
     }
 
     @FXML
@@ -246,7 +240,7 @@ public class FXMLController implements Initializable {
         }
         
         try {
-            c.refreshSequences(old, event.getNewValue());
+            OperationMemory.getOperationMemory().refreshSequences(old, event.getNewValue());
         } catch (AlreadyExistentOperationException ex) {
             generateAlert("Already existent operation.");
             opsTable.refresh();
@@ -258,10 +252,12 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void updateSeqColumn(TableColumn.CellEditEvent<CustomOperation, String> event) {
+        OperationMemory opMem = OperationMemory.getOperationMemory();
         CustomOperation selected = opsTable.getSelectionModel().getSelectedItem();
         try {
-            String newSeq = c.sequenceToOperation(selected.getName(), event.getNewValue()).getSequence();
-            selected.setSequence(newSeq);
+            opMem.removeCustomOperation(selected);
+            opMem.addCustomOperation(c.createCustomOperation(selected.getName(), event.getNewValue()));
+            opsTable.refresh();
         } catch (Exception ex) {
             generateAlert("Invalid sequence format.");
             opsTable.refresh();
@@ -277,7 +273,7 @@ public class FXMLController implements Initializable {
             opsTable.refresh();
             return false;
         }
-        if(c.parseOperation(name) != null){
+        if(c.createOperation(name) != null){
             generateAlert("Invalid operation name, already existent operation.");
             return false;
         }
@@ -287,7 +283,7 @@ public class FXMLController implements Initializable {
     
     private void executeOperation(String s) {
         try {
-            Operation op = c.parseOperation(s);
+            Operation op = c.createOperation(s);
             invoker.execute(op);
         } catch (NumberFormatException ex) {
             inputBox.setText("");
@@ -321,18 +317,12 @@ public class FXMLController implements Initializable {
     @FXML
     private void deleteOperation() {
         CustomOperation op = opsTable.getSelectionModel().getSelectedItem();
-        c.removeCustomOperation(op);
+        
+        try{
+            OperationMemory.getOperationMemory().removeCustomOperation(op);
+        }catch(ReferencedOperationException ex){
+            generateAlert("Can't delete this operation, it is used by another one.");
+        }
     }
     
-    private File chooseFile(boolean checked, boolean save){
-        if(!checked){
-            FileChooser fc = new FileChooser();
-            fc.setTitle("Choose file...");
-            if(save)
-                return fc.showSaveDialog(root.getScene().getWindow());
-            else
-                return fc.showOpenDialog(root.getScene().getWindow()); 
-        }
-        return new File(defaultPath);
-    }
 }

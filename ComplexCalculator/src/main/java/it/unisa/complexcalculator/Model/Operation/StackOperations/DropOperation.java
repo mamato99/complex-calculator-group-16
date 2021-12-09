@@ -7,8 +7,8 @@ public class DropOperation extends Operation {
 
     private NumberMemory storedNumbers;
 
-    public DropOperation(NumberMemory storedNumbers) {
-        this.storedNumbers = storedNumbers;
+    public DropOperation() {
+        this.storedNumbers = NumberMemory.getNumberMemory();
     }
 
     /**

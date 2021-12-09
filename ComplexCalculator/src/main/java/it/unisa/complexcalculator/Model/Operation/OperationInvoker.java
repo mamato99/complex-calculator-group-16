@@ -1,25 +1,27 @@
 package it.unisa.complexcalculator.Model.Operation;
 
-import it.unisa.complexcalculator.Model.Calculator;
 import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Memory.Variable;
+import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class OperationInvoker {
     
-    private ObservableList<ComplexNumber> oldMem;
-    private ObservableList<Variable> oldVars;
-    private final Calculator c;
+    private final ObservableList<ComplexNumber> oldMem;
+    private final ObservableList<Variable> oldVars;
+    private final NumberMemory numMem;
+    private final VariableMemory varMem;
 
-    public OperationInvoker(Calculator c){
-        this.c = c;
+    public OperationInvoker(){
+        numMem = NumberMemory.getNumberMemory();
+        varMem = VariableMemory.getVariableMemory();
         oldMem = FXCollections.observableArrayList();
         oldVars = FXCollections.observableArrayList();
     }
     
     public void execute(Operation op){
-        
         save();
         try{
             op.execute();
@@ -31,26 +33,26 @@ public class OperationInvoker {
     
     private void save(){
         oldMem.clear();
-        for(ComplexNumber cmpx : c.getNumberList()){
+        for(ComplexNumber cmpx : numMem.getStack()){
             oldMem.add(new ComplexNumber(cmpx.getReal(), cmpx.getImaginary()));
         }
         
         oldVars.clear();
-        for(Variable var : c.getVariableList()){
+        for(Variable var : varMem.getVars()){
             oldVars.add(new Variable(var.getVar(), var.getValue()));
         }
         
     }
     
     private void restore(){
-        c.getNumberList().clear();
+        numMem.clear();
         for(ComplexNumber cmpx : oldMem){
-            c.getNumberList().add(new ComplexNumber(cmpx.getReal(), cmpx.getImaginary()));
+            numMem.push(new ComplexNumber(cmpx.getReal(), cmpx.getImaginary()));
         }
         
-        c.getVariableList().clear();
+        varMem.clear();
         for(Variable var : oldVars){
-            c.getVariableList().add(new Variable(var.getVar(), var.getValue()));
+            varMem.addVariable(new Variable(var.getVar(), var.getValue()));
         }
     }
 }

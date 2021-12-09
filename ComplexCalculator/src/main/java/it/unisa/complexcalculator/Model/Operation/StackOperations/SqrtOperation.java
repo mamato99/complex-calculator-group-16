@@ -9,8 +9,8 @@ import it.unisa.complexcalculator.Model.Operation.Operation;
 public class SqrtOperation extends Operation{
     private final NumberMemory storedNumbers;
 
-    public SqrtOperation(NumberMemory storedNumbers) {
-        this.storedNumbers = storedNumbers;
+    public SqrtOperation() {
+        this.storedNumbers = NumberMemory.getNumberMemory();
     }
     
     /**

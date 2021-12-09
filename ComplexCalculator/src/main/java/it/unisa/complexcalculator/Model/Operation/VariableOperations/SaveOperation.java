@@ -13,9 +13,9 @@ public class SaveOperation extends Operation {
     private ObservableList<Variable> toSave;
     private final VariableStack varStack;
 
-    public SaveOperation(VariableMemory varMem, VariableStack varStack) {
-        this.varMem = varMem;
-        this.varStack = varStack;
+    public SaveOperation() {
+        this.varMem = VariableMemory.getVariableMemory();
+        this.varStack = VariableStack.getVariableStack();
         toSave = FXCollections.observableArrayList();
     }
 

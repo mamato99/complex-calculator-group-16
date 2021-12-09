@@ -9,8 +9,8 @@ public class OverOperation extends Operation {
 
     private final NumberMemory storedNumbers;
 
-    public OverOperation(NumberMemory storedNumbers) {
-        this.storedNumbers = storedNumbers;
+    public OverOperation() {
+        this.storedNumbers = NumberMemory.getNumberMemory();
     }
 
     /**

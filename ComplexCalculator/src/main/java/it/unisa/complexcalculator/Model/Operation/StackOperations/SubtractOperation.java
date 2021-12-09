@@ -10,8 +10,8 @@ public class SubtractOperation extends Operation{
     
     private final NumberMemory storedNumbers;
 
-    public SubtractOperation(NumberMemory storedNumbers) {
-        this.storedNumbers = storedNumbers;
+    public SubtractOperation() {
+        this.storedNumbers = NumberMemory.getNumberMemory();
     }
     
     /**

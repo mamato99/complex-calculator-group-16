@@ -11,9 +11,9 @@ public class RestoreOperation extends Operation {
     private final VariableMemory var;
     private final VariableStack varStack;
 
-    public RestoreOperation(VariableMemory var, VariableStack varStack) {
-        this.var = var;
-        this.varStack = varStack;
+    public RestoreOperation() {
+        this.var = VariableMemory.getVariableMemory();
+        this.varStack = VariableStack.getVariableStack();
     }
 
     @Override

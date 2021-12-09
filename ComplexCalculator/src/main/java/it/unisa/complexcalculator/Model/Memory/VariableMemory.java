@@ -6,14 +6,22 @@ import javafx.collections.ObservableList;
 
 public class VariableMemory {
     private ObservableList<Variable> vars;
+    
+    private static VariableMemory instance = null;
 
-    public VariableMemory() {
+    public static VariableMemory getVariableMemory(){
+        if(instance == null)
+            instance = new VariableMemory();
+        return instance;
+    }
+    
+    private VariableMemory() {
         vars = FXCollections.observableArrayList();
         for (char c = 'A'; c <= 'Z'; c++) {
             vars.add(new Variable(c, new ComplexNumber(0, 0)));
         }
     }
-    
+
     public ObservableList<Variable> getVars() {
         return vars;
     }
@@ -22,14 +30,18 @@ public class VariableMemory {
         this.vars = vars;
     }
     
-    public void addVariable(Character c, ComplexNumber n){
+    public void updateVariable(Character c, ComplexNumber n){
         for (Variable v : vars){
             if (v.getVar().equals(c))
                 v.setValue(n);       
         }
     }
     
-    public void pushVariable(Variable var){
+    public void clear(){
+        vars.clear();
+    }
+    
+    public void addVariable(Variable var){
         vars.add(var);
     }
     

@@ -11,15 +11,15 @@ public class SubtractToVariableOperation extends Operation {
     private final NumberMemory num;
     private final Character c;
 
-    public SubtractToVariableOperation(NumberMemory num, VariableMemory var, Character c) {
-        this.var=var;
-        this.num=num;
+    public SubtractToVariableOperation(Character c) {
+        this.var = VariableMemory.getVariableMemory();
+        this.num = NumberMemory.getNumberMemory();
         this.c = c;
     }
     
     @Override
     public void execute() {
-        var.addVariable(c, ComplexOperations.difference(var.getVariable(c), num.pop()));
+        var.updateVariable(c, ComplexOperations.difference(var.getVariable(c), num.pop()));
     }
     
 }

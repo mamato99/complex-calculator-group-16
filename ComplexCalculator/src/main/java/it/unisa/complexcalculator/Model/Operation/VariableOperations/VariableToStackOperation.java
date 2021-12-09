@@ -10,9 +10,9 @@ public class VariableToStackOperation extends Operation {
     private final NumberMemory num;
     private final Character c;
 
-    public VariableToStackOperation(NumberMemory num, VariableMemory var, Character c) {
-        this.var=var;
-        this.num=num;
+    public VariableToStackOperation(Character c) {
+        this.var = VariableMemory.getVariableMemory();
+        this.num = NumberMemory.getNumberMemory();
         this.c = c;
     }
     

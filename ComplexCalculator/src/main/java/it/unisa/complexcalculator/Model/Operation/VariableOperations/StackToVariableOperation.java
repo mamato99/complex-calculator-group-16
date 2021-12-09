@@ -10,15 +10,15 @@ public class StackToVariableOperation extends Operation {
     private final NumberMemory num;
     private final Character c;
 
-    public StackToVariableOperation (NumberMemory num, VariableMemory var, Character c) {
-        this.var = var;
-        this.num = num;
+    public StackToVariableOperation (Character c) {
+        this.var = VariableMemory.getVariableMemory();
+        this.num = NumberMemory.getNumberMemory();
         this.c = c;
     }
 
     @Override
     public void execute() {
-        var.addVariable(c, num.pop());
+        var.updateVariable(c, num.pop());
     }
 
 }

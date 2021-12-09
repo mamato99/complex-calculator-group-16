@@ -1,6 +1,7 @@
 package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Exception.AlreadyExistentOperationException;
+import it.unisa.complexcalculator.Exception.ReferencedOperationException;
 import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
 import java.io.*;
 
@@ -10,18 +11,27 @@ import javafx.collections.ObservableList;
 public class OperationMemory implements Serializable{
 
     private ObservableList<CustomOperation> ops;
-
-    public OperationMemory() {
+    private static OperationMemory instance = null;
+    
+    public static OperationMemory getOperationMemory(){
+        if(instance == null)
+            instance = new OperationMemory();
+        return instance;
+    }
+    
+    private OperationMemory() {
         ops = FXCollections.observableArrayList();
     }
     
-    public void removeCustomOperationFromMemory(CustomOperation op){
+    public void removeCustomOperation(CustomOperation op){
+        if(checkNameInSequence(op.getName()))
+            throw new ReferencedOperationException();
         ops.remove(op);
     }
     
-    public void addCustomToOperationMemory(CustomOperation op){
+    public void addCustomOperation(CustomOperation op){
         //controllo
-        if(contains(op.getName())){
+        if(checkDuplicate(op.getName())){
             throw new AlreadyExistentOperationException();
         }
         ops.add(op);
@@ -37,11 +47,24 @@ public class OperationMemory implements Serializable{
     }
     
     public void refreshSequences(String oldName, String newName){
-        if(contains(newName))
+        if(checkDuplicate(newName))
             throw new AlreadyExistentOperationException();
         for(CustomOperation op: ops){
-            op.setSequence(op.getSequence().replaceAll(oldName, newName));
+            String[] tokens = op.getSequence().split(" ");
+            for(String s : tokens){
+                if(s.equals(oldName)){
+                    //CONTINUARE
+                }
+            }
         }
+    }
+    
+    public void clear(){
+        ops.clear();
+    }
+    
+    public int opLen(){
+        return ops.size();
     }
     
     public ObservableList<CustomOperation> getOps() {
@@ -52,7 +75,18 @@ public class OperationMemory implements Serializable{
         this.ops = ops;
     }   
     
-    private boolean contains(String name){
+    private boolean checkNameInSequence(String name){
+        for(CustomOperation o : ops){
+            String[] tokens = o.getSequence().split(" ");
+            for(String s : tokens){
+                if(s.equals(name))
+                    return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean checkDuplicate(String name){
         for(CustomOperation o : ops){
             if(o.getName().equals(name))
                 return true;
