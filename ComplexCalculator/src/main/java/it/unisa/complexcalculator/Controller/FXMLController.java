@@ -183,6 +183,7 @@ public class FXMLController implements Initializable {
         seqField.clear();
     }
 
+    
     @FXML
     private void saveCustomOperation(MouseEvent event) {
         FileChooser fc = new FileChooser();
