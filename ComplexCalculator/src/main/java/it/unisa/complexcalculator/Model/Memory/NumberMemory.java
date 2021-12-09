@@ -20,7 +20,7 @@ import javafx.collections.ObservableList;
  */
 public class NumberMemory{
     
-    private final ObservableList<ComplexNumber> stack;
+    private ObservableList<ComplexNumber> stack;
 
     /**
      * <p>Constructor of the NumberMemory class.</p>
@@ -78,19 +78,8 @@ public class NumberMemory{
         return stack;
     }
     
-    public List<ComplexNumber> getStackAsList(){
-        List<ComplexNumber> retVal = new ArrayList<>();
-        for (ComplexNumber num : stack){
-            retVal.add(0, num);
-        }
-        return retVal;
-    }
-    
-    public void setStackFromList(List<ComplexNumber> numbers){
-        stack.clear();
-        for (ComplexNumber num : numbers){
-            push(num);
-        }
+    public void setStack(ObservableList<ComplexNumber> numbers){
+        stack = numbers;
     }
 
 }

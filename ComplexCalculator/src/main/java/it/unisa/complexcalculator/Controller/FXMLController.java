@@ -8,20 +8,17 @@ import it.unisa.complexcalculator.Model.Memory.Variable;
 import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
 import it.unisa.complexcalculator.Model.Operation.OperationInvoker;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.EmptyStackException;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -41,7 +38,9 @@ public class FXMLController implements Initializable {
     private Calculator c;
 
     private OperationInvoker invoker;
-
+    
+    private final String defaultPath = "backup.txt";
+    
     @FXML
     private TextField inputBox;
     @FXML
@@ -62,6 +61,8 @@ public class FXMLController implements Initializable {
     private TableColumn<CustomOperation, String> seqColumn;
     @FXML
     private AnchorPane root;
+    @FXML
+    private CheckBox pathCheckbox;
 
     /**
      * Initializes all elements according to user preferences by default
@@ -72,23 +73,21 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         c = new Calculator();
-        invoker = new OperationInvoker();
-        storedElements.setItems(c.getNumbers().getStack());
+        invoker = new OperationInvoker(c);
+        storedElements.setItems(c.getNumberList());
 
         varColumn.setCellValueFactory(new PropertyValueFactory<>("var")); //fai apparire nella tabella il valore della data
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value")); //fai apparire il valore della descrizione
-
-        varTable.setItems(c.getVariables().getVars());
+        varTable.setItems(c.getVariableList());
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name")); //fai apparire nella tabella il valore della data
         seqColumn.setCellValueFactory(new PropertyValueFactory<>("sequence")); //fai apparire il valore della descrizione
-
-        opsTable.setItems(c.getOperations().getOps());
+        opsTable.setItems(c.getCustomOperationList());
 
         seqColumn.setCellFactory(TextFieldTableCell.forTableColumn()); // Become editable
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn()); // Become editable
 
-        // Enter key to submit and Escape key to clear
+        // Enter key to submit and Escape key to clear in inputBox
         inputBox.setOnKeyPressed(value -> {
             if (value.getCode().equals(KeyCode.ENTER)) {
                 ins();
@@ -96,6 +95,19 @@ public class FXMLController implements Initializable {
                 ac();
             }
         });
+        
+        // 
+        nameField.setOnKeyPressed(value -> {
+            if (value.getCode().equals(KeyCode.ENTER)) {
+                insertCustomOperation();
+            }
+        }); 
+        
+        seqField.setOnKeyPressed(value -> {
+            if (value.getCode().equals(KeyCode.ENTER)) {
+                insertCustomOperation();
+            }
+        }); 
     }
 
     /*
@@ -127,6 +139,14 @@ public class FXMLController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.ERROR, s, ButtonType.OK);
         alert.showAndWait();
     }
+    
+    /*
+     * Method that generates an alert.
+     */
+    private void generateConfirmation(String s) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, s, ButtonType.OK);
+        alert.showAndWait();
+    }
 
     /*
      * Method to manage the modification of the labels when button with "AC" as label is clicked
@@ -147,28 +167,26 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
-    private void loadVariablesState(MouseEvent event) {
+    private void loadVariablesState() {
         executeOperation("restore");
-        
         varTable.refresh();
     }
 
     @FXML
-    private void saveVariablesState(MouseEvent event) {
+    private void saveVariablesState() {
         executeOperation("save");
         varTable.refresh();
     }
 
     @FXML
-    private void insertCustomOperation(MouseEvent event) {
+    private void insertCustomOperation() {
         String name = nameField.getText();
         String seq = seqField.getText();
 
-        if (!name.matches("^[a-zA-Z]+$")) {
-            generateAlert("Operation name must contain only letters.");
+        if(!checkOperationValidity(name)){
+            opsTable.refresh();
             return;
         }
-
         try {
             c.addCustomOperation(name, seq);
         } catch (AlreadyExistentOperationException ex) {
@@ -185,33 +203,36 @@ public class FXMLController implements Initializable {
 
     
     @FXML
-    private void saveCustomOperation(MouseEvent event) {
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Save file...");
-        File f = fc.showSaveDialog(root.getScene().getWindow());
+    private void saveCustomOperation() {
+        
+        File f = chooseFile(pathCheckbox.isSelected());
         if (f != null) {
             try {
                 c.save(f.getAbsolutePath());
+                generateConfirmation("Saved successfully.");
                 opsTable.refresh();
             } catch (IOException ex) {
                 generateAlert("Error while saving file.");
+                return;
             }
         }
     }
 
     @FXML
-    private void loadCustomOperation(MouseEvent event) {
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Save file...");
-        File f = fc.showOpenDialog(root.getScene().getWindow());
+    private void loadCustomOperation() {
+        
+        File f = chooseFile(pathCheckbox.isSelected());
         if (f != null) {
             try {
                 c.load(f.getAbsolutePath());
+                generateConfirmation("Loaded successfully.");
                 opsTable.refresh();
             } catch (IOException ex) {
                 generateAlert("Error while loading file.");
+                return;
             } catch (ClassNotFoundException ex) {
                 generateAlert("Error: " + ex.getMessage());
+                return;
             }
         }
     }
@@ -219,11 +240,11 @@ public class FXMLController implements Initializable {
     @FXML
     private void updateNameColumn(TableColumn.CellEditEvent<CustomOperation, String> event) {
         String old = opsTable.getSelectionModel().getSelectedItem().getName();
-        if (!event.getNewValue().matches("^[a-zA-Z]+$")) {
-            generateAlert("Operation name must contain only letters.");
+        if(!checkOperationValidity(event.getNewValue())){
             opsTable.refresh();
-            return;
+            return;     
         }
+        
         try {
             c.refreshSequences(old, event.getNewValue());
         } catch (AlreadyExistentOperationException ex) {
@@ -250,10 +271,24 @@ public class FXMLController implements Initializable {
 
     }
 
+    private boolean checkOperationValidity(String name){
+        if (!name.matches("^[a-zA-Z0-9]+$")) {
+            generateAlert("Operation name must contain alphanumeric characters.");
+            opsTable.refresh();
+            return false;
+        }
+        if(c.parseOperation(name) != null){
+            generateAlert("Invalid operation name, already existent operation.");
+            return false;
+        }
+        return true;
+    }
+    
+    
     private void executeOperation(String s) {
         try {
             Operation op = c.parseOperation(s);
-            invoker.execute(op, c);
+            invoker.execute(op);
         } catch (NumberFormatException ex) {
             inputBox.setText("");
             generateAlert("Invalid number format.");
@@ -278,15 +313,23 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
-    private void invokeOperation(ActionEvent event) {
+    private void invokeOperation() {
         CustomOperation op = opsTable.getSelectionModel().getSelectedItem();
         executeOperation(op.getName());
     }
 
     @FXML
-    private void deleteOperation(ActionEvent event) {
+    private void deleteOperation() {
         CustomOperation op = opsTable.getSelectionModel().getSelectedItem();
         c.removeCustomOperation(op);
     }
-
+    
+    private File chooseFile(boolean checked){
+        if(!checked){
+            FileChooser fc = new FileChooser();
+            fc.setTitle("Save file...");
+            return fc.showOpenDialog(root.getScene().getWindow());
+        }
+        return new File(defaultPath);
+    }
 }

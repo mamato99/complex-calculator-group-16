@@ -2,8 +2,8 @@
 package it.unisa.complexcalculator.Model.Memory;
 
 import java.util.ArrayDeque;
-import java.util.List;
+import javafx.collections.ObservableList;
 
-public class VariableStack extends ArrayDeque<List<Variable>> {
+public class VariableStack extends ArrayDeque<ObservableList<Variable>> {
 
 }

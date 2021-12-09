@@ -328,7 +328,7 @@
                                     </ContextMenu>
                                  </contextMenu>
                               </TableView>
-                              <Button focusTraversable="false" layoutX="1.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#insertCustomOperation" prefHeight="40.0" prefWidth="121.0" style="-fx-border-radius: 10px;" styleClass="optionButtons" text="INSERT" textFill="WHITE">
+                              <Button focusTraversable="false" layoutX="14.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#insertCustomOperation" prefHeight="40.0" prefWidth="87.0" style="-fx-border-radius: 10px;" styleClass="optionButtons" text="INSERT" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -343,7 +343,7 @@
                                     <Font name="Andale Mono" size="17.0" />
                                  </font>
                               </Button>
-                              <Button focusTraversable="false" layoutX="176.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#saveCustomOperation" prefHeight="40.0" prefWidth="121.0" style="-fx-border-radius: 10px;" styleClass="optionButtons" text="SAVE" textFill="WHITE">
+                              <Button focusTraversable="false" layoutX="265.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#saveCustomOperation" prefHeight="40.0" prefWidth="87.0" style="-fx-border-radius: 10px;" styleClass="optionButtons" text="SAVE" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -358,7 +358,7 @@
                                     <Font name="Andale Mono" size="17.0" />
                                  </font>
                               </Button>
-                              <Button focusTraversable="false" layoutX="344.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#loadCustomOperation" prefHeight="40.0" prefWidth="121.0" style="-fx-border-radius: 10px;" styleClass="optionButtons" text="LOAD" textFill="WHITE">
+                              <Button focusTraversable="false" layoutX="368.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#loadCustomOperation" prefHeight="40.0" prefWidth="87.0" style="-fx-border-radius: 10px;" styleClass="optionButtons" text="LOAD" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -373,16 +373,17 @@
                                     <Font name="Andale Mono" size="17.0" />
                                  </font>
                               </Button>
-                              <TextField fx:id="seqField" layoutX="177.0" layoutY="261.0" prefHeight="27.0" prefWidth="288.0" promptText="Sequence" styleClass="opText">
+                              <TextField fx:id="seqField" layoutX="141.0" layoutY="268.0" prefHeight="32.0" prefWidth="324.0" promptText="Sequence" styleClass="opText">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="nameField" layoutX="2.0" layoutY="261.0" prefHeight="20.0" prefWidth="119.0" promptText="Name" styleClass="opText">
+                              <TextField fx:id="nameField" layoutX="2.0" layoutY="269.0" prefHeight="20.0" prefWidth="119.0" promptText="Name" styleClass="opText">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </TextField>
+                              <CheckBox fx:id="pathCheckbox" layoutX="153.0" layoutY="326.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="100.0" text="Default path" textFill="WHITE" />
                            </children>
                         </AnchorPane>
                   </content>

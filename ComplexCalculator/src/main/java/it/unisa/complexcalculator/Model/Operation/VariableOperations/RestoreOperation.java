@@ -17,7 +17,7 @@ public class RestoreOperation extends Operation {
 
     @Override
     public void execute() {
-        var.setVarsFromList(varStack.pop());
+        var.setVars(varStack.pop());
     }
 
 }
