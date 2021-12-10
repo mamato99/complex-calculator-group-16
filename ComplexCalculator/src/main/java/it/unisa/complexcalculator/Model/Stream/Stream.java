@@ -4,7 +4,7 @@
  */
 package it.unisa.complexcalculator.Model.Stream;
 
-import it.unisa.complexcalculator.Model.Calculator;
+import it.unisa.complexcalculator.Model.ConcreteOperationFactory;
 import it.unisa.complexcalculator.Model.Memory.OperationMemory;
 import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
 import java.io.BufferedInputStream;
@@ -42,7 +42,7 @@ public abstract class Stream {
     }
     
     public void loadData(String file) throws FileNotFoundException, IOException{
-        Calculator opFac = new Calculator();
+        ConcreteOperationFactory opFac = new ConcreteOperationFactory();
         OperationMemory opMem = OperationMemory.getOperationMemory();
         DataInputStream din = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
         int n = din.readInt();

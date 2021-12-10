@@ -7,12 +7,11 @@ import it.unisa.complexcalculator.Model.Operation.StackOperations.*;
 import it.unisa.complexcalculator.Model.Operation.*;
 import java.util.ArrayDeque;
 
-public class Calculator implements OperationFactory {
+public class ConcreteOperationFactory implements OperationFactory {
 
     @Override
     public CustomOperation createCustomOperation(String name, String sequence) {
         String[] ops = sequence.split(" ");
-
         ArrayDeque<Operation> custom = new ArrayDeque<>();
 
         for (String s : ops) {
@@ -50,7 +49,7 @@ public class Calculator implements OperationFactory {
         }
 
     }
-
+    
     
     //--------------------------------------PRIVATE METHODS------------------------------------------------
     private Operation parseStackOperation(String s) {

@@ -19,7 +19,7 @@ import javafx.collections.ObservableList;
 public class NumberMemory{
     
     private static NumberMemory instance = null;
-    private ObservableList<ComplexNumber> stack;
+    private final ObservableList<ComplexNumber> stack;
 
     public static NumberMemory getNumberMemory(){
         if(instance == null)
@@ -85,10 +85,6 @@ public class NumberMemory{
      */
     public ObservableList<ComplexNumber> getStack() {
         return stack;
-    }
-    
-    public void setStack(ObservableList<ComplexNumber> numbers){
-        stack = numbers;
     }
 
 }

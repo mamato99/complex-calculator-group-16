@@ -46,17 +46,16 @@ public class OperationMemory implements Serializable{
         return null;
     }
     
-    public void refreshSequences(String oldName, String newName){
+    public void refreshName(String oldName, String newName){
+        if(checkNameInSequence(oldName))
+            throw new ReferencedOperationException();
         if(checkDuplicate(newName))
             throw new AlreadyExistentOperationException();
-        for(CustomOperation op: ops){
-            String[] tokens = op.getSequence().split(" ");
-            for(String s : tokens){
-                if(s.equals(oldName)){
-                    //CONTINUARE
-                }
-            }
-        }
+        getCustomOperation(oldName).setName(newName);
+    }
+    
+    public void refreshSequence(String newSequence, String name){
+        getCustomOperation(name).setSequence(newSequence);
     }
     
     public void clear(){

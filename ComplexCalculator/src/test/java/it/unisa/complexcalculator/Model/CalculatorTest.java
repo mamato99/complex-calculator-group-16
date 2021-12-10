@@ -19,14 +19,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class CalculatorTest {
-    private  Calculator c;
+    private  ConcreteOperationFactory c;
     
     public CalculatorTest() {
     }
     
     @Before
     public void setUp() {
-        c = new Calculator();
+        c = new ConcreteOperationFactory();
     }
     
     @After

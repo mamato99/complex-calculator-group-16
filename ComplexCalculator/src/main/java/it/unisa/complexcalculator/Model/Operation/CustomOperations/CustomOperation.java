@@ -15,7 +15,10 @@ public class CustomOperation extends Operation{
     }
     
     public void setOperations(ArrayDeque<Operation> ops){
-        this.ops = ops;
+        this.ops.clear();
+        for(Operation op : ops){
+            this.ops.push(op);
+        }
     }
     
     public String getName() {

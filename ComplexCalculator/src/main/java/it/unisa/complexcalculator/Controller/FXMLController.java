@@ -41,7 +41,7 @@ public class FXMLController implements Initializable {
     
     private Stream stream;
     
-    private Calculator c;
+    private ConcreteOperationFactory c;
 
     private OperationInvoker invoker;
     
@@ -79,7 +79,7 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setStream();
-        c = new Calculator();
+        c = new ConcreteOperationFactory();
         invoker = new OperationInvoker();
         storedElements.setItems(NumberMemory.getNumberMemory().getStack());
 
@@ -238,15 +238,17 @@ public class FXMLController implements Initializable {
             opsTable.refresh();
             return;     
         }
-        
         try {
-            OperationMemory.getOperationMemory().refreshSequences(old, event.getNewValue());
+            OperationMemory.getOperationMemory().refreshName(old, event.getNewValue());
         } catch (AlreadyExistentOperationException ex) {
             generateAlert("Already existent operation.");
             opsTable.refresh();
             return;
+        } catch (ReferencedOperationException ex) {
+            generateAlert("Referenced operation, cannot update.");
+            opsTable.refresh();
+            return;
         }
-        opsTable.getSelectionModel().getSelectedItem().setName(event.getNewValue());
         opsTable.refresh();
     }
 
@@ -255,8 +257,7 @@ public class FXMLController implements Initializable {
         OperationMemory opMem = OperationMemory.getOperationMemory();
         CustomOperation selected = opsTable.getSelectionModel().getSelectedItem();
         try {
-            opMem.removeCustomOperation(selected);
-            opMem.addCustomOperation(c.createCustomOperation(selected.getName(), event.getNewValue()));
+            opMem.refreshSequence(event.getNewValue(), selected.getName());
             opsTable.refresh();
         } catch (Exception ex) {
             generateAlert("Invalid sequence format.");

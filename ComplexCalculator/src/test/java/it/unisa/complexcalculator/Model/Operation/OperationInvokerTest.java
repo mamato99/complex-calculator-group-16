@@ -22,14 +22,14 @@ import static org.junit.Assert.*;
 
 public class OperationInvokerTest {
 
-    private Calculator c;
+    private ConcreteOperationFactory c;
 
     public OperationInvokerTest() {
     }
 
     @Before
     public void setUp() {
-        c = new Calculator();
+        c = new ConcreteOperationFactory();
     }
 
     @After
