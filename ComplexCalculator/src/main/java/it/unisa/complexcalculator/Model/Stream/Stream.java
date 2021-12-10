@@ -25,8 +25,8 @@ import javafx.scene.control.ButtonType;
  */
 public abstract class Stream {
     
-    public abstract void save(Scene scene);
-    public abstract void load(Scene scene);
+    public abstract void save();
+    public abstract void load();
     
     public void saveData(String file) throws FileNotFoundException, IOException{
         OperationMemory opMem = OperationMemory.getOperationMemory();
@@ -53,11 +53,11 @@ public abstract class Stream {
         for (int i = 0; i < n; i++) {
             token = din.readUTF();
             
-            opMem.addCustomOperation(opFac.createCustomOperation(token.split(":")[0], token.split(":")[1])); // Null because before invoking it, the calculator populates the arraydeque of operations
+            opMem.addCustomOperation(opFac.createCustomOperation(token.split(":")[0], token.split(":")[1]));
         }
     }
     
-      /*
+    /*
      * Method that generates an alert.
      */
     protected void generateAlert(String s) {

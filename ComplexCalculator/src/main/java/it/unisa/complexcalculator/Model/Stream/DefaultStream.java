@@ -2,12 +2,11 @@ package it.unisa.complexcalculator.Model.Stream;
 
 import java.io.File;
 import java.io.IOException;
-import javafx.scene.Scene;
 
 public class DefaultStream extends Stream {
 
     @Override
-    public void save(Scene scene) {
+    public void save() {
         File f = new File("backup");
         try {
             saveData(f.getAbsolutePath());
@@ -18,7 +17,7 @@ public class DefaultStream extends Stream {
     }
 
     @Override
-    public void load(Scene scene) {
+    public void load() {
         File f = new File("backup");
         try {
             loadData(f.getAbsolutePath());

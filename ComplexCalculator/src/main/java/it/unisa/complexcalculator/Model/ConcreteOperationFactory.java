@@ -47,6 +47,7 @@ public class ConcreteOperationFactory implements OperationFactory {
     
     
     //--------------------------------------PRIVATE METHODS------------------------------------------------
+    
     private Operation parseStackOperation(String s) {
         switch (s) {
             case "dup":
@@ -87,7 +88,6 @@ public class ConcreteOperationFactory implements OperationFactory {
             return null;
         }
 
-        //UPPERCASE TO AVOID "i" as imaginary part
         if (s.charAt(1) >= 'a' && s.charAt(1) <= 'z') {
             switch (s.charAt(0)) {
                 case '<':

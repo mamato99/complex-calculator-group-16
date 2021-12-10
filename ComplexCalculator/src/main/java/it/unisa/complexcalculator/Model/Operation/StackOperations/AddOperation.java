@@ -6,7 +6,7 @@ import it.unisa.complexcalculator.Model.ComplexOperations;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-public class AddOperation extends Operation{
+public class AddOperation implements Operation{
  
     /**
      * <p>

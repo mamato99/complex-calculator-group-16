@@ -6,9 +6,15 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 
 public class CustomStream extends Stream{
-
+    
+    private Scene scene;
+    
+    public CustomStream(Scene scene){
+        this.scene = scene;
+    }
+    
     @Override
-    public void save(Scene scene) {
+    public void save() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Save file...");
         File f = fc.showSaveDialog(scene.getWindow());
@@ -23,7 +29,7 @@ public class CustomStream extends Stream{
     }
 
     @Override
-    public void load(Scene scene) {
+    public void load() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Choose file...");
         File f = fc.showOpenDialog(scene.getWindow());

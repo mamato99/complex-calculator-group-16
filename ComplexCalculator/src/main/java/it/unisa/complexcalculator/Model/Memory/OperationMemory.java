@@ -2,7 +2,9 @@ package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Exception.AlreadyExistentOperationException;
 import it.unisa.complexcalculator.Exception.ReferencedOperationException;
+import it.unisa.complexcalculator.Model.ConcreteOperationFactory;
 import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
+import it.unisa.complexcalculator.Model.OperationFactory;
 import java.io.*;
 
 import javafx.collections.FXCollections;
@@ -30,7 +32,6 @@ public class OperationMemory implements Serializable{
     }
     
     public void addCustomOperation(CustomOperation op){
-        //controllo
         if(checkDuplicate(op.getName())){
             throw new AlreadyExistentOperationException();
         }
@@ -68,11 +69,7 @@ public class OperationMemory implements Serializable{
     
     public ObservableList<CustomOperation> getOps() {
         return ops;
-    }
-
-    public void setOps(ObservableList<CustomOperation> ops) {
-        this.ops = ops;
-    }   
+    } 
     
     private boolean checkNameInSequence(String name){
         for(CustomOperation o : ops){

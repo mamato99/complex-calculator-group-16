@@ -5,7 +5,7 @@ import it.unisa.complexcalculator.Model.ComplexNumber;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-public class DupOperation extends Operation {
+public class DupOperation implements Operation {
      /**
      * <p>
      * This function store a new number on the stack that is a copy of the
