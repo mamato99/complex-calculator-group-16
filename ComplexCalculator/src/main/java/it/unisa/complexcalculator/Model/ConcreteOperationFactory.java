@@ -7,8 +7,26 @@ import it.unisa.complexcalculator.Model.Operation.StackOperations.*;
 import it.unisa.complexcalculator.Model.Operation.*;
 import java.util.ArrayDeque;
 
+/**
+ * The istance of a <code>ConcreteOperationFactory</code> class represent the 
+ * memory of a calculator. This memory contains a
+ * stack abstraction in which it is possible to store instances of <code>ComplexNumbers</code> class representing 
+ * complex numbers in cartesian notation. It allows to manipulate the stored numbers the following operations:
+ * <ul>
+ * <li><b>createOperation</b> to insert a <code>ComplexNumber</code> at the top of the stack.</li>
+ * <li><b>parseStackOperation</b> to remove a <code>ComplexNumber</code> from the top of the stack.</li>
+ * <li><b>parseVariableOperation</b> to return the <code>ComplexNumber</code> at the top of the stack.</li>
+ * <li><b>parseCustomOperation</b> to return the <code>size</code> of the stack.</li>
+ * </ul>
+ */
 public class ConcreteOperationFactory implements OperationFactory {
 
+    /**
+     * Identifies and instantiates the operations indicated in the string.
+     * @param name string that identifies the sequence of operations entered
+     * @param sequence string of sequence of operations entered
+     * @return new instance of <code>CustomOperation </code>
+     */
     @Override
     public CustomOperation createCustomOperation(String name, String sequence) {
         String[] ops = sequence.split(" ");
@@ -22,6 +40,11 @@ public class ConcreteOperationFactory implements OperationFactory {
         return new CustomOperation(name, sequence, custom);
     }
     
+    /**
+     * Identifies and instantiates the operation indicated in the string.
+     * @param s string that identifies the operation entered
+     * @return the identified operation
+     */
     @Override
     public Operation createOperation(String s) {
         Operation op;
@@ -47,7 +70,11 @@ public class ConcreteOperationFactory implements OperationFactory {
     
     
     //--------------------------------------PRIVATE METHODS------------------------------------------------
-    
+    /**
+     * Identifies the operation indicated in the string. The operation is defined on a stack of <code>ComplexNumber</code>
+     * @param s string that identifies the operation entered
+     * @return the new instance of the respective extended <code>Operation</code>class
+     */
     private Operation parseStackOperation(String s) {
         switch (s) {
             case "dup":
@@ -77,6 +104,11 @@ public class ConcreteOperationFactory implements OperationFactory {
         }
     }
     
+    /**
+     * Identifies the operation indicated in the string. The operation is defined on a stack of <code>Variable</code>.
+     * @param s string that identifies the operation entered
+     * @return the new instance of the respective extended <code>Operation</code>class
+     */
     private Operation parseVariableOperation(String s) {
         switch (s) {
             case "save":
@@ -88,6 +120,7 @@ public class ConcreteOperationFactory implements OperationFactory {
             return null;
         }
 
+        //UPPERCASE TO AVOID "i" as imaginary part
         if (s.charAt(1) >= 'a' && s.charAt(1) <= 'z') {
             switch (s.charAt(0)) {
                 case '<':
@@ -106,6 +139,11 @@ public class ConcreteOperationFactory implements OperationFactory {
         return null;
     }
 
+    /**
+     * Overwrites the operation with the same name if any and returns it, else return null.
+     * @param s string that identifies the operations entered
+     * @return the modified operation, else return null.
+     */
     private CustomOperation parseCustomOperation(String s) {
         OperationMemory opMem = OperationMemory.getOperationMemory();
         CustomOperation op = opMem.getCustomOperation(s);

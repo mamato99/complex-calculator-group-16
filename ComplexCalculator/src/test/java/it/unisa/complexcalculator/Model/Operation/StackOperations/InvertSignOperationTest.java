@@ -1,6 +1,5 @@
 package it.unisa.complexcalculator.Model.Operation.StackOperations;
 
-import it.unisa.complexcalculator.Model.Operation.StackOperations.InvertSignOperation;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import it.unisa.complexcalculator.Model.ComplexOperations;
@@ -15,12 +14,15 @@ public class InvertSignOperationTest {
     private ComplexNumber c;
     private InvertSignOperation instance;
     
+    public InvertSignOperationTest() {
+    }
+    
     @Before
     public void setUp() {
-        storedNumbers = new NumberMemory();
+        storedNumbers = NumberMemory.getNumberMemory();
         c = null;
-        
-        instance = new InvertSignOperation(storedNumbers);
+        storedNumbers.clear();
+        instance = new InvertSignOperation();
     }
 
     /**

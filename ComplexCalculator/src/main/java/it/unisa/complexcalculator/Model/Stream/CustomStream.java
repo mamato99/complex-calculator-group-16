@@ -12,7 +12,7 @@ import javafx.stage.FileChooser;
  */
 public class CustomStream extends Stream {
     
-    private Scene scene;
+    private final Scene scene;
 
     public CustomStream(Scene scene) {
         this.scene = scene;

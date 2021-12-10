@@ -1,6 +1,5 @@
 package it.unisa.complexcalculator.Model.Operation.StackOperations;
 
-import it.unisa.complexcalculator.Model.Operation.StackOperations.DupOperation;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
@@ -13,12 +12,15 @@ public class DupOperationTest {
     private NumberMemory storedNumbers;
     private ComplexNumber c;
     private DupOperation instance;
+
+    public DupOperationTest() {
+    }
     
     @Before
     public void setUp() {
-        storedNumbers = new NumberMemory();
-        c = null;
-        instance = new DupOperation(storedNumbers);
+        storedNumbers = NumberMemory.getNumberMemory();
+        storedNumbers.clear();
+        instance = new DupOperation();
     }
 
     /**
@@ -27,7 +29,6 @@ public class DupOperationTest {
     @Test
     public void testExecute() {
         System.out.println("dup");
-        storedNumbers.getStack().clear();
         c = new ComplexNumber(2, 2);
         storedNumbers.push(c);
         
@@ -35,7 +36,6 @@ public class DupOperationTest {
         
         assertEquals(storedNumbers.top(), c);
         assertEquals(storedNumbers.len(), 2);
-
     }
 
     /**

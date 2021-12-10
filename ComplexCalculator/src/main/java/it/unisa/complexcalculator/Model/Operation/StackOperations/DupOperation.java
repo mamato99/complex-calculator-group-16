@@ -5,11 +5,22 @@ import it.unisa.complexcalculator.Model.ComplexNumber;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
+/**
+ * This class represent the "dup" operation of the calculator. 
+ * <p>
+ * It contains an <code>execute()</code> method that performs the operation manipulating the <code>NumberMemory</code> 
+ * stack of complex numbers.
+ * </p>
+ */
+
 public class DupOperation implements Operation {
-     /**
+
+    /**
+     * Takes the last stored complex number in the calculator number memory and push it to the top
+     * of the stack.
      * <p>
-     * This function store a new number on the stack that is a copy of the
-     * last</p>
+     * Can throw NotEnoughOperandsException.
+     * </p>
      */
     @Override
     public void execute() {

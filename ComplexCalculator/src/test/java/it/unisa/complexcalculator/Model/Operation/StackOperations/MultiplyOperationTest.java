@@ -5,6 +5,7 @@ import it.unisa.complexcalculator.Exception.OutOfBoundException;
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import it.unisa.complexcalculator.Model.ComplexOperations;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
+import java.util.EmptyStackException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -15,12 +16,16 @@ public class MultiplyOperationTest {
     private ComplexNumber c1, c2;
     private MultiplyOperation instance;
 
+    public MultiplyOperationTest() {
+    }
+    
     @Before
     public void setUp() {
-        storedNumbers = new NumberMemory();
+        storedNumbers = NumberMemory.getNumberMemory();
+        storedNumbers.clear();
         c1 = null;
         c2 = null;
-        instance = new MultiplyOperation(storedNumbers);
+        instance = new MultiplyOperation();
     }
 
 
@@ -129,6 +134,8 @@ public class MultiplyOperationTest {
     @Test(expected = NotEnoughOperandsException.class)
     public void testExecuteNotEnoughOperandsExeption() {
         System.out.println("multiply");
+        c1 =  new ComplexNumber(1.0, 0);
+        storedNumbers.push(c1);
         instance.execute();
     }
 
