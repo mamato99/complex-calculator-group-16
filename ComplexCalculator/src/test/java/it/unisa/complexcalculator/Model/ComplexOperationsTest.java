@@ -1,13 +1,11 @@
 package it.unisa.complexcalculator.Model;
 
 import it.unisa.complexcalculator.Exception.OutOfBoundException;
+
 import static java.lang.Math.sqrt;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

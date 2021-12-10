@@ -6,11 +6,21 @@ import it.unisa.complexcalculator.Model.ComplexOperations;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
+/**
+ * This class represent the "square root" operation of the calculator. 
+ * <p>
+ * It contains an <code>execute()</code>
+ * method that performs the operation manipulating the <code>NumberMemory</code> stack of complex numbers.
+ * </p>
+ */
 public class SqrtOperation implements Operation{
   
-    /**
+    /**     
+     * Takes the last number saved from the stack and calculates the square root, then pushes the result in the
+     * stack of complex numbers.
      * <p>
-     * This method takes the last number saved on the stack and calculates the square root</p>
+     * Can throw NotEnoughOperandsException.
+     * </p>
      */
     @Override
     public void execute() {

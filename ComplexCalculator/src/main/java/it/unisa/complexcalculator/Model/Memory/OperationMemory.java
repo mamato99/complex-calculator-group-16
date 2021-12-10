@@ -2,7 +2,9 @@ package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Exception.AlreadyExistentOperationException;
 import it.unisa.complexcalculator.Exception.ReferencedOperationException;
+import it.unisa.complexcalculator.Model.ConcreteOperationFactory;
 import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
+import it.unisa.complexcalculator.Model.OperationFactory;
 import java.io.*;
 
 import javafx.collections.FXCollections;
@@ -24,6 +26,14 @@ import javafx.collections.ObservableList;
  * <code>CustomOperation</code>.</li>
  * <li><b>getCustomOperation</b> to return a specific
  * <code>CustomOperation</code> into the list.</li>
+ * <li><b>refreshName</b> to replace the current name of a
+ * <code>CustomOperation</code> with a new name</li>
+ * <li><b>refreshSequence</b> to replace the current sequence of a
+ * <code>CustomOperation</code> with a new sequence</li>
+ * <li><b>checkNameInSequence</b> to verify if a name already exists into a
+ * sequence of the <code>CustomOperation</code> list.</li>
+ * <li><b>checkDuplicate</b> to verify if a name already exists into another
+ * operation of <code>CustomOperation</code> list</li>
  * </ul>
  *
  */

@@ -272,8 +272,8 @@
                            <children>
                               <TableView fx:id="varTable" prefHeight="305.0" prefWidth="466.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn fx:id="varColumn" prefWidth="113.0" resizable="false" text="Variable" />
-                                  <TableColumn fx:id="valueColumn" prefWidth="343.0" resizable="false" text="Value" />
+                                  <TableColumn fx:id="varColumn" prefWidth="92.0" resizable="false" text="Variable" />
+                                  <TableColumn fx:id="valueColumn" prefWidth="364.0" resizable="false" text="Value" />
                                 </columns>
                               </TableView>
                               <Button focusTraversable="false" layoutX="245.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#loadVariablesState" prefHeight="40.0" prefWidth="220.0" style="-fx-border-radius: 10px;" styleClass="optionButtons" text="LOAD VARIABLE STATE" textFill="WHITE">
@@ -316,8 +316,8 @@
                            <children>
                               <TableView fx:id="opsTable" editable="true" layoutX="26.0" layoutY="14.0" prefHeight="241.0" prefWidth="466.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn fx:id="nameColumn" onEditCommit="#updateNameColumn" prefWidth="139.0" resizable="false" text="Name" />
-                                  <TableColumn fx:id="seqColumn" onEditCommit="#updateSeqColumn" prefWidth="317.0" resizable="false" text="Sequence" />
+                                  <TableColumn fx:id="nameColumn" onEditCommit="#updateNameColumn" prefWidth="126.0" resizable="false" text="Name" />
+                                  <TableColumn fx:id="seqColumn" onEditCommit="#updateSeqColumn" prefWidth="330.0" resizable="false" text="Sequence" />
                                 </columns>
                                  <contextMenu>
                                     <ContextMenu>

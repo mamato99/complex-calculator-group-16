@@ -1,34 +1,34 @@
 
 package it.unisa.complexcalculator.Model.Operation.VariableOperations;
 
-import it.unisa.complexcalculator.Model.Operation.VariableOperations.VariableToStackOperation;
-import org.junit.After;
-import org.junit.AfterClass;
+import it.unisa.complexcalculator.Model.ComplexNumber;
+import it.unisa.complexcalculator.Model.Memory.NumberMemory;
+import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 
 public class VariableToStackOperationTest {
     
-    public VariableToStackOperationTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private VariableToStackOperation instance;
+    private NumberMemory stack;
+    private VariableMemory varMem;
+    private ComplexNumber cmpx;
     
     @Before
     public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+        instance = new VariableToStackOperation('a');
+
+        cmpx = new ComplexNumber(1,1);
+        
+        stack = NumberMemory.getNumberMemory();
+        stack.clear();
+
+        varMem = VariableMemory.getVariableMemory();
+        for(char c = 'a'; c <= 'z'; c++){
+            varMem.updateVariable(c, new ComplexNumber(0,0));
+        }
     }
 
     /**
@@ -36,7 +36,16 @@ public class VariableToStackOperationTest {
      */
     @Test
     public void testExecute() {
+        System.out.println("variableToStack");
         
+        assertEquals(stack.len(), 0);
+        
+        varMem.updateVariable('a', cmpx);
+        
+        instance.execute();
+        
+        assertEquals(stack.len(), 1);
+        assertEquals(stack.pop(), cmpx);
     }
     
 }

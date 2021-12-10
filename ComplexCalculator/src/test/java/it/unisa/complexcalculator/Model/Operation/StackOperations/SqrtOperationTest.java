@@ -1,7 +1,6 @@
 
 package it.unisa.complexcalculator.Model.Operation.StackOperations;
 
-import it.unisa.complexcalculator.Model.Operation.StackOperations.SqrtOperation;
 import it.unisa.complexcalculator.Exception.*;
 import it.unisa.complexcalculator.Model.*;
 import it.unisa.complexcalculator.Model.Memory.*;
@@ -11,16 +10,15 @@ import static org.junit.Assert.*;
 
 public class SqrtOperationTest {
 
-    private NumberMemory storedNumbers;
-    private ComplexNumber c1,c2;
+    private NumberMemory stack;
+    private ComplexNumber c1;
     private SqrtOperation instance;
 
     @Before
     public void setUp() {
-        storedNumbers = new NumberMemory();
+        stack = NumberMemory.getNumberMemory();
         c1=null;
-        c2=null;
-        instance = new SqrtOperation(storedNumbers);
+        instance = new SqrtOperation();
     }
 
     /**
@@ -29,15 +27,14 @@ public class SqrtOperationTest {
     @Test
     public void testExecute() {
         System.out.println("execute");
-         
-        ComplexNumber c1 = new ComplexNumber(1, 1);
-
-        storedNumbers.push(c1);
-
+        
+        c1 = new ComplexNumber(1, 1);
+        
+        stack.push(c1);
+        
         instance.execute();
-
-        assertEquals(storedNumbers.pop(), ComplexOperations.squareRoot(c1));
-
+        
+        assertEquals(stack.pop(), ComplexOperations.squareRoot(c1));
     }
 
     /**
@@ -47,8 +44,6 @@ public class SqrtOperationTest {
     public void testExecuteNotEnoughOperandsExeption() {
         System.out.println("execute");
         
-        SqrtOperation instance = new SqrtOperation(storedNumbers);
-
         instance.execute();
 
     }
@@ -59,15 +54,16 @@ public class SqrtOperationTest {
     @Test
     public void testSquareRootPosNeg() {
         System.out.println("squareRoot");
+        
         c1 = new ComplexNumber(1,-1);
         
         ComplexNumber expResult = ComplexOperations.squareRoot(c1);
         
-        storedNumbers.push(c1);
+        stack.push(c1);
         
         instance.execute();
         
-        assertEquals(expResult, storedNumbers.pop());
+        assertEquals(expResult, stack.pop());
     }
 
     /**
@@ -76,30 +72,34 @@ public class SqrtOperationTest {
     @Test
     public void testSquareRootNegPos() {
         System.out.println("squareRoot");
+        
         c1 = new ComplexNumber(-1, 1);
+        
         ComplexNumber expResult = ComplexOperations.squareRoot(c1);
         
-        storedNumbers.push(c1);
+        stack.push(c1);
         
         instance.execute();
         
-        assertEquals(expResult, storedNumbers.pop());
+        assertEquals(expResult, stack.pop());
     }
 
-        /**
+    /**
      * Test of squareRoot method, of class SqrtOperation.
      */
     @Test
     public void testSquareRootPosPos() {
         System.out.println("squareRoot");
+        
         c1 = new ComplexNumber(1, 1);
+        
         ComplexNumber expResult = ComplexOperations.squareRoot(c1);
         
-        storedNumbers.push(c1);
+        stack.push(c1);
         
         instance.execute();
         
-        assertEquals(expResult, storedNumbers.pop());
+        assertEquals(expResult, stack.pop());
     }
 
         /**
@@ -108,14 +108,16 @@ public class SqrtOperationTest {
     @Test
     public void testSquareRootNegNeg() {
         System.out.println("squareRoot");
+        
         c1 = new ComplexNumber(-1, -1);
+        
         ComplexNumber expResult = ComplexOperations.squareRoot(c1);
         
-        storedNumbers.push(c1);
+        stack.push(c1);
         
         instance.execute();
         
-        assertEquals(expResult, storedNumbers.pop());
+        assertEquals(expResult, stack.pop());
     }
 
     /**
@@ -124,14 +126,16 @@ public class SqrtOperationTest {
     @Test
     public void testSquareRootZeroValues() {
         System.out.println("squareRoot");
+        
         c1 = new ComplexNumber(0, 0);
+        
         ComplexNumber expResult = ComplexOperations.squareRoot(c1);
         
-        storedNumbers.push(c1);
+        stack.push(c1);
         
         instance.execute();
         
-        assertEquals(expResult, storedNumbers.pop());
+        assertEquals(expResult, stack.pop());
     }
     
 }
