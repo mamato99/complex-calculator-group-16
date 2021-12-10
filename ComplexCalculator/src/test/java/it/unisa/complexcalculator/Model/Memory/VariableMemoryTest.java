@@ -1,49 +1,58 @@
 package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Model.ComplexNumber;
+import java.util.NoSuchElementException;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
+ 
 
 public class VariableMemoryTest {
-    VariableMemory stack;
-    ComplexNumber c;
+    private VariableMemory stack;
+    private ComplexNumber c0;
+    private ComplexNumber c1;
+    private ComplexNumber c2;
+    private Variable v0;
     
     @Before
     public void setUp() {
+        c0 = new ComplexNumber(0, 0);
+        c1 = new ComplexNumber(1, 1);
+        c2 = new ComplexNumber(2, 2);
         stack = VariableMemory.getVariableMemory();
+        
+        for(char c = 'a'; c < 'z'; c++) {
+            stack.updateVariable(c, new ComplexNumber(0,0));
+        }
+    }
+    
+    @After
+    public void tearDown(){
         stack.clear();
-        c = new ComplexNumber (1, 2);
+        for(char c='a'; c<'z'; c++){
+            stack.addVariable(new Variable(c,new ComplexNumber(0,0)));
+        }
     }
     
-    
-    /**
-     * Test of getVariableMemory method, of class VariableMemory.
-     */
-    @Test
-    public void testGetVariableMemory() {
-        System.out.println("getVariableMemory");
-        VariableMemory expResult = null;
-        VariableMemory result = VariableMemory.getVariableMemory();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
     /**
      * Test of getVars method, of class VariableMemory.
      */
     @Test
     public void testGetVars() {
         System.out.println("getVars");
-        VariableMemory instance = null;
-        ObservableList<Variable> expResult = null;
-        ObservableList<Variable> result = instance.getVars();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
+        stack.updateVariable('a', c0);
+        stack.updateVariable('b', c1);
+        stack.updateVariable('c', c2);
+
+        ObservableList<Variable> list = stack.getVars();
+        
+        assertEquals(list.get(0).getValue(), c0);
+        assertEquals(list.get(1).getValue(), c1);
+        assertEquals(list.get(2).getValue(), c2);
     }
 
     /**
@@ -52,37 +61,12 @@ public class VariableMemoryTest {
     @Test
     public void testUpdateVariable() {
         System.out.println("updateVariable");
-        Character c = null;
-        ComplexNumber n = null;
-        VariableMemory instance = null;
-        instance.updateVariable(c, n);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of clear method, of class VariableMemory.
-     */
-    @Test
-    public void testClear() {
-        System.out.println("clear");
-        VariableMemory instance = null;
-        instance.clear();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addVariable method, of class VariableMemory.
-     */
-    @Test
-    public void testAddVariable() {
-        System.out.println("addVariable");
-        Variable var = null;
-        VariableMemory instance = null;
-        instance.addVariable(var);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
+        stack.updateVariable('a', c0);
+        
+        ComplexNumber expected = c0;
+        
+        assertEquals(expected, stack.getVariable('a'));
     }
 
     /**
@@ -91,13 +75,12 @@ public class VariableMemoryTest {
     @Test
     public void testGetVariable() {
         System.out.println("getVariable");
-        Character c = null;
-        VariableMemory instance = null;
-        ComplexNumber expResult = null;
-        ComplexNumber result = instance.getVariable(c);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
+        stack.updateVariable('a', c0);
+        
+        ComplexNumber expected = c0;
+
+        assertEquals(expected, stack.getVariable('a'));
     }
 
     /**
@@ -106,10 +89,23 @@ public class VariableMemoryTest {
     @Test
     public void testSaveVariableState() {
         System.out.println("saveVariableState");
-        VariableMemory instance = null;
-        instance.saveVariableState();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        stack.updateVariable('a', c0);
+        stack.updateVariable('b', c1);
+        stack.updateVariable('c', c2);
+        stack.saveVariableState();
+        
+        stack.updateVariable('a', new ComplexNumber(5,5));
+        stack.updateVariable('b', new ComplexNumber(5,5));
+        stack.updateVariable('c', new ComplexNumber(5,5));
+        
+        assertNotEquals(c0,stack.getVariable('a'));
+        assertNotEquals(c1,stack.getVariable('b'));
+        assertNotEquals(c2,stack.getVariable('c'));
+        
+        stack.loadVariableState();
+        assertEquals(c0,stack.getVariable('a'));
+        assertEquals(c1,stack.getVariable('b'));
+        assertEquals(c2,stack.getVariable('c'));
     }
 
     /**
@@ -118,10 +114,61 @@ public class VariableMemoryTest {
     @Test
     public void testLoadVariableState() {
         System.out.println("loadVariableState");
-        VariableMemory instance = null;
-        instance.loadVariableState();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        stack.updateVariable('a', c0);
+        stack.updateVariable('b', c1);
+        stack.updateVariable('c', c2);
+        stack.saveVariableState();
+        
+        stack.updateVariable('a', new ComplexNumber(5,5));
+        stack.updateVariable('b', new ComplexNumber(5,5));
+        stack.updateVariable('c', new ComplexNumber(5,5));
+        
+        assertNotEquals(c0,stack.getVariable('a'));
+        assertNotEquals(c1,stack.getVariable('b'));
+        assertNotEquals(c2,stack.getVariable('c'));
+        
+        stack.loadVariableState();
+        assertEquals(c0,stack.getVariable('a'));
+        assertEquals(c1,stack.getVariable('b'));
+        assertEquals(c2,stack.getVariable('c'));
     }
     
+    /**
+     * Test of loadVariableState method, of class VariableMemory.
+     */
+    @Test (expected = NoSuchElementException.class)
+    public void testLoadVariableStateException() {
+        System.out.println("loadVariableState");
+
+        stack.loadVariableState();
+    }
+   
+    
+    /**
+     * Test of addVariable method, of class VariableMemory.
+     */
+    @Test
+    public void testAddVariable() {
+        stack.clear();
+        
+        stack.addVariable(v0);
+        
+        ObservableList<Variable> expectedList = FXCollections.observableArrayList(v0);
+
+        assertEquals(expectedList, stack.getVars());
+    }
+    
+    /**
+     * Test of clear method, of class VariableMemory.
+     */
+    @Test
+    public void testClear() {
+        System.out.println("clear");
+        
+        stack.addVariable(v0);
+
+        stack.clear();        
+        
+        assertEquals(stack.getVars().size(), 0);
+    }
 }

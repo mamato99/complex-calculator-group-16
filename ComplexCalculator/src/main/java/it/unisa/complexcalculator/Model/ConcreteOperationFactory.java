@@ -13,12 +13,11 @@ import java.util.ArrayDeque;
  * stack abstraction in which it is possible to store instances of <code>ComplexNumbers</code> class representing 
  * complex numbers in cartesian notation. It allows to manipulate the stored numbers the following operations:
  * <ul>
- * <li><b>createOperation</b> to insert a <code>ComplexNumber</code> at the top of the stack.</li>
- * <li><b>parseStackOperation</b> to remove a <code>ComplexNumber</code> from the top of the stack.</li>
- * <li><b>parseVariableOperation</b> to return the <code>ComplexNumber</code> at the top of the stack.</li>
- * <li><b>parseCustomOperation</b> to return the <code>size</code> of the stack.</li>
+ * <li><b>createCustomOperation</b> to identify and instantiate a series of operations indicated in the string.</li>
+ * <li><b>createOperation</b> to identify and instantiate the operation indicated in the string.</li>
  * </ul>
  */
+
 public class ConcreteOperationFactory implements OperationFactory {
 
     /**

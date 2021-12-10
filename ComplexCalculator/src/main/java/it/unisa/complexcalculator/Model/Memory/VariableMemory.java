@@ -22,7 +22,7 @@ import javafx.collections.ObservableList;
  * </ul>
  */
 public class VariableMemory {
-    private ObservableList<Variable> vars;
+    private final ObservableList<Variable> vars;
     private final ArrayDeque<ObservableList<Variable>> varStack;
     private static VariableMemory instance = null;
 

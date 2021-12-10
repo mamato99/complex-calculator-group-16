@@ -21,6 +21,7 @@ public class CustomOperationTest {
         fact = new ConcreteOperationFactory();
     }
 
+    
     /**
      * Test of execute method, of class CustomOperation.
      */

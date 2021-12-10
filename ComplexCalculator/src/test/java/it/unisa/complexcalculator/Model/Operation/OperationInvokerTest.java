@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class OperationInvokerTest {
 
-    private ConcreteOperationFactory c;
+    private ConcreteOperationFactory opFac;
     private NumberMemory numbers;
     private VariableMemory variables;
     private Character var;
@@ -19,7 +19,7 @@ public class OperationInvokerTest {
 
     @Before
     public void setUp() {
-        c = new ConcreteOperationFactory();
+        opFac = new ConcreteOperationFactory();
         numbers = NumberMemory.getNumberMemory();
         numbers.clear();
         
@@ -36,7 +36,7 @@ public class OperationInvokerTest {
     public void testExecute() {
         System.out.println("execute");
         
-        CustomOperation op = c.createCustomOperation("op1", "3 3 >a >b");
+        CustomOperation op = opFac.createCustomOperation("op1", "3 3 >a >b");
         OperationInvoker instance = new OperationInvoker();
         instance.execute(op);
         
@@ -58,7 +58,7 @@ public class OperationInvokerTest {
         
         variables.updateVariable('a', new ComplexNumber(8,8));
         
-        CustomOperation op = c.createCustomOperation("op1", "8+7i >a >b >c");
+        CustomOperation op = opFac.createCustomOperation("op1", "8+7i >a >b >c");
         OperationInvoker instance = new OperationInvoker();
         
         try{

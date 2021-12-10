@@ -5,6 +5,10 @@ import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.Operation.StackOperations.*;
+import it.unisa.complexcalculator.Model.Operation.VariableOperations.AddToVariableOperation;
+import it.unisa.complexcalculator.Model.Operation.VariableOperations.StackToVariableOperation;
+import it.unisa.complexcalculator.Model.Operation.VariableOperations.SubtractToVariableOperation;
+import it.unisa.complexcalculator.Model.Operation.VariableOperations.VariableToStackOperation;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +27,7 @@ public class ConcreteOperationFactoryTest {
     }  
     
     /**
-     * Test of createDupOperation method, of class OperationFactory.
+     * Test of createOperation method, of class OperationFactory.
      */
     @Test
     public void testCreateDupOperation() {
@@ -34,7 +38,7 @@ public class ConcreteOperationFactoryTest {
     }
     
      /**
-     * Test of createClearOperation method, of class OperationFactory.
+     * Test of createOperation method, of class OperationFactory.
      */
     @Test
     public void testCreateClearOperation() {
@@ -46,7 +50,7 @@ public class ConcreteOperationFactoryTest {
     }
     
      /**
-     * Test of createSwapOperation method, of class OperationFactory.
+     * Test of createOperation method, of class OperationFactory.
      */
     @Test
     public void testCreateSwapOperation() {
@@ -59,7 +63,7 @@ public class ConcreteOperationFactoryTest {
     }
     
      /**
-     * Test of createDropOperation method, of class OperationFactory.
+     * Test of createOperation method, of class OperationFactory.
      */
     @Test
     public void testCreateDropOperation() {
@@ -72,7 +76,7 @@ public class ConcreteOperationFactoryTest {
     }
     
      /**
-     * Test of createOverOperation method, of class OperationFactory.
+     * Test of createOperation method, of class OperationFactory.
      */
     @Test
     public void testCreateOverOperation() {
@@ -85,7 +89,7 @@ public class ConcreteOperationFactoryTest {
     }
     
      /**
-     * Test of createAddOperation method, of class OperationFactory.
+     * Test of createOperation method, of class OperationFactory.
      */
     @Test
     public void testCreateAddOperation() {
@@ -98,7 +102,7 @@ public class ConcreteOperationFactoryTest {
     }
     
      /**
-     * Test of createSubtractOperation method, of class OperationFactory.
+     * Test of createOperation method, of class OperationFactory.
      */
     @Test
     public void testCreateSubtractOperation() {
@@ -111,7 +115,7 @@ public class ConcreteOperationFactoryTest {
     }
 
      /**
-     * Test of createMultiplyOperation method, of class OperationFactory.
+     * Test of createOperation method, of class OperationFactory.
      */
     @Test
     public void testCreateMultiplyOperation() {
@@ -124,7 +128,7 @@ public class ConcreteOperationFactoryTest {
     }
   
      /**
-     * Test of createDivideOperation method, of class OperationFactory.
+     * Test of createOperation method, of class OperationFactory.
      */
     @Test
     public void testCreateDivideOperation() {
@@ -137,7 +141,7 @@ public class ConcreteOperationFactoryTest {
    
     
      /**
-     * Test of createSqrtOperation method, of class OperationFactory.
+     * Test of createOperation method, of class OperationFactory.
      */
     @Test
     public void testCreateSqrtOperation() {
@@ -150,7 +154,7 @@ public class ConcreteOperationFactoryTest {
  
     
      /**
-     * Test of createInvertSignOperation method, of class OperationFactory.
+     * Test of createOperation method, of class OperationFactory.
      */
     @Test
     public void testCreateInvertSignOperation() {
@@ -162,7 +166,7 @@ public class ConcreteOperationFactoryTest {
     }
  
      /**
-     * Test of createNullOperation method, of class OperationFactory.
+     * Test of createOperation method, of class OperationFactory.
      */
     @Test(expected=NumberFormatException.class)
     public void testCreateNullOperation() {
@@ -173,7 +177,7 @@ public class ConcreteOperationFactoryTest {
     }
     
     /**
-     * Test of createCustomOperation method, of class ConcreteOperationFactory.
+     * Test of createOperation method, of class ConcreteOperationFactory.
      */
     @Test
     public void testCreateCustomOperation() {
@@ -186,5 +190,63 @@ public class ConcreteOperationFactoryTest {
         assertEquals(numMem.pop(), new ComplexNumber(6,0));
     }
     
+    /**
+     * Test of createOperation method's NumberFormatException, of class ConcreteOperationFactory.
+     */
+    @Test(expected = NumberFormatException.class)
+    public void testCreateCustomOperationNumberFormatException() {
+        System.out.println("createCustomOperation");
+        
+        opFac.createCustomOperation("op1", "any string");
+        
+    }
+    
+    /**
+     * Test of createOperation method, of class OperationFactory.
+     */
+    @Test
+    public void testCreateAddToVariableOperation() {
+        System.out.println("createAddToVariableOperation");
+        String s = "+a"; 
+        
+        Operation result = opFac.createOperation(s);
+        assert(result instanceof AddToVariableOperation);
+    }
+    
+    /**
+     * Test of createOperation method, of class OperationFactory.
+     */
+    @Test
+    public void testCreateStackToVariableOperation() {
+        System.out.println("createStackToVariableOperation");
+        String s = ">a"; 
+        
+        Operation result = opFac.createOperation(s);
+        assert(result instanceof StackToVariableOperation);
+    }
+    
+    /**
+     * Test of createOperation method, of class OperationFactory.
+     */
+    @Test
+    public void testCreateVariableToStackOperation() {
+        System.out.println("createVariableToStackOperation");
+        String s = "<a"; 
+        
+        Operation result = opFac.createOperation(s);
+        assert(result instanceof VariableToStackOperation);
+    }
+    
+    /**
+     * Test of createOperation method, of class OperationFactory.
+     */
+    @Test
+    public void testCreateSubtractToVariableOperation() {
+        System.out.println("createSubtractToVariableOperation");
+        String s = "-a"; 
+        
+        Operation result = opFac.createOperation(s);
+        assert(result instanceof SubtractToVariableOperation);
+    }
     
 }

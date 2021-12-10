@@ -16,7 +16,7 @@ public class ClearOperationTest {
         storedNumbers = NumberMemory.getNumberMemory();
         storedNumbers.clear();
         instance = new ClearOperation();
-        c1 = null;
+        c1 = new ComplexNumber(1, 1);
     }
 
     /**
@@ -25,7 +25,6 @@ public class ClearOperationTest {
     @Test
     public void testClearOperation() {
         System.out.println("clear");
-        c1 = new ComplexNumber(1, 1);
         instance.execute();
         assert (storedNumbers.len() == 0);
     }

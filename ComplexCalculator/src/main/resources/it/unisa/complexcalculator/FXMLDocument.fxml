@@ -383,7 +383,7 @@
                                     <Font size="12.0" />
                                  </font>
                               </TextField>
-                              <CheckBox fx:id="pathCheckbox" layoutX="153.0" layoutY="326.0" mnemonicParsing="false" onAction="#setStream" prefHeight="18.0" prefWidth="100.0" text="Default path" textFill="WHITE" />
+                              <CheckBox fx:id="pathCheckbox" layoutX="153.0" layoutY="326.0" mnemonicParsing="false" onAction="#setStream" prefHeight="18.0" prefWidth="100.0" selected="true" text="Default path" textFill="WHITE" />
                            </children>
                         </AnchorPane>
                   </content>

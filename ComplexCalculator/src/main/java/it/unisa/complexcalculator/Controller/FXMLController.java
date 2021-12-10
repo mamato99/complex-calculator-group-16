@@ -25,9 +25,6 @@ public class FXMLController implements Initializable {
     private ConcreteOperationFactory opFac;
     private OperationInvoker invoker;
     
-    private CustomStream cuStream;
-    private DefaultStream defStream;
-    
     @FXML
     private ListView<ComplexNumber> storedElements;
     @FXML
@@ -62,9 +59,6 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setStream();
-        
-        defStream = new DefaultStream();
-        cuStream = new CustomStream(root.getScene());
         
         opFac = new ConcreteOperationFactory();
         invoker = new OperationInvoker();
@@ -220,9 +214,9 @@ public class FXMLController implements Initializable {
     @FXML
     private void setStream(){
         if(pathCheckbox.isSelected())
-            stream = defStream;
+            stream = new DefaultStream();
         else
-            stream = cuStream;
+            stream = new CustomStream(root.getScene());
     }
     
     /**
@@ -379,7 +373,7 @@ public class FXMLController implements Initializable {
             generateAlert("Stack Empty.");
         }catch (NoSuchElementException ex) {
             inputBox.setText("");
-            generateAlert("No one state to restore.");
+            generateAlert("No state to restore.");
         } catch (Exception ex) {
             inputBox.setText("");
             generateAlert("Error: " + ex.getMessage());
