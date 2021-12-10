@@ -64,7 +64,7 @@ public class CustomOperation implements Operation {
     public String getSequence() {
         return sequence;
     }
-
+ 
     /**
      * Sets the sequence of the Custom Operation
      * 

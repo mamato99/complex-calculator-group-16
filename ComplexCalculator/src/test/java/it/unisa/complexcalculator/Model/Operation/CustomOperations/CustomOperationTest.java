@@ -28,7 +28,7 @@ public class CustomOperationTest {
     public void testExecute() {
         System.out.println("execute");
         op1 = fact.createCustomOperation("op1", "2 3 +");
-        
+         
         op1.execute();
         
         assertEquals(numMem.pop(), new ComplexNumber(5,0));
