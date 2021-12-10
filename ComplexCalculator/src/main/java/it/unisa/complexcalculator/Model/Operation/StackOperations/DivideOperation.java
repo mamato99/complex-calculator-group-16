@@ -7,18 +7,14 @@ import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
 public class DivideOperation extends Operation{
-    private final NumberMemory storedNumbers;
 
-    public DivideOperation() {
-        this.storedNumbers = NumberMemory.getNumberMemory();
-    }
-    
     /**
      * <p>
      * This method takes the last two numbers saved on the stack and divides them together </p>
      */
     @Override
     public void execute() {
+        NumberMemory storedNumbers = NumberMemory.getNumberMemory();
         if (storedNumbers.len() < 2) {
             throw new NotEnoughOperandsException();
         }

@@ -7,12 +7,6 @@ import it.unisa.complexcalculator.Model.Operation.Operation;
 
 public class OverOperation extends Operation {
 
-    private final NumberMemory storedNumbers;
-
-    public OverOperation() {
-        this.storedNumbers = NumberMemory.getNumberMemory();
-    }
-
     /**
      * <p>
      * This function takes the second last stored element and push it to the top
@@ -20,6 +14,7 @@ public class OverOperation extends Operation {
      */
     @Override
     public void execute() {
+        NumberMemory storedNumbers = NumberMemory.getNumberMemory();
         if (storedNumbers.len() < 2) {
             throw new NotEnoughOperandsException();
         }

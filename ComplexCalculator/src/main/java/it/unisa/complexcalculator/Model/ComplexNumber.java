@@ -121,17 +121,10 @@ public class ComplexNumber {
 
         for (String s : splitted) {
 
-            if (s.contains("i")) {
-                if (s.equals("+i") || s.equals("i")) {
-                    img += 1;
-                } else if (s.equals("-i")) {
-                    img -= 1;
-                } else {
-                    img += Double.parseDouble(s.substring(0, s.length() - 1));
-                }
-            } else {
+            if (s.contains("i"))
+                img += Double.parseDouble(s.substring(0, s.length() - 1));
+            else
                 real += Double.parseDouble(s.substring(0, s.length()));
-            }
 
         }
         return new ComplexNumber(real, img);

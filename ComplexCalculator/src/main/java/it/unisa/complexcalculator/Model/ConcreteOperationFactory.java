@@ -41,13 +41,8 @@ public class ConcreteOperationFactory implements OperationFactory {
             return op;
         }
 
-        try {
-            op = new PushOperation(ComplexNumber.parse(s));
-            return op;
-        } catch (NumberFormatException ex) {
-            return null;
-        }
-
+        return new PushOperation(ComplexNumber.parse(s));
+           
     }
     
     
@@ -93,7 +88,7 @@ public class ConcreteOperationFactory implements OperationFactory {
         }
 
         //UPPERCASE TO AVOID "i" as imaginary part
-        if (s.charAt(1) >= 'A' && s.charAt(1) <= 'Z') {
+        if (s.charAt(1) >= 'a' && s.charAt(1) <= 'z') {
             switch (s.charAt(0)) {
                 case '<':
                     return new VariableToStackOperation(s.charAt(1));

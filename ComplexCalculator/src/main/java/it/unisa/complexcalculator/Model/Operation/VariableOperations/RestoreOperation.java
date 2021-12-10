@@ -6,14 +6,9 @@ import it.unisa.complexcalculator.Model.Operation.Operation;
 
 public class RestoreOperation extends Operation {
 
-    private final VariableMemory varMem;
-
-    public RestoreOperation() {
-        this.varMem = VariableMemory.getVariableMemory();
-    }
-
     @Override
     public void execute() {
+        VariableMemory varMem = VariableMemory.getVariableMemory();
         varMem.loadVariableState();
     }
 

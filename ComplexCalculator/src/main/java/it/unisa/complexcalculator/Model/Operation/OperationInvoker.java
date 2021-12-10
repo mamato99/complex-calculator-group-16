@@ -11,12 +11,8 @@ public class OperationInvoker {
     
     private final ObservableList<ComplexNumber> oldMem;
     private final ObservableList<Variable> oldVars;
-    private final NumberMemory numMem;
-    private final VariableMemory varMem;
 
-    public OperationInvoker(){
-        numMem = NumberMemory.getNumberMemory();
-        varMem = VariableMemory.getVariableMemory();
+    public OperationInvoker(){      
         oldMem = FXCollections.observableArrayList();
         oldVars = FXCollections.observableArrayList();
     }
@@ -32,6 +28,8 @@ public class OperationInvoker {
     }
     
     private void save(){
+        NumberMemory numMem = NumberMemory.getNumberMemory();
+        VariableMemory varMem = VariableMemory.getVariableMemory();
         oldMem.clear();
         for(ComplexNumber cmpx : numMem.getStack()){
             oldMem.add(new ComplexNumber(cmpx.getReal(), cmpx.getImaginary()));
@@ -45,6 +43,8 @@ public class OperationInvoker {
     }
     
     private void restore(){
+        NumberMemory numMem = NumberMemory.getNumberMemory();
+        VariableMemory varMem = VariableMemory.getVariableMemory();
         numMem.clear();
         for(ComplexNumber cmpx : oldMem){
             numMem.push(new ComplexNumber(cmpx.getReal(), cmpx.getImaginary()));

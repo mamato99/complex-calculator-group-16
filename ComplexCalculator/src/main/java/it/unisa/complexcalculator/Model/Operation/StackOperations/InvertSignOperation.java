@@ -7,18 +7,14 @@ import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
 public class InvertSignOperation extends Operation{
-    private final NumberMemory storedNumbers;
-
-    public InvertSignOperation() {
-        this.storedNumbers = NumberMemory.getNumberMemory();
-    }
-    
+ 
     /**
      * <p>
      * This method takes the last number saved on the stack and reverses its sign </p>
      */
     @Override
     public void execute() {
+        NumberMemory storedNumbers = NumberMemory.getNumberMemory();
         if (storedNumbers.len() < 1) {
             throw new NotEnoughOperandsException();
         }

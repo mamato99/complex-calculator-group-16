@@ -45,7 +45,8 @@ public class FXMLController implements Initializable {
 
     private OperationInvoker invoker;
     
-    private final String defaultPath = "backup";
+    private final CustomStream cuStream = new CustomStream();
+    private final DefaultStream defStream = new DefaultStream();
     
     @FXML
     private TextField inputBox;
@@ -213,16 +214,15 @@ public class FXMLController implements Initializable {
     @FXML
     private void setStream(){
         if(pathCheckbox.isSelected())
-            stream = new DefaultStream();
+            stream = defStream;
         else
-            stream = new CustomStream();
+            stream = cuStream;
     }
     
     @FXML
     private void saveCustomOperation() {        
         stream.save(root.getScene());
         opsTable.refresh();
-        //REFRESHARE
     }
 
     @FXML
@@ -274,11 +274,13 @@ public class FXMLController implements Initializable {
             opsTable.refresh();
             return false;
         }
-        if(c.createOperation(name) != null){
-            generateAlert("Invalid operation name, already existent operation.");
-            return false;
+        try{
+            c.createOperation(name);
+        }catch(NumberFormatException ex){
+            return true;
         }
-        return true;
+        generateAlert("Invalid operation name, already existent operation.");
+        return false;
     }
     
     
@@ -288,7 +290,7 @@ public class FXMLController implements Initializable {
             invoker.execute(op);
         } catch (NumberFormatException ex) {
             inputBox.setText("");
-            generateAlert("Invalid number format.");
+            generateAlert("Invalid number or operation format.");
         } catch (NotEnoughOperandsException ex) {
             inputBox.setText("");
             generateAlert("Not Enough operands.");

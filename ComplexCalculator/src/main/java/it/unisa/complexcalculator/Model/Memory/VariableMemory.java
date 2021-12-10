@@ -2,8 +2,6 @@ package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -20,7 +18,7 @@ public class VariableMemory {
     
     private VariableMemory() {
         vars = FXCollections.observableArrayList();
-        for (char c = 'A'; c <= 'Z'; c++) {
+        for (char c = 'a'; c <= 'z'; c++) {
             vars.add(new Variable(c, new ComplexNumber(0, 0)));
         }
         varStack = new ArrayDeque<>();

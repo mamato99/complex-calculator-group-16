@@ -7,18 +7,16 @@ import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 
 public class AddToVariableOperation extends Operation {
 
-    private final VariableMemory var;
-    private final NumberMemory num;
     private final Character c;
 
     public AddToVariableOperation(Character c) {
-        this.var = VariableMemory.getVariableMemory();
-        this.num = NumberMemory.getNumberMemory();
         this.c = c;
     }
 
     @Override
     public void execute() {
+        NumberMemory num = NumberMemory.getNumberMemory();
+        VariableMemory var = VariableMemory.getVariableMemory();
         var.updateVariable(c, ComplexOperations.add(var.getVariable(c), num.pop()));
     }
 

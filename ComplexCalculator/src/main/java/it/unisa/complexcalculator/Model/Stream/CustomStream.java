@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package it.unisa.complexcalculator.Model.Stream;
 
 import java.io.File;
@@ -9,10 +5,6 @@ import java.io.IOException;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 
-/**
- *
- * @author mdr
- */
 public class CustomStream extends Stream{
 
     @Override

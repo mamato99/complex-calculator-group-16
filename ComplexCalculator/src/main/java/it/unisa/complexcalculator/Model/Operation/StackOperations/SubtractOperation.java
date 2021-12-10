@@ -7,19 +7,14 @@ import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
 public class SubtractOperation extends Operation{
-    
-    private final NumberMemory storedNumbers;
-
-    public SubtractOperation() {
-        this.storedNumbers = NumberMemory.getNumberMemory();
-    }
-    
+ 
     /**
      * <p>
      * This method takes the last two numbers saved on the stack and subtracts them together </p>
      */
     @Override
     public void execute() {
+        NumberMemory storedNumbers = NumberMemory.getNumberMemory();
         if (storedNumbers.len() < 2) {
             throw new NotEnoughOperandsException();
         }

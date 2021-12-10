@@ -4,10 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import javafx.scene.Scene;
 
-/**
- *
- * @author mdr
- */
 public class DefaultStream extends Stream {
 
     @Override

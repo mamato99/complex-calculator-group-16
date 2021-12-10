@@ -7,12 +7,6 @@ import it.unisa.complexcalculator.Model.Operation.Operation;
 
 public class SwapOperation extends Operation {
 
-    private final NumberMemory storedNumbers;
-
-    public SwapOperation() {
-        this.storedNumbers = NumberMemory.getNumberMemory();
-    }
-
     /**
      * <p>
      * This method takes the last two numbers saved in the stack and swaps
@@ -20,6 +14,7 @@ public class SwapOperation extends Operation {
      */
     @Override
     public void execute() {
+        NumberMemory storedNumbers = NumberMemory.getNumberMemory();
         if (storedNumbers.len() < 2) {
             throw new NotEnoughOperandsException();
         }
