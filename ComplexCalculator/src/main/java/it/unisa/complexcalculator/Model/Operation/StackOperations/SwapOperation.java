@@ -5,7 +5,7 @@ import it.unisa.complexcalculator.Model.ComplexNumber;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
-public class SwapOperation extends Operation {
+public class SwapOperation implements Operation {
 
     /**
      * <p>

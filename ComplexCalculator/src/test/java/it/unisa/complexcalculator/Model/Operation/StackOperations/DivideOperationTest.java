@@ -1,6 +1,5 @@
 package it.unisa.complexcalculator.Model.Operation.StackOperations;
 
-import it.unisa.complexcalculator.Model.Operation.StackOperations.DivideOperation;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Exception.OutOfBoundException;
 import it.unisa.complexcalculator.Model.ComplexNumber;
@@ -16,13 +15,11 @@ public class DivideOperationTest {
     private ComplexNumber c1, c2;
     private DivideOperation instance;
 
-    public DivideOperationTest() {
-    }
-
     @Before
     public void setUp() {
-        storedNumbers = new NumberMemory();
-        instance = new DivideOperation(storedNumbers);
+        storedNumbers = NumberMemory.getNumberMemory();
+        storedNumbers.clear();
+        instance = new DivideOperation();
         c1 = null;
         c2 = null;
     }

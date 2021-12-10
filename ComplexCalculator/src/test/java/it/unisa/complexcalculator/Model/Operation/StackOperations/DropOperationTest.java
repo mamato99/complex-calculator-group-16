@@ -1,6 +1,5 @@
 package it.unisa.complexcalculator.Model.Operation.StackOperations;
 
-import it.unisa.complexcalculator.Model.Operation.StackOperations.DropOperation;
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import java.util.EmptyStackException;
@@ -13,14 +12,12 @@ public class DropOperationTest {
     private ComplexNumber c1;
     private DropOperation instance;
 
-    public DropOperationTest() {
-    }
-
     @Before
     public void setUp() {
-        storedNumbers = new NumberMemory();
+        storedNumbers = NumberMemory.getNumberMemory();
+        storedNumbers.clear();
+        instance = new DropOperation();
         c1 = null;
-        instance = new DropOperation(storedNumbers);
     }
 
     /**

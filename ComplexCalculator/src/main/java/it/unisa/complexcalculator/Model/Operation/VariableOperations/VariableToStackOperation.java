@@ -4,7 +4,7 @@ import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 
-public class VariableToStackOperation extends Operation {
+public class VariableToStackOperation implements Operation {
 
     private final Character c;
 

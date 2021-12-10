@@ -2,8 +2,8 @@ package it.unisa.complexcalculator.Model.Operation;
 
 import java.io.Serializable;
 
-public abstract class Operation implements Serializable{ 
+public interface Operation{ 
     
-    public abstract void execute(); 
+    public void execute(); 
     
 }
