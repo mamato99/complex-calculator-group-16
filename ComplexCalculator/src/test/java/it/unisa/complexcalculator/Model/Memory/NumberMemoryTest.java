@@ -2,206 +2,174 @@ package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import java.util.EmptyStackException;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
 public class NumberMemoryTest {
+
     NumberMemory stack;
-    
-    public NumberMemoryTest() {
-    }
-    
+    ComplexNumber c0;
+    ComplexNumber c1;
+    ComplexNumber c2;
+
     @Before
     public void setUp() {
-        stack = new NumberMemory();
+        c0 = new ComplexNumber(0, 0);
+        c1 = new ComplexNumber(1, 1);
+        c2 = new ComplexNumber(2, 2);
+        stack = NumberMemory.getNumberMemory();
+        stack.clear();
     }
-    
-    
-    //-----------------------push-----------------------------------------
-    
+
+    //-----------------------------push-----------------------------------------
     /**
-     * Test of push method, of class NumberMemory. This method pushes a non-null item in the stack.
+     * Test of push method, of class NumberMemory.
      */
     @Test
     public void testPush() {
-        System.out.println("push of non-null item method");
-        
-        ComplexNumber toIns = new ComplexNumber(1,1);
+        System.out.println("push");
+
+        ComplexNumber toIns = new ComplexNumber(1, 1);
         stack.push(toIns);
-        
+
         assertEquals(stack.len(), 1);
         ComplexNumber popItem = stack.pop();
-        
+
         assertEquals(popItem, toIns);
-        
+
         assertEquals(stack.len(), 0);
     }
-    
+
+    //------------------------------pop-----------------------------------------
     /**
-     * Test of push method, of class NumberMemory. This method pushes a null item in the stack.
-     */
-    @Test
-    public void testPushNull() {
-        System.out.println("push of null item method");
-        
-        ComplexNumber toIns = null;
-        stack.push(toIns);
-        
-        assertEquals(stack.len(), 1);
-        
-        ComplexNumber popItem = stack.pop();
-        assertNull(popItem);
-        
-        assertEquals(stack.len(), 0);
-    }
-    
-    
-    //-----------------------pop-----------------------------------------
-    
-    /**
-     * Test of exception in pop method, of class NumberMemory.
+     * Test of EmptyStackException in pop method, of class NumberMemory.
      */
     @Test(expected = EmptyStackException.class)
     public void testPopEmptyStackException() {
-        System.out.println("EmptyStackException in pop method");
-        
-        stack.pop();        
+        System.out.println("EmptyStackException in push");
+        stack.pop();
     }
-    
+
     /**
-     * Test of pop method, of class NumberMemory. Removing a non-null item.
+     * Test of pop method, of class NumberMemory.
      */
     @Test
     public void testPop() {
-        System.out.println("non-null item in pop method");
-        
-        ComplexNumber toIns = new ComplexNumber(1,1);
+        System.out.println("pop");
 
-        stack.push(toIns);
-        assertEquals(stack.len(), 1);
-        assertEquals(stack.pop(), toIns);
+        stack.push(c0);
+        assertEquals(stack.pop(), c0);
         assertEquals(stack.len(), 0);
     }
-    
-    
-    /**
-     * Test of pop method, of class NumberMemory. Removing a null item.
-     */
-    @Test
-    public void testPopNull(){
-        System.out.println("null item in pop method");
-        
-        ComplexNumber toIns = null;
 
-        stack.push(toIns);
-        assertEquals(stack.len(), 1);
-        
-        ComplexNumber popItem = stack.pop();
-        assertNull(popItem);
-        
-        assertEquals(stack.len(), 0);
-    }
-    
-    
-    //-----------------------top-----------------------------------------
-    
+    //------------------------------top-----------------------------------------
     /**
      * Test of top method, of class NumberMemory.
      */
     @Test
     public void testTop() {
-        System.out.println("non-null item in top method");
-        
-        ComplexNumber toIns = new ComplexNumber(1,1);
-        
-        stack.push(toIns);        
-        assertEquals(stack.top(), toIns);
-        
+        System.out.println("top");
+
+        stack.push(c0);
+        assertEquals(stack.top(), c0);
+
     }
-    
+
     /**
-     * Test of EmptyStackException in top method, of class NumberMemory. Returning a non-null item.
+     * Test of EmptyStackException in top method, of class NumberMemory.
      */
     @Test(expected = EmptyStackException.class)
     public void testTopEmptyStackException() {
-        System.out.println("EmptyStackException in top method");
-        
+        System.out.println("EmptyStackException in top");
+
         stack.top();
     }
 
-    /**
-     * Test of top method, of class NumberMemory. Returning a null item.
-     */
-    @Test
-    public void testTopNull(){
-        System.out.println("null item in top method");
-        
-        ComplexNumber toIns = null;
-
-        stack.push(toIns);
-        assertEquals(stack.len(), 1);
-        
-        assertNull(stack.top());
-                
-    }
-    
-    //-----------------------len-----------------------------------------
-    
+    //------------------------------len-----------------------------------------
     /**
      * Test of len method, of class NumberMemory.
      */
     @Test
     public void testLen() {
-        System.out.println("len method");
-        
+        System.out.println("len");
+
         assertEquals(stack.len(), 0);
-        stack.push(new ComplexNumber(1,1));
+        stack.push(c0);
         assertEquals(stack.len(), 1);
         stack.pop();
         assertEquals(stack.len(), 0);
     }
-    
-    
-    //-----------------------getStack-----------------------------------------
-    
+
+    //----------------------------getStack--------------------------------------
     /**
-     * Test of getStack method, of class NumberMemory. Test if the method returns a non-empty stack.
+     * Test of getStack method, of class NumberMemory. Test if the method
+     * returns a non-empty stack.
      */
     @Test
     public void testGetStack() {
         System.out.println("getStack");
-
-        ComplexNumber c0 = new ComplexNumber(0,0);
-        ComplexNumber c1 = new ComplexNumber(1,1);
-        ComplexNumber c2 = new ComplexNumber(2,2);
 
         ObservableList<ComplexNumber> expectedList = FXCollections.observableArrayList(c0, c1, c2);
 
         stack.push(c2);
         stack.push(c1);
         stack.push(c0);
-        
-        ObservableList<ComplexNumber>  list =  stack.getStack();
+
+        ObservableList<ComplexNumber> list = stack.getStack();
         assertEquals(expectedList, list);
 
     }
-    
+
     /**
-     * Test of getStack method, of class NumberMemory. Test if the method returns an empty stack.
+     * Test of getStack method, of class NumberMemory. Test if the method
+     * returns an empty stack.
      */
     @Test
     public void testGetStackEmpty() {
-        System.out.println("getStack empty");
+        System.out.println("getStack");
 
         ObservableList<ComplexNumber> expectedList = FXCollections.observableArrayList();
 
-        ObservableList<ComplexNumber>  list =  stack.getStack();
+        ObservableList<ComplexNumber> list = stack.getStack();
         assertEquals(expectedList, list);
 
     }
-    
-    
+
+    //--------------------------getNumberMemory---------------------------------
+    /**
+     * Test of getNumberMemory method, of class NumberMemory.
+     */
+    @Test
+    public void testGetNumberMemory() {
+        System.out.println("getNumberMemory");
+
+        stack.push(c0);
+        stack.push(c1);
+
+        NumberMemory result = NumberMemory.getNumberMemory();
+        
+        assertEquals(stack.len(), result.len());
+        assertEquals(c1, result.pop());
+        assertEquals(c0, result.pop());
+
+    }
+
+    //------------------------------clear---------------------------------------
+    /**
+     * Test of clear method, of class NumberMemory.
+     */
+    @Test
+    public void testClear() {
+        System.out.println("clear");
+        stack.push(c0);
+        stack.push(c1);
+        int before = stack.len();
+
+        stack.clear();
+
+        assertEquals(stack.len(), 0);
+
+    }
 
 }

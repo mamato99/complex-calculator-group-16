@@ -1,16 +1,39 @@
 package it.unisa.complexcalculator.Model;
 
+/**
+ * The istance of a <code>ComplexNumber</code> class represent a complex number
+ * in cartesian notation. Provides all methods for working with complex numbers.
+ * <ul>
+ * <li><b>getReal</b> to get a <code>Double</code> that represent the real part
+ * of a <code>ComplexNumber.</code></li>
+ * <li><b>setReal</b> to set the real part of a <code>ComplexNumber</code>
+ * passing a <code>Double</code>.</li>
+ * <li><b>getImaginary</b> to get a <code>Double</code> that represent the
+ * imaginary part of a <code>ComplexNumber.</code></li>
+ * <li><b>setImaginary</b> to set the imaginary part of a
+ * <code>ComplexNumber</code> passing a <code>Double</code>.</li>
+ * <li><b>toString</b> to return the entire <code>ComplexNumber</code> as a
+ * <code>String</code>.</li>
+ * <li><b>parse</b> to parse a <code>String</code> and understand if it
+ * represents a <code>ComplexNumber</code>.</li>
+ * <li><b>equals</b> to verify the equality of two
+ * <code>ComplexNumber</code>.</li>
+ * </ul>
+ *
+ */
 public class ComplexNumber {
 
     private double real;
     private double imaginary;
 
     /**
-     * <p>
-     * Constructor of the ComplexNumber class it assigns the real part and the imaginary part with the two double given as input </p>
+     * Constructor of the ComplexNumber class, it assigns the real part and the
+     * imaginary part with the two double given as input
      *
-     * @param real the first double representing the real part of the complex number
-     * @param imaginary the second double representing the imaginary part of the complex number
+     * @param real the double representing the real part of the complex
+     * number
+     * @param imaginary the double representing the imaginary part of the
+     * complex number
      */
     public ComplexNumber(double real, double imaginary) {
         this.real = real;
@@ -19,19 +42,7 @@ public class ComplexNumber {
     }
 
     /**
-     * <p>
-     * Constructor of the ComplexNumber class it assigns the real part with the double given as input and sets the imaginary part to zero </p>
-     *
-     * @param real the double representing the real part of the complex number
-     */
-    public ComplexNumber(double real) {
-        this.real = real;
-        this.imaginary = 0;
-    }
-
-    /**
-     * <p>
-     * This method gets the real part of the Complex Number </p>
+     * Returns the real part of the Complex Number
      *
      * @return the real part of the Complex Number
      */
@@ -41,8 +52,8 @@ public class ComplexNumber {
     }
 
     /**
-     * <p>
-     * This method sets the real part of the Complex Number with a new double given </p>
+     * Sets the real part of the Complex Number with the new double given as
+     * param
      *
      * @param real the double that will be replaced in place of the current one
      */
@@ -51,8 +62,7 @@ public class ComplexNumber {
     }
 
     /**
-     * <p>
-     * This method gets the imaginary part of the Complex Number </p>
+     * Returns the imaginary part of the Complex Number
      *
      * @return the imaginary part of the Complex Number
      */
@@ -61,10 +71,11 @@ public class ComplexNumber {
     }
 
     /**
-     * <p>
-     * This method sets the iamginary part of the Complex Number with a new double given </p>
+     * Sets the imaginary part of the Complex Number with the new double given
+     * as param
      *
-     * @param imaginary the double that will be replaced in place of the current one
+     * @param imaginary the double that will be replaced in place of the current
+     * one
      */
     public void setImaginary(double imaginary) {
         this.imaginary = imaginary;
@@ -72,9 +83,9 @@ public class ComplexNumber {
 
     /**
      * <p>
-     * This method return a string that represent the Complex Number</p>
+     * Returns a string that represent the Complex Number</p>
      *
-     * @return a string that represent the Complex Number
+     * @return a string representing the Complex Number
      */
     @Override
     public String toString() {
@@ -86,20 +97,15 @@ public class ComplexNumber {
     }
 
     /**
-     * <p>
-     * Returns a hash code value for the object.</p>
+     * Takes a string as input and parses it, returns the corresponding Complex
+     * Number, if it exists.
      *
-     * @return a hash code value for this object.
+     * <p>
+     * Can throws NumberFormatException</p>
+     *
+     * @param input the string to parse
+     * @return
      */
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + (int) (Double.doubleToLongBits(this.real) ^ (Double.doubleToLongBits(this.real) >>> 32));
-        hash = 53 * hash + (int) (Double.doubleToLongBits(this.imaginary) ^ (Double.doubleToLongBits(this.imaginary) >>> 32));
-        return hash;
-
-    }
-
     public static ComplexNumber parse(String input) {
         double real = 0;
         double img = 0;
@@ -121,18 +127,19 @@ public class ComplexNumber {
 
         for (String s : splitted) {
 
-            if (s.contains("i"))
+            if (s.contains("i")) {
                 img += Double.parseDouble(s.substring(0, s.length() - 1));
-            else
+            } else {
                 real += Double.parseDouble(s.substring(0, s.length()));
+            }
 
         }
         return new ComplexNumber(real, img);
     }
 
     /**
-     * <p>
-     * Indicates whether some other object is "equal to" this one. </p>
+     * Indicates whether the current object is "equal to" the one passed as
+     * param.
      *
      * @param obj the Object that will be compared with the current one
      * @return true if the Object is equal to the current one otherwise false

@@ -1,6 +1,5 @@
 package it.unisa.complexcalculator.Model.Operation.StackOperations;
 
-import it.unisa.complexcalculator.Model.Operation.StackOperations.AddOperation;
 import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Exception.OutOfBoundException;
 import it.unisa.complexcalculator.Model.ComplexNumber;
@@ -16,15 +15,11 @@ public class AddOperationTest {
     private ComplexNumber c1, c2;
     private AddOperation instance;
 
-    public AddOperationTest() {
-    }
-
     @Before
     public void setUp() {
-        storedNumbers = new NumberMemory();
-        instance = new AddOperation(storedNumbers);
-        c1 = null;
-        c2 = null;
+        storedNumbers = NumberMemory.getNumberMemory();
+        storedNumbers.clear();
+        instance = new AddOperation();
     }
 
     /**

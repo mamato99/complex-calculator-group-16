@@ -6,11 +6,21 @@ import it.unisa.complexcalculator.Model.ComplexOperations;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
+/**
+ * This class represent the "add" operation of the calculator. 
+ * <p>
+ * It contains an <code>execute()</code> method that performs the operation manipulating the <code>NumberMemory</code> 
+ * stack of complex numbers.
+ * </p>
+ */
 public class AddOperation implements Operation{
  
-    /**
+     /**
+     * Takes the two last stored complex numbers from the calculator number memory and 
+     * push the sum of them to the top of the stack.
      * <p>
-     * This method takes the last two numbers saved on the stack and adds them together </p>
+     * Can throw NotEnoughOperandsException.
+     * </p>
      */
     @Override
     public void execute() {
