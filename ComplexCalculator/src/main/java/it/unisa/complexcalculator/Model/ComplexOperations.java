@@ -4,10 +4,24 @@ package it.unisa.complexcalculator.Model;
 import it.unisa.complexcalculator.Exception.OutOfBoundException;
 import static java.lang.Math.sqrt;
 
+/**
+ * The istance of a <code>ComplexOperations</code> class represent a series of operations to operate with complex numbers. 
+ * Provides all methods for working with complex numbers.
+ * <ul>
+ * <li><b>add</b> to get the addition between two <code>ComplexNumbers.</code></li>
+ * <li><b>difference</b> to get the difference between two <code>ComplexNumbers.</code>.</li>
+ * <li><b>multiplication</b> to get the multiplication between two <code>ComplexNumbers.</code></li>
+ * <li><b>division</b> to get the division between two <code>ComplexNumbers.</code>.</li>
+ * <li><b>squareRoot</b> to get the square root of a <code>ComplexNumber.</code>.</li>
+ * <li><b>signInversion</b> to get the sign inversion of a <code>ComplexNumber.</code>.</li>
+ * <li><b>abs</b> to get the abs of a <code>ComplexNumber.</code>.
+ * </ul>
+ *
+ */
 public final class ComplexOperations {
 
     /**
-     * <p>Add the two specified complex numbers values</p>
+     * Add the two specified complex numbers values
      * @param c1 is the first complex number that is taken as input by the add function
      * @param c2 is the second complex number that is taken as input by the add function
      * @return returns the result complex number of the add function
@@ -22,7 +36,7 @@ public final class ComplexOperations {
     }
     
     /**
-     * <p>Subtracts the two specified complex numbers values</p>
+     * Subtracts the two specified complex numbers values
      * @param c1 is the first complex number that is taken as input by the difference function
      * @param c2 is the second complex number that is taken as input by the difference function
      * @return returns the result complex number of the difference function
@@ -37,7 +51,7 @@ public final class ComplexOperations {
     }
 
     /**
-     * <p>Calculates the module of the specified complex number</p>
+     * Calculates the module of the specified complex number
      * @param c is the complex number that is taken as input by the abs function
      * @return returns the module of the complex number 
      * @throws OutOfBoundException if the complex number returned goes boyond the double threshold
@@ -50,7 +64,7 @@ public final class ComplexOperations {
     }
 
     /**
-     * <p>This function calculates the square root number</p>
+     * This function calculates the square root number
      * @param c is the complex number that is taken as input by the squareRoot function
      * @return returns the square root of the complex number 
      * @throws OutOfBoundException if the complex number returned goes boyond the double threshold
@@ -72,7 +86,7 @@ public final class ComplexOperations {
     }
    
     /**
-     * <p> Invert the sign of the specified Complex Numbers values </p>
+     * Invert the sign of the specified Complex Numbers values
      * @param c the complex number to which the sign will be changed
      * @return a new Complex Number that is the result of the signInversion method on the Complex Number given
      */
@@ -89,7 +103,7 @@ public final class ComplexOperations {
     }
 
     /**
-     * <p> Multiply the two specified Complex Numbers values </p>
+     * Multiply the two specified Complex Numbers values
      * @param c1 the first complex number to multiply
      * @param c2 the second complex number to multiply
      * @return a new complex number which is the result of multiplication between the two Complex Numbers given 
@@ -104,7 +118,7 @@ public final class ComplexOperations {
     }
 
     /**
-     * <p> Multiply the two specified Complex Numbers values </p>
+     * Multiply the two specified Complex Numbers values
      * @param @param c1 the first complex number to divide
      * @param c2 the second complex number to divide
      * @return a new complex number which is the result of division between the two Complex Numbers given 

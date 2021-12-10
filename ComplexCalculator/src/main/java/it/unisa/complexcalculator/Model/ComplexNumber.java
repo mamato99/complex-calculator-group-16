@@ -1,4 +1,4 @@
-package it.unisa.complexcalculator.Model;
+ package it.unisa.complexcalculator.Model;
 
 /**
  * The istance of a <code>ComplexNumber</code> class represent a complex number
