@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package it.unisa.complexcalculator.Model.Memory;
 
 import it.unisa.complexcalculator.Exception.AlreadyExistentOperationException;
@@ -12,10 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author super
- */
 public class OperationMemoryTest {
 
     OperationMemory ops;
@@ -152,7 +144,7 @@ public class OperationMemoryTest {
         System.out.println("refreshSequence");
         ops.addCustomOperation(op1);
         ops.refreshSequence("+", "op1");
-        assertNotEquals(op1,ops.getCustomOperation("op1"));
+        assert(ops.getCustomOperation("op1").getSequence().equals("+"));
     }
 
     /**

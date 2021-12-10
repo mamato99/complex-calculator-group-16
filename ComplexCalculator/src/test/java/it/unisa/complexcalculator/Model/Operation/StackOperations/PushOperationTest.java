@@ -34,8 +34,6 @@ public class PushOperationTest {
         instance = new PushOperation(c2);
         instance.execute();
 
-        instance.execute();
-
         assertEquals(stack.pop(), c2);
         assertEquals(stack.pop(), c1);
     }
