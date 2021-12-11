@@ -1,10 +1,10 @@
 package it.unisa.complexcalculator.Model.Operation;
 
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.*;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
 import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 import it.unisa.complexcalculator.Model.Operation.CustomOperations.CustomOperation;
-import java.util.EmptyStackException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -63,7 +63,7 @@ public class OperationInvokerTest {
         
         try{
             instance.execute(op);
-        } catch(EmptyStackException ex){
+        } catch(NotEnoughOperandsException ex){
             assertEquals(numbers.pop(), new ComplexNumber(5,5));
             assertEquals(variables.getVariable(var), new ComplexNumber(8,8));
         }

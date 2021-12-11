@@ -1,7 +1,9 @@
 package it.unisa.complexcalculator.Model.Operation.CustomOperations;
 
+import it.unisa.complexcalculator.Exception.NotEnoughOperandsException;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 import java.util.ArrayDeque;
+import java.util.EmptyStackException;
 
 /**
  * The istance of a <code>CustomOperation</code> class represents an object that
@@ -76,11 +78,19 @@ public class CustomOperation implements Operation {
 
     /**
      * Executes all the Operations of the Custom Operation
+     * <p>
+     * Can throw NotEnoughOperandsException if there aren't enough operands to perform the entire <code>CustomOperation</code>.
+     * </p>
      */
     @Override
     public void execute() {
         for (Operation op : ops) {
-            op.execute();
-        }
+            try{
+                op.execute();
+            }
+            catch(EmptyStackException ex){
+                throw new NotEnoughOperandsException();
+            }
+        } 
     }
 }

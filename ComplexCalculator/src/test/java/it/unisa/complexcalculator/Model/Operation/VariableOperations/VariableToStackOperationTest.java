@@ -1,4 +1,3 @@
-
 package it.unisa.complexcalculator.Model.Operation.VariableOperations;
 
 import it.unisa.complexcalculator.Model.ComplexNumber;

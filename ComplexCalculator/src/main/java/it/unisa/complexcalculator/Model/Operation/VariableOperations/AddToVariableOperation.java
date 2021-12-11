@@ -6,7 +6,7 @@ import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 
 /**
- * This class represent the "updateVariable" operation of the calculator.
+ * This class represent the "add to variable" operation of the calculator.
  * <p>
  * It contains an <code>execute()</code> method that performs the operation
  * manipulating the <code>NumberMemory</code> stack of complex numbers and the

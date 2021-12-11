@@ -25,6 +25,7 @@ public class ClearOperationTest {
     @Test
     public void testClearOperation() {
         System.out.println("clear");
+        storedNumbers.push(c1);
         instance.execute();
         assert (storedNumbers.len() == 0);
     }

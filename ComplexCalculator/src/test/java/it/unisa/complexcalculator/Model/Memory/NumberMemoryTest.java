@@ -164,8 +164,11 @@ public class NumberMemoryTest {
         System.out.println("clear");
         stack.push(c0);
         stack.push(c1);
+        
         int before = stack.len();
 
+        assertEquals(before, 2);
+        
         stack.clear();
 
         assertEquals(stack.len(), 0);

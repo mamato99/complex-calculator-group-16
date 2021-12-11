@@ -35,9 +35,9 @@ import javafx.collections.ObservableList;
  * </ul>
  *
  */
-public class OperationMemory implements Serializable {
+public class OperationMemory{
 
-    private ObservableList<CustomOperation> ops;
+    private final ObservableList<CustomOperation> ops;
     private static OperationMemory instance = null;
 
     /**

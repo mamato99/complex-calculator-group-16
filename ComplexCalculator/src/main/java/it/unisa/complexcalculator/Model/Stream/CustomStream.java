@@ -22,40 +22,44 @@ public class CustomStream extends Stream {
      * Takes the file on which save data from the user and calls the
      * <code>saveData()</code> method.
      *
+     * @return the file pointer
      */
     @Override
-    public void save() {
+    public File save() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Save file...");
         File f = fc.showSaveDialog(scene.getWindow());
         if (f != null) {
             try {
                 saveData(f.getAbsolutePath());
-                generateConfirmation("Saved successfully.");
+                return f;
             } catch (IOException ex) {
-                generateAlert("Error while saving file.");
+                return null;
             }
         }
+        return null;
     }
 
     /**
      * Takes the file from which load data from the user and calls the
      * <code>loadData()</code> method.
      * 
+     * @return the file pointer
      */
     @Override
-    public void load() {
+    public File load() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Choose file...");
         File f = fc.showOpenDialog(scene.getWindow());
         if (f != null) {
             try {
                 loadData(f.getAbsolutePath());
-                generateConfirmation("Loaded successfully.");
+                return f;
             } catch (IOException ex) {
-                generateAlert("Error while loading file.");
+                return null;
             }
         }
+        return null;
     }
 
 }

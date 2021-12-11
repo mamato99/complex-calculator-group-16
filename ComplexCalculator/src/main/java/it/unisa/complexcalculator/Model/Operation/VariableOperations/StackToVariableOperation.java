@@ -5,7 +5,7 @@ import it.unisa.complexcalculator.Model.Operation.Operation;
 import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 
 /**
- * This class represent the ">" operation of the calculator. 
+ * This class represent the ">x" operation of the calculator. 
  * <p>
  * It contains an <code>execute()</code> method that performs the operation manipulating the <code>NumberMemory</code> 
  * stack of complex numbers.

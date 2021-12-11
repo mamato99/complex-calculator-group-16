@@ -119,7 +119,7 @@ public final class ComplexOperations {
 
     /**
      * Multiply the two specified Complex Numbers values
-     * @param @param c1 the first complex number to divide
+     * @param c1 the first complex number to divide
      * @param c2 the second complex number to divide
      * @return a new complex number which is the result of division between the two Complex Numbers given 
      * @throws ArithmeticException if you are dividing by zero

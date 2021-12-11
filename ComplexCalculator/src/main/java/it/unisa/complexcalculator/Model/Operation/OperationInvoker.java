@@ -55,7 +55,7 @@ public class OperationInvoker {
         VariableMemory varMem = VariableMemory.getVariableMemory();
         oldMem.clear();
         for (ComplexNumber cmpx : numMem.getStack()) {
-            oldMem.add(new ComplexNumber(cmpx.getReal(), cmpx.getImaginary()));
+            oldMem.add(0, new ComplexNumber(cmpx.getReal(), cmpx.getImaginary()));
         }
 
         oldVars.clear();

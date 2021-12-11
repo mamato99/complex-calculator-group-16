@@ -132,7 +132,7 @@ public class OperationMemoryTest {
         System.out.println("refreshNameReferencedOperationException");
         ops.addCustomOperation(op1);
         ops.addCustomOperation(op2);
-        CustomOperation op3 = factory.createCustomOperation("op3", "op1");
+        factory.createCustomOperation("op3", "op1");
         ops.refreshName("op1", "op2");
     }
 

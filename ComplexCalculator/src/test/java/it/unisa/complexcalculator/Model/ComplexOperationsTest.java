@@ -64,9 +64,9 @@ public class ComplexOperationsTest {
      */
     @Test(expected = OutOfBoundException.class)
     public void testAddMaximumBound() {
-        ComplexNumber c3 = new ComplexNumber(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-        ComplexNumber c4 = new ComplexNumber(-33, -30);
-        ComplexNumber result2 = ComplexOperations.add(c3, c4);
+        c3 = new ComplexNumber(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+        c4 = new ComplexNumber(-33, -30);
+        ComplexOperations.add(c3, c4);
     }
 
     /**
@@ -74,9 +74,9 @@ public class ComplexOperationsTest {
      */
     @Test(expected = OutOfBoundException.class)
     public void testAddMinimumBound() {
-        ComplexNumber c3 = new ComplexNumber(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
-        ComplexNumber c4 = new ComplexNumber(-2, 30);
-        ComplexNumber result2 = ComplexOperations.add(c3, c4);
+        c3 = new ComplexNumber(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+        c4 = new ComplexNumber(-2, 30);
+        ComplexOperations.add(c3, c4);
     }
 
     //-----------------------DIFFERENCE-----------------------------------------
@@ -118,9 +118,9 @@ public class ComplexOperationsTest {
      */
     @Test(expected = OutOfBoundException.class)
     public void testDifferenceMaximumBound() {
-        ComplexNumber c3 = new ComplexNumber(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-        ComplexNumber c4 = new ComplexNumber(-2, 30);
-        ComplexNumber result2 = ComplexOperations.add(c3, c4);
+        c3 = new ComplexNumber(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+        c4 = new ComplexNumber(-2, 30);
+        ComplexOperations.add(c3, c4);
     }
 
     /**
@@ -128,9 +128,9 @@ public class ComplexOperationsTest {
      */
     @Test(expected = OutOfBoundException.class)
     public void testDifferenceMinimunBound() {
-        ComplexNumber c3 = new ComplexNumber(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
-        ComplexNumber c4 = new ComplexNumber(-2, 30);
-        ComplexNumber result2 = ComplexOperations.add(c3, c4);
+        c3 = new ComplexNumber(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+        c4 = new ComplexNumber(-2, 30);
+        ComplexOperations.add(c3, c4);
     }
 
     //-----------------------ABS------------------------------------------------
@@ -169,11 +169,8 @@ public class ComplexOperationsTest {
      */
     @Test(expected = OutOfBoundException.class)
     public void testMaximumBoundAbs() {
-        /*ComplexNumber c1 = new ComplexNumber(Double.MAX_VALUE, Double.MAX_VALUE);
-        double result1 = ComplexOperations.abs(c1);*/
-
         c2 = new ComplexNumber(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-        double result2 = ComplexOperations.abs(c2);
+        ComplexOperations.abs(c2);
     }
 
     //-----------------------SQUAREROOT-----------------------------------------
@@ -245,11 +242,8 @@ public class ComplexOperationsTest {
      */
     @Test(expected = OutOfBoundException.class)
     public void testMaximumBoundSquareRoots() {
-        /*ComplexNumber c1 = new ComplexNumber(Double.MAX_VALUE, Double.MAX_VALUE);
-        ComplexNumber result1 = ComplexOperations.squareRoot(c1);*/
-
         c2 = new ComplexNumber(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-        ComplexNumber result2 = ComplexOperations.squareRoot(c2);
+        ComplexOperations.squareRoot(c2);
     }
 
     /**
@@ -257,11 +251,8 @@ public class ComplexOperationsTest {
      */
     @Test(expected = OutOfBoundException.class)
     public void testMinimumBoundSquareRoots() {
-        /*ComplexNumber c1 = new ComplexNumber(-Double.MAX_VALUE, Double.MAX_VALUE);
-        ComplexNumber result5 = ComplexOperations.squareRoot(c1);*/
-
         c2 = new ComplexNumber(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
-        ComplexNumber result2 = ComplexOperations.squareRoot(c2);
+        ComplexOperations.squareRoot(c2);
     }
 
     //-----------------------INVERTSIGN-----------------------------------------
@@ -334,7 +325,7 @@ public class ComplexOperationsTest {
     public void testMaximumBoundMultiplication() {
         c1 = new ComplexNumber(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
         c2 = new ComplexNumber(2, 2);
-        ComplexNumber result = ComplexOperations.multiplication(c1, c2);
+        ComplexOperations.multiplication(c1, c2);
 
     }
 
@@ -342,7 +333,7 @@ public class ComplexOperationsTest {
     public void testMinimumBoundMultiplication() {
         c1 = new ComplexNumber(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
         c2 = new ComplexNumber(2, 2);
-        ComplexNumber result = ComplexOperations.multiplication(c1, c2);
+        ComplexOperations.multiplication(c1, c2);
 
     }
 
@@ -393,7 +384,7 @@ public class ComplexOperationsTest {
     public void testMinimumBuondDivision() {
         c1 = new ComplexNumber(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
         c2 = new ComplexNumber(0.5, 0.5);
-        ComplexNumber result = ComplexOperations.division(c1, c2);
+        ComplexOperations.division(c1, c2);
 
     }
 
@@ -413,7 +404,7 @@ public class ComplexOperationsTest {
         System.out.println("divide for zero");
         c1 = new ComplexNumber(1, 2);
         c2 = new ComplexNumber(0, 0);
-        ComplexNumber result1 = ComplexOperations.division(c1, c2);
+        ComplexOperations.division(c1, c2);
     }
 
 }

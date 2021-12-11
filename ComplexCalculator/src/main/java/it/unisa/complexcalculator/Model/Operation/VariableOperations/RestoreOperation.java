@@ -1,11 +1,10 @@
-
 package it.unisa.complexcalculator.Model.Operation.VariableOperations;
 
 import it.unisa.complexcalculator.Model.Memory.VariableMemory;
 import it.unisa.complexcalculator.Model.Operation.Operation;
 
 /**
- * This class represent the "loadVariablesState" operation of the calculator.
+ * This class represent the "load variables state" operation of the calculator.
  * <p>
  * It contains an <code>execute()</code> method that performs a load operation
  * manipulating the variables stored in the <code>VariableMemory</code>.

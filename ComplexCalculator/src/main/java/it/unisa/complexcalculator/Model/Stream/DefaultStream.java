@@ -14,15 +14,16 @@ public class DefaultStream extends Stream {
      * Takes the file on which save data from the user and calls the
      * <code>saveData()</code> method.
      *
+     * @return the file pointer
      */
     @Override
-    public void save() {
+    public File save() {
         File f = new File("backup");
         try {
-            saveData(f.getAbsolutePath());
-            generateConfirmation("Saved successfully.");           
+            saveData(f.getAbsolutePath());     
+            return f;
         } catch (IOException ex) {
-            generateAlert("Error while saving file.");
+            return null;
         }
     }
 
@@ -30,15 +31,16 @@ public class DefaultStream extends Stream {
      * Takes the file from which load data from the user and calls the
      * <code>loadData()</code> method.
      * 
+     * @return the file pointer 
      */
     @Override
-    public void load() {
+    public File load() {
         File f = new File("backup");
         try {
             loadData(f.getAbsolutePath());
-            generateConfirmation("Loaded successfully.");           
+            return f;           
         } catch (IOException ex) {
-            generateAlert("Error while loading file.");
+            return null;
         }
     }
 

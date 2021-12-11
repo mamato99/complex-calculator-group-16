@@ -7,12 +7,11 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 
 /**
  * The istance of a <code>Stream</code> class represent represents an object
@@ -20,9 +19,9 @@ import javafx.scene.control.ButtonType;
  */
 public abstract class Stream {
 
-    public abstract void save();
+    public abstract File save();
 
-    public abstract void load();
+    public abstract File load();
 
     /**
      * Takes the name of a file and save on this the items stored in the
@@ -34,15 +33,15 @@ public abstract class Stream {
      */
     public void saveData(String file) throws FileNotFoundException, IOException {
         OperationMemory opMem = OperationMemory.getOperationMemory();
-        DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
-        dout.writeInt(opMem.opLen());
-
-        for (CustomOperation op : opMem.getOps()) {
-            String toWrite = op.getName() + ":" + op.getSequence();
-            dout.writeUTF(toWrite);
+        try (DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
+            dout.writeInt(opMem.opLen());
+            
+            for (CustomOperation op : opMem.getOps()) {
+                String toWrite = op.getName() + ":" + op.getSequence();
+                dout.writeUTF(toWrite);
+            }
+            dout.flush();
         }
-        dout.flush();
-        dout.close();
     }
 
     /**
@@ -67,26 +66,6 @@ public abstract class Stream {
 
             opMem.addCustomOperation(opFac.createCustomOperation(token.split(":")[0], token.split(":")[1])); // Null because before invoking it, the calculator populates the arraydeque of operations
         }
-    }
-
-    /**
-     * Generate an Error Alert
-     *
-     * @param s message to display
-     */
-    protected void generateAlert(String s) {
-        Alert alert = new Alert(Alert.AlertType.ERROR, s, ButtonType.OK);
-        alert.showAndWait();
-    }
-
-    /**
-     * Generate a Confrimation Alert
-     *
-     * @param s message to display
-     */
-    protected void generateConfirmation(String s) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, s, ButtonType.OK);
-        alert.showAndWait();
     }
 
 }

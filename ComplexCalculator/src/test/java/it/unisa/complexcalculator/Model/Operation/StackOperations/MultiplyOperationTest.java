@@ -5,7 +5,6 @@ import it.unisa.complexcalculator.Exception.OutOfBoundException;
 import it.unisa.complexcalculator.Model.ComplexNumber;
 import it.unisa.complexcalculator.Model.ComplexOperations;
 import it.unisa.complexcalculator.Model.Memory.NumberMemory;
-import java.util.EmptyStackException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -25,6 +25,10 @@ public class FXMLController implements Initializable {
     private ConcreteOperationFactory opFac;
     private OperationInvoker invoker;
     
+    private NumberMemory numMem;
+    private VariableMemory varMem;
+    private OperationMemory opMem;
+    
     @FXML
     private ListView<ComplexNumber> storedElements;
     @FXML
@@ -51,27 +55,28 @@ public class FXMLController implements Initializable {
     private CheckBox pathCheckbox;
 
     /**
-     * Initializes all elements according to user preferences by default
-     *
-     * @param location
-     * @param resources
+     * Initializes all elements according to user preferences by default.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setStream();
         
+        numMem = NumberMemory.getNumberMemory();
+        varMem = VariableMemory.getVariableMemory();
+        opMem = OperationMemory.getOperationMemory();
+        
         opFac = new ConcreteOperationFactory();
         invoker = new OperationInvoker();
         
-        storedElements.setItems(NumberMemory.getNumberMemory().getStack()); // Create a binding between NumberMemory's list of ComplexNumber and storedElement
+        storedElements.setItems(numMem.getStack()); // Create a binding between NumberMemory's list of ComplexNumber and storedElement
 
         varColumn.setCellValueFactory(new PropertyValueFactory<>("var")); // Creates a binding between Variable's "var" attribute and the varColumn
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value")); // Creates a binding between Variable's "value" attribute and the varColumn
-        varTable.setItems(VariableMemory.getVariableMemory().getVars()); // Create a binding between VariableMemory's list of Variables and varTable
+        varTable.setItems(varMem.getVars()); // Create a binding between VariableMemory's list of Variables and varTable
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name")); // Creates a binding between CustomOperation's "name" attribute and the varColumn
         seqColumn.setCellValueFactory(new PropertyValueFactory<>("sequence")); // Creates a binding between CustomOperation's "sequence" attribute and the varColumn
-        opsTable.setItems(OperationMemory.getOperationMemory().getOps()); // Create a binding between OperationMemory's list of CustomOperations and opsTable
+        opsTable.setItems(opMem.getOps()); // Create a binding between OperationMemory's list of CustomOperations and opsTable
 
         seqColumn.setCellFactory(TextFieldTableCell.forTableColumn()); // Become editable
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn()); // Become editable
@@ -195,7 +200,7 @@ public class FXMLController implements Initializable {
         }
         try {
             CustomOperation op = opFac.createCustomOperation(name, seq);
-            OperationMemory.getOperationMemory().addCustomOperation(op);
+            opMem.addCustomOperation(op);
         } catch (AlreadyExistentOperationException ex) {
             generateAlert("Already existent operation.");
             return;
@@ -227,8 +232,12 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void saveCustomOperation() {        
-        stream.save();
-        opsTable.refresh();
+        if(stream.save() != null){
+            generateConfirmation("File saved successfully.");
+            opsTable.refresh();
+        }else{
+            generateAlert("Error while saving file.");
+        }    
     }
 
     /**
@@ -239,8 +248,12 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void loadCustomOperation() {
-        stream.load();
-        opsTable.refresh();
+        if(stream.load() != null){
+            generateConfirmation("File loaded successfully.");
+            opsTable.refresh();
+        }else{
+            generateAlert("Error while loading file.");
+        }  
     }
     
     /**
@@ -258,7 +271,7 @@ public class FXMLController implements Initializable {
             return;     
         }
         try {
-            OperationMemory.getOperationMemory().refreshName(old, event.getNewValue());
+            opMem.refreshName(old, event.getNewValue());
         } catch (AlreadyExistentOperationException ex) {
             generateAlert("Already existent operation.");
             opsTable.refresh();
@@ -280,7 +293,6 @@ public class FXMLController implements Initializable {
      */
     @FXML
     private void updateSeqColumn(TableColumn.CellEditEvent<CustomOperation, String> event) {
-        OperationMemory opMem = OperationMemory.getOperationMemory();
         CustomOperation selected = opsTable.getSelectionModel().getSelectedItem();
         try {
             opFac.createCustomOperation(selected.getName(), event.getNewValue());
@@ -317,9 +329,8 @@ public class FXMLController implements Initializable {
     @FXML
     private void deleteOperation() {
         CustomOperation op = opsTable.getSelectionModel().getSelectedItem();
-        
         try{
-            OperationMemory.getOperationMemory().removeCustomOperation(op);
+            opMem.removeCustomOperation(op);
         }catch(ReferencedOperationException ex){
             generateAlert("Can't delete this operation, it is used by another one.");
         }
@@ -367,10 +378,10 @@ public class FXMLController implements Initializable {
             generateAlert("Invalid number or operation format.");
         } catch (NotEnoughOperandsException ex) {
             inputBox.setText("");
-            generateAlert("Not Enough operands.");
+            generateAlert("Not enough operands.");
         } catch (EmptyStackException ex) {
             inputBox.setText("");
-            generateAlert("Stack Empty.");
+            generateAlert("Stack empty.");
         }catch (NoSuchElementException ex) {
             inputBox.setText("");
             generateAlert("No state to restore.");
@@ -391,6 +402,16 @@ public class FXMLController implements Initializable {
      */
     private void generateAlert(String s) {
         Alert alert = new Alert(Alert.AlertType.ERROR, s, ButtonType.OK);
+        alert.showAndWait();
+    }
+    
+    /**
+     * Generate a Confrimation Alert
+     *
+     * @param s message to display
+     */
+    protected void generateConfirmation(String s) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, s, ButtonType.OK);
         alert.showAndWait();
     }
     
