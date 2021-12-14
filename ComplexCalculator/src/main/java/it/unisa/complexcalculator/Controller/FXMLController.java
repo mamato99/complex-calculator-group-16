@@ -382,9 +382,12 @@ public class FXMLController implements Initializable {
         } catch (EmptyStackException ex) {
             inputBox.setText("");
             generateAlert("Stack empty.");
-        }catch (NoSuchElementException ex) {
+        } catch (NoSuchElementException ex) {
             inputBox.setText("");
             generateAlert("No state to restore.");
+        } catch (ArithmeticException ex) {
+            inputBox.setText("");
+            generateAlert("Invalid operation.");
         } catch (Exception ex) {
             inputBox.setText("");
             generateAlert("Error: " + ex.getMessage());
