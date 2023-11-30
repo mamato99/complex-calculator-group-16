@@ -2,7 +2,7 @@
 ## Project info
 ### Members
 - Aliberti Luca
-- Amato mario
+- Amato Mario
 - Avitabile Margherita
 - Del Regno Michele
 ### Conventions
